@@ -1,0 +1,524 @@
+@font-face {
+  font-family: 'Noto Sans CJK KR';
+  font-weight: 400;
+  src: url("../fonts/NotoSansCJKkr-Regular.eot");
+  src: local('※'), url("../fonts/NotoSansCJKkr-Regular.woff") format('woff');
+}
+
+@font-face {
+  font-family: 'Noto Sans CJK KR';
+  font-weight: 500;
+  src: url("../fonts/NotoSansCJKkr-Medium.eot");
+  src: local('※'), url("../fonts/NotoSansCJKkr-Medium.woff") format('woff');
+}
+
+@font-face {
+  font-family: 'Noto Sans CJK KR';
+  font-weight: 700;
+  src: url("../fonts/NotoSansCJKkr-Bold.eot");
+  src: local('※'), url("../fonts/NotoSansCJKkr-Bold.woff") format('woff');
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    width: 100%;
+    height: 85px;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+}
+
+/* HEADER LOGO */
+#logo {
+    width: 250px;
+    margin-left: 12%;
+    transform: translateY(-8%);
+    z-index: 60;
+}
+
+/* HEADER MENU BAR */
+#menubar {
+    width: 48px;
+    margin-right: 2%;
+    transform: translateY(3%);
+    z-index: 60;
+    padding: 12px;
+}
+
+/* FACEBOOK ICON */
+#facebook {
+    width: 36px;
+    bottom: 5%;
+    right: 3%;
+    position: fixed;
+    z-index: 60;
+}
+
+/* MENU DISPLAY ON CLICK */
+#menu-display {
+    display: none;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(27, 61, 74, 0.85);
+    z-index: 100;
+}
+
+#menu-display a {
+    text-decoration: none;
+    color: white;
+}
+
+#menu-display ul {
+    list-style-type: none;
+}
+
+#menu-display ul li {
+    font-size: 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+#menu-display ul li:not(:last-child) {
+    margin-bottom: 100px;
+}
+
+.closebtn {
+    position: fixed;
+    top: 1.5%;
+    right: 3%;
+    font-size: 48px;
+    z-index: 200;
+}
+
+/* MAINPAGE: BACKGROUND-IMAGE */
+.background {
+    background-size: cover;
+    background-position: center center;
+}
+
+#page-1 {
+    background-image: url('../images/page-1.jpg');
+}
+
+#page-2 {
+    background-image: url('../images/page-2.jpg');
+}
+
+#page-3 {
+    background-image: url('../images/page-3.jpg');
+}
+
+#page-4 {
+    background-image: url('../images/page-4.jpg');
+}
+
+#page-5 {
+    background-image: url('../images/page-5.jpg');
+}
+
+/* MAIN PAGE: WORD CONTENT */
+.content {
+    display: block;
+    font-family: "Noto Sans CJK KR", sans-serif;
+    position: absolute;
+    top: 37%;
+    left: 50%;
+    margin-left: 0%;
+    width: 80%; 
+    z-index: 90;
+}
+
+.content h5 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 26px;
+    opacity: 0;
+}
+
+.content p {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 38px;
+    opacity: 0;
+}
+
+.more {
+    opacity: 0;
+}
+
+.more a {
+    color: black;
+    text-decoration: none;
+}
+
+.more a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.more span {
+    font-size: 20px;
+    font-weight: 700;
+    width: 200px;
+    border: 1px black solid;
+    padding: 12px 100px;
+}
+
+#brand-content .content {
+    left: 60%;  
+}
+
+#brand-content span {
+    background-color: white;
+    border: 1px white solid; 
+}
+
+#kit-content .content {
+    left: 60%;
+}
+
+/* FOOTER */
+.footer {
+    background-color: rgba(128, 128, 128, 0.5);
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 240px;
+}
+
+/* CS CENTER */
+.contact {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.contact h6 {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.contact p {
+    display: inline-block;
+    font-weight: 500;
+    font-size: 14px;
+    margin-right: 5px;
+    margin-bottom: 0;
+}
+
+#lunchtime {
+    margin-right: 0;
+}
+
+#email {
+    margin-top: -2px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* COMPANY product-info */
+.company-info {
+    font-family: 'Noto Sans CJK KR', sans-serif;
+    text-align: center;
+}
+
+.company-info h5, .company-info h6 {
+    font-weight: 500;
+    font-size: 13px;
+    margin-bottom: 1px;
+}
+
+/* TERMS & COPYRIGHTS */
+.terms {
+    font-family: 'Noto Sans CJK KR', sans-serif;
+    margin-bottom: 8px;
+}
+
+.terms p {
+    font-weight: 700;
+    font-size: 12px;
+    margin-top: 14px;
+    margin-bottom: -10px;
+}
+
+.terms a, .terms a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.copyright {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.copyright p {
+    margin-bottom: 0;
+}
+
+@media (max-width: 991px) {
+.header {
+    background-color: rgba(240, 240, 240, 0.7);
+    height: 70px;
+}
+
+/* HEADER LOGO */
+#logo {
+    width: 200px;
+}
+
+/* HEADER MENU BAR */
+#menubar {
+    width: 42px;
+}
+
+/* FACEBOOK ICON */
+#facebook {
+    width: 24px;
+    bottom: 3%;
+    right: 4%;
+}
+
+/* MENU DISPLAY ON CLICK */
+#menu-display ul li {
+    font-size: 20px;
+}
+
+.closebtn {
+    top: 1%;
+    right: 6%;
+}
+
+/* MAINPAGE: BACKGROUND-IMAGE */
+.background {
+    background-position: center bottom;
+}
+
+#page-1 {
+    background-image: url('../images/page-1_mobile.jpg');
+}
+
+#page-2 {
+    background-image: url('../images/page-2_mobile.jpg');
+}
+
+#page-3 {
+    background-image: url('../images/page-3_mobile.jpg');
+}
+
+#page-4 {
+    background-image: url('../images/page-4_mobile.jpg');
+}
+
+#page-5 {
+    background-image: url('../images/page-5_mobile.jpg');
+}
+
+/* MAIN PAGE: WORD CONTENT */
+.content {
+    top: 17%;
+    left: 8%;
+}
+
+.content h5 {
+    font-size: 23px;
+}
+
+.content p {
+    font-size: 18px;
+    line-height: 26px;
+}
+
+.more span {
+    font-size: 16px;
+    padding: 12px 85px;
+}
+
+#brand-content .content {
+    left: 8%;
+}
+
+#kit-content .content {
+    left: 8%;
+}
+
+/* FOOTER */
+.footer {
+    height: 220px;
+}
+
+/* CS CENTER */
+.contact {
+    margin-bottom: 0;
+}
+
+.contact h6 {
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.contact p {
+    font-size: 12px;
+    margin-right: 3px;
+    margin-bottom: -6px;
+}
+
+#tel {
+    margin-right: 0;
+}
+
+#email {
+    font-size: 12px;
+    margin-top: -2px;
+}
+
+/* COMPANY product-info */
+.company-info {
+    margin-top: 13px;
+}
+
+.company-info h5, .company-info h6 {
+    margin-bottom: 3px;
+    font-size: 10px;
+}
+
+/* TERMS & COPYRIGHTS */
+.terms {
+    margin-bottom: 8px;
+}
+
+.terms p {
+    font-weight: 700;
+    font-size: 10px;
+    margin-top: 12px;
+    margin-bottom: -7px;
+}
+
+.copyright {
+    font-size: 10px;
+}
+
+.copyright p {
+    margin-bottom: 0;
+}
+}
+
+@media (max-width: 575px) {
+.header {
+    height: 50px;
+}
+
+/* HEADER LOGO */
+#logo {
+    width: 150px;
+}
+
+/* FACEBOOK ICON */
+#facebook {
+    right: 5%;
+}
+
+/* MAIN PAGE: WORD CONTENT */
+.content {
+    top: 13%;
+    left: 8%;
+}
+
+.content h5 {
+    font-size: 18px;
+    margin-bottom: 18px;  
+}
+
+.content p {
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 24px; 
+}
+
+.more span {
+    font-size: 14px;
+    padding: 8px 65px;
+}
+
+#brand-content .content {
+    top: 19%;
+}
+
+/* FOOTER */
+.footer {
+    height: 220px;
+}
+
+/* CS CENTER */
+.contact {
+    margin-bottom: -4px;
+}
+
+.contact h6 {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.contact p {
+    font-size: 12px;
+    margin-right: 3px;
+    margin-bottom: -6px;
+}
+
+#tel {
+    display: block;
+    margin-right: 0;
+}
+
+#email {
+    font-size: 12px;
+    margin-top: -2px;
+}
+
+/* COMPANY product-info */
+.company-info {
+    margin-top: 10px;
+}
+
+.company-info h5 {
+    margin-bottom: 3px;
+}
+
+.company-info h5, .company-info h6 {
+    font-size: 9px;
+}
+
+/* TERMS & COPYRIGHTS */
+.terms {
+    margin-bottom: 8px;
+}
+
+.terms p {
+    font-weight: 700;
+    font-size: 10px;
+    margin-bottom: -7px;
+}
+
+.copyright {
+    font-size: 10px;
+}
+
+.copyright p {
+    margin-bottom: 0;
+}    
+}

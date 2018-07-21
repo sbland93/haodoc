@@ -1,0 +1,490 @@
+@font-face {
+  font-family: 'Noto Sans CJK KR';
+  font-weight: 400;
+  src: url("../fonts/NotoSansCJKkr-Regular.eot");
+  src: local('※'), url("../fonts/NotoSansCJKkr-Regular.woff") format('woff');
+}
+
+@font-face {
+  font-family: 'Noto Sans CJK KR';
+  font-weight: 500;
+  src: url("../fonts/NotoSansCJKkr-Medium.eot");
+  src: local('※'), url("../fonts/NotoSansCJKkr-Medium.woff") format('woff');
+}
+
+@font-face {
+  font-family: 'Noto Sans CJK KR';
+  font-weight: 700;
+  src: url("../fonts/NotoSansCJKkr-Bold.eot");
+  src: local('※'), url("../fonts/NotoSansCJKkr-Bold.woff") format('woff');
+}
+
+.form-style-9{
+    max-width: 450px;
+    background: #FAFAFA;
+    padding: 30px;
+    margin: 50px auto;
+    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+    border-radius: 10px;
+    border: 6px solid #305A72;
+}
+.form-style-9 ul{
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+.form-style-9 ul li{
+    display: block;
+    margin-bottom: 10px;
+    min-height: 35px;
+}
+.form-style-9 ul li  .field-style{
+    box-sizing: border-box; 
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; 
+    padding: 8px;
+    outline: none;
+    border: 1px solid #B0CFE0;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+
+}.form-style-9 ul li  .field-style:focus{
+    box-shadow: 0 0 5px #B0CFE0;
+    border:1px solid #B0CFE0;
+}
+.form-style-9 ul li .field-split{
+    width: 49%;
+}
+.form-style-9 ul li .field-full{
+    width: 100%;
+}
+.form-style-9 ul li input.align-left{
+    float:left;
+}
+.form-style-9 ul li input.align-right{
+    float:right;
+}
+.form-style-9 ul li textarea{
+    width: 100%;
+    height: 100px;
+}
+.form-style-9 ul li input[type="button"], 
+.form-style-9 ul li input[type="submit"] {
+    -moz-box-shadow: inset 0px 1px 0px 0px #3985B1;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #3985B1;
+    box-shadow: inset 0px 1px 0px 0px #3985B1;
+    background-color: #216288;
+    border: 1px solid #17445E;
+    display: inline-block;
+    cursor: pointer;
+    color: #FFFFFF;
+    padding: 8px 18px;
+    text-decoration: none;
+    font: 12px Arial, Helvetica, sans-serif;
+}
+.form-style-9 ul li input[type="button"]:hover, 
+.form-style-9 ul li input[type="submit"]:hover {
+    background: linear-gradient(to bottom, #2D77A2 5%, #337DA8 100%);
+    background-color: #28739E;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    width: 100%;
+    height: 85px;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+}
+
+.headSet {
+    padding-bottom : 80px;
+}
+
+.content {
+    padding-bottom: 80px;
+}
+
+.row {
+    padding : 10px;
+}
+
+.tag {
+    padding-right: 10px;
+}
+
+/* HEADER LOGO */
+#logo {
+    width: 250px;
+    margin-left: 12%;
+    transform: translateY(-8%);
+    z-index: 60;
+}
+
+/* HEADER MENU BAR */
+#menubar {
+    width: 48px;
+    margin-right: 2%;
+    transform: translateY(3%);
+    z-index: 60;
+    padding: 12px;
+}
+
+/* FACEBOOK ICON */
+#facebook {
+    width: 36px;
+    bottom: 5%;
+    right: 3%;
+    position: fixed;
+    z-index: 60;
+}
+
+/* MENU DISPLAY ON CLICK */
+#menu-display {
+    display: none;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(27, 61, 74, 0.85);
+    z-index: 100;
+}
+
+#menu-display a {
+    text-decoration: none;
+    color: white;
+}
+
+#menu-display ul {
+    list-style-type: none;
+}
+
+#menu-display ul li {
+    font-size: 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+#menu-display ul li:not(:last-child) {
+    margin-bottom: 100px;
+}
+
+.closebtn {
+    position: fixed;
+    top: 1.5%;
+    right: 3%;
+    font-size: 48px;
+    z-index: 200;
+}
+
+
+
+
+
+.footer {
+    background-color: rgba(128, 128, 128, 0.5);
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 240px;
+}
+
+/* CS CENTER */
+.contact {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.contact h6 {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.contact p {
+    display: inline-block;
+    font-weight: 500;
+    font-size: 14px;
+    margin-right: 5px;
+    margin-bottom: 0;
+}
+
+#lunchtime {
+    margin-right: 0;
+}
+
+#email {
+    margin-top: -2px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* COMPANY product-info */
+.company-info {
+    font-family: 'Noto Sans CJK KR', sans-serif;
+    text-align: center;
+}
+
+.company-info h5, .company-info h6 {
+    font-weight: 500;
+    font-size: 13px;
+    margin-bottom: 1px;
+}
+
+/* TERMS & COPYRIGHTS */
+.terms {
+    font-family: 'Noto Sans CJK KR', sans-serif;
+    margin-bottom: 8px;
+}
+
+.terms p {
+    font-weight: 700;
+    font-size: 12px;
+    margin-top: 14px;
+    margin-bottom: -10px;
+}
+
+.terms a, .terms a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.copyright {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.copyright p {
+    margin-bottom: 0;
+}
+
+@media (max-width: 991px) {
+.header {
+    background-color: rgba(240, 240, 240, 0.7);
+    height: 70px;
+}
+
+/* HEADER LOGO */
+#logo {
+    width: 200px;
+}
+
+/* HEADER MENU BAR */
+#menubar {
+    width: 42px;
+}
+
+/* FACEBOOK ICON */
+#facebook {
+    width: 24px;
+    bottom: 3%;
+    right: 4%;
+}
+
+/* MENU DISPLAY ON CLICK */
+#menu-display ul li {
+    font-size: 20px;
+}
+
+.closebtn {
+    top: 1%;
+    right: 6%;
+}
+
+/* PRODUCT LIST */
+.product-title h1 {
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+
+#first-product-title {
+    margin-top: 120px;
+}
+
+.product-info h1 {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.product-info h6 {
+    font-size: 12px;
+    margin-top: -4px;
+}
+
+.product-info p {
+    font-size: 13px;
+}
+
+#kit-title h1 {
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+.kit-product {
+    margin-top: -19px;
+}
+
+/* FOOTER */
+.footer {
+    height: 220px;
+}
+
+/* CS CENTER */
+.contact {
+    margin-bottom: 0;
+}
+
+.contact h6 {
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.contact p {
+    font-size: 12px;
+    margin-right: 3px;
+    margin-bottom: -6px;
+}
+
+#tel {
+    margin-right: 0;
+}
+
+#email {
+    font-size: 12px;
+    margin-top: -2px;
+}
+
+/* COMPANY product-info */
+.company-info {
+    margin-top: 13px;
+}
+
+.company-info h5, .company-info h6 {
+    margin-bottom: 3px;
+    font-size: 10px;
+}
+
+/* TERMS & COPYRIGHTS */
+.terms {
+    margin-bottom: 8px;
+}
+
+.terms p {
+    font-weight: 700;
+    font-size: 10px;
+    margin-top: 12px;
+    margin-bottom: -7px;
+}
+
+.copyright {
+    font-size: 10px;
+}
+
+.copyright p {
+    margin-bottom: 0;
+}
+}
+
+@media (max-width: 575px) {
+.header {
+    height: 50px;
+}
+
+/* HEADER LOGO */
+#logo {
+    width: 150px;
+}
+
+/* FACEBOOK ICON */
+#facebook {
+    right: 5%;
+}
+
+/* PRODUCT LIST */
+.product-title h1 {
+    margin-bottom: 40px;
+}
+
+#first-product-title {
+    margin-top: 100px;
+}
+
+/* FOOTER */
+.footer {
+    height: 220px;
+}
+
+/* CS CENTER */
+.contact {
+    margin-bottom: -4px;
+}
+
+.contact h6 {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.contact p {
+    font-size: 12px;
+    margin-right: 3px;
+    margin-bottom: -6px;
+}
+
+#tel {
+    display: block;
+    margin-right: 0;
+}
+
+#email {
+    font-size: 12px;
+    margin-top: -2px;
+}
+
+/* COMPANY product-info */
+.company-info {
+    margin-top: 10px;
+}
+
+.company-info h5 {
+    margin-bottom: 3px;
+}
+
+.company-info h5, .company-info h6 {
+    font-size: 9px;
+}
+
+/* TERMS & COPYRIGHTS */
+.terms {
+    margin-bottom: 8px;
+}
+
+.terms p {
+    font-weight: 700;
+    font-size: 10px;
+    margin-bottom: -7px;
+}
+
+.copyright {
+    font-size: 10px;
+}
+
+.copyright p {
+    margin-bottom: 0;
+}      
+}
