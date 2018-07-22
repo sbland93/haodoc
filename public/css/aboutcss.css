@@ -115,11 +115,11 @@
 .brand-story {
     background-color: rgba(255, 255, 255, 0.9);
     position: absolute;
-    width: 730px;
-    height: 530px;
+    width: 750px;
+    height: 550px;
     left: 3%;
     bottom: 5%;
-    padding: 70px 80px 10px 45px;
+    padding: 40px 80px 10px 45px;
 }
 
 .brand-title {
@@ -131,7 +131,7 @@
     font-size: 30px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     color: #BD1622;
 }
 
