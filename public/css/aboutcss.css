@@ -119,7 +119,7 @@
     height: 530px;
     left: 3%;
     bottom: 5%;
-    padding: 45px 80px 10px 45px;
+    padding: 70px 80px 10px 45px;
 }
 
 .brand-title {
@@ -127,11 +127,12 @@
 }
 
 
-.brand-title h1 {
-    font-size: 24px;
+.brand-title h2 {
+    font-size: 30px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     margin-bottom: 24px;
+    color: #BD1622;
 }
 
 .brand-semi-title {
