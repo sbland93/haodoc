@@ -35,12 +35,17 @@
     z-index: 50;
 }
 
+.whiteChar {
+    color: white;
+}
+
 /* HEADER LOGO */
 #logo {
     width: 250px;
     margin-left: 12%;
     transform: translateY(-8%);
     z-index: 60;
+    padding-top: 50px;
 }
 
 /* HEADER MENU BAR */

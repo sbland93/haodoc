@@ -125,6 +125,7 @@
     display: none;
 }
 
+
 .brand-title h1 {
     font-size: 24px;
     font-family: 'Montserrat', sans-serif;
@@ -151,6 +152,7 @@
     font-size: 24px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
+    color: #BD1622;
 }
 
 #question {
