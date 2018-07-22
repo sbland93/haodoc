@@ -10,8 +10,6 @@ $(document).ready(function() {
         $('#menubar').css('display', 'block');
     });
 
-
-
     $('#fullpage').fullpage({
         anchors: ['#01', '#02', '#03'],
         navigation: true,
@@ -37,6 +35,7 @@ $(document).ready(function() {
                     }, 1900)
                 }
             }
+
         }
     });
 });
