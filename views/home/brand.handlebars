@@ -1,59 +1,30 @@
-<!DOCTYPE HTML>
-<html lang="ko">
-    <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122389631-1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
-            gtag('config', 'UA-122389631-1');
-        </script>
-        <meta charset="utf-8" />
-        <title>HPV - About</title>
-        <link rel="icon" href="images/favicon.ico" type="images/ico">
-        <link rel="stylesheet" type="text/css" href="css/aboutcss.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <meta property="og:title" content="HaoDoc">
-        <meta property="og:description" content="재한 중국인을 위한 의료시설 검색 서비스" />
-        <meta property="og:image" content="images/logo2.png" />
-    </head>
-    <body>
-        <div id="menu-display">
-            <a href="javascript:void(0)" class="closebtn">&times;</a>
-            <ul>
-                <li><a href="about">ABOUT</a></li>
-                <li><a href="hpv1">HPV Event</a></li>
-            </ul>
+{{#section 'head'}}
+    <link rel="stylesheet" type="text/css" href="css/aboutcss.css">
+{{/section}}
+
+{{#section 'logo'}}
+    <a href="/"><img id="logo" alt="HaoDoc" src="images/logo2.png"></a>
+{{/section}}
+
+<div class="about-page">
+    <div class="brand-story">
+        <div class="brand-title">
+            <h2>HaoDoc</h2>
         </div>
-        <nav class="header">
-            <!-- HEADER LOGO -->
-            <a href="/"><img id="logo" alt="HaoDoc" src="images/logo2.png"></a>
-            <!-- HEADER MENU BAR -->
-            <input id="menubar" type="image" src="images/menubar.png" />
-        </nav>
-        <!-- FACEBOOK ICON -->
-        <a href="https://www.weibo.com/u/6589350358?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank"><img id="facebook" alt="Facebook" src="images/weibo.png"></a>
-            <div class="about-page">
-                <div class="brand-story">
-                    <div class="brand-title">
-                        <h2>HaoDoc</h2>
-                    </div>
-                    <div class="brand-semi-title">
-                        <p id="brand-cut-in" class="semi-title">한국 의료 서비스를 어려움 없이 소비하도록</p><p id="brand-name" class="semi-title">HaoDoc</p>
-                    </div>
-                    <p id="question">"간단한 감기진료 한번에,<br />&nbsp;왜 중국인들은 30만원이나 지불해야 할까?"</p>
-                    <div class="paragraph">
-                        <p>고향을 떠나 타국에서 생활하다 보면 아플 때가 가장 서럽죠. 말도 안 통하고 모든 것이 어려운 한국에서 병원 찾기란 더 힘든거같아요.</p> 
-                        <p>더군다나 중국에서는 아프면 종합병원을 가서 검사에서 진료까지 한 번에 해결할 수 있는데, 한국은 다른 개념인 개인병원이 주를 이루고 있어서 혼란스러울거에요.</p>
-                        <p>중국과는 다른 병원 체계 때문에 한국 병원에 대해 오해를 갖게 되고, 잘못된 병원 선택 때문에 비싼 진료비를 내야 할 수 있어요.</p>
-                        <p>HaoDoc을 통해 한국에서의 병원선택에서 진료예약까지 모든 어려움을 해결해 보세요.</p>
-                    </div>
-                </div>
-            </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="js/aboutjs.js"></script>
-    </body>
-</html>
+        <div class="brand-semi-title">
+            <p id="brand-cut-in" class="semi-title">为了大家最便利地享受韩国的医疗服务而努力</p><p id="brand-name" class="semi-title">健康镖局HaoDoc</p>
+        </div>
+        <p id="question">"就检查一个小小的感冒,<br />&nbsp;那个中国人为什么得花30万韩元?"</p>
+        <div class="paragraph">
+            <p>离开故乡在外国生活时生病的话最难受了吧！语言不通，对韩国医疗体系不了解使得在韩国找到合适的医院就变得更难了吧。</p> 
+            <p>在中国，中国人一般会去大型综合医院从检查到治疗，一次性全都能解决，在韩国，人们就诊的习惯和意识与中国人不同，韩国人主要去家附近的私人诊所就诊。</p>
+            <p>因为中韩两国的医院体系不同，中国人对韩国医院有很多误解，所以选择了错误的医院花了很贵的诊疗费。</p>
+            <p> 通过联系健康镖局HaoDoc，从韩国的医院选择到就诊预约，尽我们的最大努力来解决您在韩国就诊的所有不便！</p>
+        </div>
+    </div>
+</div>
+
+
+{{#section 'jquery'}}
+    <script src="js/aboutjs.js"></script>
+{{/section}}

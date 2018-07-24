@@ -4,7 +4,7 @@ module.exports = function(){
 	return {
 		
 		home:  function(req, res, next){
-			res.render('layouts/main');
+			res.render('home/main');
 		},
 		about: function(req, res, next){
 			res.render('home/brand');

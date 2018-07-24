@@ -47,6 +47,7 @@ app.use(express.static(__dirname + '/public'));
 //핸들바 뷰 엔진 설정.
 var hbs = require('express-handlebars');
 var handlebars = hbs.create({
+	defaultLayout: 'main',
 	helpers: {
 		section: function(name, options){
 			if(!this._sections) this._sections = {};
