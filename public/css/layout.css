@@ -70,6 +70,14 @@
     z-index: 60;
 }
 
+#QRCode {
+  width: 200px;
+
+  height: 200px;
+
+  margin-left : 120px;
+}
+
 /* MENU DISPLAY ON CLICK */
 #menu-display {
     display: none;
@@ -216,6 +224,11 @@
     right: 4%;
 }
 
+#wechat {
+    width: 24px;
+    bottom: 10%;
+    right: 3%;
+}
 /* MENU DISPLAY ON CLICK */
 #menu-display ul li {
     font-size: 20px;
@@ -301,13 +314,26 @@
 /* HEADER LOGO */
 #logo {
     width: 150px;
-}
+    padding-top: 0px;
+}   
 
 /* Weibo ICON */
 #weibo {
     right: 5%;
 }
 
+/* Weibo ICON */
+#wechat {
+    right: 5%;
+}
+
+#QRCode {
+  width: 150px;
+
+  height: 150px;
+
+  margin-left : 80px;
+}
 
 /* FOOTER */
 .footer {
@@ -370,5 +396,8 @@
 
 .copyright p {
     margin-bottom: 0;
-}    
+}
+
+
+
 }
