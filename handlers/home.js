@@ -7,7 +7,7 @@ module.exports = function(){
 			res.render('home/main');
 		},
 		about: function(req, res, next){
-			res.render('home/brand');
+			res.render('home/about');
 		},
 		hpv1: function(req, res, next){
 			res.render('home/hpv1');

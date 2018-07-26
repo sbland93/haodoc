@@ -44,6 +44,10 @@
     padding-top: 50px;
 }
 
+.logoColor{
+    color: #BD1622;
+}
+
 /* HEADER MENU BAR */
 #menubar {
     width: 48px;

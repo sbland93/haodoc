@@ -2,7 +2,6 @@
 .about-page {
     background-size: cover;
     background-position: center center;
-    background-image: url('../images/about-page.jpg');
     display: flex;
     width: 100%;
     height: 100vh;
@@ -70,6 +69,102 @@
     font-family: 'Noto Sans CJK KR', sans-serif;
     font-weight: 400;
 }
+
+
+
+/*Full-Page CSS */
+.whiteChar {
+    color: white;
+}
+
+/* MAINPAGE: BACKGROUND-IMAGE */
+.background {
+    background-size: cover;
+    background-position: center center;
+}
+
+#page-1 {
+    background-image: url('../images/about/01.jpg');
+}
+
+#page-2 {
+    background-image: url('../images/about/02.jpg');
+}
+
+#page-3 {
+    background-image: url('../images/about/03.jpg');
+}
+
+#page-4 {
+    background-image: url('../images/about/04.jpg');
+}
+
+
+/* MAIN PAGE: WORD CONTENT */
+.content {
+    display: block;
+    font-family: "Noto Sans CJK KR", sans-serif;
+    position: absolute;
+    top: 37%;
+    width: 80%; 
+    left: 5%;
+    z-index: 90;
+}
+
+.content h5 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 26px;
+    opacity: 0;
+}
+
+.content p {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 38px;
+    opacity: 0;
+}
+
+.more {
+    opacity: 0;
+}
+
+.more a {
+    color: black;
+    text-decoration: none;
+}
+
+.more a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.more span {
+    font-size: 20px;
+    font-weight: 700;
+    width: 200px;
+    border: 1px black solid;
+    padding: 12px 100px;
+}
+
+#content-right .content {
+    top: 40%;
+    left: 60%;
+}
+
+#content-right span {
+    background-color: white;
+    border: 1px white solid; 
+}
+
+#kit-content .content {
+    left: 60%;
+    margin-left: 10px;
+}
+
+
+
+
 
 @media (max-width: 991px) {
 
