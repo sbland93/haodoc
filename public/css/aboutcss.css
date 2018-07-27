@@ -166,72 +166,156 @@
 
 
 
-@media (max-width: 991px) {
+@media (max-width: 1024px) {
+#page-1 {
+    background-image: url('../images/about/01-mobile.jpg');
+}
+
+#page-2 {
+    background-image: url('../images/about/website-mobile2.jpg');
+}
+
+#page-3 {
+    background-image: url('../images/about/03-mobile.jpg');
+}
+
+#page-4 {
+    background-image: url('../images/about/04.jpg');
+}
+/* MAIN PAGE: WORD CONTENT */
+.content {
+    top: 70%;
+    left: 8%;
+}
+
+.content h5 {
+    font-size: 25px;
+}
+
+.content p {
+    font-size: 22px;
+    line-height: 26px;
+}
+
+#content-right .content {
+    top: 17%;
+    left: 12%;
+}
 
 /* ABOUT-PAGE */
 .brand-story {
-    width: 600px;
-    height: 450px;
-    left: 4%;
+    width: 780px;
+    height: 560px;
+    left: 2%;
     padding: 30px 50px 10px 30px;
+    top: 10%;
 }
 
 .brand-title h1 {
-    font-size: 20px;
-    margin-bottom: 20px;
+    font-size: 24px;
+    margin-bottom: 15px;
 }
 
 #brand-cut-in {
-    font-size: 18px;
-}
-
-#brand-name {
     font-size: 20px;
 }
 
+#brand-name {
+    font-size: 22px;
+}
+
 #question {
-    font-size: 16px;
+    font-size: 18px;
     margin-top: 4px;
     margin-bottom: 34px;
 }
 
 .paragraph p {
-    font-size: 14px;
+    font-size: 16px;
 }
 }
 
 @media (max-width: 575px) {
 
+#page-1 {
+    background-image: url('../images/about/01-mobile.jpg');
+}
+
+#page-2 {
+    background-image: url('../images/about/website-mobile2.jpg');
+}
+
+#page-3 {
+    background-image: url('../images/about/03-mobile.jpg');
+}
+
+#page-4 {
+    background-image: url('../images/about/04.jpg');
+}
+/* MAIN PAGE: WORD CONTENT */
+.content {
+    top: 70%;
+    left: 8%;
+}
+
+.content h5 {
+    font-size: 23px;
+}
+
+.content p {
+    font-size: 19px;
+    line-height: 26px;
+}
+
+#content-right .content {
+    top: 17%;
+    left: 8%;
+}
+
+.more span {
+    font-size: 16px;
+    padding: 12px 85px;
+}
+
+#brand-content .content {
+    left: 8%;
+}
+
+#kit-content .content {
+    left: 8%;
+}
 
 /* ABOUT-PAGE */
 .brand-story {
-    width: 300px;
-    height: 480px;
+    width: 350px;
+    height: 500px;
+    left : 3%;
     padding: 20px 15px 10px 20px;
 }
 
 .brand-title h1 {
-    font-size: 16px;
+    font-size: 17px;
     margin-bottom: 16px;
 }
 
 #brand-cut-in {
-    font-size: 14px;
+    font-size: 15px;
     margin-right: 0;
     margin-bottom: 0;
 }
 
 #brand-name {
-    font-size: 16px;
+    font-size: 17px;
 }
 
 #question {
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 4px;
     margin-bottom: 34px;
 }
 
 .paragraph p {
-    font-size: 11px;
+    font-size: 13px;
 }
+
 }
