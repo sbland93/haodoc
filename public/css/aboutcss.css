@@ -192,6 +192,7 @@
     font-size: 25px;
 }
 
+
 .content p {
     font-size: 22px;
     line-height: 26px;
@@ -201,7 +202,9 @@
     top: 17%;
     left: 12%;
 }
-
+#content-right .content h5{
+    font-size: 23px;
+}
 /* ABOUT-PAGE */
 .brand-story {
     width: 780px;
