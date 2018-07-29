@@ -2,7 +2,7 @@
 $(document).ready(function(){
 	// Initialize form validation on the registration form.
 	// It has the name attribute "registration"
-	$(".userForm").validate({
+	$(".stepOneForm").validate({
 		// Specify validation rules
 		rules: {
 			name:{
@@ -20,10 +20,10 @@ $(document).ready(function(){
 		},
 		// Specify validation error messages
 		messages: {
-			name: "name is required",
-			birthDay : "birthDay is required",
-			phone : "phone is required",
-			wechatID : "wechatID is required",
+			name: "Name is required",
+			birthDay : "BirthDay is required",
+			phone : "Phone is required",
+			wechatID : "WeChatID is required",
 		},
 		submitHandler: function(form, evt) {
 			evt.preventDefault();

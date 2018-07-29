@@ -1,0 +1,6 @@
+.scroll {
+	overflow:scroll;
+	height:200px;
+	padding:10px;
+	background-color : #DCDCDC;
+}

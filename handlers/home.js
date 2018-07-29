@@ -4,16 +4,16 @@ module.exports = function(){
 	return {
 		
 		home:  function(req, res, next){
-			res.render('home/main');
+			res.render('main');
 		},
 		about: function(req, res, next){
 			res.render('home/about');
 		},
-		hpv1: function(req, res, next){
-			res.render('home/hpv1');
+		personal: function(req, res, next){
+			res.render('home/footer/personal');
 		},
-		hpv2: function(req, res, next){
-			res.render('home/hpv2');
+		rules : function(req, res, next){
+			res.render('home/footer/rules');
 		},
 		admin: function(req, res, next){
 			User.find({}).sort({updated_at: -1}).exec(function(err, users){
