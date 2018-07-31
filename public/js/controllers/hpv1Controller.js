@@ -5,7 +5,10 @@ $(document).ready(function(){
 	$(".stepOneForm").validate({
 		// Specify validation rules
 		rules: {
-			name:{
+			chineseName:{
+				required: true,
+			},
+			englishName: {
 				required: true,
 			},
 			birthDay:{
@@ -20,7 +23,8 @@ $(document).ready(function(){
 		},
 		// Specify validation error messages
 		messages: {
-			name: "Name is required",
+			chineseName: "ChineseName is required",
+			englishName: "EnglishName is required",
 			birthDay : "BirthDay is required",
 			phone : "Phone is required",
 			wechatID : "WeChatID is required",

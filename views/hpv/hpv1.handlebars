@@ -11,17 +11,29 @@
     <form class="form-style-9 stepOneForm">
         <ul>
             <li>
-                <label for="name">Name</label> <input type="text" name="name" id="name" class="field-style field-full align-left" placeholder="(中文姓名 & 韩文姓名)" />
+                <label for="chineseName">中文姓名</label> <input type="text" name="chineseName" id="name" class="field-style field-full align-left" placeholder="中文姓名" />
             </li>
             <li>
-                <label for="birthDay">Birth</label> <input type="text" name="birthDay" class="field-style field-full align-none" id="birthDay" placeholder="(1993-04-07)" />
+                <label for="englishName">护照英文姓名</label> <input type="text" name="englishName" id="name" class="field-style field-full align-left" placeholder="韩文姓名" />
             </li>
             <li>
-                <label for="phone">Phone</label> <input type="text" name="phone" class="field-style field-full align-left" id="phone" placeholder="(010-1234-5678)" />
+                <label for="name">韩文姓名</label> <input type="text" name="name" id="name" class="field-style field-full align-left" placeholder="不知道的话请空着不填" />
             </li>
             <li>
-                <label for="wechatID">WechatID</label> <input type="text" name="wechatID" class="field-style field-full align-none" id="wechatID" placeholder="EX)hao_doc" />
+                <label for="gender">性别</label>
+                <div class="field-style field-full align-left"><input type="radio" name="gender" value="male" id="gender" checked> 男 
+                &nbsp;     &nbsp;    <input type="radio" name="gender" value="female" id="gender"> 女<br></div>
             </li>
+            <li>
+                <label for="birthDay">出生年月日</label> <input type="text" name="birthDay" class="field-style field-full align-none" id="birthDay" placeholder="(1993-04-07)" />
+            </li>
+            <li>
+                <label for="phone">电话号码</label> <input type="text" name="phone" class="field-style field-full align-left" id="phone" placeholder="(010-1234-5678)" />
+            </li>
+            <li>
+                <label for="wechatID">微信号</label> <input type="text" name="wechatID" class="field-style field-full align-none" id="wechatID" placeholder="EX)hao_doc" />
+            </li>
+            
 
             <li>
                 <input type="submit" class="align-right" value="Submit" />
