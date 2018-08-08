@@ -40,6 +40,8 @@ $(document).ready(function(){
 				} 
 				else{
 					alert('Error Occured');
+					alert(data);
+					console.log(data);
 				}
 			}).catch(function(err){
 				alert(err);

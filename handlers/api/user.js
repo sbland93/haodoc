@@ -15,7 +15,7 @@ module.exports = function(){
 		//요청본문에 해당하는 user를 새로 생성한다.
 		//유저생성을 위한 post에서는 name과 email과 password가 있어야한다.
 		newUser: function(req, res, next){
-			if(req.body.name && req.body.wechatID && req.body.birthDay){
+			if(req.body.wechatID && req.body.birthDay){
 				User.create(req.body, function(err, user){
 					if(err) return next(err);
 					res.json({
