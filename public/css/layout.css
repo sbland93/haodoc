@@ -25,6 +25,12 @@
     padding: 0;
 }
 
+/* For Prevent Mobile Web Scroll-X*/
+html, body {
+max-width: 100%;
+overflow-x: hidden;
+}
+
 .header {
     display: flex;
     width: 100%;
