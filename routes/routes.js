@@ -10,6 +10,7 @@ module.exports = function(app){
 	//home Handlers
 	app.get('/about', homeHandlers.about);
 	app.get('/admin', homeHandlers.admin);
+	app.get('/team', homeHandlers.team);
 	app.get('/rules', homeHandlers.rules);
 	app.get('/personal', homeHandlers.personal);
 

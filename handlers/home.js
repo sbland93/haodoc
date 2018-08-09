@@ -15,6 +15,11 @@ module.exports = function(){
 		rules : function(req, res, next){
 			res.render('home/footer/rules');
 		},
+
+		team : function(req, res, next){
+			res.render('home/team');
+		},
+		
 		admin: function(req, res, next){
 			User.find({}).sort({updated_at: -1}).exec(function(err, users){
 				res.render('admin/admin', {

@@ -41,7 +41,7 @@
     margin-left: 12%;
     transform: translateY(-8%);
     z-index: 60;
-    padding-top: 50px;
+    padding-top: 30px;
 }
 
 .logoColor{
@@ -75,11 +75,11 @@
 }
 
 #QRCode {
-  width: 200px;
+    width: 200px;
 
-  height: 200px;
+    height: 200px;
 
-  margin-left : 120px;
+    margin-left : 120px;
 }
 
 /* MENU DISPLAY ON CLICK */
