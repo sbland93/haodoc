@@ -24,6 +24,7 @@ switch(app.get('env')){
 		mongoose.connect(credentials.mongo.development.connectionString, opts);
 		//데이터 초기화 및 생성.
 		//매번 독립적으로 같은 데이터를 생성하기위해, 모두 삭제후 생성.
+		require('./seed.js').development();
 		break;
 	case 'production' :
 		//production에서는 실행하지 않는다.
@@ -54,6 +55,7 @@ var handlebars = hbs.create({
 			this._sections[name] = options.fn(this);
 			return null;
 		},
+
 	}
 });
 

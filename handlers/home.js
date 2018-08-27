@@ -6,6 +6,7 @@ module.exports = function(){
 		home:  function(req, res, next){
 			res.render('main');
 		},
+
 		about: function(req, res, next){
 			res.render('home/about');
 		},
@@ -18,8 +19,7 @@ module.exports = function(){
 
 		team : function(req, res, next){
 			res.render('home/team');
-		},
-		
+		},		
 		admin: function(req, res, next){
 			User.find({}).sort({updated_at: -1}).exec(function(err, users){
 				res.render('admin/admin', {
@@ -27,6 +27,24 @@ module.exports = function(){
 				});	
 			});
 		},
+
+
+
+		/*
+
+		For Development Temp Handlers
+
+
+		*/
+
+
+		home2: function(req, res, next){
+			res.render('main2');
+		},
+		//for Finding Hospital
+		find : function(req, res, next){
+			res.render('hospital/find');
+		}
 
 	}
 	

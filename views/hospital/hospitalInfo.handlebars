@@ -1,0 +1,43 @@
+
+
+{{#section 'head'}}
+
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+{{/section}}
+
+
+<br><br><br><br><br><br>
+
+<div id="app">
+
+	<p>병원내부사진</p>
+
+	<div v-for="photo in hospital.photo"><img src="/images/hospital/\{{photo}}"></div>
+
+	<p>이름 : \{{ hospital.name }}</p>
+	<p>번호 : \{{ hospital.tel }}</p>
+	<p>주소 :	 \{{ fullAddress }}</p>
+	<p>진료과목 : \{{ hospital.subject}}</p>
+	<p>평일 : \{{ hospital.weekday }}</p>
+	<p>토요일 : \{{ hospital.saturday }}</p>
+	<p>일요일 및 공휴일 : \{{ hospital.holiday }}</p>
+	<p>리뷰 : \{{ hospital.review }}</p>
+
+	<hr><hr>
+
+	<p>증상을 한국어로 번역하고 싶으시거나, 궁금하신 점이 더 있다면 하오닥을 통해 연락 주세요!</p>
+	<img src="/images/QR_Small.jpg">
+
+
+	<!-- 지도 표시될 장소 -->
+	<div id="map" style="width:100%;height:400px;"></div>
+
+</div>
+
+
+{{#section 'jquery'}}
+
+	<script type="text/javascript" src="/js/controllers/hospitalInfoController.js"></script>
+
+{{/section}}
