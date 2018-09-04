@@ -1,9 +1,10 @@
 
+var url =  window.location.pathname;
+
+var hospitalID = url.replace("/hospital/", "");
 
 
-
-
-
+console.log(url);
 
 var app = new Vue({
 
@@ -11,7 +12,8 @@ var app = new Vue({
 	
 	data : {
 
-		hospital : ''
+		hospital : '',
+		hospitalID : hospitalID,
 	
 	},
 	
@@ -19,7 +21,8 @@ var app = new Vue({
 		//fullAddress를 리턴해주는 함수.
 		fullAddress : function(){
 
-			return this.hospital.city + this.hospital.district + this.hospital.neighborhood + this.hospital.address;
+			var space = " "
+			return this.hospital.city + space + this.hospital.district + space + this.hospital.neighborhood + space + this.hospital.address;
 
 		},
 
@@ -27,11 +30,24 @@ var app = new Vue({
 	
 	mounted : function(){
 		
-		this.getHospital(this.hospital.id);
+		this.getHospital(this.hospitalID);
 
 	},
 	
 	methods: {
+		
+		//TODO
+		photoHref : function(photo_name){
+
+			return "/images/hospital/" + photo_name;
+
+		},
+
+		//index가 0인지 확인
+		isFirst : function(index){
+			console.log(index ==0);
+			return index == 0;
+		},
 
 		//Hospital의 Data들을 가져오고 map에 해당하는 데이터를 표시해준다.
 		getHospital : function(id){
@@ -39,17 +55,17 @@ var app = new Vue({
 			var self = this;
 
 			var map = new naver.maps.Map('map');
-			var myaddress = this.hospital.;
 
 			getHospital(id).then(function(_hospital){
 
 				self.hospital = _hospital;
+				var myaddress = self.hospital.address;
 
 				naver.maps.Service.geocode({address: myaddress}, function(status, response) {
   
 					if (status !== naver.maps.Service.Status.OK) {
 					  
-					  return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
+						return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
 
 					}
 

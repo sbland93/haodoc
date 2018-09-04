@@ -3,6 +3,8 @@
 {{#section 'head'}}
 
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="/css/hospitalInfo.css">
 
 {{/section}}
 
@@ -10,34 +12,89 @@
 <br><br><br><br><br><br>
 
 <div id="app">
+    <section class="text-white" style="height:150px; background-color:#BD1622">
+		<div class="container">
+	        <div class="row">
+		        <div class="col-sm-12 col-lg-12" style="width:100;">
+	    	        <h1 class="h2" style="text-align: center; padding-top:50px">
+	        	        \{{hospital.name}}
+	            	</h1>
+	    		</div>
+	        </div>
+		</div>
+    </section>
+    <br><br><br>
+    <section class="search-box">
+		<div class="container">
+		    <div class="row">
+	            <div class="col-sm-5 well listing-box">
+	            	<br><br>
+	            	<h3 style="line-height:20%;"><i class="fas fa-globe fa-1x" style="line-height:6%;color:#BD1622"></i> 진료과목 </h3>
+	                <p style="margin-top:6%;line-height:35%"><span v-for="subject in hospital.subject"><b>- \{{subject}}</b> </span></p><br>
 
-	<p>병원내부사진</p>
+	                <h3 style="line-height:20%;"><i class="fas fa-map-marker-alt fa-1x" style="line-height:6%;color:#BD1622"></i> 상세주소</h3>               
+	                <p style="margin-top:6%;line-height:35%">- \{{ fullAddress }}</p><br />
+	                <h3 style="line-height:20%;"><i class="fas fa-phone fa-1x" style="line-height:6%;color:#BD1622"></i> 
+	                전화번호 </h3>
+	                <p style="margin-top:6%;line-height:35%"><a href="siteadresi.com/destek">- \{{ hospital.tel }}</a></p>
+	                <br />
+	                <h3 style="line-height:20%;"><i class="far fa-calendar-alt fa-1x" style="line-height:6%;color:#BD1622"></i> 진료시간</h3>
+	                <p style="margin-top:6%;line-height:130%">
+	                	- 평일 - \{{ hospital.weekday }}<br>	
+	                	- 토요일 - \{{ hospital.saturday }}<br>
+	                	- 일요일 및 공휴일 - \{{ hospital.holiday }}<br>
+	            	</p>
+	                <br />
+	            </div>
+		        <div class="col-sm-7">
+					<div id="map" style="width:100%; height:430px; border:0;"></div>
+		        </div>
+		    </div>
 
-	<div v-for="photo in hospital.photo"><img src="/images/hospital/\{{photo}}"></div>
+		    <br><br><br>
+		    <div class="container">
+		    	<div class="row">
+				<div class="carousel" id="slide" data-ride="carousel">
+				    <ol class="carousel-indicators">
+				      <li data-target="#slide" data-slide-to="0" class="active"></li>
+				      <li data-target="#slide" data-slide-to="1"></li>
+				      <li data-target="#slide" data-slide-to="2"></li>
+				      <li data-target="#slide" data-slide-to="3"></li>
+				    </ol>
+				    <div class="carousel-inner">
+				    	<div v-for="(photo, index) in hospital.photo">
+							<div v-if="isFirst(index)">
+								<div class="carousel-item active">
+									<img :src="photoHref(photo)" class="img-fluid">
+								</div>
+							</div>	
+							<div v-else>
+								<div class="carousel-item">
+									<img :src="photoHref(photo)" class="img-fluid">
+								</div>
+							</div>   	
+				    	</div>
+				    <a href="#slide" class="carousel-control-prev" data-slide="prev">
+				    	<span class="carousel-control-prev-icon"></span>
+				    </a>
+				    	<a href="#slide" class="carousel-control-next" data-slide="next">
+				      	<span class="carousel-control-next-icon"></span>
+				    </a>
+				  	</div>
+				</div>
+		    	</div>
+			</div>
 
-	<p>이름 : \{{ hospital.name }}</p>
-	<p>번호 : \{{ hospital.tel }}</p>
-	<p>주소 :	 \{{ fullAddress }}</p>
-	<p>진료과목 : \{{ hospital.subject}}</p>
-	<p>평일 : \{{ hospital.weekday }}</p>
-	<p>토요일 : \{{ hospital.saturday }}</p>
-	<p>일요일 및 공휴일 : \{{ hospital.holiday }}</p>
-	<p>리뷰 : \{{ hospital.review }}</p>
-
-	<hr><hr>
-
-	<p>증상을 한국어로 번역하고 싶으시거나, 궁금하신 점이 더 있다면 하오닥을 통해 연락 주세요!</p>
-	<img src="/images/QR_Small.jpg">
-
-
-	<!-- 지도 표시될 장소 -->
-	<div id="map" style="width:100%;height:400px;"></div>
-
+	</section>
+	
 </div>
+
+
 
 
 {{#section 'jquery'}}
 
+	<script type="text/javascript" src="/js/api/hospital.js"></script>
 	<script type="text/javascript" src="/js/controllers/hospitalInfoController.js"></script>
 
 {{/section}}

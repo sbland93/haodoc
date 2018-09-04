@@ -1,9 +1,9 @@
 
 /* 
-	Naver Map 만들기 shinchonX, shinchonY는 신촌의 위도 경도.
+	Naver Map 만들기 SHINCHON_X, SHINCHON_Y는 신촌의 위도 경도.
 */
-const shinchonX = 37.555157;
-const shinchonY = 126.936885;
+const SHINCHON_X = 37.555157;
+const SHINCHON_Y = 126.936885;
 
 
 

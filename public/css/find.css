@@ -1,0 +1,43 @@
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #dd0000;
+    background-color: #f2f2f2;
+    border-color: transparent transparent #f3f3f3;
+    border-bottom: 3px solid !important;
+    font-weight: bold;
+}
+.nav-tabs .nav-link {
+    border-bottom: 1px solid #dd0000;
+    color: #696969;
+   
+}
+
+.pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px;}
+
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700');
+
+h2{float:left; width:100%; color:#fff; margin-bottom:40px; font-size: 14px; position:relartive; z-index:3; margin-top:30px}
+h2 span{font-family: 'Libre Baskerville', serif; display:block; font-size:45px; text-transform:none; margin-bottom:20px; margin-top:30px; font-weight:700}
+h2 a{color:#fff; font-weight:bold;}
+
+
+.head{float:left;width:100%;}
+.search-box{width:90%; margin:0 auto 40px; border: 1px solid #BD1622; box-shadow:10px 13px 0 rgba(0,0,0,0.2);}
+.listing-block{background:#fff; height:700px; padding-top:20px; overflow-y:scroll;}
+.slimScrollDiv{width:41%!important;}
+.media {background:#fff; position:relative; margin-bottom:15px;}
+.media-body{border:1px solid #bcbcbc; height:136px;}
+.media .price{float:left; width:100%; font-size:30px;font-weight:600; color:#BD1622;}
+
+.media .price small{display:block; font-size:17px; color:#BD1622;}
+.media .stats{float:left; width:100%; margin-top:10px;}
+.media .stats span{float:left; margin-right:10px; font-size:15px;}
+.media .stats span i{margin-right:7px; color:#4765AB;}
+.media .address{float:left; width:100%;font-size:14px; margin-top:5px; color:#888;}
+.media .fav-box{position:absolute; right:10px; font-size:20px; top:4px; color:#E74C3C;}
+
+.map-box{background-color:#A3CCFF;}
+
+
+
+
