@@ -46,6 +46,19 @@ module.exports = function(){
 			res.render('hospital/find');
 		}
 
+
+
+		/*
+
+		For robots.txt
+
+		*/
+
+		robots : function(req, res, next){
+			res.type('text/plain');
+   			res.send("User-agent: *\nDisallow: /");
+		},
+
 	}
 	
 }
