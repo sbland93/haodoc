@@ -54,10 +54,6 @@ module.exports = function(){
 
 		*/
 
-		robots : function(req, res, next){
-			res.type('text/plain');
-   			res.send("User-agent: *\nDisallow: /");
-		},
 
 	}
 	
