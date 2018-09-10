@@ -39,7 +39,8 @@ var app = new Vue({
 		//TODO
 		photoHref : function(photo_name){
 
-			return "/images/hospital/" + photo_name;
+			console.log("/images/hospital/" + photo_name+".jpg");
+			return "/images/hospital/" + photo_name+".jpg";
 
 		},
 

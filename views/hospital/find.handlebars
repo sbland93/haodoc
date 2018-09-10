@@ -8,8 +8,6 @@
 
 
 
-
-
 <div id="app">
 
 <br><br><br><br><br>
@@ -20,8 +18,8 @@
             <div class="col-md-12">
                 <nav>
                   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" @click="showAddress" role="tab" aria-controls="nav-home" aria-selected="true">지역별 검색</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" @click="showSubway" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">역 주변 검색</a>
+                    <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" @click="showAddress" role="tab" aria-controls="nav-home" aria-selected="false">分地域进行搜索<!--지역별검색--></a>
+                    <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" @click="showSubway" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">地铁站周边搜索<!--역 주변 검색--></a>
                   </div>
                 </nav>
             </div>
@@ -30,13 +28,10 @@
 </section>
 
 <section class="text-white" v-show="addressRender" style="background-color:#BD1622;">
-    <div class="container">
+    <div class="container search-condition">
         <div class="row">
             <div class="col-md-12">
-                <div class="card-body">
-                        <div class="row pb-2">
-            <div class="col-md-12">
-                <h4>지역과 진료과를 입력해 주변의 병원을 찾아보세요.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/subjectInfo" class="btn btn-primary">진료과목 선택이 어려우신가요? (Click!)</a></h4>
+                <h4>输入地区和诊疗科，找一下我家附近的医院。<!--지역과 진료과를 입력해 주변의 병원을 찾아보세요.-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/subjectInfo" class="btn btn-primary">选择诊疗科室时很难吗？(Click!)<!--진료과목 선택이 어려우신가요? (Click!)--></a></h4>
             </div>
         </div>
     	<div class="row">
@@ -57,7 +52,7 @@
 			<div class="col-md-3">
             	<div class="form-group">
             		<select v-model="neighborhood" id="inputState" class="form-control">
-            			<option>선택없음</option>
+            			<option>没有选择<!--선택없음--></option>
 						<option v-for="index in neighborList">\{{index}}</option>
 					</select>
             	</div>
@@ -65,7 +60,7 @@
             <div class="col-md-3">
             	<div class="form-group">
             		<select v-model="subject" id="inputState" class="form-control">
-            			<option>선택없음</option>
+            			<option>没有选择<!--선택없음--></option>
 						<option v-for="index in subjectList">\{{index}}</option>
 					</select>
             	</div>
@@ -74,16 +69,32 @@
     </div>
 </section>
 
-<div class="bg-danger text-white" v-show="subwayRender">
-	 <div class="container">
+<section class="text-white" v-show="subwayRender" style="background-color:#BD1622;">
+	<div class="container search-condition">
+		<div class="row">
+            <div class="col-md-12">
+                <h4>请输入地铁站和诊疗科室，查找就近的医院。<!--지하철 역과 진료과를 입력해 주변의 병원을 찾아보세요.-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/subjectInfo" class="btn btn-primary">选择诊疗科室时很难吗？(Click!)<!--진료과목 선택이 어려우신가요? (Click!)--></a></h4>
+            </div>
+        </div>
         <div class="row">
-        	<div class="form-group">
-		        <label for="subway">역 이름</label>
-				<input id="subway" type="text" name="subway" v-model="subway"><button @click="searchSubway">검색</button>
-        	</div>
+        	<div class="col-md-4">
+            	<div class="form-group">
+            		<select v-model="subway" id="inputState" class="form-control">
+						<option v-for="index in subwayList">\{{index}}</option>
+					</select>
+            	</div>
+			</div>
+			<div class="col-md-8">
+            	<div class="form-group">
+            		<select v-model="subject" id="inputState" class="form-control">
+            			<option>没有选择<!--선택없음--></option>
+						<option v-for="index in subjectList">\{{index}}</option>
+					</select>
+            	</div>
+			</div>
    		</div>
-    </div>
-</div>
+	</div>
+</section>
 
 <br><br>
 
@@ -97,11 +108,11 @@
 				</div>
 				<div class="media-body pl-3">
 					<div class="price"><a :href="hospitalInfoHref(hospital.id)"><img :src="pinImageHref(index)">  \{{hospital.name}}</a></div>
-					진료과목 :<span v-for="subject in hospital.subject">\{{subject}} </span>
+					诊疗科目<!--진료과목--> :<span v-for="subject in hospital.subject">\{{subject}} </span>
 					<div class="stats">
-					    <span>평일 : \{{hospital.weekday}} </span>
-					    <span>토요일 : \{{hospital.saturday}}</span>
-					    <span>공휴일 : \{{hospital.holiday}}</span>
+					    <span>工作日<!--평일 --> : \{{hospital.weekday}} </span>
+					    <span>星期六<!--토요일--> : \{{hospital.saturday}}</span>
+					    <span>假期<!--공휴일--> : \{{hospital.holiday}}</span>
 					</div>
 					<div class="address">\{{ fullAddress(hospital) }}</div>
 					</div>
@@ -133,15 +144,12 @@
 
 {{#section 'jquery'}}
 
-
-
 	<!-- For Hospital Data Ajax-->
 	<script type="text/javascript" src="/js/api/hospital.js"></script>	
 	<!-- Hospital Data들 모음 (City, District, NeighborHood)등-->
 	<script type="text/javascript" src="/js/data/hospitalData.js"></script>
 	<!-- Vue Controller 포함. -->
 	<script type="text/javascript" src="/js/controllers/findController.js"></script>
-
 
 {{/section}}
 

@@ -1,0 +1,12 @@
+.border-red {
+    height:auto;
+    min-height:150px;
+    border-top: 1px solid #BD1622;
+    border-left: 1px solid #BD1622;
+    border-right: 1px solid #BD1622;
+    padding:15px;
+}
+
+.title {
+	padding : 15px;
+}

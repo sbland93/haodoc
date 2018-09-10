@@ -14,8 +14,10 @@ a:link{text-decoration:none;}
 }
 
 
-
-
-
 .search-box{width:90%; margin:0 auto 40px; border: 1px solid #BD1622; box-shadow:10px 13px 0 rgba(0,0,0,0.2);}
 .listing-block{background:#fff; height:700px; padding-top:20px; overflow-y:scroll;}
+
+
+.card-inner{
+    margin-left: 4rem;
+}

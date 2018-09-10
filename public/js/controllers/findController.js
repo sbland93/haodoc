@@ -31,44 +31,77 @@ var app = new Vue({
 		hospitalList : [],
 		city : "서울특별시",
 		district : "서대문구",
-		neighborhood : "선택없음",
-		subject : "선택없음",
-		subway : "",
-		addressRender : true,
-		subwayRender : false,
+		neighborhood : "没有选择",
+		//neighborhood : "선택없음",
+		subject : "没有选择",
+		//subject : "선택없음",
+		subway : "新村站",
+		//subway : "신촌역",
+		addressRender : false,
+		subwayRender : true,
 
+		//From Data.js
 		districtList : districtList,
-		subjectList : subjectList,
-	
+		//subjectList : subjectList,
+		subjectList : _subjectList,
+		//subwayList : subwayList,
+		subwayList : _subwayList,
 	},
 	
 	computed : {
 
 		//변화에 대응해 자동으로 query를 만들어준다.
 		query : function(){
+			var computedQuery = {
+				subject : this.subject
+			}
 
-			var computedQuery = { 
+			if(this.subwayRender === true){ //지하철역별 검색일시
+
+				computedQuery["subway"] = this.subway;
 			
-				city : this.city,
-				district : this.district, 
-				neighborhood : this.neighborhood,
-				subject : this.subject,
-
-			};
-
+			}else{ //주소기반 검색일시 (addressRender === true)
+			
+				computedQuery["city"] = this.city;
+				computedQuery["district"] = this.district;
+				computedQuery["neighborhood"] = this.neighborhood;
+			
+			}
 			for(var key in computedQuery){
 
-				if ( computedQuery[key] === "선택없음" ){
+				if ( computedQuery[key] === "没有选择" ){
+				//if ( computedQuery[key] === "선택없음" ){
 
 					delete computedQuery[key];
 				
 				}
 			
 			}
-
 			return computedQuery;
-
 		},
+
+		//map의 중심의 위경도를 구하기 위해 보낼 주소의 String
+		centerString : function(){
+
+			var centerString = "";
+			
+			if(this.subwayRender === true){ //지하철역 방식 Rendering
+
+				//centerString += subwayDic[this.subway];
+				centerString += _subwayDic[this.subway];
+			
+			}else{ //주소방식 Rendering
+
+				centerString += this.district;
+				centerString += " ";
+				if(this.neighborhood !== "没有选择") centerString += this.neighborhood;
+				//if(this.neighborhood !== "선택없음") centerString += this.neighborhood;
+
+			}
+
+			return centerString;
+		},
+		
 		//District에 해당하는 Neighborhood를 내야하기 때문에.
 		neighborList : function(){
 
@@ -88,7 +121,8 @@ var app = new Vue({
 
 		district : function(){
 
-			this.neighborhood = "선택없음";
+			this.neighborhood = "没有选择";
+			//this.neighborhood = "선택없음";
 			this.getHospital(this.query);
 
 		},
@@ -99,6 +133,17 @@ var app = new Vue({
 		},
 		subject : function(newSubject){
 
+			this.getHospital(this.query);
+
+		},
+		subway : function(newSubway){
+			this.getHospital(this.query);
+		},
+		//역 주변 검색 OR 지역별 검색에 따라서 선택한다.
+		addressRender : function(newSubject){
+
+			this.subject = "没有选择";
+			//this.subject = "선택없음";
 			this.getHospital(this.query);
 
 		}
@@ -118,14 +163,6 @@ var app = new Vue({
 			
 			return "/images/pin/"+index+".png";
 		
-		},
-		//역 검색 실시할 때, 사용하는 method.
-		searchSubway : function(){
-
-			//사용자가 적은것이 역의 일부 일 수 있으므로, 정규표현식을 활용한다.
-			const subwayQuery = { "subway": { "$regex": this.subway, "$options": "i" } };
-			this.getHospital(subwayQuery);
-
 		},
 		showAddress : function(){
 
@@ -180,36 +217,49 @@ var app = new Vue({
 		
 		//hospitalPageList에 해당하는 Map을 초기화 후 Marker를 찍는다.
 		makeListMap : function(hospitalPageList){
+			console.log(this.centerString);
+			//map의 중심을 잡기 위해 위,경도를 확인 후 Setting.
+			naver.maps.Service.geocode({ address : this.centerString }, function(status, response){
+				console.log(response.result);
+				var result = response.result;
 
-			var map = new naver.maps.Map('map', {
+				var centerX = result.items[0].point.x,
+					centerY = result.items[0].point.y;
+				console.log(centerX, centerY);
 
-				center: new naver.maps.LatLng(SHINCHON_X, SHINCHON_Y),
+				var map = new naver.maps.Map('map', {
+
+					center: new naver.maps.Point(centerX, centerY),
+
+				});
+
+				//index를 closer로 저장하기 위해 callback Function을 리턴하는 함수를 만든다.
+				var mapCallback = function(index){
+					
+					return function(status, response) {
+						if (status !== naver.maps.Service.Status.OK) {
+							return alert(hospitalPageList[index].address + '의 검색 결과가 없거나 기타 네트워크 에러');
+						}
+						
+						var result = response.result;
+						
+						var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+						makeMarker(map, myaddr, index);
+					};
+
+				}
+
+
+				//map에 hospital들의 위치 마커를 찍는다.
+				for(var i = 0; i< hospitalPageList.length; i++){
+					
+					//Marker를 찍기 위함 TODO 이걸 데이터에 저장하는 로직을 넣어야 빨라질 것 같다.
+					naver.maps.Service.geocode({address: hospitalPageList[i].address}, mapCallback(i));
+
+				}
 
 			});
 
-			//index를 closer로 저장하기 위해 callback Function을 리턴하는 함수를 만든다.
-			var mapCallback = function(index){
-				
-				return function(status, response) {
-					if (status !== naver.maps.Service.Status.OK) {
-						return alert(hospitalPageList[index].address + '의 검색 결과가 없거나 기타 네트워크 에러');
-					}
-					
-					var result = response.result;
-					
-					var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
-					makeMarker(map, myaddr, index);
-				};
-
-			}
-
-			//map에 hospital들의 위치 마커를 찍는다.
-			for(var i = 0; i< hospitalPageList.length; i++){
-				
-				//Marker를 찍기 위함 TODO 이걸 데이터에 저장하는 로직을 넣어야 빨라질 것 같다.
-				naver.maps.Service.geocode({address: hospitalPageList[i].address}, mapCallback(i));
-	
-			}
 
 		}
 	}
