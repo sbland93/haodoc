@@ -58,6 +58,10 @@ a {
     color: #BD1622;
 }
 
+.logoColorBG{
+    background-color:#BD1622;
+}
+
 /* HEADER MENU BAR */
 #menubar {
     width: 48px;

@@ -10,7 +10,7 @@
 
 <div id="app">
 
-<br><br><br><br><br>
+<br><br><br>
 
 <section>
     <div class="container">
@@ -31,7 +31,7 @@
     <div class="container search-condition">
         <div class="row">
             <div class="col-md-12">
-                <h4>输入地区和诊疗科，找一下我家附近的医院。<!--지역과 진료과를 입력해 주변의 병원을 찾아보세요.-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/subjectInfo" class="btn btn-primary">选择诊疗科室时很难吗？(Click!)<!--진료과목 선택이 어려우신가요? (Click!)--></a></h4>
+                <h4 class="search-help-text">输入地区和诊疗科，找一下我家附近的医院。<!--지역과 진료과를 입력해 주변의 병원을 찾아보세요.-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/subjectInfo" class="btn btn-primary">选择诊疗科室时很难吗？(Click!)<!--진료과목 선택이 어려우신가요? (Click!)--></a></h4>
             </div>
         </div>
     	<div class="row">
@@ -107,9 +107,13 @@
 	            	<div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>
 				</div>
 				<div class="media-body pl-3">
-					<div class="price"><a :href="hospitalInfoHref(hospital.id)"><img :src="pinImageHref(index)">  \{{hospital.name}}</a></div>
-					诊疗科目<!--진료과목--> :<span v-for="subject in hospital.subject">\{{subject}} </span>
-					<div class="stats">
+					<div class="hospitalName">
+						<a :href="hospitalInfoHref(hospital.id)"><img :src="pinImageHref(index)">\{{hospital.name}}</a>
+					</div>
+					<div class="subject">
+						诊疗科目<!--진료과목--> :<span v-for="subject in hospital.subject">\{{subject}} </span>
+					</div>
+					<div class="hospitalInfo">
 					    <span>工作日<!--평일 --> : \{{hospital.weekday}} </span>
 					    <span>星期六<!--토요일--> : \{{hospital.saturday}}</span>
 					    <span>假期<!--공휴일--> : \{{hospital.holiday}}</span>

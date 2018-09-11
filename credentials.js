@@ -7,7 +7,8 @@ module.exports = {
 	mongo: {
 		//기본 mlab주소.
 		development: {
-			connectionString : 'mongodb://haodoc:inspire0407!@ds225902.mlab.com:25902/haodoc_development'
+			connectionString : 'mongodb://haodoc:inspire0407!@ds225902.mlab.com:25902/haodoc_development',
+			//connectionString : 'mongodb://haodoc:inspire0407@ds147391.mlab.com:47391/haodoc'
 		},
 		//deploy된 상태에서의 mongodb mlab 주소.
 		production: {

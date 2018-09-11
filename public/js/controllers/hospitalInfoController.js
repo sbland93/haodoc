@@ -14,14 +14,15 @@ var app = new Vue({
 
 		hospital : '',
 		hospitalID : hospitalID,
-	
+		havePhoto : false,
+
 	},
 	
 	computed : {
 		//fullAddress를 리턴해주는 함수.
 		fullAddress : function(){
 
-			var space = " "
+			var space = " ";
 			return this.hospital.city + space + this.hospital.district + space + this.hospital.neighborhood + space + this.hospital.address;
 
 		},
@@ -62,6 +63,8 @@ var app = new Vue({
 				self.hospital = _hospital;
 				var myaddress = self.hospital.address;
 
+				self.havePhoto = _hospital.photo.length > 0;
+
 				naver.maps.Service.geocode({address: myaddress}, function(status, response) {
   
 					if (status !== naver.maps.Service.Status.OK) {
@@ -78,7 +81,10 @@ var app = new Vue({
 
 					var marker = new naver.maps.Marker({
 						position: myaddr,
-						map: map
+						map: map,
+						icon: {
+				        	url: '/images/pin/0.png',
+				        }
 					});
 				  
 				});

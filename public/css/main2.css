@@ -154,8 +154,8 @@ body {
     height: auto;
     }
     .publicaciones-blog-home .fondo-publicacion-home .img-publicacion-principal-home img {
-    height: auto;
-    width: 100%;
+    height: 300px;
+    width: auto;
     }
     .publicaciones-blog-home .black {
     background: #fff;
@@ -185,6 +185,9 @@ body {
     padding: 20px;
     text-decoration: none;
     border-radius: 3px;
+    }
+    .about img{
+        padding-left:35px;
     }
 }
 

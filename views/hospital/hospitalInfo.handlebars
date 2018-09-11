@@ -8,22 +8,21 @@
 
 {{/section}}
 
-
-<br><br><br><br><br><br>
+<br><br><br>
 
 <div id="app">
-    <section class="text-white" style="height:150px; background-color:#BD1622">
+    <section class="text-white logoColorBG" style="height:150px;">
 		<div class="container">
 	        <div class="row">
-		        <div class="col-sm-12 col-lg-12" style="width:100;">
-	    	        <h1 class="h2" style="text-align: center; padding-top:50px">
+		        <div class="col-sm-12 col-lg-12 hospitalName" style="width:100;">
+	    	        <h1 style="text-align: center; padding-top:50px">
 	        	        \{{hospital.name}}
 	            	</h1>
 	    		</div>
 	        </div>
 		</div>
     </section>
-    <br><br><br>
+    <br><br>
     <section class="search-box">
 		<div class="container">
 			
@@ -37,17 +36,17 @@
 	            <div class="col-sm-5 well listing-box">
 	            	<br>
 	            	<br>
-	            	<h3 style="line-height:20%;"><i class="fas fa-globe fa-1x" style="line-height:6%;color:#BD1622"></i> 诊疗科目 </h3>
-	                <p style="margin-top:6%;line-height:35%"><span v-for="subject in hospital.subject"><b>- \{{subject}}</b> </span></p><br>
+	            	<h3 style="line-height:20%;"><i class="fas fa-globe fa-1x" style="line-height:6%;color:#BD1622"></i> 诊疗科目<!--진료과목--> </h3>
+	                <p style="margin-top:12%;line-height:35%"><span v-for="subject in hospital.subject"><b>- \{{subject}}</b> </span></p><br>
 
 	                <h3 style="line-height:20%;"><i class="fas fa-map-marker-alt fa-1x" style="line-height:6%;color:#BD1622"></i> 详细地址<!--상세주소--></h3>               
-	                <p style="margin-top:6%;line-height:35%">- \{{ fullAddress }}</p><br />
+	                <p style="margin-top:12%;line-height:35%">- \{{ fullAddress }}</p><br />
 	                <h3 style="line-height:20%;"><i class="fas fa-phone fa-1x" style="line-height:6%;color:#BD1622"></i> 
 	                电话号<!--전화번호--> </h3>
-	                <p style="margin-top:6%;line-height:35%"><a href="siteadresi.com/destek">- \{{ hospital.tel }}</a></p>
+	                <p style="margin-top:12%;line-height:35%"><a href="siteadresi.com/destek">- \{{ hospital.tel }}</a></p>
 	                <br />
 	                <h3 style="line-height:20%;"><i class="far fa-calendar-alt fa-1x" style="line-height:6%;color:#BD1622"></i> 诊疗时间<!--진료시간--></h3>
-	                <p style="margin-top:6%;line-height:130%">
+	                <p style="margin-top:12%;line-height:130%">
 	                	- 工作日<!--평일--> - \{{ hospital.weekday }}<br>	
 	                	- 星期六<!--토요일--> - \{{ hospital.saturday }}<br>
 	                	- 周日及公休日 <!--일요일 및 공휴일--> - \{{ hospital.holiday }}<br>
@@ -63,13 +62,15 @@
 
 		    <br><br>
 		    
-
-		    <h2 class="logoColor text-center"> 医院照片<!--병원 내부 사진--> </h2>
-		    <div class="container-fluid row">
-			    <div style="float : none; margin: 0 auto;">
-		    		<span class="col-xs-12 col-md-4" v-for="(photo, index) in hospital.photo"><img class="img-responsive" :src="photoHref(photo)" width="400px" height="300px"></span>
-		    	</div>
+		    <div v-show="havePhoto">
+		    	<h2 class="logoColor text-center"> 医院照片<!--병원 내부 사진--> </h2>
+			    <div class="container-fluid row">
+				    <div style="float : none; margin: 0 auto;">
+			    		<span class="col-xs-12 col-md-4" v-for="(photo, index) in hospital.photo"><img class="img-responsive" :src="photoHref(photo)" width="400px" height="300px"></span>
+			    	</div>
+			    </div>
 		    </div>
+		    
 
 		    <br><br>
 
@@ -77,11 +78,11 @@
 		    
 	</section>
 
-    <section class="search-box">
+    <!--section class="search-box">
 
 	<div class="container">
 		<br>
-		<h2 class="text-center logoColor">医院访问后记<!--병원 후기 --></h2>
+		<h2 class="text-center logoColor">医院访问后记</h2>
 		<br>
 		<div class="card">
 		    <div class="card-body">
@@ -137,7 +138,7 @@
 		<br><br>
 	</div>
 
-	</section>
+	</section-->
 	
 </div>
 

@@ -36,7 +36,7 @@ var app = new Vue({
 		subject : "没有选择",
 		//subject : "선택없음",
 		subway : "新村站",
-		//subway : "신촌역",
+		//subway : "홍대입구역",
 		addressRender : false,
 		subwayRender : true,
 

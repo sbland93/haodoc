@@ -1,3 +1,13 @@
 .form-style-9 p{
 	padding-left:0px;
 }
+
+@media (max-width: 991px) {
+	.form-style-9 img{
+		width:280px;
+	}
+}
+
+@media (max-width: 575px) {
+
+}
