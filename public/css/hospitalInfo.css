@@ -4,6 +4,17 @@ a {color: #000;}
 
 a:link{text-decoration:none;}
 
+.name-box{
+    margin-top: 30px;
+}
+
+.hospitalName h1{
+
+     text-align: center; 
+     padding-top:50px;
+
+}
+
 #contact2{
     letter-spacing:3px;
 }
@@ -22,14 +33,29 @@ a:link{text-decoration:none;}
     margin-left: 4rem;
 }
 
+.name-box{
+    height: 150px;
+}
+
+/* 병원 사진 이미지 모바일 시 */
+.photo img{
+    padding-top: 20px;
+    width : 330px;
+    height: 220px;
+}
+
 
 @media (max-width: 768px) {
 
+    .name-box{
+        margin-top: 25px;
+    }
 
 	/* SearchBox HospitalName */    
     .hospitalName h1{
     	
     	font-size: 25px;
+        padding-top:30px;
     
     }
 
@@ -51,7 +77,17 @@ a:link{text-decoration:none;}
 
     }
 
+    /* 병원 사진 이미지 모바일 시 */
+    .photo img{
+        
+        width : 275px;
+        height: 200px;
+    
+    }
 
+    .name-box{
+        height: 100px;
+    }
 
 
 }

@@ -1,8 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100italic,100,300,300italic,900italic,900,700,700italic,500italic,500,400italic);
+
 body {
     font-family: 'Roboto', sans-serif;
 }
+
 .publicaciones-blog-home {
+    padding-top: 50px;
     padding-bottom: 50px;
 	background: url("") no-repeat fixed center center;
     background-size: 100% auto;
@@ -128,63 +131,77 @@ body {
     font-size: 25px;
     line-height: 26px;
 }
+
+
 @media (max-width: 768px) {
-    .publicaciones-blog-home h2 {
-    text-align: center;
-    font-weight: 300;
-    margin-bottom: 30px;
-    font-size: 34px;
-    margin-top: 70px;
+
+    .publicaciones-blog-home {
+    
+        padding-top: 15px;
+    
     }
+
+    .publicaciones-blog-home h2 {
+    
+        text-align: center;
+        font-weight: 300;
+        margin-bottom: 30px;
+        font-size: 34px;
+        margin-top: 70px;
+    
+    }
+
     .publicaciones-blog-home .fondo-publicacion-home {
-    background: #ffffff;
-    border-radius: 3px;
-    overflow: hidden;
-    height: inherit;
-    margin-bottom: 20px;
-    display: block;
-    color: inherit;
-    text-decoration: none;
-    position: relative;
+    
+        background: #ffffff;
+        border-radius: 3px;
+        overflow: hidden;
+        height: inherit;
+        margin-bottom: 20px;
+        display: block;
+        color: inherit;
+        text-decoration: none;
+        position: relative;
+    
     }
     .publicaciones-blog-home .fondo-publicacion-home .img-publicacion-principal-home {
-    display: inline-block;
-    width: 100%;
-    overflow: hidden;
-    height: auto;
+        display: inline-block;
+        width: 100%;
+        overflow: hidden;
+        height: auto;
     }
     .publicaciones-blog-home .fondo-publicacion-home .img-publicacion-principal-home img {
-    height: 300px;
-    width: auto;
+        height: 300px;
+        width: auto;
     }
     .publicaciones-blog-home .black {
-    background: #fff;
+        background: #fff;
     }
     .publicaciones-blog-home .fondo-publicacion-home .contenido-publicacion-principal-home {
-    display: inline-block;
-    vertical-align: top;
-    width: 100%;
-    padding: 0 10px;
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        padding: 0 10px;
     }
     .publicaciones-blog-home .fondo-publicacion-home .contenido-publicacion-principal-home h3 {
-    font-weight: 900;
-    color: #333;
-    text-transform: uppercase;
-    font-size: 20px;
+        font-weight: 900;
+        color: #333;
+        text-transform: uppercase;
+        font-size: 20px;
     }
     .publicaciones-blog-home .fondo-publicacion-home .contenido-publicacion-principal-home p {
-    color: #333;
-    font-size: 14px;
-    font-weight: 400;
+        color: #333;
+        font-size: 14px;
+        font-weight: 400;
     }
     .publicaciones-blog-home .todas-las-publicaciones-home {
-    background: #BD1622;
-    height: 100%;
-    width: 100%;
-    display: inline-block;
-    padding: 20px;
-    text-decoration: none;
-    border-radius: 3px;
+        background: #BD1622;
+        height: 100%;
+        width: 100%;
+        display: inline-block;
+        padding: 20px;
+        text-decoration: none;
+        border-radius: 3px;
     }
     .about img{
         padding-left:35px;

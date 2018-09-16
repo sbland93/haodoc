@@ -4,7 +4,7 @@ module.exports = function(){
 	return {
 		
 		home:  function(req, res, next){
-			res.render('main');
+			res.render('main2');
 		},
 
 		about: function(req, res, next){

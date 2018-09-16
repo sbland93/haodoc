@@ -8,21 +8,24 @@
 
 {{/section}}
 
-<br><br><br>
+
 
 <div id="app">
-    <section class="text-white logoColorBG" style="height:150px;">
+
+    <section class="name-box text-white logoColorBG">
 		<div class="container">
 	        <div class="row">
-		        <div class="col-sm-12 col-lg-12 hospitalName" style="width:100;">
-	    	        <h1 style="text-align: center; padding-top:50px">
+		        <div class="col-sm-12 col-lg-12 hospitalName">
+	    	        <h1>
 	        	        \{{hospital.name}}
 	            	</h1>
 	    		</div>
 	        </div>
 		</div>
     </section>
+    
     <br><br>
+    
     <section class="search-box">
 		<div class="container">
 			
@@ -40,7 +43,7 @@
 	                <p style="margin-top:12%;line-height:35%"><span v-for="subject in hospital.subject"><b>- \{{subject}}</b> </span></p><br>
 
 	                <h3 style="line-height:20%;"><i class="fas fa-map-marker-alt fa-1x" style="line-height:6%;color:#BD1622"></i> 详细地址<!--상세주소--></h3>               
-	                <p style="margin-top:12%;line-height:35%">- \{{ fullAddress }}</p><br />
+	                <p style="margin-top:12%;">- \{{ fullAddress }}</p><br />
 	                <h3 style="line-height:20%;"><i class="fas fa-phone fa-1x" style="line-height:6%;color:#BD1622"></i> 
 	                电话号<!--전화번호--> </h3>
 	                <p style="margin-top:12%;line-height:35%"><a href="siteadresi.com/destek">- \{{ hospital.tel }}</a></p>
@@ -62,11 +65,11 @@
 
 		    <br><br>
 		    
-		    <div v-show="havePhoto">
+		    <div class="photo" v-show="havePhoto">
 		    	<h2 class="logoColor text-center"> 医院照片<!--병원 내부 사진--> </h2>
 			    <div class="container-fluid row">
 				    <div style="float : none; margin: 0 auto;">
-			    		<span class="col-xs-12 col-md-4" v-for="(photo, index) in hospital.photo"><img class="img-responsive" :src="photoHref(photo)" width="400px" height="300px"></span>
+			    		<span class="col-xs-12 col-md-4" v-for="(photo, index) in hospital.photo"><img class="img-responsive" :src="photoHref(photo)"></span>
 			    	</div>
 			    </div>
 		    </div>

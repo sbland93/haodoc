@@ -43,42 +43,51 @@
         <div id="menu-display">
             <a href="javascript:void(0)" class="closebtn">&times;</a>
             <ul>
-                <li><a href="/about">ABOUT HaoDoc</a></li>
-                <li><a href="/hpv1">HPV Event</a></li>
-                <li><a href="/team">Team</a></li>
+                <li><a href="/find">搜索我家附近的医院</a></li>
+                <li><a href="/hpv0">HPV 疫苗活动</a></li>
+                <li><a href="/team">HaoDoc 团队介绍</a></li>
             </ul>
         </div>
+        
         <nav class="header">
             <!-- HEADER LOGO -->
             <a href="/"><img id="logo" alt="HaoDoc" src="/images/logo2.png"></a>
             <!-- HEADER MENU BAR -->
             <input id="menubar" type="image" src="/images/menubar.png" />
-
         </nav>
 
         <!-- WEIBO ICON -->
-        <a href="https://www.weibo.com/u/6589350358?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank"><img id="weibo" alt="Weibo" src="/images/weibo.png"></a>
-        <a target="_blank" data-toggle="modal" data-target="#exampleModal"><img id="wechat" alt="Wechat" src="/images/wechat.png"></a>
+        <a href="https://www.weibo.com/u/6589350358?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank">
+            <img id="weibo" alt="Weibo" src="/images/weibo.png">
+        </a>
+        <!-- Wechat ICON -->
+        <a target="_blank" data-toggle="modal" data-target="#exampleModal">
+            <img id="wechat" alt="Wechat" src="/images/wechat.png">
+        </a>
+        
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">HaoDoc</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p><img src="/images/QR.jpg" id="QRCode"></p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              </div>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">HaoDoc</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><img src="/images/QR.jpg" id="QRCode"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
+
             {{{body}}}
+
+         <!-- 'javascript Section -->   
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script type="text/javascript" src="/js/layout.js"></script>
         {{{_sections.jquery}}}

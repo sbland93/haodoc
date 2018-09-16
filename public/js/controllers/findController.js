@@ -2,8 +2,9 @@
 
 
 /*  Marker를 찍는 함수  */
-const makeMarker = function(map, position, index) {
-	console.log("index", index);
+const makeMarker = function(map, position, index, hospitalObj) {
+
+
     var marker = new naver.maps.Marker({
         map: map,
         position: position,
@@ -12,9 +13,38 @@ const makeMarker = function(map, position, index) {
         }
     });
 
+    var contentString = [
+	    '<div class="iw_inner">',
+	    '   <a href="/hospital/'+ hospitalObj.id +'"><h3 class="logoColor text-center" style="padding:10px">' + hospitalObj.name + '</h3></a>',
+	    '   <p style="padding:15px">',
+	    '详细地址 - ' + hospitalObj.address +'<br>',
+	    '电话号 - ' + hospitalObj.tel + '<br>',
+	    '工作日 - ' + hospitalObj.weekday +'<br>',
+	    '星期六 - ' + hospitalObj.saturday + '<br>',
+	    '假期 - ' + hospitalObj.holiday + '<br>',
+	    '   </p>',
+	    '</div>'
+	].join('');
+
+	var infowindow = new naver.maps.InfoWindow({
+	    content: contentString,
+	    borderColor: "#BD1622",
+	});
+
+	naver.maps.Event.addListener(marker, "click", function(e) {
+	    if (infowindow.getMap()) {
+	        infowindow.close();
+	    } else {
+	        infowindow.open(map, marker);
+	    }
+	});
+
     return marker;
 
 }
+
+
+
 
 
 //Vue 앱 만들기.
@@ -25,13 +55,13 @@ var app = new Vue({
 	data : {
 
 		numOfPage : 0,
-		index : 0,
+		index : 1,
 		pageHospitals : [],
 		
 		hospitalList : [],
 		city : "서울특별시",
 		district : "서대문구",
-		neighborhood : "没有选择",
+		neighborhood : "창천동",
 		//neighborhood : "선택없음",
 		subject : "没有选择",
 		//subject : "선택없음",
@@ -112,17 +142,15 @@ var app = new Vue({
 	},
 	
 	mounted : function(){
-		
 		this.getHospital(this.query);
-
 	},
 
 	watch: {
 
-		district : function(){
-
-			this.neighborhood = "没有选择";
-			//this.neighborhood = "선택없음";
+		district : function(newDistrict){
+			console.log(newDistrict);
+			//구 변경시 구청이 뜨므로, 이를 동이 나오게끔 해야 병원이 찍혀있을것.
+			this.neighborhood = neighborDictionary[newDistrict][0];
 			this.getHospital(this.query);
 
 		},
@@ -145,8 +173,12 @@ var app = new Vue({
 			this.subject = "没有选择";
 			//this.subject = "선택없음";
 			this.getHospital(this.query);
+		},
+		//index 변경시에 scroll을 top으로 이동시켜야함.
+		index : function(newIndex, oldIndex){
+			$(".listing-block").scrollTop(0);
+		},
 
-		}
 
 	},
 	
@@ -188,6 +220,7 @@ var app = new Vue({
 		changeIndex : function(index){
 			
 			//ex) index = 1 , slice(0, 10)
+			this.index = index;
 			var endNum = index * 10;
 			var firstNum = endNum - 10;
 			this.pageHospitals = this.hospitalList.slice(firstNum, endNum);
@@ -220,12 +253,11 @@ var app = new Vue({
 			console.log(this.centerString);
 			//map의 중심을 잡기 위해 위,경도를 확인 후 Setting.
 			naver.maps.Service.geocode({ address : this.centerString }, function(status, response){
-				console.log(response.result);
+				
 				var result = response.result;
 
 				var centerX = result.items[0].point.x,
 					centerY = result.items[0].point.y;
-				console.log(centerX, centerY);
 
 				var map = new naver.maps.Map('map', {
 
@@ -244,7 +276,7 @@ var app = new Vue({
 						var result = response.result;
 						
 						var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
-						makeMarker(map, myaddr, index);
+						makeMarker(map, myaddr, index, hospitalPageList[index]);
 					};
 
 				}
@@ -266,8 +298,5 @@ var app = new Vue({
 
 
 });
-
-
-
 
 

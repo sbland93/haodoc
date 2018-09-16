@@ -1,6 +1,7 @@
 
 
 $(document).ready(function() {
+	
 	$('#menubar').on('click', function() {
 	    $('#menu-display').fadeIn(500);
 	    $('#menu-display').css('display', 'flex');
