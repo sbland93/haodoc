@@ -1,4 +1,8 @@
 
+var url =  window.location.pathname;
+
+var hospitalID = url.replace("/hospital/", "");
+
 
 var app = new Vue({
 
