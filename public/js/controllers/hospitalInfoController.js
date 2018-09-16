@@ -1,21 +1,4 @@
 
-var url =  window.location.pathname;
-
-var hospitalID = url.replace("/hospital/", "");
-
-if ("onhashchange" in window) {
-    alert("The browser supports the hashchange event!");
-}
-
-function locationHashChanged() {
-    if (location.hash === "#somecoolfeature") {
-        somecoolfeature();
-    }
-}
-
-window.onhashchange = locationHashChanged;
-
-console.log(url);
 
 var app = new Vue({
 
