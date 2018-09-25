@@ -235,7 +235,7 @@ var app = new Vue({
 			var self = this;
 
 			getHospitals(query).then(function(_hospitals){
-
+				//전체 hopsitalList
 				self.hospitalList = _hospitals;
 				//page당 10개씩 렌더링 할 것이므로 총 페이지수를 구한다.
 				self.numOfPage = parseInt( _hospitals.length / 10 ) + 1;

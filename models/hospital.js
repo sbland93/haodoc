@@ -15,7 +15,7 @@ var hospitalSchema = mongoose.Schema({
 	holiday: String,
 	review: String,
 	subway : String,
-	photo : Array,
+	photo : {type: Number, default: 0}
 });
 
 

@@ -3427,9 +3427,18 @@ for (var i = 0; i < processing_data.length; i++) {
       } 
 
       //photo, subject(array가 되어야할 필드) 중 데이터가 있었던 필드에 대해 array로 만드는 작업.
-      if ((thisObject[key] !== undefined) && (key === "photo" || key == "subject")){
+      if ((thisObject[key] !== undefined) && (key == "subject")){
          
-         thisObject[key] = thisObject[key].split(',')
+         thisObject[key] = thisObject[key].split(',');
+
+      }
+
+      //photo, subject(array가 되어야할 필드) 중 데이터가 있었던 필드에 대해 array로 만드는 작업.
+      if ((thisObject[key] !== undefined) && (key === "photo")){
+         
+        thisObject[key] = thisObject[key].split(',');
+        console.log(thisObject[key].length);
+        thisObject[key] = thisObject[key].length;
 
       }
 

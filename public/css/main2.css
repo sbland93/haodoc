@@ -135,6 +135,7 @@ body {
 
 @media (max-width: 768px) {
 
+
     .publicaciones-blog-home {
     
         padding-top: 15px;
@@ -149,6 +150,21 @@ body {
         font-size: 34px;
         margin-top: 70px;
     
+    }
+
+    .mainbox {
+
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+
+    }
+
+    /* mobile에서는 button이 생성 */
+    .mobile-btn{
+        background-color:#BD1622;
+        color:white;
+        width:350px;
+        align-items: center;
     }
 
     .publicaciones-blog-home .fondo-publicacion-home {
@@ -206,5 +222,6 @@ body {
     .about img{
         padding-left:35px;
     }
+    
 }
 

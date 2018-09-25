@@ -5,25 +5,26 @@
 {{/section}}
 
 
-<div id="userList">
-    <div><b>긁히지 않는 영역입니다 고갱님들</b></div>
-    <br><br><br><br>
-    <ul>
-    {{#each userList}}
-        <li><h4>Korean Name : {{name}}</h4></li>
-        <li><h4>English Name : {{englishName}} </h4></li>
-        <li><h4>Chinese Name : {{chineseName}} </h4></li>
-        <li><h4>Gender : {{gender}} </h4></li>
-        <li><h4>Wechat ID : {{wechatID}}</h4></li>
-        <li><h4>Brith : {{birthDay}}</h4></li>
-        <li><h4>Phone : {{phone}}</h4></li>
-        <li><h4>Updated_at : {{updated_at}}</h4></li>
-        <hr>
-    {{/each}}
-    </ul>
-</div>
+    <div id="userList">
+        <div><b>긁히지 않는 영역입니다 고갱님들</b></div>
+        <br><br><br><br>
+        <ul>
+        {{#each userList}}
+            <li><h4>Korean Name : {{name}}</h4></li>
+            <li><h4>English Name : {{englishName}} </h4></li>
+            <li><h4>Chinese Name : {{chineseName}} </h4></li>
+            <li><h4>Gender : {{gender}} </h4></li>
+            <li><h4>Wechat ID : {{wechatID}}</h4></li>
+            <li><h4>Brith : {{birthDay}}</h4></li>
+            <li><h4>Phone : {{phone}}</h4></li>
+            <li><h4>Updated_at : {{updated_at}}</h4></li>
+            <hr>
+        {{/each}}
+        </ul>
+    </div>
+
 
 {{#section 'jquery'}}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/controllers/adminController.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/controllers/adminController.js"></script>
 {{/section}}

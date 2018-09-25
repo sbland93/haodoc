@@ -1,3 +1,6 @@
+
+
+/* 진료과목 테두리를 위함 */
 .border-red {
     height:auto;
     min-height:150px;
@@ -6,7 +9,19 @@
     border-right: 1px solid #BD1622;
     padding:15px;
 }
+/* 마지막 진료과목 테두리는 아래에 선이 있어야 함. */
+.border-red-bottom{
+	border-bottom: 1px solid #BD1622
+}
+
 
 .title {
 	padding : 15px;
+}
+
+
+.subject-icon{
+	width: 200px;
+	height: 200px;
+	margin: 0 auto;
 }

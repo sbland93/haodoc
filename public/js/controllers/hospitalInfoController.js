@@ -36,10 +36,15 @@ var app = new Vue({
 	methods: {
 		
 		//TODO
-		photoHref : function(photo_name){
+		/*photoHref : function(photo_name){
 
 			return "/images/hospital/" + photo_name+".JPG";
 
+		},*/
+
+		photoHref: function(index){
+			var rtnValue = "/images/hospital/" + this.hospital.neighborhood + "_" + this.hospital.name + "_0" + index + ".JPG"; 
+			return  rtnValue;
 		},
 
 		//index가 0인지 확인
@@ -60,7 +65,8 @@ var app = new Vue({
 				self.hospital = _hospital;
 				var myaddress = self.hospital.address;
 
-				self.havePhoto = _hospital.photo.length > 0;
+				//self.havePhoto = _hospital.photo.length > 0;
+				self.havePhoto = _hospital.photo > 0;
 
 				naver.maps.Service.geocode({address: myaddress}, function(status, response) {
   

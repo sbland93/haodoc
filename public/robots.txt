@@ -1,4 +1,2 @@
-User-agent: *
-Disallow: /admin/
-Disallow: /personal/
-Disallow: /rules/
+User-agent: Yeti
+Allow:/

@@ -1,48 +1,52 @@
-hr {border-top: 1px solid #000; width:50%;}
+    hr {
+        border-top: 1px solid #000; width:50%;
+    }
 
-a {color: #000;}
+    a {
+        color: #000;
+    }
 
-a:link{text-decoration:none;}
+    a:link{text-decoration:none;}
 
-.name-box{
-    margin-top: 30px;
-}
+    .name-box{
+        margin-top: 30px;
+    }
 
-.hospitalName h1{
+    .hospitalName h1{
 
-     text-align: center; 
-     padding-top:50px;
+         text-align: center; 
+         padding-top:50px;
 
-}
+    }
 
-#contact2{
-    letter-spacing:3px;
-}
+    #contact2{
+        letter-spacing:3px;
+    }
 
-#author a{
-  color: #fff;
-  text-decoration: none;   
-}
-
-
-.search-box{width:90%; margin:0 auto 40px; border: 1px solid #BD1622; box-shadow:10px 13px 0 rgba(0,0,0,0.2);}
-.listing-block{background:#fff; height:700px; padding-top:20px; overflow-y:scroll;}
+    #author a{
+      color: #fff;
+      text-decoration: none;   
+    }
 
 
-.card-inner{
-    margin-left: 4rem;
-}
+    .search-box{width:90%; margin:0 auto 40px; border: 1px solid #BD1622; box-shadow:10px 13px 0 rgba(0,0,0,0.2);}
+    .listing-block{background:#fff; height:700px; padding-top:20px; overflow-y:scroll;}
 
-.name-box{
-    height: 150px;
-}
 
-/* 병원 사진 이미지 모바일 시 */
-.photo img{
-    padding-top: 20px;
-    width : 330px;
-    height: 220px;
-}
+    .card-inner{
+        margin-left: 4rem;
+    }
+
+    .name-box{
+        height: 150px;
+    }
+
+    /* 병원 사진 이미지 모바일 시 */
+    .photo img{
+        padding-top: 20px;
+        width : 320px;
+        height: 220px;
+    }
 
 
 @media (max-width: 768px) {

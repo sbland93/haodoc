@@ -1,4 +1,9 @@
 /* ABOUT-PAGE */
+.header {
+
+    position: fixed;
+}
+
 .about-page {
     background-size: cover;
     background-position: center center;
@@ -84,23 +89,19 @@
 }
 
 #page-1 {
-    background-image: url('../images/about/01.jpg');
+    background-image: url('../images/about/about_1.jpg');
 }
 
 #page-2 {
-    background-image: url('../images/about/02.jpg');
+    background-image: url('../images/about/about_2.jpg');
 }
 
 #page-3 {
-    background-image: url('../images/about/03.jpg');
+    background-image: url('../images/about/about_3.jpg');
 }
 
 #page-4 {
-    background-image: url('../images/about/04.jpg');
-}
-
-#page-5 {
-    background-image: url('../images/about/05.jpg');
+    background-image: url('../images/about/about_4.jpg');
 }
 
 
@@ -170,166 +171,161 @@
 
 
 
-@media (max-width: 1024px) {
-#page-1 {
-    background-image: url('../images/about/01-mobile.jpg');
-}
+@media (max-width: 700px) {
+    #page-1 {
+        background-image: url('../images/about/about_mobile_1.jpg');
+    }
 
-#page-2 {
-    background-image: url('../images/about/website-mobile2.jpg');
-}
+    #page-2 {
+        background-image: url('../images/about/about_mobile_2.jpg');
+    }
 
-#page-3 {
-    background-image: url('../images/about/03-mobile.jpg');
-}
+    #page-3 {
+        background-image: url('../images/about/about_mobile_3.jpg');
+    }
 
-#page-4 {
-    background-image: url('../images/about/04.jpg');
-}
+    #page-4 {
+        background-image: url('../images/about/about_mobile_4.jpg');
+    }
 
-#page-5 {
-    background-image: url('../images/about/05.jpg');
-}
-/* MAIN PAGE: WORD CONTENT */
-.content {
-    top: 70%;
-    left: 8%;
-}
+    /* MAIN PAGE: WORD CONTENT */
+    .content {
+        top: 70%;
+        left: 8%;
+    }
 
-.content h5 {
-    font-size: 25px;
-}
+    .content h5 {
+        font-size: 25px;
+    }
 
 
-.content p {
-    font-size: 22px;
-    line-height: 26px;
-}
+    .content p {
+        font-size: 22px;
+        line-height: 26px;
+    }
 
-#content-right .content {
-    top: 17%;
-    left: 12%;
-}
-#content-right .content h5{
-    font-size: 23px;
-}
-/* ABOUT-PAGE */
-.brand-story {
-    width: 780px;
-    height: 560px;
-    left: 2%;
-    padding: 30px 50px 10px 30px;
-    top: 10%;
-}
+    #content-right .content {
+        top: 17%;
+        left: 12%;
+    }
+    #content-right .content h5{
+        font-size: 23px;
+    }
+    /* ABOUT-PAGE */
+    .brand-story {
+        width: 780px;
+        height: 560px;
+        left: 2%;
+        padding: 30px 50px 10px 30px;
+        top: 10%;
+    }
 
-.brand-title h1 {
-    font-size: 24px;
-    margin-bottom: 15px;
-}
+    .brand-title h1 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
 
-#brand-cut-in {
-    font-size: 20px;
-}
+    #brand-cut-in {
+        font-size: 20px;
+    }
 
-#brand-name {
-    font-size: 22px;
-}
+    #brand-name {
+        font-size: 22px;
+    }
 
-#question {
-    font-size: 18px;
-    margin-top: 4px;
-    margin-bottom: 34px;
-}
+    #question {
+        font-size: 18px;
+        margin-top: 4px;
+        margin-bottom: 34px;
+    }
 
-.paragraph p {
-    font-size: 16px;
-}
+    .paragraph p {
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 575px) {
 
-#page-1 {
-    background-image: url('../images/about/01-mobile.jpg');
-}
+    #page-1 {
+        background-image: url('../images/about/about_mobile_1.jpg');
+    }
 
-#page-2 {
-    background-image: url('../images/about/website-mobile2.jpg');
-}
+    #page-2 {
+        background-image: url('../images/about/about_mobile_2.jpg');
+    }
 
-#page-3 {
-    background-image: url('../images/about/03-mobile.jpg');
-}
+    #page-3 {
+        background-image: url('../images/about/about_mobile_3.jpg');
+    }
 
-#page-4 {
-    background-image: url('../images/about/04.jpg');
-}
-#page-5 {
-    background-image: url('../images/about/05.jpg');
-}
-/* MAIN PAGE: WORD CONTENT */
-.content {
-    top: 70%;
-    left: 8%;
-}
+    #page-4 {
+        background-image: url('../images/about/about_mobile_4.jpg');
+    }
 
-.content h5 {
-    font-size: 23px;
-}
+    /* MAIN PAGE: WORD CONTENT */
+    .content {
+        top: 70%;
+        left: 8%;
+    }
 
-.content p {
-    font-size: 19px;
-    line-height: 26px;
-}
+    .content h5 {
+        font-size: 23px;
+    }
 
-#content-right .content {
-    top: 17%;
-    left: 8%;
-}
+    .content p {
+        font-size: 19px;
+        line-height: 26px;
+    }
 
-.more span {
-    font-size: 16px;
-    padding: 12px 85px;
-}
+    #content-right .content {
+        top: 17%;
+        left: 8%;
+    }
 
-#brand-content .content {
-    left: 8%;
-}
+    .more span {
+        font-size: 16px;
+        padding: 12px 85px;
+    }
 
-#kit-content .content {
-    left: 8%;
-}
+    #brand-content .content {
+        left: 8%;
+    }
 
-/* ABOUT-PAGE */
-.brand-story {
-    width: 350px;
-    height: 500px;
-    left : 3%;
-    padding: 20px 15px 10px 20px;
-}
+    #kit-content .content {
+        left: 8%;
+    }
 
-.brand-title h1 {
-    font-size: 17px;
-    margin-bottom: 16px;
-}
+    /* ABOUT-PAGE */
+    .brand-story {
+        width: 350px;
+        height: 500px;
+        left : 3%;
+        padding: 20px 15px 10px 20px;
+    }
 
-#brand-cut-in {
-    font-size: 15px;
-    margin-right: 0;
-    margin-bottom: 0;
-}
+    .brand-title h1 {
+        font-size: 17px;
+        margin-bottom: 16px;
+    }
 
-#brand-name {
-    font-size: 17px;
-}
+    #brand-cut-in {
+        font-size: 15px;
+        margin-right: 0;
+        margin-bottom: 0;
+    }
 
-#question {
-    font-size: 14px;
-    margin-top: 4px;
-    margin-bottom: 34px;
-}
+    #brand-name {
+        font-size: 17px;
+    }
 
-.paragraph p {
-    font-size: 13px;
-}
+    #question {
+        font-size: 14px;
+        margin-top: 4px;
+        margin-bottom: 34px;
+    }
+
+    .paragraph p {
+        font-size: 13px;
+    }
 
 }
