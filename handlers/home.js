@@ -28,6 +28,10 @@ module.exports = function(){
 			});
 		},
 
+		events: function(req, res, next){
+			res.render('home/event');
+		},
+
 
 
 		/*
@@ -43,9 +47,11 @@ module.exports = function(){
 		},
 		//for Finding Hospital
 		find : function(req, res, next){
+
+
+
 			res.render('hospital/find');
 		}
-
 
 
 		/*

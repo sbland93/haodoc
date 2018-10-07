@@ -15,7 +15,8 @@
             <div class="col-md-12">
                 <nav>
                   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" @click="showSubway" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">地铁站周边搜索<!--역 주변 검색--></a>
+                  	<!--역 주변 검색-->
+                    <!--a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" @click="showSubway" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">地铁站周边搜索</a-->
                     <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" @click="showAddress" href="#nav-profile" role="tab" aria-controls="nav-home" aria-selected="true">分地域进行搜索<!--지역별검색--></a>
                   </div>
                 </nav>
@@ -62,7 +63,7 @@
             <div class="col-md-3">
             	<div class="form-group">
             		<select v-model="city" id="inputState" class="form-control">
-						<option value="서울특별시">서울특별시</option>
+						<option value="서울특별시(首尔特别市)">서울특별시(首尔特别市)</option>
 					</select>
             	</div>
 			</div>
@@ -109,12 +110,10 @@
 						<a :href="hospitalInfoHref(hospital.id)"><img :src="pinImageHref(index)">\{{hospital.name}}</a>
 					</div>
 					<div class="subject">
-						诊疗科目<!--진료과목--> :<span v-for="subject in hospital.subject">\{{subject}} </span>
+						诊疗科目<!--진료과목--> :<span v-for="subject in hospital.subjects"> \{{subject}} </span>
 					</div>
 					<div class="hospitalInfo">
-					    <span>工作日<!--평일 --> : \{{hospital.weekday}} </span>
-					    <span>星期六<!--토요일--> : \{{hospital.saturday}}</span>
-					    <span>假期<!--공휴일--> : \{{hospital.holiday}}</span>
+					    <span>电话号<!--전화번호--> : \{{hospital.tel}}</span>
 					</div>
 					<div class="address">\{{ fullAddress(hospital) }}</div>
 					</div>

@@ -47,7 +47,7 @@
 	            		<i class="fas fa-globe fa-1x" style="line-height:6%;color:#BD1622"></i> 诊疗科目<!--진료과목-->
 	        		</h3>
 	                <p style="margin-top:12%;line-height:35%">
-	                	<span v-for="subject in hospital.subject"><b>- \{{subject}}</b> </span></p><br>
+	                	<span v-for="subject in hospital.subjects"><b>- \{{subject}}</b> </span></p><br>
 
 	                <h3 style="line-height:20%;">
 	                	<i class="fas fa-map-marker-alt fa-1x" style="line-height:6%;color:#BD1622"></i> 详细地址<!--상세주소-->
@@ -60,7 +60,7 @@
 	                </h3>
 	                
 	                <p style="margin-top:12%;line-height:35%">
-	                	<a href="siteadresi.com/destek">-전화번호\{{ hospital.tel }}</a>
+	                	<a href="siteadresi.com/destek">-\{{ hospital.tel }}</a>
 	                </p>
 	                <br />
 	                
@@ -69,9 +69,14 @@
 	                </h3>
 
 	                <p style="margin-top:12%;line-height:130%">
-	                	- 工作日<!--평일--> - \{{ hospital.weekday }}<br>	
-	                	- 星期六<!--토요일--> - \{{ hospital.saturday }}<br>
-	                	- 周日及公休日 <!--일요일 및 공휴일--> - \{{ hospital.holiday }}<br>
+	                	- 星期一 : \{{hospital.monStart}} ~ \{{hospital.monClose}}<br>
+	                	- 星期二 : \{{hospital.tueStart}} ~ \{{hospital.tueClose}}<br>
+	                	- 星期三 : \{{hospital.wedStart}} ~ \{{hospital.wedClose}}<br>
+	                	- 星期四 : \{{hospital.thuStart}} ~ \{{hospital.thuClose}}<br>
+	                	- 星期五 : \{{hospital.friStart}} ~ \{{hospital.friClose}}<br>
+	                	- 星期六 : \{{hospital.satStart}} ~ \{{hospital.satClose}}<br>
+	                	- 星期日 : \{{hospital.sunStart}} ~ \{{hospital.sunClose}}<br>
+	                	- 假期 : \{{hospital.holStart}} ~ \{{hospital.holClose}}<br>
                 	<div v-if="hospital.remarks">\{{hospital.remarks}}</div>
 	            		</p>
 	                <br />

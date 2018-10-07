@@ -1,6 +1,6 @@
 
 var Hospital = require('./models/hospital.js');
-var seedData = require("./processed_data.js");
+var seedData = require("./서대문구 병원 데이터.js");
 
 
 //Seed All Data From seedData.
@@ -8,7 +8,7 @@ var seedDev = function(){
 
 
 	//Seeding Hospital Promise
-	var seedHospital = new Promise(function(resolve, reject){
+	/*var seedHospital = new Promise(function(resolve, reject){
 		Hospital.remove({}, function(err){
 			Hospital.create(seedData, function(err, hospitals){
 				if(err) reject(err);
@@ -24,7 +24,7 @@ var seedDev = function(){
 	.catch(function(err){
 		console.log("Data initiating All, Fail", err);
 		throw new Error("Data initiating All, Fail");
-	});
+	});*/
 
 	
 }

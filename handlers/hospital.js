@@ -15,12 +15,13 @@ module.exports = function(){
 			
 		},
 
-
 		subjectInfo : function(req, res, next){
 
 			res.render("hospital/subjectInfo");
 
 		}
+
+
 	}
 	
 }

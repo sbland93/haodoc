@@ -4,6 +4,7 @@ var url =  window.location.pathname;
 var hospitalID = url.replace("/hospital/", "");
 
 
+
 var app = new Vue({
 
 	el : "#app",
@@ -21,10 +22,24 @@ var app = new Vue({
 		fullAddress : function(){
 
 			var space = " ";
-			return this.hospital.city + space + this.hospital.district + space + this.hospital.neighborhood + space + this.hospital.address;
+			return this.hospital.city + space + this.hospital.district + space + this.hospital.address;
 
 		},
 
+	},
+
+	filters: {
+		//ToDO
+		makeTimeForm: function(value){
+		   
+			console.log(value);
+
+			var timeForm = value + "!!"
+			
+			return timeForm;
+		
+		},
+	
 	},
 	
 	mounted : function(){
@@ -32,6 +47,8 @@ var app = new Vue({
 		this.getHospital(this.hospitalID);
 
 	},
+
+	
 	
 	methods: {
 		
@@ -41,6 +58,13 @@ var app = new Vue({
 			return "/images/hospital/" + photo_name+".JPG";
 
 		},*/
+
+		//monStart(1000)을 10:00으로 만들기 위해 String을 입력받으면 세번째에 : 을 추가해 리턴해주는 함수.
+		makeTimeForm: function(timeString){
+			console.log(timeString);
+			var timeForm = timeString.slice(0, 2) + " : " + timeString.slice(2);
+			return timeForm;
+		},
 
 		photoHref: function(index){
 			var rtnValue = "/images/hospital/" + this.hospital.neighborhood + "_" + this.hospital.name + "_0" + index + ".JPG"; 

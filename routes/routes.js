@@ -14,6 +14,9 @@ module.exports = function(app){
 	app.get('/rules', homeHandlers.rules);
 	app.get('/personal', homeHandlers.personal);
 
+	app.get('/event', homeHandlers.events);
+
+
 	//hpv Handlers
 	app.get('/hpv0', hpvHandlers.hpv0);
 	app.get('/hpv1', hpvHandlers.hpv1);
@@ -30,5 +33,11 @@ module.exports = function(app){
 
 	require('./api/user.js')(app);
 	require('./api/hospital.js')(app);
+
+
+
+
+	//Testing
+
 
 }

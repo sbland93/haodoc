@@ -19,9 +19,6 @@ const makeMarker = function(map, position, index, hospitalObj) {
 	    '   <p style="padding:15px">',
 	    '详细地址 - ' + hospitalObj.address +'<br>',
 	    '电话号 - ' + hospitalObj.tel + '<br>',
-	    '工作日 - ' + hospitalObj.weekday +'<br>',
-	    '星期六 - ' + hospitalObj.saturday + '<br>',
-	    '假期 - ' + hospitalObj.holiday + '<br>',
 	    '   </p>',
 	    '</div>'
 	].join('');
@@ -59,16 +56,16 @@ var app = new Vue({
 		pageHospitals : [],
 		
 		hospitalList : [],
-		city : "서울특별시",
-		district : "서대문구",
-		neighborhood : "창천동",
+		city : "서울특별시(首尔特别市)",
+		district : "서대문구(西大門區)",
+		neighborhood : "창천동(滄川洞)",
 		//neighborhood : "선택없음",
 		subject : "没有选择",
 		//subject : "선택없음",
 		subway : "新村站",
 		//subway : "홍대입구역",
-		addressRender : false,
-		subwayRender : true,
+		addressRender : true,
+		subwayRender : false,
 
 		//From Data.js
 		districtList : districtList,
@@ -82,8 +79,17 @@ var app = new Vue({
 
 		//변화에 대응해 자동으로 query를 만들어준다.
 		query : function(){
+			
 			var computedQuery = {
-				subject : this.subject
+			
+			}
+
+			//진료과목별 선택을 하기 위해서
+			if(this.subject !== "没有选择"){
+
+				//진료과목이 병원 이름 안에 있을 경우에 찾아야 한다.
+				computedQuery["subjects"] = this.subject;
+			
 			}
 
 			if(this.subwayRender === true){ //지하철역별 검색일시
@@ -92,9 +98,10 @@ var app = new Vue({
 			
 			}else{ //주소기반 검색일시 (addressRender === true)
 			
-				computedQuery["city"] = this.city;
-				computedQuery["district"] = this.district;
-				computedQuery["neighborhood"] = this.neighborhood;
+				computedQuery["city"] = this.city.replace(/\(.*\)/,"");
+				computedQuery["district"] = this.district.replace(/\(.*\)/,"");
+				//address에 동을 포함하고 있는것을 찾기 위함.
+				if(this.neighborhood !== "没有选择") computedQuery["address"] = { "$regex" : this.neighborhood.replace(/\(.*\)/,""), "$options": "i" };
 			
 			}
 			for(var key in computedQuery){
@@ -107,6 +114,7 @@ var app = new Vue({
 				}
 			
 			}
+			console.log(computedQuery);
 			return computedQuery;
 		},
 
@@ -122,9 +130,9 @@ var app = new Vue({
 			
 			}else{ //주소방식 Rendering
 
-				centerString += this.district;
+				centerString += this.district.replace(/\(.*\)/,"");
 				centerString += " ";
-				if(this.neighborhood !== "没有选择") centerString += this.neighborhood;
+				if(this.neighborhood !== "没有选择") centerString += this.neighborhood.replace(/\(.*\)/,"");
 				//if(this.neighborhood !== "선택없음") centerString += this.neighborhood;
 
 			}
@@ -212,7 +220,7 @@ var app = new Vue({
 		fullAddress : function(hospitalObj){
 			
 			var space = " ";
-			return hospitalObj.city + space + hospitalObj.district + space + hospitalObj.neighborhood + space + hospitalObj.address ;
+			return hospitalObj.city + space + hospitalObj.district + space + hospitalObj.address ;
 
 		},
 		
