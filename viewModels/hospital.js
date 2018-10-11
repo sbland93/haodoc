@@ -18,6 +18,8 @@ module.exports = function(hospital){
 		subjects: hospital.subjects,
 		homepage : hospital.homepage,
 		remarks: hospital.remarks,
+		subway : hospital.subway,
+		reviews: hospital.reviews,
 
 		xPos : hospital.xPos,
 		yPos : hospital.yPos,

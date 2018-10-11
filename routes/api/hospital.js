@@ -13,6 +13,6 @@ module.exports = function(app){
 
 	app.delete('/api/hospital/:id', hospitalHandlers.deleteHospital);
 
-	app.put('/api/hospital', hospitalHandlers.updateHospital);
+	app.put('/api/hospital/:id', hospitalHandlers.updateHospital);
 
 }

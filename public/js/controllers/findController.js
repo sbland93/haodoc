@@ -67,6 +67,8 @@ var app = new Vue({
 		addressRender : true,
 		subwayRender : false,
 
+		isHospitals : true,
+
 		//From Data.js
 		districtList : districtList,
 		//subjectList : subjectList,
@@ -243,8 +245,15 @@ var app = new Vue({
 			var self = this;
 
 			getHospitals(query).then(function(_hospitals){
+				
+				console.log("_hospitals.length", _hospitals.length == 0);
+				
+				self.isHospitals = true;
+
+				if(_hospitals.length == 0) self.isHospitals = false;
 				//전체 hopsitalList
 				self.hospitalList = _hospitals;
+
 				//page당 10개씩 렌더링 할 것이므로 총 페이지수를 구한다.
 				self.numOfPage = parseInt( _hospitals.length / 10 ) + 1;
 				self.changeIndex(1);
@@ -273,28 +282,15 @@ var app = new Vue({
 
 				});
 
-				//index를 closer로 저장하기 위해 callback Function을 리턴하는 함수를 만든다.
-				var mapCallback = function(index){
-					
-					return function(status, response) {
-						if (status !== naver.maps.Service.Status.OK) {
-							return alert(hospitalPageList[index].address + '의 검색 결과가 없거나 기타 네트워크 에러');
-						}
-						
-						var result = response.result;
-						
-						var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
-						makeMarker(map, myaddr, index, hospitalPageList[index]);
-					};
-
-				}
-
-
 				//map에 hospital들의 위치 마커를 찍는다.
 				for(var i = 0; i< hospitalPageList.length; i++){
 					
 					//Marker를 찍기 위함 TODO 이걸 데이터에 저장하는 로직을 넣어야 빨라질 것 같다.
-					naver.maps.Service.geocode({address: hospitalPageList[i].address}, mapCallback(i));
+					//naver.maps.Service.geocode({address: hospitalPageList[i].address}, mapCallback(i));
+
+					//marker 찍는 로직. 핀의 index를 위해 넘기고, xPos와, yPos를 넘긴다.
+					var myaddr = new naver.maps.Point(hospitalPageList[i].xPos, hospitalPageList[i].yPos);
+					makeMarker(map, myaddr, i, hospitalPageList[i]);
 
 				}
 

@@ -77,14 +77,17 @@
 	                	- 星期六 : \{{hospital.satStart}} ~ \{{hospital.satClose}}<br>
 	                	- 星期日 : \{{hospital.sunStart}} ~ \{{hospital.sunClose}}<br>
 	                	- 假期 : \{{hospital.holStart}} ~ \{{hospital.holClose}}<br>
-                	<div v-if="hospital.remarks">\{{hospital.remarks}}</div>
-	            		</p>
+                		<div v-if="hospital.remarks">\{{hospital.remarks}}</div>
+                		- subway : {{hospital.subway}}
+            		</p>
 	                <br />
 	            </div>
 
 		        <div class="col-sm-7">
 		        	<br>	
 					<div id="map" style="width:100%; height:430px; border:0;"></div>
+				    <button class="mobile-btn btn" @click="toggleUpdate" style="margin-top:120px">정보 업데이트(Beta)</button>
+				    <button class="mobile-btn btn" @click="toggleReview" style="margin-top:120px">리뷰 추가하기(Beta)</button>
 		        </div>
 
 		    </div>
@@ -92,7 +95,7 @@
 		    <br><br>
 		    
 		    <!-- 병원 사진 렌더링 -->
-		    <div class="photo" v-show="havePhoto">
+		    <!--div class="photo" v-show="havePhoto">
 		    	<h2 class="logoColor text-center"> 医院照片 </h2>
 			    <div class="container-fluid row">
 				    <div style="float : none; margin: 0 auto;">
@@ -101,54 +104,182 @@
 			    		</span>
 			    	</div>
 			    </div>
-		    </div>
+		    </div-->
 
+	</section>
+	<section v-if="reviewToggle" class="search-box row">
+		<form style="padding:10px">
+			<div class="form-group">
+				<div class="col-xs-3">
+					<label for="treatment">받은치료</label>
+					<input type="text" v-model="newReview.treatment" id="treatment" class="form-control">
+				    <small id="emailHelp" class="form-text text-muted">받은 치료를 나열해 적어주세요. ex)피검사, 스케일링, 교정</small>
+				</div>
+				<div class="col-xs-3">
+					<label for="star">총 만족도</label>
+		    		<input type="text" id="star" class="form-control" v-model="newReview.star">
+				    <small id="emailHelp" class="form-text text-muted">진료에 대한 전체적인 만족도를 1,2,3,4,5중 표현해 주세요.</small>
+				</div>
+				<div class="col-xs-3">
+					<label for="content">상세 후기</label>
+		    		<input type="text" id="content" class="form-control" v-model="newReview.content">
+				    <small id="emailHelp" class="form-text text-muted">진료의 전문성, 서비스 친절도, 대기시간, 치료후 결과 등에 대한 후기를 적어주세요! 좀 더 상세한 리뷰는 건강한 세상 만들기에 도움을 줄 수 있습니다:)</small>
+				</div>
+				<div class="col-xs-3">
+					<label for="weChat">위챗 아이디</label>
+		    		<input type="text" id="weChat" class="form-control" v-model="newReview.weChat">
+				    <small id="emailHelp" class="form-text text-muted">건강한 리뷰작성 이벤트에 도움주셔서 감사합니다! 상품을 보내드릴 위챗 아이디를 적어주시면 HaoDoc에서 빠른 시일내에 보내드리겠습니다. 고객님의 소중한 개인정보는 상품 발송 직후에 바로 삭제 됩니다. 감사합니다.</small>
+				</div>
+				<div class="col-xs-3">
+					<label for="password">리뷰 잠금 비밀번호</label>
+		    		<input type="text" id="password" class="form-control" v-model="newReview.password">
+				    <small id="password" class="form-text text-muted">리뷰 수정, 삭제시에 사용할 리뷰 잠금 비밀번호 (숫자 네자리 ex. 1234 )를 입력해주세요.</small>
+				</div>
+			</div>
+		</form>
+	    <button class="mobile-btn btn" @click="addReview">리뷰 작성 완료</button>
+	    <button class="mobile-btn btn" @click="toggleReview">작성 취소</button>
 
-		    <br><br>
+	</section>
+	<section v-if="updateToggle" class="search-box row">
+		<form style="padding:10px">
+			<div class="form-group">
+		<div class="col-xs-3">
+			<label for="hospitalName">병원이름</label>
+			<input type="text" v-model="hospital.name" id="hospitalName" class="form-control">
+		    <small id="emailHelp" class="form-text text-muted">이름이 틀릴시 변경입니다</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="hospitalCity">시</label>
+			<input type="text" name="" id="hospitalCity" class="form-control" v-model="hospital.city">
+		</div>
+		<div class="col-xs-3">
+			<label for="district">구</label>
+    		<input type="text" name="" id="district" class="form-control" v-model="hospital.district">
+		</div>
+		<div class="col-xs-3">
+			<label for="neighborhood">동</label>
+    		<input type="text" name="" id="neighborhood" class="form-control" v-model="hospital.neighborhood">
+		</div>
+		<div class="col-xs-3">
+			<label for="address">상세주소</label>
+    		<input type="text" name="" id="address" class="form-control" v-model="hospital.address">
+		</div>
+		<div class="col-xs-3">
+			<label for="tel">전화번호</label>
+    		<input type="text" id="tel" class="form-control" v-model="hospital.tel">
+		</div>
+		<div class="col-xs-3">
+			<label for="homepage">홈페이지</label>
+    		<input type="text" id="homepage" class="form-control" v-model="hospital.homepage">
+		</div>
+		<div class="col-xs-3">
+			<label for="subjects">진료과목</label>
+    		<input type="text" id="subjects" class="form-control" v-model="hospital.subjects">
+		    <small id="emailHelp" class="form-text text-muted">중국어만 ,사이 띄어쓰기 없이 입력해주세요. 아래의 진료과에서만 선택해서 적어주시거나, 삭제해주시면 됩니다.</small>
+		    <small id="emailHelp" class="form-text text-muted">ex)耳鼻喉科,内科,皮肤科</small>
+		    <small id="emailHelp" class="form-text text-muted">"耳鼻喉科"(이비인후과) "内科"(내과) "皮肤科"(피부과) 	"牙科"(치과) "眼科"(안과) "骨科"(정형외과) "妇产科"(산부인과) "整形外科"(성형외과) "康复科"(재활의학과) "小儿科"(소아청소년과) </small>
+		    <small id="emailHelp" class="form-text text-muted">"家庭医学科"(가정의학과) "神经外科"(신경외과) "外科"(외과) "泌尿科"(비뇨의학과) "影像科"(영상의학과) "病理科"(병리과) "麻醉科"(마취통증의학과) "神经科"(신경과) "诊断检查科"(진단검사의학과) "应急室"(응급의학과)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="monTime">월요일시간</label>
+    		<input type="text" name="" id="monTime" class="form-control" v-model="hospital.monStart"> ~ <input type="text" name="" class="form-control" v-model="hospital.monClose">
+		    <small id="emailHelp" class="form-text text-muted">네개의 숫자로만 입력해주세요 ex) 1000 (o) 10:00(x)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="tueTime">화요일시간</label>
+    		<input type="text" name="" id="tueTime" class="form-control" v-model="hospital.tueStart"> ~ <input type="text" name="" class="form-control" v-model="hospital.tueClose">
+		    <small id="emailHelp" class="form-text text-muted">네개의 숫자로만 입력해주세요 ex) 1000 (o) 10:00(x)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="wedTime">수요일시간</label>
+    		<input type="text" name="" id="wedTime" class="form-control" v-model="hospital.wedStart"> ~ <input type="text" name="" class="form-control" v-model="hospital.wedClose">
+		    <small id="emailHelp" class="form-text text-muted">네개의 숫자로만 입력해주세요 ex) 1000 (o) 10:00(x)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="thuStart">목요일시간</label>
+    		<input type="text" name="" id="thuStart" class="form-control" v-model="hospital.thuStart"> ~ <input type="text" name="" class="form-control" v-model="hospital.thuClose">
+		    <small id="emailHelp" class="form-text text-muted">네개의 숫자로만 입력해주세요 ex) 1000 (o) 10:00(x)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="friTime">금요일시간</label>
+    		<input type="text" name="" id="friTime" class="form-control" v-model="hospital.friStart"> ~ <input type="text" name="" class="form-control" v-model="hospital.friClose">
+		    <small id="emailHelp" class="form-text text-muted">네개의 숫자로만 입력해주세요 ex) 1000 (o) 10:00(x)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="satTime">토요일시간</label>
+    		<input type="text" name="" id="satTime" class="form-control" v-model="hospital.satStart"> ~ <input type="text" name="" class="form-control" v-model="hospital.satClose">
+		    <small id="emailHelp" class="form-text text-muted">네개의 숫자로만 입력해주세요 ex) 1000 (o) 10:00(x)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="sunTime">일요일시간</label>
+    		<input type="text" name="" id="sunTime" class="form-control" v-model="hospital.sunStart"> ~ <input type="text" name="" class="form-control" v-model="hospital.sunClose">
+		    <small id="emailHelp" class="form-text text-muted">네개의 숫자로만 입력해주세요 ex) 1000 (o) 10:00(x)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="sunTime">공휴일시간</label>
+    		<input type="text" name="" id="sunTime" class="form-control" v-model="hospital.holStart"> ~ <input type="text" name="" class="form-control" v-model="hospital.holClose">
+		    <small id="emailHelp" class="form-text text-muted">네개의 숫자로만 입력해주세요 ex) 1000 (o) 10:00(x)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="subway">지하철</label>
+    		<input type="text" name="" id="subway" class="form-control" v-model="hospital.subway">
+		    <small id="subwayhelp" class="form-text text-muted">반드시 정확한 역의 중국어 이름을 입력해주셔야 합니다. 모르시겠다면 나무위키에 검색하면 역의 중국어 이름이 나와요! 정확한지는 한번 케리에게 물어보고 진행해주세요!</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="remarks">특이사항</label>
+    		<input type="text" name="" id="remarks" class="form-control" v-model="hospital.remarks">
+		    <small id="subwayhelp" class="form-text text-muted">특이사항(ex. HPV 백신 접종 가능, MMR 접종 가능, 미백 가격 얼마, 등등) 비정형 데이터들을 '중국어로' 입력해주세요.</small>
+		</div>
+			</div>
+		</form>
+		<button class="mobile-btn btn" @click="updateHospital">수정사항 반영하기</button>
+   		<button class="mobile-btn btn" @click="toggleUpdate">작성 취소</button>
 
 	</section>
 
-    <!--section class="search-box">
+    <section class="search-box">
 
 	<div class="container">
 		<br>
 		<h2 class="text-center logoColor">医院访问后记</h2>
 		<br>
-		<div class="card">
-		    <div class="card-body">
-		        <div class="row">
-	        	    <div class="col-md-2">
-	        	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
-	        	        <p class="text-secondary text-center">15 Minutes Ago</p>
-	        	    </div>
-	        	    <div class="col-md-10">
-	        	        <p>
-	        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong style="color:#BD1622;">金胜范</strong></a>
-	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
-	                        <span class="float-right"><i class="text-warning fa fa-star"></i></span>
-	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
 
-	        	       </p>
-	        	       <div class="clearfix"></div>
-	        	        <p>延世大学12级政治外交系毕业生 石岳峰 – 我是今年春天刚刚从延世大学毕业的学生，六月初在一个很偶然的场合下，了解到了这个叫做“正确了解韩国医院”的活动。因为在过去的留学生活中，去医院看病或者买药经常是我最烦恼的一件事，不论是从医院的选择和预约，还是药物的选择，再到事后申请保险公司的理赔，各个环节都繁琐复杂，当时我想如果有一群经验丰富的学生能把这些信息提供给刚来韩国留学的学生那该有多好？在过去的一个月的时间里，我通过和“正确了解韩国医院”的成员们的交流，了解到他们正是我期待的那些能为我们中国留学生提供这些帮助的热心同学。</p>
-	        	        <p>
-	        	            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
-	        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
-	        	       </p>
-	        	    </div>
-		        </div>
-		    </div>
+
+		<div v-for="review in hospital.reviews">
+			<div class="card">
+				<div class="card-body">
+			        <div class="row">
+		        	    <div class="col-md-12">
+		        	        <p>
+		        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>\{{review.treatment}}</strong></a>
+		        	            <span v-for="index in review.star">
+			        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+		        	            </span>
+		        	       </p>
+		        	       <div class="clearfix"></div>
+		        	        <p>\{{review.content}}</p>
+		        	        <p>
+		        	           <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
+		        	           <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+		        	        </p>
+		        	    </div>
+			        </div>
+		    	</div>
+			</div>
 		</div>
-		<div class="card">
+
+
+		<!--div class="card">
 		    <div class="card-body">
 		        <div class="row">
 	        	    <div class="col-md-2">
 	        	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
 	        	        <p class="text-secondary text-center">Several Days Ago</p>
 	        	    </div>
-	        	    <div class="col-md-10">
+	        	    <div class="col-md-12">
 	        	        <p>
-	        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong style="color:#BD1622;">李再勋</strong></a>
+	        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>李再勋</strong></a>
 	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
 	                        <span class="float-right"><i class="text-warning fa fa-star"></i></span>
 	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
@@ -164,11 +295,13 @@
 	        	    </div>
 		        </div>
 		    </div>
-		</div>
+		</div-->
+
+
 		<br><br>
 	</div>
 
-	</section-->
+	</section>
 	
 </div>
 

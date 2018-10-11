@@ -55,7 +55,18 @@ var mongoose = require('mongoose');
 
 // });
 
- var hospitalSchema = mongoose.Schema({
+var reviewSchema = mongoose.Schema({
+	
+	treatment: String, 
+	content: String,
+	star: Number,
+	password: Number,
+	updated_at : {type: Date, default: Date.now},
+
+});
+
+
+var hospitalSchema = mongoose.Schema({
 
 
 	name: String, 
@@ -66,6 +77,7 @@ var mongoose = require('mongoose');
 	category : String, //의원, 병원 등
 	homepage: String,
 	subjects : Array,
+	subway: String,
 
 	remarks: String,
 	hospitalID: String,
@@ -90,6 +102,9 @@ var mongoose = require('mongoose');
 	holStart: String,
 	holClose: String,
 
+	reviews: {
+		type: [reviewSchema], default: []
+	},
 
 });
 

@@ -1,0 +1,11 @@
+@media (max-width: 768px) {
+
+    .main-block .full-block .img-block img {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .content-block h3{
+        color:white;
+    }    
+    
+}

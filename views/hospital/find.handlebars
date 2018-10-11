@@ -101,6 +101,7 @@
     <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-5 listing-block">
+			<div v-show="!isHospitals" class="text-center" style="padding:10px;">现在这个地区不存在医院!</div>
 			<div v-for="(hospital, index) in pageHospitals">
 				<div class="media">
 	            	<div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>

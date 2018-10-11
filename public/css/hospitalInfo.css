@@ -18,6 +18,12 @@
          padding-top:50px;
 
     }
+    .mobile-btn{
+        background-color:#BD1622;
+        color:white;
+        width:150px;
+        align-items: center;
+    }
 
     #contact2{
         letter-spacing:3px;
@@ -26,8 +32,7 @@
     #author a{
       color: #fff;
       text-decoration: none;   
-    }
-
+    }    
 
     .search-box{width:90%; margin:0 auto 40px; border: 1px solid #BD1622; box-shadow:10px 13px 0 rgba(0,0,0,0.2);}
     .listing-block{background:#fff; height:700px; padding-top:20px; overflow-y:scroll;}

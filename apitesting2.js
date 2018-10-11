@@ -16,9 +16,6 @@ mongoose.connect(credentials.mongo.development.connectionString, opts);
 
 var Hospital = require('./models/hospital.js');
 
-// Hospital.remove({}, function(err){
-
-// });
 
 var subjectDictionary = {
 
@@ -116,7 +113,7 @@ var getHospitalDefault = function(pageNo, full_data_array){
 	query_for_default += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent(pageNo); /* 페이지번호 */
 	query_for_default += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('5'); /* 한 페이지 결과 수 */
 	query_for_default += '&' + encodeURIComponent('sidoCd') + '=' + encodeURIComponent('110000');  /*시도코드  110000 - 서울 */
-	query_for_default += '&' + encodeURIComponent('zipCd') + '=' + encodeURIComponent('2070'); /* 2010:종합병원, 2030:병원, 2040:요양병원, 2050:치과, 2060:한방, 2070:의원, 2080:보건기관, 2090:조산원 */
+	query_for_default += '&' + encodeURIComponent('zipCd') + '=' + encodeURIComponent('2050'); /* 2010:종합병원, 2030:병원, 2040:요양병원, 2050:치과, 2060:한방, 2070:의원, 2080:보건기관, 2090:조산원 */
 
 
 	return new Promise(function(resolve, reject){
@@ -196,17 +193,19 @@ var getHospitalDetail = function(k, full_data_array){
 		    	if(detail_data.item){
 		    		
 		    		var subject_list = detail_data.item;
-		    		var subject_list_array = [];
+		    		var subject_list_array = ["牙科"]; //치과의 경우
+		    		//var subject_list_array = [];
 		    		//진료과목을 돌면서, '내과', '이비인후과', '신경과' 등의 키워드만 빼서, subject_list_array
-		    		for (var i = subject_list.length - 1; i >= 0; i--) {
+		    		/*for (var i = subject_list.length - 1; i >= 0; i--) {
 
-		    			if(subjectDictionary[subject_list[i].dgsbjtCdNm[0]]){
+		    			if(subjectDictionary[subject_list[i].dgsbjtCdNm[0]] && subjectDictionary[subject_list[i].dgsbjtCdNm[0]] !== "牙科"){
 		    				var _subject = subjectDictionary[subject_list[i].dgsbjtCdNm[0]]
 			    			subject_list_array.push(_subject);
 		    			};
 
 		    		
-		    		}
+		    		}*/
+
 
 		    		full_data_array[k]["subjects"] = subject_list_array;
 
@@ -276,15 +275,10 @@ var getHospitalTime = function (k, full_data_array){
 
 
 
-
-
-
-
-
 //num_of_hospital 만큼 완성된 병원 데이터를 만드는 함수.
 var doingPageN = function(pageNo){
 
-	if(pageNo == 2000) return;
+	if(pageNo == 500) return;
 
 	var full_data_array = [];
 
@@ -329,6 +323,7 @@ var doingPageN = function(pageNo){
 			});
 
 
+
 		});
 	
 	});
@@ -338,7 +333,7 @@ var doingPageN = function(pageNo){
 
 
 
-doingPageN(1667);
+doingPageN(477);
 
 
 

@@ -14,6 +14,22 @@ var app = new Vue({
 		hospital : '',
 		hospitalID : hospitalID,
 		havePhoto : false,
+		updateToggle : false,
+		reviewToggle: false,
+		
+		newReview : {
+
+			star: '',
+			treatment: '',
+			content : '',
+			weChat: '',
+			password: '',
+		
+		},
+
+		updateSubjects : [
+
+		],
 
 	},
 	
@@ -59,6 +75,55 @@ var app = new Vue({
 
 		},*/
 
+		addReview: function(){
+
+			var self = this;
+			if(self.hospital.reviews === undefined){
+				self.hospital.reviews = [];
+			}
+			var obj = self.newReview;
+			if(Array.isArray(self.hospital.reviews)){
+				for(var index in obj) { 
+					console.log(obj[index]);
+				    if(obj[index] === '') {console.log("here"); return;}
+				}
+				self.hospital.reviews.push(obj);
+			}
+			updateHospital(hospitalID, self.hospital).then(function(rtnData){
+				console.log("반영");
+				console.log(rtnData);
+			});
+
+		
+		},
+
+		updateHospital: function(){
+
+			this.hospital.subjects = this.hospital.subjects.split(",");
+			console.log("this.hospital.subjects", this.hospital.subjects);
+			updateHospital(hospitalID, this.hospital).then(function(rtnData){
+				alert("반영되었습니다");
+				this.updateToggle = false;
+			});
+
+		},
+
+		toggleReview: function(){
+			var pass=prompt("Password")
+			if(pass !== "inspire") return;
+			this.reviewToggle = !this.reviewToggle;
+			console.log(this.reviewToggle);
+			return;
+		},
+
+		toggleUpdate: function(){
+			var pass=prompt("Password")
+			if(pass !== "inspire") return;
+			this.updateToggle = !this.updateToggle;
+			console.log(this.updateToggle)
+			return;
+		},
+
 		//monStart(1000)을 10:00으로 만들기 위해 String을 입력받으면 세번째에 : 을 추가해 리턴해주는 함수.
 		makeTimeForm: function(timeString){
 			console.log(timeString);
@@ -81,12 +146,11 @@ var app = new Vue({
 		getHospital : function(id){
 			
 			var self = this;
-
 			var map = new naver.maps.Map('map');
-
 			getHospital(id).then(function(_hospital){
 
 				self.hospital = _hospital;
+				console.log("self.hospital.reviews", self.hospital.reviews);
 				var myaddress = self.hospital.address;
 
 				//self.havePhoto = _hospital.photo.length > 0;
