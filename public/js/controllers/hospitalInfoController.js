@@ -1,9 +1,13 @@
 
 var url =  window.location.pathname;
-
+console.log(url);
 var hospitalID = url.replace("/hospital/", "");
 
+window.onbeforeunload = function(e) {
 
+	alert("HHH");
+    window.location.href = "/finddd"
+};
 
 var app = new Vue({
 

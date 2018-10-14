@@ -66,8 +66,12 @@ var app = new Vue({
 		//subway : "홍대입구역",
 		addressRender : true,
 		subwayRender : false,
-
+		keywordRender: false,
 		isHospitals : true,
+
+		keywordCondition: false,
+
+		keyword : '',
 
 		//From Data.js
 		districtList : districtList,
@@ -194,10 +198,42 @@ var app = new Vue({
 	
 	methods: {
 
+		showKeyword: function(id){
+			this.subwayRender = false;
+			this.addressRender = false;
+			this.keywordRender = true;
+		},
+		showAddress : function(){
+			this.keywordRender = false;
+			this.subwayRender = false;
+			this.addressRender = true;
+		},
+		showSubway : function(){
+
+			this.keywordRender = false;
+			this.addressRender = false;
+			this.subwayRender = true;
+
+		},
+
+		searchByKeyword : function(){
+
+			if(this.keyword.length < 2){
+				this.keywordCondition = true;
+				return;
+			}
+
+			var keywordQuery = {name: { "$regex" : this.keyword, "$options": "i" }};
+			this.getHospital(keywordQuery);
+			this.keywordCondition = false;
+			this.keyword = "";
+
+		},
+
 		//handlebars랑 겹쳐서, href를만드는 것을 method로 뺌. 방법을 강구해봐야할 듯.
 		hospitalInfoHref : function(id){
 		
-			return "/hospital/"+id;
+			return "/hospital/"+id+"?keyword=true&";
 		
 		},
 
@@ -206,18 +242,7 @@ var app = new Vue({
 			return "/images/pin/"+index+".png";
 		
 		},
-		showAddress : function(){
-
-			this.subwayRender = false;
-			this.addressRender = true;
 		
-		},
-		showSubway : function(){
-
-			this.addressRender = false;
-			this.subwayRender = true;
-
-		},
 		//Full Address를 만들어 (시, 구, 동, 상세주소) 리턴한다.
 		fullAddress : function(hospitalObj){
 			
