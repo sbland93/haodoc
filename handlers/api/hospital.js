@@ -1,8 +1,42 @@
-var Hospital = require('../../models/hospital.js');
+var Hospital = require('../../models/hospital2.js');
 var hospitalViewModel = require('../../viewModels/hospital.js');
 
 module.exports = function(){
 	return {
+
+		getNearHospitals: function(req, res, next){
+			var data = req.body;
+			console.log("data",  data);
+
+			var base = {
+				"location" : {
+					"$near" : {
+						"$geometry" : {
+							"type": "Point", "coordinates": data.coordinates
+						} 
+					}
+				}
+			};
+			if(data.subject){
+				console.log("here");
+				var query = {
+					"$and" : [
+						base,
+						{ "subjects": data.subject }
+					]
+				}
+			}else{
+				var query = base;
+			}
+
+			console.log("query", query);
+			Hospital.find(query).limit(Number(data.limitNum)).exec(function(err, hospitals){
+				console.log("err", err);
+				res.json(hospitals.map(hospitalViewModel));
+			});
+
+
+		},
 
 		getHospitals: function(req, res, next){
 			Hospital.find(req.query)

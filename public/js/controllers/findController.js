@@ -4,7 +4,6 @@
 /*  Marker를 찍는 함수  */
 const makeMarker = function(map, position, index, hospitalObj) {
 
-
     var marker = new naver.maps.Marker({
         map: map,
         position: position,
@@ -12,6 +11,7 @@ const makeMarker = function(map, position, index, hospitalObj) {
         	url: '/images/pin/'+index+'.png',
         }
     });
+    console.log(position);
 
     var contentString = [
 	    '<div class="iw_inner">',
@@ -41,15 +41,14 @@ const makeMarker = function(map, position, index, hospitalObj) {
 }
 
 
-
-
-
 //Vue 앱 만들기.
 var app = new Vue({
 
 	el : "#app",
 	
 	data : {
+
+		map : '',
 
 		numOfPage : 0,
 		index : 1,
@@ -64,15 +63,17 @@ var app = new Vue({
 		//subject : "선택없음",
 		subway : "新村站",
 		//subway : "홍대입구역",
-		addressRender : true,
-		subwayRender : false,
+		subwayRender : true,
+		addressRender : false,
 		keywordRender: false,
 		isHospitals : true,
-
 		keywordCondition: false,
+		//지하철입력검색시 쓰이는 것.
+		subwayKeyword: '',
+		subwaySubject : "没有选择",
 
+		//병원명검색키워드
 		keyword : '',
-
 		//From Data.js
 		districtList : districtList,
 		//subjectList : subjectList,
@@ -156,7 +157,10 @@ var app = new Vue({
 	},
 	
 	mounted : function(){
-		this.getHospital(this.query);
+		var self = this;
+		var defaultQuery = {"district": "서대문구", "address" : {"$regex": "창천동", "$options": "i" } };
+		this.getHospital(defaultQuery, self.keywordRender);
+
 	},
 
 	watch: {
@@ -165,28 +169,37 @@ var app = new Vue({
 			console.log(newDistrict);
 			//구 변경시 구청이 뜨므로, 이를 동이 나오게끔 해야 병원이 찍혀있을것.
 			this.neighborhood = neighborDictionary[newDistrict][0];
-			this.getHospital(this.query);
+			this.getHospital(this.query, this.keywordRender);
 
 		},
 		neighborhood : function(newNeighbor){
 
-			this.getHospital(this.query);
+			this.getHospital(this.query, this.keywordRender);
 		
 		},
 		subject : function(newSubject){
 
-			this.getHospital(this.query);
+			this.getHospital(this.query, this.keywordRender);
 
 		},
 		subway : function(newSubway){
-			this.getHospital(this.query);
+			this.getHospital(this.query, this.keywordRender);
 		},
 		//역 주변 검색 OR 지역별 검색에 따라서 선택한다.
 		addressRender : function(newSubject){
 
 			this.subject = "没有选择";
 			//this.subject = "선택없음";
-			this.getHospital(this.query);
+			this.getHospital(this.query, this.keywordRender);
+		},
+		subwayRender(newValue, oldValue){
+			var self = this;	
+			//다른 검색 방식에서 기본방식인 subwayRender로 돌아올 경우, 기본의 값들(신촌 서대문구 창천동)을 보여주고, subwayKeyword를 삭제한다.
+			if(newValue === true && oldValue === false){
+				var defaultQuery = {"district": "서대문구", "address" : {"$regex": "창천동", "$options": "i" } };
+				self.getHospital(defaultQuery, self.keywordRender);
+				self.subwayKeyword = "";
+			}
 		},
 		//index 변경시에 scroll을 top으로 이동시켜야함.
 		index : function(newIndex, oldIndex){
@@ -198,33 +211,32 @@ var app = new Vue({
 	
 	methods: {
 
-		showKeyword: function(id){
-			this.subwayRender = false;
-			this.addressRender = false;
-			this.keywordRender = true;
+		showKeyword: function(){
+			this.renderChange("keywordRender");
 		},
 		showAddress : function(){
-			this.keywordRender = false;
-			this.subwayRender = false;
-			this.addressRender = true;
+			this.renderChange("addressRender");
 		},
 		showSubway : function(){
+			this.renderChange("subwayRender");
+		},
+		renderChange : function(kind_of_render){
 
-			this.keywordRender = false;
-			this.addressRender = false;
-			this.subwayRender = true;
+			var self = this;
+			self.keywordRender = false;
+			self.subwayRender = false;
+			self.addressRender = false;
+			self[kind_of_render] = true;
 
 		},
-
 		searchByKeyword : function(){
 
 			if(this.keyword.length < 2){
 				this.keywordCondition = true;
 				return;
 			}
-
 			var keywordQuery = {name: { "$regex" : this.keyword, "$options": "i" }};
-			this.getHospital(keywordQuery);
+			this.getHospital(keywordQuery, this.keywordRender);
 			this.keywordCondition = false;
 			this.keyword = "";
 
@@ -251,21 +263,8 @@ var app = new Vue({
 
 		},
 		
-		//index를 change하면 pageHospitals를 바꾸고, 해당하는 Hospitals에 대한 marker를 가진 map을 만든다.
-		changeIndex : function(index){
-			
-			//ex) index = 1 , slice(0, 10)
-			this.index = index;
-			var endNum = index * 10;
-			var firstNum = endNum - 10;
-			this.pageHospitals = this.hospitalList.slice(firstNum, endNum);
-			console.log(this.pageHospitals);
-			this.makeListMap(this.pageHospitals);
-
-		},
-		
 		//Hospital의 Data들을 가져오고 map에 해당하는 데이터를 표시해준다.
-		getHospital : function(query){
+		getHospital : function(query, isKeywordSearch){
 			
 			var self = this;
 
@@ -281,7 +280,32 @@ var app = new Vue({
 
 				//page당 10개씩 렌더링 할 것이므로 총 페이지수를 구한다.
 				self.numOfPage = parseInt( _hospitals.length / 10 ) + 1;
-				self.changeIndex(1);
+
+				var myAddress = self.centerString;
+				console.log("isKeywordSearch",  isKeywordSearch); 
+				console.log("_hospitals.length > 0", _hospitals.length>0);
+				//keywordSearch하는 경우는, 첫 병원의 주소를 중심으로 지도를 움직여야 병원의 정보가 보인다.
+				if(isKeywordSearch && _hospitals.length > 0) myAddress = _hospitals[0].address;
+				
+				console.log("myAddress", myAddress);
+				naver.maps.Service.geocode({ address :  myAddress}, function(status, response){
+					var result = response.result;
+					
+					var centerX = result.items[0].point.x,
+						centerY = result.items[0].point.y;
+					
+					console.log("centerX, centerY", centerX, centerY);
+
+					var map = new naver.maps.Map('map', {
+						center : new naver.maps.Point(centerX, centerY),
+					});
+					self.map = map;
+
+					self.changeIndex(1);
+
+				});
+
+
 
 			}).catch(function(err){
 				
@@ -290,37 +314,112 @@ var app = new Vue({
 			});
 		},
 		
+
+
+		//index를 change하면 pageHospitals를 바꾸고, 해당하는 Hospitals에 대한 marker를 가진 map을 만든다.
+		changeIndex : function(index){
+			var self = this;
+			//ex) index = 1 , slice(0, 10)
+			self.index = index;
+			var endNum = index * 10;
+			var firstNum = endNum - 10;
+			self.pageHospitals = self.hospitalList.slice(firstNum, endNum);
+			
+			//페이지 변경시에 새롭게 Map에 Marker를 찍는다.
+			self.makeListMap(self.pageHospitals);
+
+
+		},
+		
+
 		//hospitalPageList에 해당하는 Map을 초기화 후 Marker를 찍는다.
 		makeListMap : function(hospitalPageList){
-			console.log(this.centerString);
 			//map의 중심을 잡기 위해 위,경도를 확인 후 Setting.
-			naver.maps.Service.geocode({ address : this.centerString }, function(status, response){
+			console.log("hospitalPageList", hospitalPageList);
+			var self = this;
+			var map = new naver.maps.Map('map', {
+				center: new naver.maps.Point(self.map.center.x, self.map.center.y)
+			})
+			self.map = map;
+			//map에 hospital들의 위치 마커를 찍는다.
+			for(var i = 0; i< hospitalPageList.length; i++){
 				
-				var result = response.result;
+				//marker 찍는 로직. 핀의 index를 위해 넘기고, xPos와, yPos를 넘긴다.
+				var myaddr = new naver.maps.Point(hospitalPageList[i].xPos, hospitalPageList[i].yPos);
+				makeMarker(self.map, myaddr, i, hospitalPageList[i]);
 
-				var centerX = result.items[0].point.x,
-					centerY = result.items[0].point.y;
+			}
+		},
+
+
+		getSubwayHospitals : function( ){
+			
+			var self = this;
+			var subwayKeyword = self.subwayKeyword;
+
+			//한국어 이름 혹은 중국어 이름 둘다 입력에 대응할 수 있게끔, 둘다 찾는다.
+			var subwayQuery = {
+				"$or" : [ 
+				{
+					'name': { 
+						"$regex" : self.subwayKeyword,
+						"$options": "i"
+					}
+				}, 
+				{
+					'chnName': { 
+						"$regex" : self.subwayKeyword,
+						"$options": "i"
+					}
+				}]
+			};
+			
+			//지하철역의 정보(GPS)를 찾아온 후 그 coordinates를 활용해 가까운 병원을 찾는다.
+			getSubways(subwayQuery).then(function(subways){
+			
+				//TODO 선택할 수 있도록 해줘야 하는데 무조건 첫번째꺼를 가져오고 있다.
+				console.log(subways[0].chnName);
+				
+				var centerX = subways[0].xPos,
+					centerY = subways[0].yPos;
 
 				var map = new naver.maps.Map('map', {
 
 					center: new naver.maps.Point(centerX, centerY),
 
 				});
+				
+				var coordinates = [ centerX, centerY ];
 
-				//map에 hospital들의 위치 마커를 찍는다.
-				for(var i = 0; i< hospitalPageList.length; i++){
-					
-					//Marker를 찍기 위함 TODO 이걸 데이터에 저장하는 로직을 넣어야 빨라질 것 같다.
-					//naver.maps.Service.geocode({address: hospitalPageList[i].address}, mapCallback(i));
+				self.map = map;
+				var subject = undefined;
 
-					//marker 찍는 로직. 핀의 index를 위해 넘기고, xPos와, yPos를 넘긴다.
-					var myaddr = new naver.maps.Point(hospitalPageList[i].xPos, hospitalPageList[i].yPos);
-					makeMarker(map, myaddr, i, hospitalPageList[i]);
-
+				//진료과목별 선택을 하기 위해서
+				if(self.subwaySubject !== "没有选择"){
+					//진료과목이 병원 이름 안에 있을 경우에 찾아야 한다.
+					subject = self.subwaySubject;
 				}
 
+				getNearHospitals(coordinates, 25, subject).then(function(_hospitals){
+
+
+					console.log("_hospitals.length", _hospitals.length == 0);
+				
+					self.isHospitals = true;
+					if(_hospitals.length == 0) self.isHospitals = false;
+					//전체 hopsitalList
+					self.hospitalList = _hospitals;
+
+					//page당 10개씩 렌더링 할 것이므로 총 페이지수를 구한다.
+					self.numOfPage = parseInt( _hospitals.length / 10 ) + 1;
+					self.changeIndex(1);
+
+				});
+			
 			});
 
+
+			
 
 		}
 	}
@@ -328,4 +427,50 @@ var app = new Vue({
 
 });
 
+
+
+
+/*getAroundHospitals : function( ){
+	
+	var self = this;
+	var centerAddress = self.centerAddress;
+	console.log(centerAddress);
+
+	naver.maps.Service.geocode({ address: centerAddress }, function(status, response){
+
+		var result = response.result;
+
+		var centerX = result.items[0].point.x,
+			centerY = result.items[0].point.y;
+
+		var map = new naver.maps.Map('map', {
+
+			center: new naver.maps.Point(centerX, centerY),
+
+		});
+		
+		var coordinates = [ centerX, centerY ];
+
+		self.map = map;
+
+		getNearHospitals(coordinates, 10).then(function(_hospitals){
+
+
+			console.log("_hospitals.length", _hospitals.length == 0);
+		
+			self.isHospitals = true;
+
+			if(_hospitals.length == 0) self.isHospitals = false;
+			//전체 hopsitalList
+			self.hospitalList = _hospitals;
+
+			//page당 10개씩 렌더링 할 것이므로 총 페이지수를 구한다.
+			self.numOfPage = parseInt( _hospitals.length / 10 ) + 1;
+			self.changeIndex(1);
+
+
+		});
+
+	});
+},*/
 

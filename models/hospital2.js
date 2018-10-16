@@ -31,6 +31,11 @@ var hospitalSchema = mongoose.Schema({
 	xPos: Number, //위도 경도
 	yPos : Number,
 
+	location:{
+		type: {type: String},
+		coordinates: [Number],
+	},
+
 	monStart: String, //월~금 진료시간
 	monClose: String,
 	tueStart: String,
@@ -55,9 +60,9 @@ var hospitalSchema = mongoose.Schema({
 });
 
 
-var Hospital = mongoose.model('Hospital', hospitalSchema);
+var Hospital2 = mongoose.model('Hospital2', hospitalSchema);
 
-module.exports = Hospital;
+module.exports = Hospital2;
 
 
 

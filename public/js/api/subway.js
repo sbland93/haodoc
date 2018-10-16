@@ -1,44 +1,9 @@
-var baseHospital = "/api/hospital";
+var baseSubway = "/api/subway";
 
-//coordinate근처의 병원들을 limitNum만큼 가져온다.
-var getNearHospitals = function(coordinates, limitNum, subject){
-
-	var data = {
-		"coordinates" : coordinates,
-		"limitNum" : limitNum,
-	};
-	console.log("here1", subject);
-
-	if(subject){
-
-		data["subject"] = subject;
-		console.log("here", subject);
-	}
-
-	console.log(data);
-
+var getSubways = function(data){
 	return new Promise(function(resolve, reject){
 		$.ajax({
-			url: baseHospital + "/near",
-			method: 'POST',
-			data: data,
-			success: function(rtnData){
-				resolve(rtnData);
-			},
-			fail: function(rtnData){
-				reject(rtnData);
-			},
-		});
-	});
-
-
-}
-
-
-var getHospitals = function(data){
-	return new Promise(function(resolve, reject){
-		$.ajax({
-			url: baseHospital,
+			url: baseSubway,
 			method: 'GET',
 			data: data,
 			success: function(rtnData){
@@ -51,10 +16,10 @@ var getHospitals = function(data){
 	});
 };
 
-var getHospital = function(id){
+var getSubway = function(id){
 	return new Promise(function(resolve, reject){
 		$.ajax({
-			url: baseHospital + '/' + id,
+			url: baseSubway + '/' + id,
 			method: 'GET',
 			success: function(rtnData){
 				resolve(rtnData);
@@ -66,10 +31,10 @@ var getHospital = function(id){
 	});
 };
 
-var addHospital = function(data){
+var addSubway = function(data){
 	return new Promise(function(resolve, reject){
 		$.ajax({
-			url: baseHospital,
+			url: baseSubway,
 			method: 'POST',
 			data: data,
 			success: function(rtnData){
@@ -82,10 +47,10 @@ var addHospital = function(data){
 	});
 };
 
-var deleteHospital = function(id){
+var deleteSubway = function(id){
 	return new Promise(function(resolve, reject){
 		$.ajax({
-			url: baseHospital + '/' + id,
+			url: baseSubway + '/' + id,
 			method: 'DELETE',
 			success: function(rtnData){
 				resolve(rtnData);
@@ -97,11 +62,11 @@ var deleteHospital = function(id){
 	});
 };
 
-//updateHospital는 데이터만 보내서, ajax로 유저의 아이디를 체크한후, 그 유저아이디를 활용한다.
-var updateHospital = function(id, data){
+//updateSubway는 데이터만 보내서, ajax로 유저의 아이디를 체크한후, 그 유저아이디를 활용한다.
+var updateSubway = function(data){
 	return new Promise(function(resolve, reject){
 		$.ajax({
-			url: baseHospital + '/' + id,
+			url: baseSubway,
 			method: 'PUT',
 			data: data,
 			success: function(rtnData){

@@ -9,6 +9,8 @@ module.exports = function(app){
 
 	app.post('/api/hospital', hospitalHandlers.newHospital);
 
+	app.post('/api/hospital/near', hospitalHandlers.getNearHospitals);
+
 	app.get('/api/hospital/:id', hospitalHandlers.getHospital);
 
 	app.delete('/api/hospital/:id', hospitalHandlers.deleteHospital);

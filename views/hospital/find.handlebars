@@ -16,13 +16,42 @@
                 <nav>
                   <div class="nav nav-tabs" id="nav-tab" role="tablist">
                   	<!--역 주변 검색-->
-                    <!--a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" @click="showSubway" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">地铁站周边搜索</a-->
-                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" @click="showAddress" href="#nav-profile" role="tab" aria-controls="nav-home" aria-selected="true">分地域进行搜索<!--지역별검색--></a>
-                    <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" @click="showKeyword" href="#nav-profile" role="tab" aria-controls="nav-profile">병원명검색<!--병원명검색--></a>
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" @click="showSubway" href="#nav-profile" role="tab" aria-controls="nav-profile">地铁站别搜索<!--지하철역별검색--></a>
+                    <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" @click="showAddress" href="#nav-profile" role="tab" aria-controls="nav-home" aria-selected="true">分地域进行搜索<!--지역별검색--></a>
+                    <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" @click="showKeyword" href="#nav-profile" role="tab" aria-controls="nav-profile">医院名搜索<!--병원명검색--></a>
                   </div>
                 </nav>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- 역주변 병원 검색 -->
+<section class="text-white logoColorBG" v-show="subwayRender">
+	<div class="container search-condition">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="search-help-text">请简单将地铁站名称输入，搜索附近的医院<!--간편하게 지하철역을 입력해 역 주변의 병원들을 찾아보세요--></h4>
+            </div>
+        </div>
+        <div class="row">
+        	<div class="form-inline col-md-9" style="margin: 0 auto;">
+	            <div class="form-group" style="padding-right: 20px">
+	            	<input type="text" class="form-control" id="subwayKeywordSearch" placeholder="ex) 新村站, 安岩站, 회기역" v-model="subwayKeyword" size="30">
+	           	</div>
+	           	<div class="form-group" style="padding-right: 20px">
+	        		<select v-model="subwaySubject" id="inputState" class="form-control">
+	        			<option>没有选择<!--선택없음--></option>
+						<option v-for="index in subjectList">\{{index}}</option>
+					</select>
+	        	</div>
+        		<div class="form-group">
+	           		<button class="btn btn-primary" @click="getSubwayHospitals">搜索<!--검색--></button>
+	           	</div>
+	           	<div v-show="keywordCondition" style="padding-left:10px">请输入至少是两个字以上的搜索语<!--검색어는 최소 2글자 이상, 입력해 주세요!--></div>
+			</div>
+        </div>
+		
     </div>
 </section>
 
@@ -72,7 +101,7 @@
     <div class="container search-condition">
         <div class="row">
             <div class="col-md-12">
-                <h4 class="search-help-text">정보가 궁금한 병원이름을 입력하여 검색해 보세요.<!--정보가 궁금한 병원이름을 입력하여 검색해 보세요. --></h4>
+                <h4 class="search-help-text">将想要了解的医院名字输入后搜索.<!--정보가 궁금한 병원이름을 입력하여 검색해 보세요. --></h4>
             </div>
         </div>
 		<div class="form-inline" style="margin: 0 auto;">
@@ -80,38 +109,11 @@
             	<input type="text" class="form-control" id="keywordSearch" placeholder="ex) 서울리마치과의원, 드림성모안과" v-model="keyword" size="30">
            	</div>
            	<div class="form-group">
-           		<button class="btn btn-primary" @click="searchByKeyword">검색</button>
+           		<button class="btn btn-primary" @click="searchByKeyword">搜索</button>
            	</div>
-           	<div v-show="keywordCondition" style="padding-left:10px">검색어는 최소 2글자 이상, 입력해 주세요!</div>
+           	<div v-show="keywordCondition" style="padding-left:10px">搜索语至少是两个字以上，</div>
 		</div>
     </div>
-</section>
-
-<section class="text-white logoColorBG" v-show="subwayRender">
-	<div class="container search-condition">
-		<div class="row">
-            <div class="col-md-12">
-                <h4>请输入地铁站和诊疗科室，查找就近的医院。<!--지하철 역과 진료과를 입력해 주변의 병원을 찾아보세요.-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/subjectInfo" class="btn btn-primary">选择诊疗科室时很难吗？(Click!)<!--진료과목 선택이 어려우신가요? (Click!)--></a></h4>
-            </div>
-        </div>
-        <div class="row">
-        	<div class="col-md-4">
-            	<div class="form-group">
-            		<select v-model="subway" id="inputState" class="form-control">
-						<option v-for="index in subwayList">\{{index}}</option>
-					</select>
-            	</div>
-			</div>
-			<div class="col-md-8">
-            	<div class="form-group">
-            		<select v-model="subject" id="inputState" class="form-control">
-            			<option>没有选择<!--선택없음--></option>
-						<option v-for="index in subjectList">\{{index}}</option>
-					</select>
-            	</div>
-			</div>
-   		</div>
-	</div>
 </section>
 
 
@@ -123,7 +125,7 @@
     <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-5 listing-block">
-			<div v-show="!isHospitals" class="text-center" style="padding:10px;">조건(지역, 키워드)에 해당하는 병원이 없습니다!</div>
+			<div v-show="!isHospitals" class="text-center" style="padding:10px;">无符合该条件（地区，关键词）的医院<!--조건(지역, 키워드)에 해당하는 병원이 없습니다!--></div>
 			<div v-for="(hospital, index) in pageHospitals">
 				<div class="media">
 	            	<div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>
@@ -176,7 +178,8 @@
 
 
 {{#section 'jquery'}}
-
+	<!-- For Subway Data Ajax-->
+	<script type="text/javascript" src="/js/api/subway.js"></script>	
 	<!-- For Hospital Data Ajax-->
 	<script type="text/javascript" src="/js/api/hospital.js"></script>	
 	<!-- Hospital Data들 모음 (City, District, NeighborHood)등-->
