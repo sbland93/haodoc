@@ -35,8 +35,6 @@ module.exports = function(){
 			if(!req.params.id) return next('No Id');
 			Event.findById({_id: req.params.id}, function(err, event){
 				if(err) console.error(err);
-				console.log("ID", req.params.id);
-				console.log(event);
 				/*DOLATER err 처리 */
 				if(!event){
 					return res.json({
