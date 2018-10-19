@@ -681,12 +681,22 @@ var Subway = require('./models/subway.js');
 var full_list = [];
 
 var findChnName = function(koreanStationName){
+	
 	var station_name_list = station_name_data["DATA"];
+	var alreadyFound = false;
+	
+	for(var k=0; k<station_name_list.length; k++){
+		var fullSame = station_name_list[k]["stn_nm"] == koreanStationName;
+		if(fullSame){
+			//console.log("full_same!");
+			return station_name_list[k]["stn_nm_chn"];
+		}
+	}
 
 	for (var i = station_name_list.length - 1; i >= 0; i--) {
 		var isHere = station_name_list[i]["stn_nm"].indexOf(koreanStationName);
 		if(isHere !== -1){
-			console.log("Station China Name", koreanStationName, station_name_list[i]["stn_nm_chn"]);
+			//console.log("Station China Name", koreanStationName, station_name_list[i]["stn_nm_chn"]);
 			return station_name_list[i]["stn_nm_chn"];
 		}
 	}
@@ -695,9 +705,9 @@ var findChnName = function(koreanStationName){
 
 for (var i = subway_data_list.length - 1; i >= 0; i-- ) {
 	
+
 	for (var k = subway_data_list[i]["features"].length - 1; k >= 0; k--) {
 		
-
 		var obj = subway_data_list[i]["features"][k];
 		
 		var newObj = {
@@ -706,7 +716,19 @@ for (var i = subway_data_list.length - 1; i >= 0; i-- ) {
 			name : obj["properties"]["station_name"], 
 		};
 
-		newObj["chnName"] = findChnName(newObj["name"]);		
+		if(findChnName(newObj["name"]) && findChnName(newObj["name"]).indexOf("(") !== -1 ){
+			console.log("findChnName", findChnName(newObj["name"]).split("(")[0] + "站(" + findChnName(newObj["name"]).split("(")[1]);
+			newObj["chnName"] = findChnName(newObj["name"]).split("(")[0] + "站(" + findChnName(newObj["name"]).split("(")[1];
+		}else{
+			newObj["chnName"] = findChnName(newObj["name"]) + "站";
+		}
+
+		if(newObj["name"] && newObj["name"].indexOf("(") !== -1 ){
+			console.log("findChnName", newObj["name"].split("(")[0] + "역(" + newObj["name"].split("(")[1]);
+			newObj["name"] = newObj["name"].split("(")[0] + "역(" + newObj["name"].split("(")[1];
+		}else{
+			newObj["name"] = newObj["name"] + "역";
+		}
 
 		full_list.push(newObj);
 
@@ -714,8 +736,9 @@ for (var i = subway_data_list.length - 1; i >= 0; i-- ) {
 }
 
 
-console.log(full_list);
-
-Subway.create(full_list, function(err, docs){
-	console.log(docs);
+//console.log(full_list);
+Subway.remove({}, function(){
+	Subway.create(full_list, function(err, docs){
+		console.log(docs);
+	});
 });

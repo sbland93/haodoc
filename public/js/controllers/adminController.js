@@ -1,12 +1,67 @@
 
-var r = prompt("INSPIRE Nickname!");
+
+var app = new Vue({
+
+    el : "#app",
+
+    data : {
+
+    	participants : "",
 
 
+        eventName: "",
+        eventRange: "",
+        hospitalName: "",
+        subway: "",
+        address: "",
+        thumbnailImage: "",
+        eventImage: "",
+      
+
+    },
+
+    mounted: function(){
+    	var self = this;
+        getParticipants().then(function(data){
+        	
+        	self.participants = data;
+            console.log(data);
+
+        
+        });
+    
+    },
+    methods: {
 
 
+        newEvent: function(){
+            var self = this;
+            var newEventObj = {
+                eventName: self.eventName,
+                eventRange: self.eventRange,
+                hospitalName: self.hospitalName,
+                subway: self.subway,
+                address: self.address,
+                thumbnailImage: self.thumbnailImage,
+                eventImage: self.eventImage,
+            };
+            addEvent(newEventObj).then(function(rtn){
+                if(rtn.success){
+                    alert('추가 완료');
+                    self.eventName=  "";
+                    self.eventRange=  "";
+                    self.hospitalName=  "";
+                    self.subway=  "";
+                    self.address=  "";
+                    self.thumbnailImage=  "";
+                    self.eventImage=  "";
+                }else{
+                    alert('실패');
+                }
+            });
 
-if (r == "라이언" || r == "조이" || r == "조지" || r == "제이") {
-    alert("인정");
-} else {
-    location.href == '/';
-}
+        }
+
+    }
+
+});

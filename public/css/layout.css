@@ -61,6 +61,14 @@ a {
     background-color:#BD1622;
 }
 
+/* mobile에서는 button이 생성 */
+.mobile-btn{
+    background-color:#BD1622;
+    color:white;
+    width:350px;
+    align-items: center;
+}
+
 /* HEADER MENU BAR */
 #menubar {
     width: 48px;

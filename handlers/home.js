@@ -28,11 +28,14 @@ module.exports = function(){
 			});
 		},
 
+
 		events: function(req, res, next){
-			res.render('home/event');
+			res.render('home/event/event');
 		},
 
-
+		eventInfo: function(req, res, next){
+			res.render('home/event/eventInfo');
+		},
 
 		/*
 

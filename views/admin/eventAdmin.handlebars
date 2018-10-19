@@ -1,0 +1,70 @@
+<div class="offset-md-2 col-md-8" id="app" style="background-color:#660000" >
+    <span class="anchor" id="formPayment"></span>
+    <hr class="my-5">
+    <!-- form card cc payment -->
+    <div class="card card-outline-secondary">
+        <div class="card-body">
+            <h3 class="text-center">HaoDoc Event 추가하기</h3>
+            <hr>
+            <form class="form" role="form">
+                <div class="form-group">
+                    <label for="cc_name">이벤트이름</label>
+                    <input type="text" class="form-control">
+                </div>
+                <label>성별</label>
+                <div class="form-group">
+                    <input type="radio" id="male" name="gender" value="male" checked />
+                    <label for="male">남자</label>
+                    <input type="radio" id="female" name="gender" value="female" style="margin-left:20px" />
+                    <label for="female">여자</label>
+                </div>
+                <div class="form-group">
+                    <label>위챗아이디</label>
+                    <input type="text" class="form-control" autocomplete="off" maxlength="20" pattern="\d{16}" title="Credit card number" required="">
+                </div>
+                <div class="form-group">
+                    <label>메모</label>
+                    <input type="text" class="form-control" placeholder="상담시간, 날짜 등을 입력해주세요.">
+                </div>
+                <hr>
+                <div class="form-group">
+                    <button type="submit" class="btn mobile-btn">상담신청하기</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<!-- /form card cc payment -->
+
+<p class="copyright" style="text-align:center;padding:40px 0;">
+    CopyRight by <a href="http://www.haodoc.co.kr">INSPIRE</a>
+</p>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+    
+    
+    var app = new Vue({
+
+        el : "#app",
+
+        data : {
+
+            hospital : '',
+            hospitalID : hospitalID,
+            
+
+        },
+
+        methods: {
+                
+        }
+
+    });
+
+
+</script>

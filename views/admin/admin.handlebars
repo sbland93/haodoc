@@ -2,29 +2,83 @@
     <meta name="Robots" content="nofollow" />
     <link rel="stylesheet" type="text/css" href="/css/maincss.css">
     <link rel="stylesheet" type="text/css" href="/css/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 {{/section}}
 
 
-    <div id="userList">
-        <div><b>긁히지 않는 영역입니다 고갱님들</b></div>
-        <br><br><br><br>
-        <ul>
-        {{#each userList}}
-            <li><h4>Korean Name : {{name}}</h4></li>
-            <li><h4>English Name : {{englishName}} </h4></li>
-            <li><h4>Chinese Name : {{chineseName}} </h4></li>
-            <li><h4>Gender : {{gender}} </h4></li>
-            <li><h4>Wechat ID : {{wechatID}}</h4></li>
-            <li><h4>Brith : {{birthDay}}</h4></li>
-            <li><h4>Phone : {{phone}}</h4></li>
-            <li><h4>Updated_at : {{updated_at}}</h4></li>
+<div class="offset-md-2 col-md-8" id="app" style="background-color:#660000" >
+
+    <p v-for="participant in participants" style="color:white">
+        신청이벤트 : \{{participant.eventName}}<br>
+        신청자이름 : \{{participant.participantName}}<br>
+        위챗아이디 : \{{participant.wechatID}}<br>
+        성별 : \{{participant.gender}}<br>
+        메모 : \{{participant.memo}}<br>
+        <hr>
+    </p>
+
+
+
+    <span class="anchor" id="formPayment"></span>
+    <hr class="my-5">
+    <!-- form card cc payment -->
+    <div class="card card-outline-secondary">
+        <div class="card-body">
+            <h3 class="text-center">HaoDoc Event 추가하기</h3>
             <hr>
-        {{/each}}
-        </ul>
+            <div class="form" role="form">
+                <div class="form-group">
+                    <label for="cc_name">이벤트이름</label>
+                    <input type="text" class="form-control" v-model="eventName">
+                </div>
+
+                <div class="form-group">
+                    <label for="cc_name">이벤트기간</label>
+                    <input type="text" class="form-control" v-model="eventRange" placeholder="2018-07-01~2018-11-12">
+                </div>
+
+                <div class="form-group">
+                    <label for="cc_name">병원이름</label>
+                    <input type="text" class="form-control" v-model="hospitalName" placeholder="드림성모안과">
+                </div>
+
+                <div class="form-group">
+                    <label for="cc_name">역이름</label>
+                    <input type="text" class="form-control" v-model="subway">
+                </div>
+
+                <div class="form-group">
+                    <label for="cc_name">병원상세주소</label>
+                    <input type="text" class="form-control" v-model="address">
+                </div>
+
+                <div class="form-group">
+                    <label for="cc_name">썸네일 파일명</label>
+                    <input type="text" class="form-control" v-model="thumbnailImage" placeholder="드림성모안과_썸네일.png">
+                </div>
+
+                <div class="form-group">
+                    <label for="cc_name">상세 이벤트 그림파일명</label>
+                    <input type="text" class="form-control" v-model="eventImage" placeholder="드림성모안과_이벤트.png">
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn mobile-btn" @click="newEvent">이벤트 만들기</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 
+</div>
+
+
+
+
 {{#section 'jquery'}}
+    <script type="text/javascript" src="/js/api/event.js"></script>  
+    <script type="text/javascript" src="/js/api/participant.js"></script>  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/controllers/adminController.js"></script>
+
+    <script type="text/javascript" src="/js/controllers/adminController.js"></script>  
 {{/section}}

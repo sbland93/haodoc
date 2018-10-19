@@ -13,8 +13,9 @@ module.exports = function(app){
 	app.get('/team', homeHandlers.team);
 	app.get('/rules', homeHandlers.rules);
 	app.get('/personal', homeHandlers.personal);
+	
 	app.get('/event', homeHandlers.events);
-
+	app.get('/event/:id', homeHandlers.eventInfo);
 
 	//hpv Handlers
 	app.get('/hpv0', hpvHandlers.hpv0);
@@ -26,13 +27,20 @@ module.exports = function(app){
 	app.get('/main2', homeHandlers.home2);
 	app.get('/find', homeHandlers.find);
 
-
 	app.get('/subjectInfo', hospitalHandlers.subjectInfo);
 	app.get('/hospital/:id', hospitalHandlers.info);
 
+
+
+
+
+
+	require('./api/participant.js')(app);
 	require('./api/user.js')(app);
 	require('./api/hospital.js')(app);
 	require('./api/subway.js')(app);
+	require('./api/event.js')(app);
+
 
 
 }
