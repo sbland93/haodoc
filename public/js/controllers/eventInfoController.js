@@ -57,9 +57,18 @@ var app = new Vue({
 			};
 
 			addParticipant(newObj).then(function(rtn){
-
 				console.log(rtn);
-			
+				if(rtn.success){
+					self.participantName = "";
+					self.wechatID = "";
+					self.gender = "";
+					self.memo = "";
+					alert("您的活动申请已经成功! 我们会尽快联系您，感谢您的支持与关注");
+					console.log(rtn);
+				}else{
+					alert("存在未填写的空格.请每个空格都进行填写")
+				}
+				
 			});
 
 		}
