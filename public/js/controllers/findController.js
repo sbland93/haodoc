@@ -192,7 +192,7 @@ var app = new Vue({
 			//this.subject = "선택없음";
 			this.getHospital(this.query, this.keywordRender);
 		},
-		subwayRender(newValue, oldValue){
+		subwayRender : function(newValue, oldValue){
 			var self = this;	
 			//다른 검색 방식에서 기본방식인 subwayRender로 돌아올 경우, 기본의 값들(신촌 서대문구 창천동)을 보여주고, subwayKeyword를 삭제한다.
 			if(newValue === true && oldValue === false){
