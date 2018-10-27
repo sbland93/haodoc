@@ -7,59 +7,60 @@ var app = new Vue({
     data : {
 
     	participants : "",
+    	events : "",
 
-
-        eventName: "",
-        eventRange: "",
-        hospitalName: "",
-        subway: "",
-        address: "",
-        thumbnailImage: "",
-        eventImage: "",
       
 
     },
 
     mounted: function(){
+    	
     	var self = this;
-        getParticipants().then(function(data){
-        	
-        	self.participants = data;
-            console.log(data);
 
-        
+        getParticipants().then(function(participants){
+        	self.participants = participants;
+            console.log(participants);
+        });
+
+        getEvents().then(function(events){
+        	self.events = events;
+        	console.log(events);
         });
     
     },
     methods: {
 
+        newEvent: function(event){
+            event.preventDefault();
 
-        newEvent: function(){
             var self = this;
-            var newEventObj = {
-                eventName: self.eventName,
-                eventRange: self.eventRange,
-                hospitalName: self.hospitalName,
-                subway: self.subway,
-                address: self.address,
-                thumbnailImage: self.thumbnailImage,
-                eventImage: self.eventImage,
-            };
-            addEvent(newEventObj).then(function(rtn){
-                if(rtn.success){
-                    alert('추가 완료');
-                    self.eventName=  "";
-                    self.eventRange=  "";
-                    self.hospitalName=  "";
-                    self.subway=  "";
-                    self.address=  "";
-                    self.thumbnailImage=  "";
-                    self.eventImage=  "";
-                }else{
-                    alert('실패');
-                }
-            });
 
+            var newEvent = new FormData($("#event-form")[0]);
+            
+            addEvent(newEvent).then(function(rtn){
+            
+            	if(rtn.success){
+            		alert("추가 완료");
+            		location.href = '/event/'+rtn.id;
+            	}else{
+            		alert("실패!");
+            	}
+            
+            });
+        },
+
+        removeEvent: function(id){
+        	var pass=prompt("Password")
+			if(pass !== "inspire") return;
+        	var self = this;
+        	deleteEvent(id).then(function(rtn){
+        		console.log(rtn);
+        		getEvents().then(function(events){
+		        	self.events = events;
+		        	console.log(events);
+		        });
+        		return;
+        	});
         }
 
     }

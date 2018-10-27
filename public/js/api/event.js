@@ -37,6 +37,8 @@ var addEvent = function(data){
 			url: baseEvent,
 			method: 'POST',
 			data: data,
+			processData: false,
+    		contentType: false,
 			success: function(rtnData){
 				resolve(rtnData);
 			},

@@ -2,6 +2,19 @@
 var homeHandlers = require('../handlers/home.js')();
 var hpvHandlers = require('../handlers/hpv.js')();
 const hospitalHandlers = require('../handlers/hospital.js')();
+var Event = require("../models/event.js");
+
+
+var multer = require("multer");
+var storage = multer.diskStorage({
+	destination: function(req, file, cb){
+		cb(null, 'public/images/event/');
+	},
+	filename: function(req, file, cb){
+		cb(null, Date.now() + file.originalname);
+	},
+});
+var upload = multer({ storage: storage });
 
 module.exports = function(app){
 
@@ -32,7 +45,31 @@ module.exports = function(app){
 
 
 
-
+	app.post('/testing', upload.any(), function(req, res, next){
+		console.log(req.files);
+		var newEventObject = req.body;
+		newEventObject["eventImage"] = ["", "", ""];
+		console.log(newEventObject);
+		for (var i = req.files.length - 1; i >= 0; i--) {
+			var thisFile = req.files[i];
+			if(thisFile["fieldname"] == "thumbnailImage"){
+				newEventObject["thumbnailImage"] = thisFile["filename"];
+			}
+			if(thisFile["fieldname"] == "eventImage1"){
+				newEventObject["eventImage"][0] = thisFile["filename"];
+			}
+			if(thisFile["fieldname"] == "eventImage2"){
+				newEventObject["eventImage"][1] = thisFile["filename"];
+			}
+			if(thisFile["fieldname"] == "eventImage3"){
+				newEventObject["eventImage"][2] = thisFile["filename"];
+			}
+		}
+		console.log(newEventObject);
+		Event.create(newEventObject, function(req, res, next){
+			console.log("here");
+		});
+	});
 
 
 	require('./api/participant.js')(app);

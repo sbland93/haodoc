@@ -9,7 +9,7 @@ var eventSchema = mongoose.Schema({
     subway: String,
     address: String,
     thumbnailImage: String,
-    eventImage: String,
+    eventImage: [ String ],
 	updated_at : { type: Date, default: Date.now },
 
 });

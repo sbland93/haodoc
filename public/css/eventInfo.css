@@ -1,6 +1,6 @@
 
-#infoImage{
-	padding:20px 500px 0px 500px;
+.infoImage{
+	padding:0px 500px 0px 500px;
 	width:100%;
 }
 
@@ -27,8 +27,8 @@ body{
 
 
 
-    #infoImage{
-    	padding: 10px 0px 0px 0px;
+    .infoImage{
+    	padding: 0px 0px 0px 0px;
     	width: 100%;
     } 
 

@@ -11,7 +11,8 @@
 		\{{event.eventName}} <br>
 		\{{event.address}}
 	</div>
-	<img :src="eventImageHref(event.eventImage)" id="infoImage">
+
+	<img v-for="imageName in event.eventImage" :src="eventImageHref(imageName)" class="infoImage">
 
 	<div class="offset-md-2 col-md-8" id="contactInfo" style="background-color:#660000" >
 

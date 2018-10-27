@@ -17,58 +17,67 @@
         <hr>
     </p>
 
-
+    <ul>
+        <div v-for="event in events" style="color:white">\{{event.eventName}} / \{{event.hospitalName}} / \{{event.eventRange}} / \{{event.address}} / \{{event.subway}}<button class="mobile-btn" @click="removeEvent(event.id)">이벤트 삭제</button></div> 
+    </ul>
 
     <span class="anchor" id="formPayment"></span>
     <hr class="my-5">
     <!-- form card cc payment -->
     <div class="card card-outline-secondary">
-        <div class="card-body">
+        <div class="card-body" >
             <h3 class="text-center">HaoDoc Event 추가하기</h3>
             <hr>
-            <div class="form" role="form">
+            <form class="form" role="form" id="event-form">
                 <div class="form-group">
                     <label for="cc_name">이벤트이름</label>
-                    <input type="text" class="form-control" v-model="eventName">
+                    <input type="text" class="form-control" name="eventName">
                 </div>
 
                 <div class="form-group">
                     <label for="cc_name">이벤트기간</label>
-                    <input type="text" class="form-control" v-model="eventRange" placeholder="2018-07-01~2018-11-12">
+                    <input type="text" class="form-control" name="eventRange" placeholder="2018-07-01~2018-11-12">
                 </div>
 
                 <div class="form-group">
                     <label for="cc_name">병원이름</label>
-                    <input type="text" class="form-control" v-model="hospitalName" placeholder="드림성모안과">
+                    <input type="text" class="form-control"  name="hospitalName" placeholder="드림성모안과">
                 </div>
 
                 <div class="form-group">
                     <label for="cc_name">역이름</label>
-                    <input type="text" class="form-control" v-model="subway">
+                    <input type="text" class="form-control" name="subway" >
                 </div>
 
                 <div class="form-group">
                     <label for="cc_name">병원상세주소</label>
-                    <input type="text" class="form-control" v-model="address">
+                    <input type="text" class="form-control" name="address">
                 </div>
 
                 <div class="form-group">
                     <label for="cc_name">썸네일 파일명</label>
-                    <input type="text" class="form-control" v-model="thumbnailImage" placeholder="드림성모안과_썸네일.png">
+                    <input type="file" class="form-control" name="thumbnailImage"  />
                 </div>
 
                 <div class="form-group">
-                    <label for="cc_name">상세 이벤트 그림파일명</label>
-                    <input type="text" class="form-control" v-model="eventImage" placeholder="드림성모안과_이벤트.png">
+                    <label for="cc_name">상세 이벤트 그림파일1</label>
+                    <input type="file" class="form-control" name="eventImage1" placeholder="반드시 순서를 지켜주세요" />
+                </div>
+                <div class="form-group">
+                    <label for="cc_name">상세 이벤트 그림파일2</label>
+                    <input type="file" class="form-control" name="eventImage2" placeholder="반드시 순서를 지켜주세요" />
+                </div>
+                <div class="form-group">
+                    <label for="cc_name">상세 이벤트 그림파일3</label>
+                    <input type="file" class="form-control" name="eventImage3" placeholder="반드시 순서를 지켜주세요" />
                 </div>
                 
                 <div class="form-group">
                     <button type="submit" class="btn mobile-btn" @click="newEvent">이벤트 만들기</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
-
 
 </div>
 
