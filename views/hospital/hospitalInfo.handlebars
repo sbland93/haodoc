@@ -88,6 +88,7 @@
 					<div id="map" style="width:100%; height:430px; border:0;"></div>
 				    <button class="mobile-btn btn" @click="toggleUpdate" style="margin-top:120px">정보 업데이트(Beta)</button>
 				    <button class="mobile-btn btn" @click="toggleReview" style="margin-top:120px">리뷰 추가하기(Beta)</button>
+				    <button class="mobile-btn btn" @click="togglePhotos" style="margin-top:120px">사진 관리하기(Beta)</button>
 		        </div>
 
 		    </div>
@@ -95,16 +96,16 @@
 		    <br><br>
 		    
 		    <!-- 병원 사진 렌더링 -->
-		    <!--div class="photo" v-show="havePhoto">
+		    <div class="photo" v-show="havePhoto">
 		    	<h2 class="logoColor text-center"> 医院照片 </h2>
 			    <div class="container-fluid row">
 				    <div style="float : none; margin: 0 auto;">
-			    		<span class="col-xs-12 col-md-4" v-for="index in hospital.photo">
-			    			<img class="img-responsive" :src="photoHref(index)">
+			    		<span class="col-xs-12 col-md-4" v-for="photo in hospital.photos">
+			    			<img class="img-responsive" :src="imageHref(photo)">
 			    		</span>
 			    	</div>
 			    </div>
-		    </div-->
+		    </div>
 
 	</section>
 	<section v-if="reviewToggle" class="search-box row">
@@ -139,10 +140,39 @@
 		</form>
 	    <button class="mobile-btn btn" @click="addReview">리뷰 작성 완료</button>
 	    <button class="mobile-btn btn" @click="toggleReview">작성 취소</button>
-
 	</section>
+
+	<!--사진 관리 탭 -->
+	<section v-if="photosToggle" class="search-box row">
+		<form style="padding:10px" role="form" class="form" id="photos-form">
+			<div class="form-group">
+				<div class="form-group">
+                    <label for="cc_name">병원 관련 사진</label>
+                    <div v-for="(photo, index) in photos">
+                    	<input type="file" class="form-control" :name="index" :id="index">
+                    	<button class="btn" @click="deletePhoto(index, $event)">X</button>
+                    </div>
+            		<button class="mobile-btn btn" @click="addPhoto">사진 추가하기</button>
+                </div>
+			</div>
+		</form>
+		<form style="padding:10px" role="form" class="form" id="photos-form">
+			<div class="form-group">
+				<div class="form-group">
+                    <label for="cc_name">삭제 관련</label>
+                    <div v-for="(photo, index) in hospital.photos">
+                    	<input type="text" class="form-control" :value="photo">
+                    	<button class="btn mobile-btn" @click="removePhoto(photo, $event)">\{{index}}번째 사진삭제하기</button>
+                    </div>
+                </div>
+			</div>
+		</form>
+	    <button class="mobile-btn btn" @click="changePhotos">사진 관리 완료</button>
+	    <button class="mobile-btn btn" @click="togglePhotos">취소</button>
+	</section>
+
 	<section v-if="updateToggle" class="search-box row">
-		<form style="padding:10px">
+		<div class="form" role="form" style="padding:10px">
 			<div class="form-group">
 		<div class="col-xs-3">
 			<label for="hospitalName">병원이름</label>
@@ -175,10 +205,13 @@
 		</div>
 		<div class="col-xs-3">
 			<label for="subjects">진료과목</label>
-    		<input type="text" id="subjects" class="form-control" v-model="hospital.subjects">
-		    <small id="emailHelp" class="form-text text-muted">중국어만 ,사이 띄어쓰기 없이 입력해주세요. 아래의 진료과에서만 선택해서 적어주시거나, 삭제해주시면 됩니다.</small>
-		    <small id="emailHelp" class="form-text text-muted">ex)耳鼻喉科,内科,皮肤科</small>
-		    <small id="emailHelp" class="form-text text-muted">"耳鼻喉科"(이비인후과) "内科"(내과) "皮肤科"(피부과) 	"牙科"(치과) "眼科"(안과) "骨科"(정형외과) "妇产科"(산부인과) "整形外科"(성형외과) "康复科"(재활의학과) "小儿科"(소아청소년과) </small>
+    		<!--input type="text" id="subjects" class="form-control" v-model="hospital.subjects"-->
+    		<div v-for="(subject, index) in hospital.subjects">
+    			<input id="subjects" type="text" class="subjects" v-model="hospital.subjects[index]"><button class="btn" @click="deleteSubject(subject)">X</button>
+    		</div>
+    		<button class="mobile-btn btn" @click="addSubject">진료과목 추가하기</button>
+		    <small id="emailHelp" class="form-text text-muted">ex)耳鼻喉科,内科,皮肤科 등 중국어만 한칸에 하나씩 입력해주세요.</small>
+		    <small id="emailHelp" class="form-text text-muted">"耳鼻喉科"(이비인후과) "内科"(내과) "皮肤科"(피부과) "牙科"(치과) "眼科"(안과) "骨科"(정형외과) "妇产科"(산부인과) "整形外科"(성형외과) "康复科"(재활의학과) "小儿科"(소아청소년과) </small>
 		    <small id="emailHelp" class="form-text text-muted">"家庭医学科"(가정의학과) "神经外科"(신경외과) "外科"(외과) "泌尿科"(비뇨의학과) "影像科"(영상의학과) "病理科"(병리과) "麻醉科"(마취통증의학과) "神经科"(신경과) "诊断检查科"(진단검사의학과) "应急室"(응급의학과)</small>
 		</div>
 		<div class="col-xs-3">
@@ -231,10 +264,19 @@
     		<input type="text" name="" id="remarks" class="form-control" v-model="hospital.remarks">
 		    <small id="subwayhelp" class="form-text text-muted">특이사항(ex. HPV 백신 접종 가능, MMR 접종 가능, 미백 가격 얼마, 등등) 비정형 데이터들을 '중국어로' 입력해주세요.</small>
 		</div>
+		<div class="col-xs-3">
+			<label for="remarks">상단 노출 키워드</label>
+			<div v-for="(keyword, index) in hospital.keywords">
+    			<input id="keywords" type="text" class="keywords" v-model="hospital.keywords[index]"><button class="btn" @click="deleteKeyword(keyword)">X</button>
+    		</div>
+    		<button class="mobile-btn btn" @click="addKeyword">키워드 추가하기</button>
+		    <small id="subwayhelp" class="form-text text-muted">강남역, 回基站, 서대문구, 서대문구 창천동, 서대문구 牙科, 서대문구 창천동 牙科 (한국어역이름, 중국어역이름, 구, 구 동, 구 진료과, 구 동 진료과, 진료과목은 항상 중국어입니다!)</small>
+		</div>
 			</div>
-		</form>
+		</div>
 		<button class="mobile-btn btn" @click="updateHospital">수정사항 반영하기</button>
    		<button class="mobile-btn btn" @click="toggleUpdate">작성 취소</button>
+
 
 	</section>
 

@@ -30,10 +30,43 @@ var getNearHospitals = function(coordinates, limitNum, subject){
 			},
 		});
 	});
-
-
 }
 
+
+var addPhotos = function(id, data){
+	return new Promise(function(resolve, reject){
+		$.ajax({
+			url: baseHospital + "/" + id + "/photo",
+			method: 'POST',
+			data: data,
+			processData: false,
+    		contentType: false,
+			success: function(rtnData){
+				resolve(rtnData);
+			},
+			fail: function(rtnData){
+				reject(rtnData);
+			},
+		});
+	});
+}
+
+//photoName을 받아서 삭제하는 함수
+var deletePhoto = function(id, data){
+	return new Promise(function(resolve, reject){
+		$.ajax({
+			url: baseHospital + "/" + id + "/photo",
+			method: 'DELETE',
+			data: data,
+			success: function(rtnData){
+				resolve(rtnData);
+			},
+			fail: function(rtnData){
+				reject(rtnData);
+			},
+		});
+	});
+}
 
 var getHospitals = function(data){
 	return new Promise(function(resolve, reject){

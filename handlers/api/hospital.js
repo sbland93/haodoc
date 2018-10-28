@@ -1,8 +1,78 @@
 var Hospital = require('../../models/hospital2.js');
 var hospitalViewModel = require('../../viewModels/hospital.js');
+var fs = require('fs');
+var path = require('path');
+
+
+var deleteFile = function(base_path, file_name){
+	var rtnPromise = new Promise(function(resolve, reject){
+		console.log("here22");
+		fs.unlink(path.join(__dirname + base_path) + file_name, function(err){
+			console.log("err", err);
+			if (err) reject(err);
+			else{
+				console.log(base_path+file_name+"is deleted");
+				resolve();
+			}
+		});
+	});
+	return rtnPromise; 
+}
 
 module.exports = function(){
 	return {
+		//요청본문에 해당하는 Event를 새로 생성한다.
+		//이벤트 생성을 위한 post에서는 이벤트이름과, 이벤트 기간, 병원 주소, 병원 이름, 지하철이 있어야 한다.
+		addPhotos: function(req, res, next){
+			var photos = [];
+			
+			for (var i = 0; i < req.files.length ; i++) {
+				photos.push(req.files[i].filename);
+			}
+
+			Hospital.update({_id: req.params.id}, {"$push" : {"photos": photos}}, function(err, response){
+				if(err) next(err);
+				if(response.nModified === 1){
+					res.json({
+						success: true,
+						id: req.params.id,
+					});
+				} else {
+					res.json({
+						success: false,
+						message: ''
+					});
+				}
+			})
+			
+		},
+
+		deletePhoto : function(req, res, next){
+
+			console.log(req.body);
+			if(req.body.photoName){
+				deleteFile("../../../public/images/hospital/", req.body.photoName).then(function(){
+					Hospital.update({_id: req.params.id}, {"$pull" : {"photos": req.body.photoName}}, function(err, response){
+						if(err) next(err);
+						if(response.nModified === 1){
+							res.json({
+								success: true,
+								id: req.params.id,
+							});
+						} else {
+							res.json({
+								success: false,
+								message: ''
+							});
+						}
+					})
+				}).catch(function(err){
+					res.json({success: false, message: err});
+				});
+			}
+
+		},
+
 
 		getNearHospitals: function(req, res, next){
 			var data = req.body;

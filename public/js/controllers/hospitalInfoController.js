@@ -14,7 +14,7 @@ var app = new Vue({
 		havePhoto : false,
 		updateToggle : false,
 		reviewToggle: false,
-		
+		photosToggle: true,
 		newReview : {
 
 			star: '',
@@ -25,8 +25,8 @@ var app = new Vue({
 		
 		},
 
-		updateSubjects : [
-
+		photos: [
+			""
 		],
 
 	},
@@ -67,11 +67,11 @@ var app = new Vue({
 	methods: {
 		
 		//TODO
-		/*photoHref : function(photo_name){
+		imageHref : function(photo_name){
 
-			return "/images/hospital/" + photo_name+".JPG";
+			return "/images/hospital/" + photo_name;
 
-		},*/
+		},
 
 		addReview: function(){
 
@@ -94,18 +94,100 @@ var app = new Vue({
 
 		
 		},
+		//subject를 넣기 위한 칸을 만들어준다.
+		addSubject: function(){
+			var self = this;
 
-		updateHospital: function(){
+			self.hospital.subjects.push("");
+			console.log(self.hospital.subjects);
+		},
 
-			this.hospital.subjects = this.hospital.subjects.split(",");
-			console.log("this.hospital.subjects", this.hospital.subjects);
-			updateHospital(hospitalID, this.hospital).then(function(rtnData){
-				alert("반영되었습니다");
-				this.updateToggle = false;
-			});
+		//X를 클릭하면 그 과목이 삭제된다. index를 찾고, index에 해당하는 엘리먼트를 삭제한다.
+		deleteSubject: function(subject){
+			
+			var self = this;
+			var subjects = self.hospital.subjects;
+			var index = subjects.indexOf(subject);
+			if (index !== -1) subjects.splice(index, 1);
 
 		},
 
+		addKeyword : function(){
+		
+			var self = this;
+			self.hospital.keywords.push("");
+			console.log(self.hospital.keywords);
+		
+		},
+		//X를 클릭하면 그 키워드가 삭제된다. index를 찾고, index에 해당하는 엘리먼트를 삭제한다.
+		deleteKeyword: function(keyword){
+			
+			var self = this;
+			var keywords = self.hospital.keywords;
+			var index = keywords.indexOf(keyword);
+			if (index !== -1) keywords.splice(index, 1);
+
+		},
+
+		addPhoto: function(event){
+			event.preventDefault();
+			var self = this;
+			self.photos.push("");
+
+		},
+		deletePhoto: function(index, event){
+			event.preventDefault();
+			var self = this;
+			var photos = self.photos;
+			photos.splice(index, 1);
+		},
+		updateHospital: function(){
+
+			var self = this;
+			console.log("this.hospital.subjects", self.hospital.subjects);
+			updateHospital(hospitalID, self.hospital).then(function(rtnData){
+				alert("반영되었습니다");
+				self.updateToggle = false;
+			});
+
+		},
+		changePhotos: function(event){
+			event.preventDefault();
+            var self = this;
+            var newPhoto = new FormData();
+            for (var i = 0; i < self.photos.length; i++) {
+            	//파일이 정의 되어 있으면 append 한다.
+            	if($("#"+i)[0].files[0] !== undefined){
+					newPhoto.append("photos", $("#"+i)[0].files[0]);
+					console.log(newPhoto.keys().next());            		
+            	}
+            }
+            //api함수
+            addPhotos(hospitalID, newPhoto).then(function(rtn){
+            	if(rtn.success){
+            		alert("성공입니다.")
+            		self.photosToggle = false;
+            		self.getHospital(self.hospitalID);
+            	}else{
+            		alert("에러입니다.")
+            		self.photosToggle = false;
+            	}
+            });
+        },
+        removePhoto: function(photoName, event){
+        	event.preventDefault();
+        	var self = this;
+        	deletePhoto(hospitalID, {"photoName": photoName}).then(function(rtn){
+        		if(rtn.success){
+            		alert("성공입니다.")
+            		self.photosToggle = false;
+            		self.getHospital(self.hospitalID);
+            	}else{
+            		alert("에러입니다.")
+            		self.photosToggle = false;
+            	}
+        	});
+        },
 		toggleReview: function(){
 			var pass=prompt("Password")
 			if(pass !== "inspire") return;
@@ -119,6 +201,14 @@ var app = new Vue({
 			if(pass !== "inspire") return;
 			this.updateToggle = !this.updateToggle;
 			console.log(this.updateToggle)
+			return;
+		},
+
+		togglePhotos: function(){
+			var pass=prompt("Password")
+			if(pass !== "inspire") return;
+			this.photosToggle = !this.photosToggle;
+			console.log(this.photosToggle)
 			return;
 		},
 
@@ -148,12 +238,15 @@ var app = new Vue({
 			getHospital(id).then(function(_hospital){
 
 				self.hospital = _hospital;
-				console.log("self.hospital.reviews", self.hospital.reviews);
+				console.log("self.hospital.reviews", _hospital);
+				if(!_hospital.keywords) _hospital.keywords = [];
+				
 				var myaddress = self.hospital.address;
 
 				//self.havePhoto = _hospital.photo.length > 0;
-				self.havePhoto = _hospital.photo > 0;
-
+				self.havePhoto = _hospital.photos.length > 0;
+				console.log(self.havePhoto);
+				//TODO 안에 지금 위도 경도가 있으니깐 그걸 활용하면 된다.
 				naver.maps.Service.geocode({address: myaddress}, function(status, response) {
   
 					if (status !== naver.maps.Service.Status.OK) {

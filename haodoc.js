@@ -1,3 +1,6 @@
+Array.prototype.diff = function(a) {
+    return this.filter(function(i) {return a.indexOf(i) < 0;});
+};
 
 //credentials보안파일 로드
 var credentials = require('./credentials.js');

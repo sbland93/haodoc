@@ -52,9 +52,23 @@ var hospitalSchema = mongoose.Schema({
 	sunClose: String,
 	holStart: String,
 	holClose: String,
+	
+	photos : {
+		type: [String], default: []
+	},
 
 	reviews: {
 		type: [reviewSchema], default: []
+	},
+
+	//상단 노출을 위한 키워드
+	keywords : {
+		type: [ String ], default: []
+	},
+
+	//상단 노출을 위한 점수
+	score: {
+		type : Number, default: 0,
 	},
 
 });

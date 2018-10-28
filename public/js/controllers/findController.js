@@ -245,7 +245,7 @@ var app = new Vue({
 		//handlebars랑 겹쳐서, href를만드는 것을 method로 뺌. 방법을 강구해봐야할 듯.
 		hospitalInfoHref : function(id){
 		
-			return "/hospital/"+id+"?keyword=true&";
+			return "/hospital/"+id;
 		
 		},
 
@@ -267,6 +267,31 @@ var app = new Vue({
 		getHospital : function(query, isKeywordSearch){
 			
 			var self = this;
+			var highRankPromise = new Promise(function(resolve, reject){resolve([])});
+			//keywordSearch(병원이름으로 검색)이 아니라면, [시구동] 이경우 구까지
+			if(!isKeywordSearch){
+				
+				var keyword = "";
+				keyword += self.district.replace(/\(.*\)/,"");
+				if(self.neighborhood !== "没有选择"){
+					keyword += " ";
+					keyword += self.neighborhood.replace(/\(.*\)/,"");
+				}
+				if(self.subject !== "没有选择"){
+					keyword += " ";
+					keyword += self.subject;
+				}
+				console.log("keyword", keyword);
+				//상단노출 병원을 찾아서 넘기는 Promsie , 밑의 getHospitals(주소로 찾는) 와 비동기로 하기 위해 Promise로 처리.
+				highRankPromise = new Promise(function(resolve, reject){
+					getHospitals({"keywords": keyword}).then(function(_hospitals){
+						if(_hospitals.length === 0) _hospitals = [];
+						console.log(_hospitals);
+						resolve(_hospitals);
+					}).catch(function(rtn){reject(rtn);});
+				})
+
+			}
 
 			getHospitals(query).then(function(_hospitals){
 				
@@ -275,35 +300,35 @@ var app = new Vue({
 				self.isHospitals = true;
 
 				if(_hospitals.length == 0) self.isHospitals = false;
-				//전체 hopsitalList
-				self.hospitalList = _hospitals;
-
-				//page당 10개씩 렌더링 할 것이므로 총 페이지수를 구한다.
-				self.numOfPage = parseInt( _hospitals.length / 10 ) + 1;
-
-				var myAddress = self.centerString;
-				console.log("isKeywordSearch",  isKeywordSearch); 
-				console.log("_hospitals.length > 0", _hospitals.length>0);
-				//keywordSearch하는 경우는, 첫 병원의 주소를 중심으로 지도를 움직여야 병원의 정보가 보인다.
-				if(isKeywordSearch && _hospitals.length > 0) myAddress = _hospitals[0].address;
 				
-				console.log("myAddress", myAddress);
-				naver.maps.Service.geocode({ address :  myAddress}, function(status, response){
-					var result = response.result;
-					
-					var centerX = result.items[0].point.x,
-						centerY = result.items[0].point.y;
-					
-					console.log("centerX, centerY", centerX, centerY);
+				highRankPromise.then(function(high_rank_hospital_arr){
+					self.hospitalList = high_rank_hospital_arr.concat(_hospitals);
 
-					var map = new naver.maps.Map('map', {
-						center : new naver.maps.Point(centerX, centerY),
+					//page당 10개씩 렌더링 할 것이므로 총 페이지수를 구한다.
+					self.numOfPage = parseInt( self.hospitalList.length / 10 ) + 1;
+
+					var myAddress = self.centerString;
+					//keywordSearch하는 경우는, 첫 병원의 주소를 중심으로 지도를 움직여야 병원의 정보가 보인다.
+					if(isKeywordSearch && _hospitals.length > 0) myAddress = _hospitals[0].address;
+
+					naver.maps.Service.geocode({ address :  myAddress}, function(status, response){
+						var result = response.result;
+						
+						var centerX = result.items[0].point.x,
+							centerY = result.items[0].point.y;
+						
+						console.log("centerX, centerY", centerX, centerY);
+
+						var map = new naver.maps.Map('map', {
+							center : new naver.maps.Point(centerX, centerY),
+						});
+						self.map = map;
+
+						self.changeIndex(1);
+
 					});
-					self.map = map;
-
-					self.changeIndex(1);
-
-				});
+				})
+				
 
 
 
@@ -356,6 +381,7 @@ var app = new Vue({
 			
 			var self = this;
 			var subwayKeyword = self.subwayKeyword;
+			self.hospitalList = [];
 
 			//한국어 이름 혹은 중국어 이름 둘다 입력에 대응할 수 있게끔, 둘다 찾는다.
 			var subwayQuery = {
@@ -400,77 +426,41 @@ var app = new Vue({
 					subject = self.subwaySubject;
 				}
 
+				//상단노출이 되어 있는 병원을 가져온다. Promise로 처리해서, Near Hopsital이랑 비동기 처리가 가능하도록 한다.
+				var highRankPromise = new Promise(function(resolve, reject){
+					getHospitals({keywords : subways[0].name}).then(function(_hospitals){
+						//상단노출 병원이 없으면 뒤에서 concat으로 합치므로 []로 넘긴다.
+						if(_hospitals.length === 0) _hospitals = [];
+						resolve(_hospitals);
+					}).catch(function(rtn){
+						reject(rtn);
+					});
+				}) 
+
+
 				getNearHospitals(coordinates, 25, subject).then(function(_hospitals){
 
-
 					console.log("_hospitals.length", _hospitals.length == 0);
-				
 					self.isHospitals = true;
 					if(_hospitals.length == 0) self.isHospitals = false;
-					//전체 hopsitalList
-					self.hospitalList = _hospitals;
-
-					//page당 10개씩 렌더링 할 것이므로 총 페이지수를 구한다.
-					self.numOfPage = parseInt( _hospitals.length / 10 ) + 1;
-					self.changeIndex(1);
+					else{
+						//상단노출 병원들을 받아온것이 확인되면, 이를 
+						highRankPromise.then(function(high_rank_hospital_arr){
+							self.hospitalList = high_rank_hospital_arr.concat(_hospitals);
+							//page당 10개씩 렌더링 할 것이므로 총 페이지수를 구한다.
+							self.numOfPage = parseInt( self.hospitalList.length / 10 ) + 1;
+							self.changeIndex(1);
+						});
+					}
+					
 
 				});
 			
 			});
 
 
-			
-
 		}
 	}
 
-
 });
-
-
-
-
-/*getAroundHospitals : function( ){
-	
-	var self = this;
-	var centerAddress = self.centerAddress;
-	console.log(centerAddress);
-
-	naver.maps.Service.geocode({ address: centerAddress }, function(status, response){
-
-		var result = response.result;
-
-		var centerX = result.items[0].point.x,
-			centerY = result.items[0].point.y;
-
-		var map = new naver.maps.Map('map', {
-
-			center: new naver.maps.Point(centerX, centerY),
-
-		});
-		
-		var coordinates = [ centerX, centerY ];
-
-		self.map = map;
-
-		getNearHospitals(coordinates, 10).then(function(_hospitals){
-
-
-			console.log("_hospitals.length", _hospitals.length == 0);
-		
-			self.isHospitals = true;
-
-			if(_hospitals.length == 0) self.isHospitals = false;
-			//전체 hopsitalList
-			self.hospitalList = _hospitals;
-
-			//page당 10개씩 렌더링 할 것이므로 총 페이지수를 구한다.
-			self.numOfPage = parseInt( _hospitals.length / 10 ) + 1;
-			self.changeIndex(1);
-
-
-		});
-
-	});
-},*/
 

@@ -39,7 +39,11 @@ module.exports = function(hospital){
 		sunStart: hospital.sunStart,
 		sunClose: hospital.sunClose,
 		holStart: hospital.holStart,
-		holClose: hospital.holClose
+		holClose: hospital.holClose,
+
+		photos: hospital.photos,
+		keywords: hospital.keywords,
+		score: hospital.score,
 
 	}
 
