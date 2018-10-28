@@ -14,7 +14,7 @@ var app = new Vue({
 		havePhoto : false,
 		updateToggle : false,
 		reviewToggle: false,
-		photosToggle: true,
+		photosToggle: false,
 		newReview : {
 
 			star: '',

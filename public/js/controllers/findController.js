@@ -11,7 +11,6 @@ const makeMarker = function(map, position, index, hospitalObj) {
         	url: '/images/pin/'+index+'.png',
         }
     });
-    console.log(position);
 
     var contentString = [
 	    '<div class="iw_inner">',
@@ -268,8 +267,9 @@ var app = new Vue({
 			
 			var self = this;
 			var highRankPromise = new Promise(function(resolve, reject){resolve([])});
+			console.log("self.subwayRender", self.subwayRender);
 			//keywordSearch(병원이름으로 검색)이 아니라면, [시구동] 이경우 구까지
-			if(!isKeywordSearch){
+			if(!isKeywordSearch && !self.subwayRender){
 				
 				var keyword = "";
 				keyword += self.district.replace(/\(.*\)/,"");
