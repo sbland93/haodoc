@@ -5,83 +5,80 @@
     <link rel="stylesheet" type="text/css" href="/css/main2.css">
     <link rel="stylesheet" type="text/css" href="/css/event.css">
 {{/section}}
+
 <div id="app">
+    <section class="main-block">
+        <div class="container">
+            <div class="row-page row">
+                <!-- 드림성모안과 -->
+                <div  v-for="event in events" class="mainbox col-page col-xs-10 col-lg-12" style="padding:40px 0px 80px 0px;">
+                    <a :href="eventHref(event.id)" class="full-block">
+                        <div class="img-block">
+                            <img class="img-responsive" :src="eventThumbnailHref(event.thumbnailImage)" width="1000" height="200" >
+                        </div>
+                        <div class="content-block">
+                              <br>
+                            <h3> \{{event.eventName}} </h3>
+                            <p> \{{event.hospitalName}} </p>
+                            <p> \{{event.hospitalName}} </p>
+                            <p> \{{event.eventRange}}  <span style="float:right">\{{event.subway}}</span></p>
+                        </div>
+                        <div class="d-none d-sm-block transition-block">
+                            <span>详细内容 </span>
+                        </div>
+                        <!-- mobile web button -->
+                        <span class="d-md-none float-right" >
+                            <button class="mobile-btn btn">查看活动详情<!--서비스자세히보기-->&nbsp;&nbsp;&nbsp;(Click!)</button>
+                        </span>
+                    </a>
+                </div>
 
 
-<section class="main-block">
-    <div class="container">
-        <div class="row-page row">
-            <!-- 드림성모안과 -->
-            <div  v-for="event in events" class="mainbox col-page col-xs-10 col-lg-12" style="padding:40px 0px 80px 0px;">
-                <a :href="eventHref(event.id)" class="full-block">
-                    <div class="img-block">
-                        <img class="img-responsive" :src="eventThumbnailHref(event.thumbnailImage)" width="1000" height="200" >
-                    </div>
-                    <div class="content-block">
-                          <br>
-                        <h3> \{{event.eventName}} </h3>
-                        <p> \{{event.hospitalName}} </p>
-                        <p> \{{event.eventRange}}  <span style="float:right">\{{event.subway}}</span></p>
-                    </div>
-                    <div class="d-none d-sm-block transition-block">
-                        <span>详细内容 </span>
-                    </div>
-                    <!-- mobile web button -->
-                    <span class="d-md-none float-right" >
-                        <button class="mobile-btn btn">查看活动详情<!--서비스자세히보기-->&nbsp;&nbsp;&nbsp;(Click!)</button>
-                    </span>
-                </a>
+                <!-- 하오닥 팀 소개 -->
+                <div class="mainbox col-page col-xs-10 col-lg-12" style="padding:40px 0px 80px 0px;">
+                    <a href="/hpv0" class="full-block">
+                        <div class="img-block">
+                            <img class="img-responsive" src="/images/event_low.png" width="800" height="150">
+                        </div>
+                        <div class="content-block">
+                        	  <br>
+                            <h3>HaoDoc X Tndn HPV 疫苗活动</h3>
+                            <p>只为您准备的HPV 疫苗活动</p><br>
+                            <p>~2018.09.30</p>
+                        </div>
+                        <div class="d-none d-sm-block transition-block">
+                            <span>详细内容 </span>
+                        </div>
+                        <!-- mobile web button -->
+                        <span class="d-md-none float-right" >
+                            <button class="mobile-btn btn">查看活动详情<!--서비스자세히보기-->&nbsp;&nbsp;&nbsp;(Click!)</button>
+                        </span>
+                    </a>
+                </div>
+
             </div>
-
-
-            <!-- 하오닥 팀 소개 -->
-            <div class="mainbox col-page col-xs-10 col-lg-12" style="padding:40px 0px 80px 0px;">
-                <a href="/hpv0" class="full-block">
-                    <div class="img-block">
-                        <img class="img-responsive" src="/images/event_low.png" width="800" height="150">
-                    </div>
-                    <div class="content-block">
-                    	  <br>
-                        <h3>HaoDoc X Tndn HPV 疫苗活动</h3>
-                        <p>只为您准备的HPV 疫苗活动</p><br>
-                        <p>~2018.09.30</p>
-                    </div>
-                    <div class="d-none d-sm-block transition-block">
-                        <span>详细内容 </span>
-                    </div>
-                    <!-- mobile web button -->
-                    <span class="d-md-none float-right" >
-                        <button class="mobile-btn btn">查看活动详情<!--서비스자세히보기-->&nbsp;&nbsp;&nbsp;(Click!)</button>
-                    </span>
-                </a>
-            </div>
-
+        </div>
+    </section>
+    <div class="footer">
+        <div class="contact">
+            <h6>CS CENTER</h6>
+            <p id="tel">WechatId : Hao_Doc</p>
+            <p id="worktime">AM 09:00 - PM 06:00</p>
+            <p id="lunchtime">LUNCH 11:40 - 12:50</p>
+            <h6 id="email">E-mail: haodoc@haodoc.co.kr</h6>
+        </div>
+        <div class="company-info">
+            <h5>(주) INSPIRE&nbsp;&nbsp;|&nbsp;&nbsp;대표 김승범</h5>
+            <h5>사업자등록번호 631-05-01190 |&nbsp;&nbsp; HaoDoc</h5>
+            <h6>02841 서울시 성북구 안암로 145 경영본관 2층 일진창업센터 220호</h6>
+        </div>
+        <div class="terms">
+            <p><a href="/rules">이용약관</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/personal">개인정보취급방침</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/rules">이용안내</a></p>
+        </div>
+        <div class="copyright">
+            <p>COPYRIGHT © 2018 INSPIRE All rights reserved</p>
         </div>
     </div>
-</section>
-
-
-<div class="footer">
-    <div class="contact">
-        <h6>CS CENTER</h6>
-        <p id="tel">WechatId : Hao_Doc</p>
-        <p id="worktime">AM 09:00 - PM 06:00</p>
-        <p id="lunchtime">LUNCH 11:40 - 12:50</p>
-        <h6 id="email">E-mail: haodoc@haodoc.co.kr</h6>
-    </div>
-    <div class="company-info">
-        <h5>(주) INSPIRE&nbsp;&nbsp;|&nbsp;&nbsp;대표 김승범</h5>
-        <h5>사업자등록번호 631-05-01190 |&nbsp;&nbsp; HaoDoc</h5>
-        <h6>02841 서울시 성북구 안암로 145 경영본관 2층 일진창업센터 220호</h6>
-    </div>
-    <div class="terms">
-        <p><a href="/rules">이용약관</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/personal">개인정보취급방침</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/rules">이용안내</a></p>
-    </div>
-    <div class="copyright">
-        <p>COPYRIGHT © 2018 INSPIRE All rights reserved</p>
-    </div>
-</div>
-
 </div>
 
 

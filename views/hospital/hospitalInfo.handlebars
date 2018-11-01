@@ -78,7 +78,7 @@
 	                	- 星期日 : \{{hospital.sunStart}} ~ \{{hospital.sunClose}}<br>
 	                	- 假期 : \{{hospital.holStart}} ~ \{{hospital.holClose}}<br>
                 		<div v-if="hospital.remarks">\{{hospital.remarks}}</div>
-                		- subway : {{hospital.subway}}
+                		<!--- subway : {{hospital.subway}}-->
             		</p>
 	                <br />
 	            </div>
@@ -86,9 +86,9 @@
 		        <div class="col-sm-7">
 		        	<br>	
 					<div id="map" style="width:100%; height:430px; border:0;"></div>
-				    <button class="mobile-btn btn" @click="toggleUpdate" style="margin-top:120px">정보 업데이트(Beta)</button>
-				    <button class="mobile-btn btn" @click="toggleReview" style="margin-top:120px">리뷰 추가하기(Beta)</button>
-				    <button class="mobile-btn btn" @click="togglePhotos" style="margin-top:120px">사진 관리하기(Beta)</button>
+				    <button class="mobile-btn btn" @click="toggleUpdate" style="margin-top:120px">Update</button>
+				    <button class="mobile-btn btn" @click="toggleReview" style="margin-top:120px">Review</button>
+				    <button class="mobile-btn btn" @click="togglePhotos" style="margin-top:120px">Photos</button>
 		        </div>
 
 		    </div>
@@ -96,6 +96,7 @@
 		    <br><br>
 		    
 		    <!-- 병원 사진 렌더링 -->
+		    <!--div class="photo" v-show="havePhoto"-->
 		    <div class="photo" v-show="havePhoto">
 		    	<h2 class="logoColor text-center"> 医院照片 </h2>
 			    <div class="container-fluid row">
@@ -103,6 +104,11 @@
 			    		<span class="col-xs-12 col-md-4" v-for="photo in hospital.photos">
 			    			<img class="img-responsive" :src="imageHref(photo)">
 			    		</span>
+			    		<!--span class="col-xs-12 col-md-4">
+			    			<img class="img-responsive" src="/images/hospital/노고산동_신촌연세안과의원_01.JPG">
+			    			<img class="img-responsive" src="/images/hospital/노고산동_신촌연세안과의원_02.JPG">
+			    			<img class="img-responsive" src="/images/hospital/노고산동_신촌연세안과의원_03.JPG">
+			    		</span-->
 			    	</div>
 			    </div>
 		    </div>
@@ -314,25 +320,80 @@
 
 		<!--div class="card">
 		    <div class="card-body">
-		        <div class="row">
-	        	    <div class="col-md-2">
+		        <div class="row"-->
+	        	    <!--div class="col-md-2">
 	        	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
 	        	        <p class="text-secondary text-center">Several Days Ago</p>
+	        	    </div-->
+	        	    <!--div class="col-md-12">
+	        	        <p>
+	        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>鲁洁</strong></a>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	                        <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+
+
+	        	       </p>
+	        	       <div class="clearfix"></div>
+	        	        <p>当初需要水平不太好，所以去了以后听不懂😂 而且我也不知道我的保险能不能用，他们咨询台的人讲了一大堆，发现他们也不是很明白.然后医生还挺倔的，我都告诉他，我在国内确认过是湿疹了，非跟我说是水痘，我说我曾经得过水痘了，他还在那边不信……是一次非常差的就诊体验！！！甚至可以说是糟糕！但是就诊环境还是不错的，不用排队，有沙发可以休息，而且当时快到夏天了，冷气也开放，比较舒服。然后还有自助饮水机和咖啡，挺全的。这些都挺好。</p>
+	        	        <p>
+	        	            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> 1</a>
+	        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i>2</a>
+	        	       </p>
 	        	    </div>
 	        	    <div class="col-md-12">
 	        	        <p>
-	        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>李再勋</strong></a>
+	        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>庄珺茹</strong></a>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	                        <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+
+
+	        	       </p>
+	        	       <div class="clearfix"></div>
+	        	        <p>本来要去大医院打疫苗，但是下课时突然看到学校里挂的横幅，说是有活动打子宫癌疫苗，觉得在学校张贴的广告一定是信得过的，毕竟是医疗方面，一定得小心，然后就去了广告上说的小医院，去了以后只有一个医生和一个护士（也可能是因为午休时间，中午下课去的），护士很不耐烦，我说我要打针，接着就付款填表打了，五分钟都不用，主要是针对那个疫苗没有给我任何的说明，这是什么疫苗，几价，打完需要注意什么，下次什么时候再来，什么话都没有，就让我走人，我就一个一个的问，护士就惜字如金的告诉我二价，没别的，不知道，不知道这个疫苗第二次打得时候可不可以去别的地方打，（因为担心不同医院用的药不一样，怕引起不良反应）如果可以，这医院不想再去第二次</p>
+	        	        <p>
+	        	            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> 2</a>
+	        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i>1</a>
+	        	       </p>
+	        	    </div>
+	        	    <div class="col-md-12">
+	        	        <p>
+	        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>虞箫萌</strong></a>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	                        <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+
+
+	        	       </p>
+	        	       <div class="clearfix"></div>
+	        	        <p>一直因为韩国打hpv疫苗快捷 资金方面又便宜才开始找医院 一开始是通过同学推荐来的 说是学生会组织的 然后医院也很正规 价格也很合理 各方宏大8号口出去，有中文系的韩国小姐姐来接，一起去医院，中文很好，人也很亲切。到了医院，医生护士都很温柔很亲切，笑眯眯的。到了先量体温，不发烧就可以接种hpv9价疫苗了。打针很快，注射的时候会痛，但能忍受，打完针会给一杯热水让你喝掉，会嘱咐不要喝酒。有微信和支付宝支付功能，还可以visa卡，很贴心。回到家晚上有点低烧，浑身酸痛，醒了好几次，第二天躺了一天才好，疫苗的副作用，能接受。</p>
+	        	        <p>
+	        	            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> 4</a>
+	        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i>3</a>
+	        	       </p>
+	        	    </div>
+	        	    <div class="col-md-12">
+	        	        <p>
+	        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>白潇义</strong></a>
 	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
 	                        <span class="float-right"><i class="text-warning fa fa-star"></i></span>
 	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
 	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
 
+
 	        	       </p>
 	        	       <div class="clearfix"></div>
-	        	        <p>延世大学韩语学堂学生 杨媛 - 大家好！我是本次活动的第一期志愿者，很荣幸可以参与到这样的活动中来。“正确了解韩国的医院”，本次活动不仅让我完全了解到韩国的就医体系和医疗系统，而且通过丰富多彩的活动，对韩国的文化有了更深刻的认识和体会。此次丰富的收获是我留韩生活中不可多得的一笔宝贵财富。</p>
+	        	        <p>现在国内的九价疫苗很不好预约，在韩国这边报名接种宫颈癌九价疫苗之后，交完5万预约金之后就几乎没费过心了，还是比较省事的。陪同人员也很耐心，还给了小零食。医院环境也很好，接种的时候那位女医生还很有亲和力地分散注意力，手法也很轻柔，扎针的时候都没什么感觉，就是推的时候涨涨的。接种完之后还提醒我们不要喝酒不要剧烈运动，多喝水什么的，很细心。</p>
 	        	        <p>
-	        	            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
-	        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+	        	            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i>1</a>
+	        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i>1</a>
 	        	       </p>
 	        	    </div>
 		        </div>
