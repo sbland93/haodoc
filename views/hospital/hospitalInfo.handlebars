@@ -81,7 +81,11 @@
                 		<!--- subway : {{hospital.subway}}-->
             		</p>
 	                <br />
+	                <div class="alert alert-danger col-xs-5" role="alert">
+				  诊疗时间有可能会变更请向相应的医院电话确认后再进行访问。
+				</div>
 	            </div>
+
 
 		        <div class="col-sm-7">
 		        	<br>	
@@ -90,13 +94,18 @@
 				    <button class="mobile-btn btn" @click="toggleReview" style="margin-top:120px">Review</button>
 				    <button class="mobile-btn btn" @click="togglePhotos" style="margin-top:120px">Photos</button>
 		        </div>
-
+		       
 		    </div>
+
+	        <div class="alert alert-danger col-xs-5" role="alert" style="margin-top:10px">
+			  备注：
+韩国法定公休日：元旦（1月1日），新年（农历1月1日），三一节（3月1日），儿童节（5月5日），释迦诞生日（农历4月8日），显忠日（6月6日），光复节（8月15日），中秋（农历8月15日），开天节（10月3日），韩文节（10月9日），圣诞节（12月25日）
+			</div>
 
 		    <br><br>
 		    
 		    <!-- 병원 사진 렌더링 -->
-		    <!--div class="photo" v-show="havePhoto"-->
+		    <!--div class="photo"-->
 		    <div class="photo" v-show="havePhoto">
 		    	<h2 class="logoColor text-center"> 医院照片 </h2>
 			    <div class="container-fluid row">
@@ -104,11 +113,11 @@
 			    		<span class="col-xs-12 col-md-4" v-for="photo in hospital.photos">
 			    			<img class="img-responsive" :src="imageHref(photo)">
 			    		</span>
-			    		<!--span class="col-xs-12 col-md-4">
+			    		<span class="col-xs-12 col-md-4">
 			    			<img class="img-responsive" src="/images/hospital/노고산동_신촌연세안과의원_01.JPG">
 			    			<img class="img-responsive" src="/images/hospital/노고산동_신촌연세안과의원_02.JPG">
 			    			<img class="img-responsive" src="/images/hospital/노고산동_신촌연세안과의원_03.JPG">
-			    		</span-->
+			    		</span>
 			    	</div>
 			    </div>
 		    </div>
