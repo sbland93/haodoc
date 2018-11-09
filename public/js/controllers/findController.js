@@ -1,6 +1,8 @@
 //HospitalData를 script에 포함시키는 것이 선행 되어야 한다.
 
 
+
+
 /*  Marker를 찍는 함수  */
 const makeMarker = function(map, position, index, hospitalObj) {
 
@@ -66,6 +68,7 @@ var app = new Vue({
 		addressRender : false,
 		keywordRender: false,
 		isHospitals : true,
+		//키워드 입력을 두글자이상하지 않을시에 주의사항을 알려준다.
 		keywordCondition: false,
 		//지하철입력검색시 쓰이는 것.
 		subwayKeyword: '',
@@ -156,6 +159,8 @@ var app = new Vue({
 	},
 	
 	mounted : function(){
+
+		
 		var self = this;
 		var defaultQuery = {"district": "서대문구", "address" : {"$regex": "창천동", "$options": "i" } };
 		this.getHospital(defaultQuery, self.keywordRender);
@@ -229,7 +234,7 @@ var app = new Vue({
 
 		},
 		searchByKeyword : function(){
-
+			console.log("this.keyword.length", this.keyword.length);
 			if(this.keyword.length < 2){
 				this.keywordCondition = true;
 				return;
@@ -404,8 +409,11 @@ var app = new Vue({
 			getSubways(subwayQuery).then(function(subways){
 			
 				//TODO 선택할 수 있도록 해줘야 하는데 무조건 첫번째꺼를 가져오고 있다.
-				console.log(subways[0].chnName);
-				
+				if(subways.length === 0){
+
+					return;
+				}
+
 				var centerX = subways[0].xPos,
 					centerY = subways[0].yPos;
 
@@ -452,8 +460,6 @@ var app = new Vue({
 							self.changeIndex(1);
 						});
 					}
-					
-
 				});
 			
 			});
@@ -464,3 +470,37 @@ var app = new Vue({
 
 });
 
+
+//Post loading.
+/*var enterKey = function(actionFunc){
+	if (window.event.keyCode == 13) {
+ 		actionFunc();
+     }
+}
+loadPost();
+
+
+function loadPost() {
+
+  if (!!navigator.geolocation) 
+  {
+    navigator.geolocation.getCurrentPosition(successCallback,errorCallback);  
+  }
+  else
+
+  {
+    alert("이 브라우저는 Geolocation를 지원하지 않습니다");
+  }
+
+}    
+
+function errorCallback(error)
+{
+    alert(error.message);
+}    
+
+function successCallback(position) { 
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+        console.log("lat, lng", lat, lng);
+}*/
