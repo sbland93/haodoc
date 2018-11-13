@@ -1,4 +1,9 @@
 	
+var url =  window.location.pathname;
+var hpvID = url.replace("/hpv1/", "");
+console.log("hpvID", hpvID);
+
+
 $(document).ready(function(){
 	// Initialize form validation on the registration form.
 	// It has the name attribute "registration"
@@ -33,10 +38,13 @@ $(document).ready(function(){
 			evt.preventDefault();
 			var sendingData = $(form).serialize();
 			
-			addUser(sendingData).then(function(data){
+			sendingData += '&coupon=' + hpvID;
+			console.log(sendingData);
+			
+			addPayer(sendingData).then(function(data){
 				if(data.success){
-					alert('Step 1 Success!');
-					location.href = '/hpv2';
+					alert('个人信息成功提交!');//개인정보 제출 성공
+					location.href = '/hpv2/' + hpvID;
 				} 
 				else{
 					alert('Error Occured');
@@ -46,6 +54,7 @@ $(document).ready(function(){
 			}).catch(function(err){
 				alert(err);
 			});
+
 		
 		}
 	});

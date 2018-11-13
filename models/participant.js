@@ -8,6 +8,7 @@ var participantSchema = mongoose.Schema({
     wechatID: String,
     memo: String,
     eventName: String,
+    remarks: String,
 	updated_at : { type: Date, default: Date.now },
 
 });

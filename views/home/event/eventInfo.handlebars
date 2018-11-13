@@ -9,11 +9,12 @@
 
 	<div class="text-center" style="color:#ffffff;">
 		\{{event.eventName}} <br>
-		\{{event.address}}
+		\{{event.address}} <br>
+		\{{event.eventRange}} <br>
+		<div v-show="event.price">\{{event.price}}</div> <br>
 	</div>
 
 	<img v-for="imageName in event.eventImage" :src="eventImageHref(imageName)" class="infoImage">
-
 	<div class="offset-md-2 col-md-8" id="contactInfo" style="background-color:#660000" >
 
 

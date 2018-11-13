@@ -5,7 +5,7 @@ var app = new Vue({
     data : {
 
         events: "",
-      
+        coupons: "",
 
     },
 
@@ -17,6 +17,11 @@ var app = new Vue({
             self.events = events;
     
         });
+        getCoupons().then(function(coupons){
+            console.log(coupons[0]);
+            self.coupons = coupons;
+    
+        });
     
     },
 
@@ -24,16 +29,18 @@ var app = new Vue({
 
         //handlebars랑 겹쳐서, href를만드는 것을 method로 뺌. 방법을 강구해봐야할 듯.
         eventHref : function(id){
-        
             return "/event/"+id;
-        
         },
 
+        couponHref : function(id){
+            return "/coupon/" + id
+        },
         eventThumbnailHref: function(thumb_file_name){
-
             return "/images/event/"+thumb_file_name;
-        
-        }
+        },
+        couponThumbnailHref: function(thumb_file_name){
+            return "/images/coupon/all/" + thumb_file_name;
+        },
 
 
     }

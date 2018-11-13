@@ -37,11 +37,13 @@ module.exports = function(){
 			res.render('home/event/eventInfo');
 		},
 
+
+		couponInfo : function(req, res, next){
+			res.render('home/coupon/couponInfo');
+		},
+
 		/*
-
 		For Development Temp Handlers
-
-
 		*/
 
 

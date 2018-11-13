@@ -15,11 +15,11 @@
 
         <meta charset="utf-8" />
         <title>HaoDoc(하오닥)</title>
-        <link rel="icon" href="/images/favicon.ico" type="/images/ico">
+        <link rel="icon" href="/images/layout/favicon.ico" type="/images/ico">
         <link rel="canonical" href="http://www.haodoc.co.kr">
 
         <!-- Jquery -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
         <!-- BootStrap -->
@@ -32,7 +32,7 @@
         <meta name="keywords" content="하오닥, HaoDoc, 为在韩华人提供免费韩国医疗信息服务的平台 " />
         <meta property="og:title" content="HaoDoc(하오닥)">
         <meta property="og:description" content="为在韩华人提供免费韩国医疗信息服务的平台 (하오닥)" />
-        <meta property="og:image" content="images/thumbnail.jpg" />
+        <meta property="og:image" content="images/layout/thumbnail.jpg" />
         <link rel="stylesheet" type="text/css" href="/css/layout.css">
         <!-- Gsuite 용 -->
         <meta name="google-site-verification" content="GkEvRms7vI1Eamz8dMycBihFkootSnMpOXmu0dsa6CY" />
@@ -60,18 +60,22 @@
         
         <nav class="header">
             <!-- HEADER LOGO -->
-            <a href="/"><img id="logo" alt="HaoDoc" src="/images/logo2.png"></a>
+            <a href="/"><img id="logo" alt="HaoDoc" src="/images/layout/logo2.png"></a>
             <!-- HEADER MENU BAR -->
-            <input id="menubar" type="image" src="/images/menubar.png" />
+            <input id="menubar" type="image" src="/images/layout/menubar.png" />
         </nav>
 
         <!-- WEIBO ICON -->
         <a href="https://www.weibo.com/u/6589350358?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank">
-            <img id="weibo" alt="Weibo" src="/images/weibo.png">
+            <img id="weibo" alt="Weibo" src="/images/layout/weibo.png">
         </a>
         <!-- Wechat ICON -->
         <a target="_blank" data-toggle="modal" data-target="#exampleModal">
-            <img id="wechat" alt="Wechat" src="/images/wechat.png">
+            <img id="wechat" alt="Wechat" src="/images/layout/wechat.png">
+        </a>
+
+        <a id="top-btn" >
+            <img id="top"alt="Wechat" src="/images/layout/arrow_up.png">
         </a>
         
             <!-- Modal -->
@@ -85,7 +89,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p><img src="/images/QR.jpg" id="QRCode"></p>
+                            <p><img src="/images/layout/QR.jpg" id="QRCode"></p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -97,7 +101,6 @@
             {{{body}}}
 
          <!-- 'javascript Section -->   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script type="text/javascript" src="/js/layout.js"></script>
         {{{_sections.jquery}}}
     </body>

@@ -1,20 +1,31 @@
 {{#section 'head'}}
-    <link rel="stylesheet" type="text/css" href="css/hpv1.css">
-    <link rel="stylesheet" type="text/css" href="css/hpv2.css">
-
+    <link rel="stylesheet" type="text/css" href="/css/hpv1.css">
+    <link rel="stylesheet" type="text/css" href="/css/hpv2.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 {{/section}}
 
-
+<div id="app">
 <div class="content left-low">
-    <h3 class="form-style-9">Step2. 交预约金</h3>
+    <h3 class="form-style-9">Step3. 支付</h3>
     <div class="form-style-9">
-        <div><img src="images/QR_Pay_Small.png"></div>
+        <div><img src="/images/event/base/QR_Pay_Small.png" style="margin: 0 auto;"></div>
         <br><br>
-        <p><b>1. 通过扫健康镖局HaoDoc专用的二维码来交<br>HPV 活动的5万韩元预约金。</b></p>
-        <p><b>2. 付款后，把付款成功的画面截图后发给健康镖局HaoDoc 的微信，我们的微信号是Hao_Doc</b></p>
-        <p><b>3. Haodoc会给您发送到账确认短信进行确认。</b></p>
-        <p>* <b>因为韩国和中国的浏览器连接的问题不能进行付款的顾客们，可以通过健康镖局HaoDoc 的微信号Hao_Doc 来联系我们的客服</b></p>
+        
+        <p><b> 活动名称<!-- 이벤트 이름--> : \{{coupon.couponName}}</b></p>   
+        <p><b> 活动价格<!--이벤트가격 --> : ₩\{{coupon.price}}</b></p>   
+
+        <p><b>1. 请支付商品金额相符的费用</b></p>
+        
+        <p><b>2. 支付后请将支付完成的画面截图后发送至HaoDoc公众号. <br>
+        </b></p>
+        
+        <p>* <b>因为韩国和中国的浏览器连接的问题不能进行付款的顾客们，可以通过HaoDoc 的微信号HaoDoc 来联系我们的客服   <br>
+        </b></p>
+
+        <p><b>(公众号 ID : HaoDoc)</b></p>
     </div>
+</div>
+    <img src="/images/coupon/base/coupon_info.png" class="infoImage">
 </div>
 
 <div class="footer">
@@ -39,7 +50,8 @@
 
 
 {{#section 'jquery'}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/js/productjs.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <script src="js/productjs.js"></script>
+    <script type="text/javascript" src="/js/api/coupon.js"></script>
+    <script type="text/javascript" src="/js/controllers/hpv2Controller.js"></script>
 {{/section}}

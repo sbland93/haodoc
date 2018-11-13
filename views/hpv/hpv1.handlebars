@@ -1,10 +1,10 @@
 {{#section 'head'}}
-    <link rel="stylesheet" type="text/css" href="css/hpv1.css">
+    <link rel="stylesheet" type="text/css" href="/css/hpv1.css">
 {{/section}}
 
 
 <div class="content">
-    <h3 class="form-style-9">Step1. 个人信息</h3>
+    <h3 class="form-style-9">Step2. 个人信息</h3>
     <form class="form-style-9 stepOneForm">
         <ul>
             <li>
@@ -14,7 +14,7 @@
                 <label for="englishName">护照英文姓名</label> <input type="text" name="englishName" id="englishName" class="field-style field-full align-left" placeholder="韩文姓名" />
             </li>
             <li>
-                <label for="name">韩文姓名</label> <input type="text" name="name" id="name" class="field-style field-full align-left" placeholder="不知道的话请空着不填" />
+                <label for="name">韩文姓名</label> <input type="text" name="payerName" id="name" class="field-style field-full align-left" placeholder="不知道的话请空着不填" />
             </li>
             <li>
                 <label for="gender">性别</label>
@@ -28,10 +28,8 @@
                 <label for="phone">电话号码</label> <input type="text" name="phone" class="field-style field-full align-left" id="phone" placeholder="(010-1234-5678)" />
             </li>
             <li>
-                <label for="wechatID">微信号</label> <input type="text" name="wechatID" class="field-style field-full align-none" id="wechatID" placeholder="EX)hao_doc" />
+                <label for="wechatID">微信号</label> <input type="text" name="wechatID" class="field-style field-full align-none" id="wechatID" placeholder="EX)HaoDoc" />
             </li>
-            
-
             <li>
                 <input type="submit" class="align-right" value="Submit" />
             </li>
@@ -65,7 +63,7 @@
 
 {{#section 'jquery'}}
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <script src="js/productjs.js"></script>
-    <script src="js/api/user.js"></script>
-    <script src="js/controllers/hpv1Controller.js"></script>
+    <script src="/js/productjs.js"></script>
+    <script src="/js/api/payer.js"></script>
+    <script src="/js/controllers/hpv1Controller.js"></script>
 {{/section}}

@@ -2,9 +2,10 @@ var mongoose = require('mongoose');
 
 
 var eventSchema = mongoose.Schema({
-
+    
     eventName: String,
     eventRange: String,
+    price : Number,
     hospitalName: String,
     subway: String,
     address: String,

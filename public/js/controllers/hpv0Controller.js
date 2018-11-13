@@ -1,3 +1,11 @@
+
+var url =  window.location.pathname;
+var hpvID = url.replace("/hpv0/", "");
+console.log("hpvID", hpvID);
+
+
+
+
 $(document).ready(function(){
 	// Initialize form validation on the registration form.
 	// It has the name attribute "registration"
@@ -16,14 +24,13 @@ $(document).ready(function(){
 				required : "Term should be checked"
 			},
 			refundTerms: {
-				required : "Refund term should be checked"
+				required : "Term should be checked"
 			}
 		},
 		submitHandler: function(form, evt) {
 			evt.preventDefault();
-			alert('Step 0 Success!');
-			location.href = '/hpv1';
-		
+			alert('同意书成功提交!');//동의 성공
+			location.href = '/hpv1/' + hpvID;	
 		}
 	});
 

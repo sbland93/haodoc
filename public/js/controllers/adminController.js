@@ -8,8 +8,8 @@ var app = new Vue({
 
     	participants : "",
     	events : "",
-
-      
+        payers : "",
+        coupons: "",
 
     },
 
@@ -19,17 +19,35 @@ var app = new Vue({
 
         getParticipants().then(function(participants){
         	self.participants = participants;
-            console.log(participants);
         });
 
         getEvents().then(function(events){
         	self.events = events;
-        	console.log(events);
         });
+
+        getPayers().then(function(payers){
+            self.payers = payers;
+        });
+
+        getCoupons().then(function(coupons){
+            self.coupons = coupons;
+        })
     
     },
-    methods: {
 
+    filters: {
+        moment: function (date) {
+          return moment(date).format('MM/DD hh:mm a');
+        }
+    },
+    methods: {
+        moment: function (date) {
+          return moment(date);
+        },
+
+        date: function (date) {
+          return moment(date).format('MMMM Do YYYY, hh:mmm:ss a');
+        },
         newEvent: function(event){
             event.preventDefault();
 
@@ -61,7 +79,39 @@ var app = new Vue({
 		        });
         		return;
         	});
-        }
+        },
+
+        removeCoupon: function(id){
+            console.log("here");
+            var pass=prompt("Password")
+            if(pass !== "inspire") return;
+            var self = this;
+            deleteCoupon(id).then(function(rtn){
+                console.log(rtn);
+                getCoupons().then(function(events){
+                    self.coupons = coupons;
+                });
+                return;
+            });
+        },
+
+        newCoupon: function(event){
+            event.preventDefault();
+            var self = this;
+            var newCoupon = new FormData($("#coupon-form")[0]);
+            
+            addCoupon(newCoupon).then(function(rtn){
+                console.log(rtn);
+                if(rtn.success){
+                    alert("추가 완료");
+                    location.href = '/coupon/'+rtn.id;
+                }else{
+                    alert("실패!");
+                } 
+            });
+        },
+        
+
 
     }
 

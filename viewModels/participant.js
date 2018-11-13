@@ -14,6 +14,7 @@ module.exports = function(participant){
 		eventName: participant.eventName,
 		wechatID: participant.wechatID,
 		memo: participant.memo,
+		remarks: participant.remarks,
 		updated_at : participant.updated_at,		
 	
 	};

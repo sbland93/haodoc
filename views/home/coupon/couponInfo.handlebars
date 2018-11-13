@@ -1,0 +1,174 @@
+
+{{#section 'head'}}
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/couponInfo.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+{{/section}}
+
+
+<div id="app">
+	<br><br>
+	<div class="infoCard">
+		<div class="card" style="background-color:#660000; border: 1px solid gray;">
+			<div style="margin:10px; color:white;">
+				<h5>\{{coupon.couponName}}</h5>
+				<h5>\{{coupon.hospitalName}}</h5>
+				<h5>\{{coupon.address}} </h5>
+				<h5>\{{coupon.couponRange}} </h5>
+				<h5 v-show="coupon.price">₩\{{coupon.price}}<a :href="hpvZeroHref()" style="color:white;"><button class="btn mobile-btn">支付<!--결제하기--></button></a>
+		
+				</h5>
+			</div>
+		</div>
+	</div>
+
+	<br><br>	
+
+	<img v-for="imageName in coupon.couponImage" :src="couponImageHref(imageName)" class="infoImage">
+	<img src="/images/coupon/base/coupon_info.png" class="infoImage">
+	<div class="infoCard">
+		<a :href="hpvZeroHref()" style="color:white;"><button class="btn mobile-btn">支付<!--결제하기--></button></a>
+	</div>
+
+	<div class="infoCard">
+		<div style="border: solid 1px white;">
+			<div style="margin:10px; color:white;">
+				[退款指南]<br>
+				1. 请填写一下您的姓名,手机号码,购买的商品信息(医院名, 接种名),退款理由,银行账号(无存折入账时)发送给wechat. <br>
+				2. 确认完商品是否使用后会一起进行退款处理. <br>
+				3. 支付后10天之内由于改变主意而引起的退款行为是可以将购买金额进行100% 退款的. <br>支付10天后由于单纯改变主意而引起的退款除了购买金额的手续费5%外其他的可进行退款. (根据韩国公正交易法.) <br>医院访问咨询后若出现不适合进行接种的结果时与期间无关，购买金额100%可进行退款. <br>
+				4. 退款金额根据微信,支付宝等方式的不同，最晚可能需要5天时间. <br>
+			</div>
+		</div>
+	</div>
+
+
+<br><br><br><br>
+<!-- coupon question -->
+
+<div class="container">
+	<h2 class="text-center" style="color:white;">Q&A</h2>
+	
+	<div class="card" v-for="(question, index) in coupon.questions">
+	    <div class="card-body">
+	        <div class="row">
+        	    <div class="col-md-12">
+        	        <p>
+        	            <strong>\{{question.name}}</strong>
+        	            <span class="float-right">\{{question.updated_at | moment}}</span>
+        	       </p>
+        	       <div class="clearfix"></div>
+        	        <p>Q\{{index}}.&nbsp;&nbsp;\{{question.content}}</p>
+        	        <p>
+        	            <a v-show="!question.answer" class="float-right btn btn-outline-primary ml-2" @click="changeAnswerIndex(index)"> <i class="fa fa-reply"></i> 回答<!--응답하기--></a>
+        	       </p>
+        	    </div>
+	        </div>
+        	<div class="card card-inner" v-if="question.answer">
+        	    <div class="card-body">
+        	        <div class="row">
+                	    <div class="col-md-12">
+                	        <p><strong>\{{question.answer.name}}</strong></p>
+            	            <span class="float-right">\{{question.answer.updated_at | moment}}</span>
+                	        <p>A. &nbsp;&nbsp;\{{question.answer.content}}</p>
+                	    </div>
+        	        </div>
+        	    </div>
+            </div>
+	    </div>
+	</div>
+</div>
+
+
+<div class="offset-md-2 col-md-8" id="contactInfo" style="background-color:#660000" >
+
+<!-- coupon FAQ Form -->
+<hr class="my-5">
+<div class="card card-outline-secondary">
+    <div class="card-body">
+        <h3 class="text-center">Q&A</h3>
+        <hr>
+        <div class="form" role="form" id="question-form">
+            <div class="form-group">
+                <label for="cc_name">姓名<!--이름--></label>
+                <input type="text" class="form-control" v-model="newQuestion.name" placeholder="可以不用填写真实姓名"><!--실명을 적지 않으셔도 괜찮습니다.-->
+            </div>
+            <div class="form-group">
+                <label>비밀번호<!--비밀번호--></label>
+                <input type="text" class="form-control" v-model="newQuestion.password" placeholder="修改及删除时使用的一次性密码"><!--글 수정, 삭제에 사용할 일회용 비밀번호-->
+            </div>
+            <div class="form-group">
+                <label>微信账号<!--위챗아이디--></label>
+                <input type="text" class="form-control" v-model="newQuestion.wechatID" placeholder="提问后若想得到我们的答复请填写，不公开"><!--답이 달릴시에 연락받고싶다면 적어주세요. 공개되지 않습니다. -->
+            </div>
+            <div class="form-group">
+                <label>咨询事项<!--문의사항--></label>
+                <textarea rows="5" class="form-control" v-model="newQuestion.content" placeholder="请填写疑问之处"><!--궁금하신 점을 적어주세요--></textarea>
+            </div>
+            <hr>
+            <div class="form-group">
+                <button type="submit" class="btn mobile-btn" @click="addQuestion">咨询<!--문의하기--></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+
+
+<!-- Answer Modal -->
+<div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="answerModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="answerModalLabel">답글달기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- coupon FAQ Form -->
+		<div class="card card-outline-secondary">
+		    <div class="card-body">
+		        <div class="form" role="form" id="answer-form">
+		            <div class="form-group">
+		                <label for="cc_name">이름<!--이름--></label>
+		                <input type="text" class="form-control" v-model="newAnswer.name" placeholder="응답자이름(HaoDoc)">
+		            </div>
+		            <div class="form-group">
+		                <label><!--메모--></label>
+		                <input type="text" class="form-control" v-model="newAnswer.password" placeholder="글 수정, 삭제에 사용할 일회용 비밀번호">
+		            </div>
+		            <div class="form-group">
+		                <label>응답사항<!--메모--></label>
+		                <textarea rows="5" class="form-control" v-model="newAnswer.content" placeholder="궁금하신 점을 적어주세요"></textarea>
+		            </div>
+		            <hr>
+		        </div>
+		    </div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="dismissAnswerModal">취소하기</button>
+        <button type="button" class="btn btn-primary" @click="addAnswer" >답글 완성</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- / Answer Modal -->
+
+
+</div>
+
+
+{{#section 'jquery'}}
+	<!-- Vue Controller 포함. -->
+	<script type="text/javascript" src="/js/api/coupon.js"></script>
+	<script type="text/javascript" src="/js/controllers/couponInfoController.js"></script>
+{{/section}}
+
+

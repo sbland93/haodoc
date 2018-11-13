@@ -9,6 +9,7 @@ module.exports = function(event){
 		success: true,
 		id: event._id,
 		eventName: event.eventName,
+		price : event.price,
 		eventRange: event.eventRange,
 		hospitalName: event.hospitalName,
 		subway: event.subway,

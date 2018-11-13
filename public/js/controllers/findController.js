@@ -106,22 +106,16 @@ var app = new Vue({
 				computedQuery["subway"] = this.subway;
 			
 			}else{ //주소기반 검색일시 (addressRender === true)
-			
 				computedQuery["city"] = this.city.replace(/\(.*\)/,"");
 				computedQuery["district"] = this.district.replace(/\(.*\)/,"");
 				//address에 동을 포함하고 있는것을 찾기 위함.
 				if(this.neighborhood !== "没有选择") computedQuery["address"] = { "$regex" : this.neighborhood.replace(/\(.*\)/,""), "$options": "i" };
-			
 			}
 			for(var key in computedQuery){
-
 				if ( computedQuery[key] === "没有选择" ){
 				//if ( computedQuery[key] === "선택없음" ){
-
 					delete computedQuery[key];
-				
 				}
-			
 			}
 			console.log(computedQuery);
 			return computedQuery;
@@ -224,8 +218,9 @@ var app = new Vue({
 		showSubway : function(){
 			this.renderChange("subwayRender");
 		},
-		renderChange : function(kind_of_render){
 
+		renderChange : function(kind_of_render){
+			
 			var self = this;
 			self.keywordRender = false;
 			self.subwayRender = false;
@@ -333,8 +328,6 @@ var app = new Vue({
 
 					});
 				})
-				
-
 
 
 			}).catch(function(err){

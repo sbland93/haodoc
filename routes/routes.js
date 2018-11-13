@@ -30,11 +30,17 @@ module.exports = function(app){
 	app.get('/event', homeHandlers.events);
 	app.get('/event/:id', homeHandlers.eventInfo);
 
+
+	app.get('/coupon/:id', homeHandlers.couponInfo);
+
+
 	//hpv Handlers
 	app.get('/hpv0', hpvHandlers.hpv0);
+	app.get('/hpv0/:id', hpvHandlers.hpv0);
 	app.get('/hpv1', hpvHandlers.hpv1);
+	app.get('/hpv1/:id', hpvHandlers.hpv1);
 	app.get('/hpv2', hpvHandlers.hpv2);
-
+	app.get('/hpv2/:id', hpvHandlers.hpv2);
 
 	//For Development Handlers
 	app.get('/main2', homeHandlers.home2);
@@ -73,6 +79,8 @@ module.exports = function(app){
 
 
 	require('./api/participant.js')(app);
+	require('./api/payer.js')(app);
+	require('./api/coupon.js')(app);
 	require('./api/user.js')(app);
 	require('./api/hospital.js')(app);
 	require('./api/subway.js')(app);

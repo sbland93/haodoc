@@ -11,6 +11,10 @@ $(document).ready(function() {
 	$('.closebtn').on('click', function() {
 	    $('#menu-display').fadeOut(500);
 	    $('#menubar').css('display', 'block');
-	}); 
+	});
+
+	$('#top-btn').on('click', function(){
+		window.scrollTo(0, 0);
+	})
 
 });

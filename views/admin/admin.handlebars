@@ -1,23 +1,57 @@
 {{#section 'head'}}
     <meta name="Robots" content="nofollow" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/maincss.css">
     <link rel="stylesheet" type="text/css" href="/css/admin.css">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 {{/section}}
 
 
-<div class="offset-md-2 col-md-8" id="app" style="background-color:#660000" >
+<div id="app" style="background-color:#660000" >
+    <div class="offset-xs-2 col-xs-4">
+        <h3 style="color:white">이벤트신청자 </h3>
+        <div style="color:white"v-for=" (participant, index) in participants">
+            <p>
+                <h2 style="color:white;">\{{index}}</h2>
+                신청이벤트 : \{{participant.eventName}}<br>
+                신청자이름 : \{{participant.participantName}}<br>
+                위챗아이디 : \{{participant.wechatID}}<br>
+                성별 : \{{participant.gender}}<br>
+                메모 : \{{participant.memo}}<br>
+                신청일시 : \{{participant.updated_at | moment}}
+                <hr style="color:white">
+            </p>
+        </div>
+    </div>
 
-    <p v-for="participant in participants" style="color:white">
-        신청이벤트 : \{{participant.eventName}}<br>
-        신청자이름 : \{{participant.participantName}}<br>
-        위챗아이디 : \{{participant.wechatID}}<br>
-        성별 : \{{participant.gender}}<br>
-        메모 : \{{participant.memo}}<br>
-        <hr>
-    </p>
+    <div class="col-xs-4">
+        <h3 style="color:white">쿠폰신청자 </h3>
+        <div stlye="color:white;" v-for="(payer, index) in payers">
+            <p>
+                <h2 style="color:white;">\{{index}}</h2>
+                <span v-if="payer.coupon">쿠폰이름 : \{{payer.coupon.couponName}}<br></span>
+                <span v-if="payer.coupon">쿠폰가격 : \{{payer.coupon.price}}<br></span>
+                한국어이름 : \{{payer.payerName}}<br>
+                위챗아이디 : \{{payer.wechatID}}<br>
+                성별 : \{{payer.gender}}<br>
+                생년월일 : \{{payer.birthDay}}<br>
+                영어이름 : \{{payer.englishName}}<br>
+                중국어이름 : \{{payer.chineseName}}<br>
+                휴대폰 : \{{payer.phone}}<br>
+                신청일시 : \{{payer.updated_at | moment}}<br>
+                <hr>
+            </p>
+        </div>
+    </div>
+
 
     <ul>
+        ----쿠폰---- 
+        <div v-for="coupon in coupons" style="color:white">\{{coupon.couponName}} / \{{coupon.hospitalName}} / \{{coupon.couponRange}} / \{{coupon.address}} / \{{coupon.subway}}<button class="mobile-btn" @click="removeCoupon(coupon.id)">쿠폰 삭제</button></div> 
+    </ul>
+
+    <ul>
+        ---- 이벤트 ---- 
         <div v-for="event in events" style="color:white">\{{event.eventName}} / \{{event.hospitalName}} / \{{event.eventRange}} / \{{event.address}} / \{{event.subway}}<button class="mobile-btn" @click="removeEvent(event.id)">이벤트 삭제</button></div> 
     </ul>
 
@@ -29,6 +63,7 @@
             <h3 class="text-center">HaoDoc Event 추가하기</h3>
             <hr>
             <form class="form" role="form" id="event-form">
+
                 <div class="form-group">
                     <label for="cc_name">이벤트이름</label>
                     <input type="text" class="form-control" name="eventName">
@@ -52,6 +87,11 @@
                 <div class="form-group">
                     <label for="cc_name">병원상세주소</label>
                     <input type="text" class="form-control" name="address">
+                </div>
+
+                <div class="form-group">
+                    <label for="cc_name">이벤트 가격</label>
+                    <input type="text" class="form-control"  name="price" placeholder="있는경우만 입력, 560000 처럼 숫자만 입력">
                 </div>
 
                 <div class="form-group">
@@ -79,13 +119,69 @@
         </div>
     </div>
 
+
+
+    <div class="card card-outline-secondary">
+        <div class="card-body" >
+            <h3 class="text-center">HaoDoc Coupon Event 추가하기</h3>
+            <hr>
+            <form class="form" role="form" id="coupon-form">
+                <div class="form-group">
+                    <label for="cc_name">쿠폰이름</label>
+                    <input type="text" class="form-control" name="couponName">
+                </div>
+                <div class="form-group">
+                    <label for="cc_name">쿠폰기간</label>
+                    <input type="text" class="form-control" name="couponRange" placeholder="2018-07-01~2018-11-12">
+                </div>
+                <div class="form-group">
+                    <label for="cc_name">병원이름</label>
+                    <input type="text" class="form-control"  name="hospitalName" placeholder="드림성모안과">
+                </div>
+                <div class="form-group">
+                    <label for="cc_name">역이름</label>
+                    <input type="text" class="form-control" name="subway" >
+                </div>
+                <div class="form-group">
+                    <label for="cc_name">병원상세주소</label>
+                    <input type="text" class="form-control" name="address">
+                </div>
+                <div class="form-group">
+                    <label for="cc_name">쿠폰 가격</label>
+                    <input type="text" class="form-control"  name="price" placeholder="560000 처럼 숫자만 입력">
+                </div>
+                <div class="form-group">
+                    <label for="cc_name">썸네일 파일명</label>
+                    <input type="file" class="form-control" name="thumbnailImage"  />
+                </div>
+                <div class="form-group">
+                    <label for="cc_name">상세 쿠폰 그림파일1</label>
+                    <input type="file" class="form-control" name="couponImage1" placeholder="반드시 순서를 지켜주세요" />
+                </div>
+                <div class="form-group">
+                    <label for="cc_name">상세 쿠폰 그림파일2</label>
+                    <input type="file" class="form-control" name="couponImage2" placeholder="반드시 순서를 지켜주세요" />
+                </div>
+                <div class="form-group">
+                    <label for="cc_name">상세 쿠폰 그림파일3</label>
+                    <input type="file" class="form-control" name="couponImage3" placeholder="반드시 순서를 지켜주세요" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn mobile-btn" @click="newCoupon">쿠폰 만들기</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 
 
 
 {{#section 'jquery'}}
-    <script type="text/javascript" src="/js/api/event.js"></script>  
+    <script type="text/javascript" src="/js/api/event.js"></script> 
+    <script type="text/javascript" src="/js/api/coupon.js"></script>  
+    <script type="text/javascript" src="/js/api/payer.js"></script>
+
     <script type="text/javascript" src="/js/api/participant.js"></script>  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
