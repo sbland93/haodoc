@@ -69,7 +69,7 @@ app.set('view engine', 'handlebars');
 
 
 //포트 지정, 기본 포트는 3000
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 80);
 
 //쿠키 설정및 접근을 위한 쿠키파서 링크
 //세션 연결 req.session을 확장한다.
