@@ -82,13 +82,13 @@ var app = new Vue({
         },
 
         removeCoupon: function(id){
-            console.log("here");
             var pass=prompt("Password")
             if(pass !== "inspire") return;
             var self = this;
             deleteCoupon(id).then(function(rtn){
+                alert("삭제 완료");
                 console.log(rtn);
-                getCoupons().then(function(events){
+                getCoupons().then(function(coupons){
                     self.coupons = coupons;
                 });
                 return;

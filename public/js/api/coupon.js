@@ -23,7 +23,7 @@ var getCoupon = function(id){
 			method: 'GET',
 			success: function(rtnData){
 				resolve(rtnData);
-			},
+			}, 
 			fail: function(rtnData){
 				reject(rtnData);
 			},
