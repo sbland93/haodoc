@@ -19,11 +19,10 @@ a {
     display: flex;
     width: 100%;
     height: 85px;
-    justify-content: space-between;
+    justify-content: space-between; 
     align-items: center;
     z-index: 50;
 }
-
 /* HEADER LOGO */
 #logo {
     width: 250px;
