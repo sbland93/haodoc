@@ -33,6 +33,12 @@ $(document).ready(function(){
 			location.href = '/hpv1/' + hpvID;	
 		}
 	});
+	var app = new Vue({
+
+	    el : "#hpv0_app",
+
+	});
 
 
 });
+

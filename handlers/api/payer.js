@@ -8,7 +8,6 @@ module.exports = function(){
 		getPayers: function(req, res, next){
 			Payer.find(req.query).populate("coupon")
 			.exec(function(err, payers){
-				console.log(payers);
 				if(err) return next(err);
 				res.json(payers.map(payerViewModel));
 			});

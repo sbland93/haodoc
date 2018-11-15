@@ -1,6 +1,5 @@
 
 {{#section 'head'}}
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/couponInfo.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -13,13 +12,14 @@
 	<div class="infoCard">
 		<div class="card" style="background-color:#660000; border: 1px solid gray;">
 			<div style="margin:10px; color:white;">
-				<h5>\{{coupon.couponName}}</h5>
-				<h5>\{{coupon.hospitalName}}</h5>
-				<h5>\{{coupon.address}} </h5>
-				<h5>\{{coupon.couponRange}} </h5>
-				<h5 v-show="coupon.price">₩\{{coupon.price}}<a :href="hpvZeroHref()" style="color:white;"><button class="btn mobile-btn">支付<!--결제하기--></button></a>
-		
-				</h5>
+				<span style="font-size:1.2em">\{{coupon.couponName}}</span>
+                <div style="font-size:1em">
+    				<span>\{{coupon.couponRange}} </span><br>
+                    <span>\{{coupon.hospitalName}}</span>
+                    <span style="font-size:0.8em">(\{{coupon.address}})</span><br>
+                    <span v-show="coupon.price">₩\{{coupon.price}}</span><br>
+                    <a :href="hpvZeroHref()" style="color:white;"><button class="btn mobile-btn">支付<!--결제하기--></button></a>
+                </div>
 			</div>
 		</div>
 	</div>
@@ -70,8 +70,10 @@
         	    <div class="card-body">
         	        <div class="row">
                 	    <div class="col-md-12">
-                	        <p><strong>\{{question.answer.name}}</strong></p>
-            	            <span class="float-right">\{{question.answer.updated_at | moment}}</span>
+                	        <p>
+                                <strong>\{{question.answer.name}}</strong>
+                                <span class="float-right">\{{question.answer.updated_at | moment}}</span>
+                            </p>
                 	        <p>A. &nbsp;&nbsp;\{{question.answer.content}}</p>
                 	    </div>
         	        </div>
@@ -88,7 +90,7 @@
 <hr class="my-5">
 <div class="card card-outline-secondary">
     <div class="card-body">
-        <h3 class="text-center">Q&A</h3>
+        <h5 class="text-center">\{{coupon.couponName}} &nbsp;&nbsp;Q&A</h5>
         <hr>
         <div class="form" role="form" id="question-form">
             <div class="form-group">
@@ -105,7 +107,7 @@
             </div>
             <div class="form-group">
                 <label>咨询事项<!--문의사항--></label>
-                <textarea rows="5" class="form-control" v-model="newQuestion.content" placeholder="请填写疑问之处"><!--궁금하신 점을 적어주세요--></textarea>
+                <textarea rows="5" class="form-control" v-model="newQuestion.content" placeholder="请将想提问的问题进行填写，我们HaoDoc确认后会尽快回复您"><!--궁금하신 점을 적어주세요 하오닥이 확인 즉시 답해드립니다.--></textarea>
             </div>
             <hr>
             <div class="form-group">
