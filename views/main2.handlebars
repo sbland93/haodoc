@@ -8,24 +8,26 @@
 <section class="main-block">
     <div class="container">
         <div class="row-page row">
+            {{!--모바일 렌더링 --}}
+            <img class="d-none d-block d-sm-none col-xs-12 col-page ab_ps" src="/images/home/mobile_banner.png" id="mobile-banner">
 
+            <a href="/find"><img class="d-none d-block d-sm-none col-xs-8 ab_ps" src="/images/home/mobile_search_trimmed.png" id="mobile-search-btn"></a>
 
-            <img class="d-none d-block d-sm-none col-xs-12 col-page" src="/images/home/mobile_banner.png" style="width:100%; height:130px; padding-top:5px;">
-
-            <a href="/find"><img class="d-none d-block d-sm-none col-xs-8" src="/images/home/mobile_search_trimmed.png" style="height:140px; padding:15px 25px 0px 15px; width:60% float-left"></a>
-            <a href="/about"><img class="d-none d-block d-sm-none col-xs-4" src="/images/home/mobile_about_trimmed.png" style="height:140px; padding:15px 15px 0px 0px; width:40% float-right"> </a>
+            <a href="/about"><img class="d-none d-block d-sm-none col-xs-4 ab_ps" src="/images/home/mobile_about_trimmed.png" id="mobile-about-btn"> </a>
 
             <a href="/event">
-                <img src="/images/home/mobile_event_trimmed.png" class="d-none d-block d-sm-none col-xs-12 col-page img-responsive" style="width:100%; padding:5px 15px 5px 15px; height:130px">
+                <img src="/images/home/mobile_event_trimmed.png" class="d-none d-block d-sm-none col-xs-12 col-page ab_ps" id="mobile-event-btn" >
             </a>
             
             <a href="/team">
-                <img src="/images/home/mobile_team_trimmed.png" class="d-none d-block d-sm-none col-xs-12 col-page" style="width:100%; padding:0px 15px 10px 15px; height:100px">
+                <img src="/images/home/mobile_team_trimmed.png" class="d-none d-block d-sm-none col-xs-12 col-page ab_ps" id="mobile-team-btn">
             </a>
            
- 
-            <img class="d-none d-block d-sm-none col-xs-12 col-page" src="/images/home/mobile_time_info.png" style="width:80%; height:80px; margin: 0 auto; padding-bottom:10px">
+            <img class="d-none d-block d-sm-none col-xs-12 col-page ab_ps" src="/images/home/mobile_time_info.png" id="mobile-time-info">
+            {{!-- ./ 모바일 렌더링 --}}
 
+
+            {{!-- 웹화면 렌더링  --}}
             <div class="mainbox col-page col-sm-12 col-lg-9 d-none d-sm-block" style="padding-left:20px">
                 <a href="/find" class="black full-block">
                     <div class="img-block" id="searchBox">
@@ -47,25 +49,7 @@
                     </span>
                 </a>
             </div>
-            <!--div class="mainbox col-page col-sm-12 col-lg-3">
-                <a href="/about"  class="full-block">
-                    <div class="img-publicacion-home about">
-                        <img class="img-responsive" src="/images/website-mobile3_small.jpg">
-                    </div>
-                    <div class="contenido-publicacion-home">
-                    	 <br>
-                        <h3>健康镖局 HaoDoc是</h3>
-                        <p>为在韩华人提供免费韩国医疗信息服务的平台</p>
-                    </div>
-                    <div class="d-none d-sm-block transition-block">
-                        <span>询问健康镖局HaoDoc<!--하오닥 알아보기--><!--/span>
-                    </div>
-                    <!-- mobile web button -->
-                    <!--span class="d-md-none float-right" >
-                        <button class="mobile-btn btn">进一步了解健康镖局HaoDoc&nbsp;&nbsp;&nbsp;(Click!)</button>
-                    </span>
-                </a>
-            </div-->
+
             <div class="mainbox col-page d-none d-sm-block col-lg-3" style="padding-left:0px;">
                 <a href="/about" class="small-block" id="aboutBox">
                     <img src="/images/home/about_trimmed_low.png" style="height:93%;">
@@ -76,22 +60,7 @@
                     <img src="/images/home/team_trimmed2.png" style="width:100%;">
                 </a>
             </div>
-            <!-- 하오닥 팀 소개 -->
-            <!--div class="mainbox col-page d-none d-sm-block col-lg-3">
-                <a href="/team" class="full-block">
-                    <div class="img-publicacion-home">
-                        <img class="img-responsive" src="/images/05_small.jpg">
-                    </div>
-                    <div class="contenido-publicacion-home">
-                    	  <br>
-                        <h3>HaoDoc 团队介绍</h3>
-                        <p>介绍HaoDoc的 健康镖局成员们</p>
-                    </div>
-                    <div class="d-none d-sm-block transition-block">
-                        <span>기 </span>
-                    </div>
-                </a>
-            </div-->
+
             <div class="mainbox d-none d-sm-block col-page col-sm-12 col-lg-9">
                 <a href="/event" class="black full-block">
                     <div class="content-block" id="event-content-block">
@@ -113,28 +82,10 @@
                     </span>
                 </a>
             </div>
+            {{!-- ./웹화면 렌더링 --}}
+
         </div>
     </div>
 </section>
-<div class="footer">
-    <div class="contact">
-        <h6>CS CENTER</h6>
-        <p id="tel">WechatId : Hao_Doc</p>
-        <p id="worktime">AM 09:00 - PM 06:00</p>
-        <p id="lunchtime">LUNCH 11:40 - 12:50</p>
-        <h6 id="email">E-mail: haodoc@haodoc.co.kr</h6>
-    </div>
-    <div class="company-info">
-        <h5>(주) INSPIRE&nbsp;&nbsp;|&nbsp;&nbsp;대표 김승범</h5>
-        <h5>사업자등록번호 631-05-01190 |&nbsp;&nbsp; HaoDoc</h5>
-        <h6>02841 서울시 성북구 안암로 145 경영본관 2층 일진창업센터 220호</h6>
-    </div>
-    <div class="terms">
-        <p><a href="/rules">이용약관</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/personal">개인정보취급방침</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/rules">이용안내</a></p>
-    </div>
-    <div class="copyright">
-        <p>COPYRIGHT © 2018 INSPIRE All rights reserved</p>
-    </div>
-</div>
 
 

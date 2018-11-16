@@ -3,6 +3,8 @@ var url =  window.location.pathname;
 console.log(url);
 var hospitalID = url.replace("/hospital/", "");
 
+
+
 var app = new Vue({
 
 	el : "#app",
@@ -45,10 +47,14 @@ var app = new Vue({
 	filters: {
 		//ToDO
 		makeTimeForm: function(value){
-		   
-			console.log(value);
-
-			var timeForm = value + "!!"
+			
+			if(!!value){
+				var hour = value.substring(0,2);
+				var minute = value.substring(2,4);
+				var timeForm = hour + ":" + minute;
+			}else{
+				var timeForm = value;
+			}
 			
 			return timeForm;
 		
@@ -57,7 +63,7 @@ var app = new Vue({
 	},
 	
 	mounted : function(){
-		
+		var self = this;
 		this.getHospital(this.hospitalID);
 
 	},

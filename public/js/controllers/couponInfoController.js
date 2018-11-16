@@ -39,10 +39,11 @@ var app = new Vue({
         });
     
     },
-     filters: {
+    filters: {
         moment: function (date) {
-          return moment(date).format('MM/DD hh:mm a');
-        }
+            return moment(date).format('MM/DD hh:mm a');
+        },
+
     },
     methods: {
 
