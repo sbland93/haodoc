@@ -5,8 +5,6 @@ var seedData = require("./서대문구 병원 데이터.js");
 
 //Seed All Data From seedData.
 var seedDev = function(){
-
-
 	//Seeding Hospital Promise
 	/*var seedHospital = new Promise(function(resolve, reject){
 		Hospital.remove({}, function(err){
@@ -16,7 +14,6 @@ var seedDev = function(){
 			});
 		});
 	});
-
 	//Answer with Seed Hospital
 	seedHospital.then(function(){
 		console.log("Data initiating All, Success");
@@ -25,8 +22,6 @@ var seedDev = function(){
 		console.log("Data initiating All, Fail", err);
 		throw new Error("Data initiating All, Fail");
 	});*/
-
-	
 }
 
 var seedTest = function(){

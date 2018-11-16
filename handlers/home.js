@@ -28,7 +28,6 @@ module.exports = function(){
 			});
 		},
 
-
 		events: function(req, res, next){
 			res.render('home/event/event');
 		},
@@ -41,28 +40,19 @@ module.exports = function(){
 		couponInfo : function(req, res, next){
 			res.render('home/coupon/couponInfo');
 		},
-
 		/*
-		For Development Temp Handlers
+			For Development Temp Handlers
 		*/
-
-
 		home2: function(req, res, next){
 			res.render('main2');
 		},
 		//for Finding Hospital
 		find : function(req, res, next){
-
-
-
 			res.render('hospital/find');
 		}
 
-
 		/*
-
-		For robots.txt
-
+			For robots.txt
 		*/
 
 

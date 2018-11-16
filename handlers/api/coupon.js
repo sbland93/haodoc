@@ -43,7 +43,6 @@ module.exports = function(){
 		//요청본문에 해당하는 Coupon를 새로 생성한다.
 		//이벤트 생성을 위한 post에서는 이벤트이름과, 이벤트 기간, 병원 주소, 병원 이름, 지하철이 있어야 한다.
 		newCoupon: function(req, res, next){
-			console.log("req.body", req.body);
 			if(req.body.couponName && req.body.couponRange && req.body.address && req.body.hospitalName && req.body.subway){
 				//새로운 이벤트 객체를 만든다. 이벤트 이미지는 세개로 나뉘어서 들어온다.
 				var newCouponObject = req.body;

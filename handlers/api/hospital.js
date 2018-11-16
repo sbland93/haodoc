@@ -6,9 +6,7 @@ var path = require('path');
 
 var deleteFile = function(base_path, file_name){
 	var rtnPromise = new Promise(function(resolve, reject){
-		console.log("here22");
 		fs.unlink(path.join(__dirname + base_path) + file_name, function(err){
-			console.log("err", err);
 			if (err) reject(err);
 			else{
 				console.log(base_path+file_name+"is deleted");
@@ -49,7 +47,6 @@ module.exports = function(){
 
 		deletePhoto : function(req, res, next){
 
-			console.log(req.body);
 			if(req.body.photoName){
 				deleteFile("../../../public/images/hospital/", req.body.photoName).then(function(){
 					Hospital.update({_id: req.params.id}, {"$pull" : {"photos": req.body.photoName}}, function(err, response){
@@ -76,7 +73,6 @@ module.exports = function(){
 
 		getNearHospitals: function(req, res, next){
 			var data = req.body;
-			console.log("data",  data);
 
 			var base = {
 				"location" : {
@@ -88,7 +84,6 @@ module.exports = function(){
 				}
 			};
 			if(data.subject){
-				console.log("here");
 				var query = {
 					"$and" : [
 						base,
@@ -99,9 +94,7 @@ module.exports = function(){
 				var query = base;
 			}
 
-			console.log("query", query);
 			Hospital.find(query).limit(Number(data.limitNum)).exec(function(err, hospitals){
-				console.log("err", err);
 				res.json(hospitals.map(hospitalViewModel));
 			});
 
