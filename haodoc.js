@@ -32,7 +32,7 @@ switch(app.get('env')){
 		break;
 	case 'production' :
 		//production에서는 실행하지 않는다.
-		mongoose.connect(credentials.mongo.development.connectionString, opts);
+		mongoose.connect(credentials.mongo.production.connectionString, opts);
 		break;
 	//test환경에서는, 완전히 독립적이게 유지하는게 좋을것이다.
 	case 'test' :
