@@ -4,6 +4,11 @@
 	width:100%;
 }
 
+.infoCard{
+  padding:0px 500px 0px 500px;
+  width:100%;
+}
+
 
 body{
 	background-color:#660000;
@@ -24,6 +29,10 @@ body{
 
 @media (max-width: 768px) {
 
+    .infoCard{
+        padding: 0px 0px 0px 0px;
+        width: 100%;
+    } 
 
 
 

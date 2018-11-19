@@ -6,11 +6,23 @@
 
 <div id="app">
 
-	<div class="text-center" style="color:#ffffff;">
-		\{{event.eventName}} <br>
-		\{{event.address}} <br>
-		\{{event.eventRange}} <br>
-		<div v-show="event.price">\{{event.price}}</div> <br>
+	<img :src="eventImageHref(event.thumbnailImage)" class="infoImage">
+	
+
+	<div class="infoCard">
+		<div class="card" style="background-color:#660000; border: 1px solid gray;">
+			<div style="margin:10px; color:white;">
+				<div v-show="event.price">\{{event.price}}</div> <br>
+				<span style="font-size:1.2em">\{{event.eventName}}</span>
+                <div style="font-size:1em">
+    				<span>\{{event.eventRange}} </span><br>
+                    <span>\{{event.hospitalName}}</span>
+                    <br>	
+                    <span style="font-size:0.7em">(\{{event.address}})</span><br>
+                    <span v-show="event.price">₩\{{event.price}}</span><br>
+                </div>
+			</div>
+		</div>
 	</div>
 
 	<img v-for="imageName in event.eventImage" :src="eventImageHref(imageName)" class="infoImage">

@@ -9,9 +9,9 @@
 <div id="app" style="background-color:#660000" >
     <div class="offset-xs-2 col-xs-4">
         <h3 style="color:white">이벤트신청자 </h3>
-        <div style="color:white"v-for=" (participant, index) in participants">
+        <div class="whiteColor" v-for=" (participant, index) in participants">
             <p>
-                <h2 style="color:white;">\{{index}}</h2>
+                <h2 class="whiteColor">\{{index}}</h2>
                 신청이벤트 : \{{participant.eventName}}<br>
                 신청자이름 : \{{participant.participantName}}<br>
                 위챗아이디 : \{{participant.wechatID}}<br>
@@ -22,22 +22,24 @@
             </p>
         </div>
     </div>
+    
+    <br><br><br>
 
     <div class="col-xs-4">
         <h3 style="color:white">쿠폰신청자 </h3>
         <div stlye="color:white;" v-for="(payer, index) in payers">
-            <p>
-                <h2 style="color:white;">\{{index}}</h2>
-                <span v-if="payer.coupon">쿠폰이름 : \{{payer.coupon.couponName}}<br></span>
-                <span v-if="payer.coupon">쿠폰가격 : \{{payer.coupon.price}}<br></span>
-                한국어이름 : \{{payer.payerName}}<br>
-                위챗아이디 : \{{payer.wechatID}}<br>
-                성별 : \{{payer.gender}}<br>
-                생년월일 : \{{payer.birthDay}}<br>
-                영어이름 : \{{payer.englishName}}<br>
-                중국어이름 : \{{payer.chineseName}}<br>
-                휴대폰 : \{{payer.phone}}<br>
-                신청일시 : \{{payer.updated_at | moment}}<br>
+            <p class="whiteColor">
+                <h2 class="whiteColor">\{{index}}</h2>
+                <span v-if="payer.coupon" class="whiteColor">쿠폰이름 : \{{payer.coupon.couponName}}<br></span>
+                <span v-if="payer.coupon" class="whiteColor">쿠폰가격 : \{{payer.coupon.price}}<br></span>
+                <span class="whiteColor">한국어이름 : \{{payer.payerName}}<br></span>
+                <span class="whiteColor">위챗아이디 : \{{payer.wechatID}}<br></span>
+                <span class="whiteColor">성별 : \{{payer.gender}}<br></span>
+                <span class="whiteColor">생년월일 : \{{payer.birthDay}}<br></span>
+                <span class="whiteColor">영어이름 : \{{payer.englishName}}<br></span>
+                <span class="whiteColor">중국어이름 : \{{payer.chineseName}}<br></span>
+                <span class="whiteColor">휴대폰 : \{{payer.phone}}<br></span>
+                <span class="whiteColor">신청일시 : \{{payer.updated_at | moment}}<br></span>
                 <hr>
             </p>
         </div>

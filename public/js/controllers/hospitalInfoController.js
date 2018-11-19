@@ -1,6 +1,5 @@
 
 var url =  window.location.pathname;
-console.log(url);
 var hospitalID = url.replace("/hospital/", "");
 
 
@@ -88,14 +87,11 @@ var app = new Vue({
 			var obj = self.newReview;
 			if(Array.isArray(self.hospital.reviews)){
 				for(var index in obj) { 
-					console.log(obj[index]);
 				    if(obj[index] === '') {console.log("here"); return;}
 				}
 				self.hospital.reviews.push(obj);
 			}
 			updateHospital(hospitalID, self.hospital).then(function(rtnData){
-				console.log("반영");
-				console.log(rtnData);
 			});
 
 		
@@ -105,7 +101,6 @@ var app = new Vue({
 			var self = this;
 
 			self.hospital.subjects.push("");
-			console.log(self.hospital.subjects);
 		},
 
 		//X를 클릭하면 그 과목이 삭제된다. index를 찾고, index에 해당하는 엘리먼트를 삭제한다.
@@ -122,7 +117,6 @@ var app = new Vue({
 		
 			var self = this;
 			self.hospital.keywords.push("");
-			console.log(self.hospital.keywords);
 		
 		},
 		//X를 클릭하면 그 키워드가 삭제된다. index를 찾고, index에 해당하는 엘리먼트를 삭제한다.
@@ -150,7 +144,6 @@ var app = new Vue({
 		updateHospital: function(){
 
 			var self = this;
-			console.log("this.hospital.subjects", self.hospital.subjects);
 			updateHospital(hospitalID, self.hospital).then(function(rtnData){
 				alert("반영되었습니다");
 				self.updateToggle = false;
@@ -165,7 +158,6 @@ var app = new Vue({
             	//파일이 정의 되어 있으면 append 한다.
             	if($("#"+i)[0].files[0] !== undefined){
 					newPhoto.append("photos", $("#"+i)[0].files[0]);
-					console.log(newPhoto.keys().next());            		
             	}
             }
             //api함수
@@ -198,7 +190,6 @@ var app = new Vue({
 			var pass=prompt("Password")
 			if(pass !== "inspire") return;
 			this.reviewToggle = !this.reviewToggle;
-			console.log(this.reviewToggle);
 			return;
 		},
 
@@ -206,7 +197,6 @@ var app = new Vue({
 			var pass=prompt("Password")
 			if(pass !== "inspire") return;
 			this.updateToggle = !this.updateToggle;
-			console.log(this.updateToggle)
 			return;
 		},
 
@@ -214,13 +204,11 @@ var app = new Vue({
 			var pass=prompt("Password")
 			if(pass !== "inspire") return;
 			this.photosToggle = !this.photosToggle;
-			console.log(this.photosToggle)
 			return;
 		},
 
 		//monStart(1000)을 10:00으로 만들기 위해 String을 입력받으면 세번째에 : 을 추가해 리턴해주는 함수.
 		makeTimeForm: function(timeString){
-			console.log(timeString);
 			var timeForm = timeString.slice(0, 2) + " : " + timeString.slice(2);
 			return timeForm;
 		},
@@ -232,7 +220,6 @@ var app = new Vue({
 
 		//index가 0인지 확인
 		isFirst : function(index){
-			console.log(index ==0);
 			return index == 0;
 		},
 
@@ -244,14 +231,12 @@ var app = new Vue({
 			getHospital(id).then(function(_hospital){
 
 				self.hospital = _hospital;
-				console.log("self.hospital.reviews", _hospital);
 				if(!_hospital.keywords) _hospital.keywords = [];
 				
 				var myaddress = self.hospital.address;
 
 				//self.havePhoto = _hospital.photo.length > 0;
 				self.havePhoto = _hospital.photos.length > 0;
-				console.log(self.havePhoto);
 				//TODO 안에 지금 위도 경도가 있으니깐 그걸 활용하면 된다.
 				naver.maps.Service.geocode({address: myaddress}, function(status, response) {
   

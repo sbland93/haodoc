@@ -21,6 +21,10 @@ a {
     color: #BD1622;
 }
 
+.whiteColor{
+    color: white;
+}
+
 /*LogoColor의 백그라운드*/
 .logoColorBG{
     background-color:#BD1622;

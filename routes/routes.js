@@ -79,6 +79,7 @@ module.exports = function(app){
 
 
 	require('./api/participant.js')(app);
+	require('./api/couponReview.js')(app);
 	require('./api/payer.js')(app);
 	require('./api/coupon.js')(app);
 	require('./api/user.js')(app);

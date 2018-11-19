@@ -1,7 +1,6 @@
 
 var url =  window.location.pathname;
 var eventID = url.replace("/event/", "");
-console.log("eventID", eventID);
 
 var app = new Vue({
 
@@ -23,7 +22,6 @@ var app = new Vue({
 	mounted: function(){
 		
 		var self = this;
-		console.log("dd",eventID);
 		getEvent(eventID).then(function(event){
 		
 			console.log(event);
@@ -35,7 +33,6 @@ var app = new Vue({
 	methods: {
 		
 		eventImageHref:function(image_file_name){
-			console.log(image_file_name);
 
 			return "/images/event/" + image_file_name;
 		
