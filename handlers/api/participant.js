@@ -16,7 +16,6 @@ module.exports = function(){
 		//요청본문에 해당하는 Participant를 새로 생성한다.
 		//유저생성을 위한 post에서는 name과 email과 password가 있어야한다.
 		newParticipant: function(req, res, next){
-			console.log(req.body);
 			if(req.body.participantName && req.body.wechatID && req.body.gender && req.body.eventName){
 				Participant.create(req.body, function(err, participant){
 					if(err) return next(err);
