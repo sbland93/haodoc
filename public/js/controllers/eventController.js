@@ -13,12 +13,10 @@ var app = new Vue({
         var self = this;
     
         getEvents().then(function(events){
-            console.log(events[0]);
             self.events = events;
     
         });
         getCoupons().then(function(coupons){
-            console.log(coupons[0]);
             self.coupons = coupons;
     
         });

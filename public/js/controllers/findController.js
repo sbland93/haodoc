@@ -117,7 +117,6 @@ var app = new Vue({
 					delete computedQuery[key];
 				}
 			}
-			console.log(computedQuery);
 			return computedQuery;
 		},
 
@@ -164,7 +163,6 @@ var app = new Vue({
 	watch: {
 
 		district : function(newDistrict){
-			console.log(newDistrict);
 			//구 변경시 구청이 뜨므로, 이를 동이 나오게끔 해야 병원이 찍혀있을것.
 			this.neighborhood = neighborDictionary[newDistrict][0];
 			this.getHospital(this.query, this.keywordRender);
@@ -229,7 +227,6 @@ var app = new Vue({
 
 		},
 		searchByKeyword : function(){
-			console.log("this.keyword.length", this.keyword.length);
 			if(this.keyword.length < 2){
 				this.keywordCondition = true;
 				return;
@@ -267,7 +264,6 @@ var app = new Vue({
 			
 			var self = this;
 			var highRankPromise = new Promise(function(resolve, reject){resolve([])});
-			console.log("self.subwayRender", self.subwayRender);
 			//keywordSearch(병원이름으로 검색)이 아니라면, [시구동] 이경우 구까지
 			if(!isKeywordSearch && !self.subwayRender){
 				
@@ -281,12 +277,10 @@ var app = new Vue({
 					keyword += " ";
 					keyword += self.subject;
 				}
-				console.log("keyword", keyword);
 				//상단노출 병원을 찾아서 넘기는 Promsie , 밑의 getHospitals(주소로 찾는) 와 비동기로 하기 위해 Promise로 처리.
 				highRankPromise = new Promise(function(resolve, reject){
 					getHospitals({"keywords": keyword}).then(function(_hospitals){
 						if(_hospitals.length === 0) _hospitals = [];
-						console.log(_hospitals);
 						resolve(_hospitals);
 					}).catch(function(rtn){reject(rtn);});
 				})
@@ -295,7 +289,6 @@ var app = new Vue({
 
 			getHospitals(query).then(function(_hospitals){
 				
-				console.log("_hospitals.length", _hospitals.length == 0);
 				
 				self.isHospitals = true;
 
@@ -317,7 +310,6 @@ var app = new Vue({
 						var centerX = result.items[0].point.x,
 							centerY = result.items[0].point.y;
 						
-						console.log("centerX, centerY", centerX, centerY);
 
 						var map = new naver.maps.Map('map', {
 							center : new naver.maps.Point(centerX, centerY),
@@ -358,7 +350,6 @@ var app = new Vue({
 		//hospitalPageList에 해당하는 Map을 초기화 후 Marker를 찍는다.
 		makeListMap : function(hospitalPageList){
 			//map의 중심을 잡기 위해 위,경도를 확인 후 Setting.
-			console.log("hospitalPageList", hospitalPageList);
 			var self = this;
 			var map = new naver.maps.Map('map', {
 				center: new naver.maps.Point(self.map.center.x, self.map.center.y)
@@ -441,7 +432,6 @@ var app = new Vue({
 
 				getNearHospitals(coordinates, 25, subject).then(function(_hospitals){
 
-					console.log("_hospitals.length", _hospitals.length == 0);
 					self.isHospitals = true;
 					if(_hospitals.length == 0) self.isHospitals = false;
 					else{

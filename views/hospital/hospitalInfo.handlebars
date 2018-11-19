@@ -54,11 +54,11 @@
 
 	                <p style="margin-top:12%;">- \{{ fullAddress }}</p><br />
 
-	                <h3 style="line-height:20%;">
+	                <h3 style="line-height:20%;" v-show="hospital.homepage">
 	                	<i class="fas fa-map-marker-alt fa-1x" style="line-height:6%;color:#BD1622"></i> Homepage<!--상세주소-->
 	                </h3>
 
-	                <p style="margin-top:12%;">-<a :href="hospital.homepage"> \{{ hospital.homepage }}</a></p><br />
+	                <p style="margin-top:12%;" v-show="hospital.homepage" >-<a :href="hospital.homepage"> \{{ hospital.homepage }}</a></p><br />
 	                
 	                <h3 style="line-height:20%;">
 	                	<i class="fas fa-phone fa-1x" style="line-height:6%;color:#BD1622"></i>电话号<!--전화번호-->
