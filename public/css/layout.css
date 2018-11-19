@@ -1,3 +1,4 @@
+/*전지역에 쓰이는 CSS */
 
 * {
     box-sizing: border-box;
@@ -15,50 +16,74 @@ a {
     color: #BD1622;
 }
 
-.header {
-    display: flex;
-    width: 100%;
-    height: 85px;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 50;
-}
-
-/* HEADER LOGO */
-#logo {
-    width: 250px;
-    margin-left: 12%;
-    transform: translateY(-8%);
-    z-index: 60;
-    padding-top: 30px;
-}
-
+/* Logo Color로 색을 바꿔줌*/
 .logoColor{
     color: #BD1622;
 }
 
+/*LogoColor의 백그라운드*/
 .logoColorBG{
     background-color:#BD1622;
 }
 
-/* mobile에서는 button이 생성 */
+/* 빨간 배경에 흰색의 버튼 CSS 자주 쓰임 */
 .mobile-btn{
     background-color:#BD1622;
     color:white;
-    width:350px;
+    width:30%;
     align-items: center;
+}
+/*absolute position*/
+.ab_ps{
+    position: absolute;
+}
+
+.rl_ps{
+    position: relative;
+}
+/* ./전지역에 쓰이는 CSS */
+
+
+.header {
+    display: flex;
+    width: 100%;
+    height: 85px;
+    justify-content: space-between; 
+    align-items: center;
+    z-index: 50;
+}
+/* HEADER LOGO */
+#logo {
+    /*width: 250px;
+    margin-left: 12%;
+    transform: translateY(-8%);
+    z-index: 60;
+    padding-top: 30px;*/
+
+    position: absolute;
+    width: 16%;
+    height: 6.9%;
+    top: 2%;
+    left: 1.6%;
 }
 
 /* HEADER MENU BAR */
 #menubar {
+
+/*
     width: 48px;
     margin-right: 2%;
     transform: translateY(3%);
     z-index: 60;
-    padding: 12px;
+    padding: 12px; */
+    position : absolute;
+    width: 2%;
+    height: 3%;
+    top: 3%;
+    right: 2%;
+
 }
 
-/* WEIBO ICON */
 #weibo {
     width: 36px;
     bottom: 5%;
@@ -85,9 +110,7 @@ a {
 
 #QRCode {
     width: 200px;
-
     height: 200px;
-
     margin-left : 120px;
 }
 
@@ -118,12 +141,10 @@ a {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
 }
-
 #menu-display ul li:not(:last-child) {
     margin-bottom: 100px;
 }
-
-.closebtn {
+.close-btn {
     position: fixed;
     top: 1.5%;
     right: 3%;
@@ -214,128 +235,24 @@ a {
     margin-bottom: 0;
 }
 
-@media (max-width: 991px) {
-
-.header {
-    padding-top: 20px;
-    height: 70px;
-}
-
-/* HEADER LOGO */
-#logo {
-    width: 200px;
-}
-
-/* HEADER MENU BAR */
-#menubar {
-    width: 42px;
-}
-
-/* WEIBO ICON */
-#weibo {
-    width: 24px;
-    bottom: 3%;
-    right: 3%;
-}
-
-#wechat {
-    width: 24px;
-    bottom: 10%;
-    right: 3%;
-}
-
-#top {
-    width: 24px;
-    bottom: 15%;
-    right: 5%;
-}
-/* MENU DISPLAY ON CLICK */
-#menu-display ul li {
-    font-size: 20px;
-}
-
-.closebtn {
-    top: 1%;
-    right: 6%;
-}
-
-/* MAINPAGE: BACKGROUND-IMAGE */
-.background {
-    background-position: center bottom;
-}
 
 
-/* FOOTER */
-.footer {
-    height: 220px;
-}
+@media (max-width: 768px) {
 
-/* CS CENTER */
-.contact {
-    margin-bottom: 0;
-}
-
-.contact h6 {
-    font-size: 14px;
-    margin-bottom: 2px;
-}
-
-.contact p {
-    font-size: 12px;
-    margin-right: 3px;
-    margin-bottom: -6px;
-}
-
-#tel {
-    margin-right: 0;
-}
-
-#email {
-    font-size: 12px;
-    margin-top: -2px;
-}
-
-/* COMPANY product-info */
-.company-info {
-    margin-top: 13px;
-}
-
-.company-info h5, .company-info h6 {
-    margin-bottom: 3px;
-    font-size: 10px;
-}
-
-/* TERMS & COPYRIGHTS */
-.terms {
-    margin-bottom: 8px;
-}
-
-.terms p {
-    font-weight: 700;
-    font-size: 10px;
-    margin-top: 12px;
-    margin-bottom: -7px;
-}
-
-.copyright {
-    font-size: 10px;
-}
-
-.copyright p {
-    margin-bottom: 0;
-}
-}
-
-@media (max-width: 575px) {
 .header {
     height: 50px;
 }
 
 /* HEADER LOGO */
 #logo {
-    width: 150px;
-    padding-top: 0px;
-}   
+    top: 1%; left:2.7%;
+    width: 24.7%; height:3.4%;
+}
+
+#menubar{
+    top: 1.3%; right:4%;
+    width: 5%; height:3%;
+}
 
 /* Weibo ICON */
 #weibo {
@@ -347,19 +264,18 @@ a {
     right: 5%;
 }
 
+#top {
+    right: 5%;
+    bottom: 18%;
+}
+
 #QRCode {
+
   width: 150px;
-
   height: 150px;
-
   margin-left : 80px;
-}
 
-/* FOOTER */
-.footer {
-    height: 220px;
 }
-
 /* CS CENTER */
 .contact {
     margin-bottom: -4px;

@@ -3,7 +3,6 @@ var url =  window.location.pathname;
 var eventID = url.replace("/event/", "");
 console.log("eventID", eventID);
 
-
 var app = new Vue({
 
 	el : "#app",

@@ -3,6 +3,7 @@
     <head>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126136412-1"></script>
+        
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -10,7 +11,6 @@
 
           gtag('config', 'UA-126136412-1');
         </script>
-
         
 
         <meta charset="utf-8" />
@@ -25,7 +25,8 @@
         <!-- BootStrap -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+        </script>
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
         <meta name="description" content="为在韩华人提供免费韩国医疗信息服务的平台 HaoDoc(하오닥)" />
@@ -34,23 +35,28 @@
         <meta property="og:description" content="为在韩华人提供免费韩国医疗信息服务的平台 (하오닥)" />
         <meta property="og:image" content="images/layout/thumbnail.jpg" />
         <link rel="stylesheet" type="text/css" href="/css/layout.css">
+       
         <!-- Gsuite 용 -->
         <meta name="google-site-verification" content="GkEvRms7vI1Eamz8dMycBihFkootSnMpOXmu0dsa6CY" />
         <meta content="yes" name="apple-mobile-web-app-capable" />
         <meta content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
 
+        {{!-- For Naver Map API --}}
         <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=OP0DNCxnLS8RuXxQNNjW&submodules=geocoder"></script>
-
 
         <!-- For IE Promise Debugging -->
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+        {{!-- For Vue.js 2 --}}
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
         {{{_sections.head}}}
 
     </head>
     <body>
+
         <div id="menu-display">
-            <a href="javascript:void(0)" class="closebtn">&times;</a>
+            <a class="close-btn">&times;</a>
             <ul>
                 <li><a href="/find">搜索我家附近的医院</a></li>
                 <li><a href="/event">HaoDoc 医院活动</a></li>
@@ -60,7 +66,7 @@
         
         <nav class="header">
             <!-- HEADER LOGO -->
-            <a href="/"><img id="logo" alt="HaoDoc" src="/images/layout/logo2.png"></a>
+            <a href="/"><img id="logo" alt="HaoDoc" src="/images/layout/logo2.png" ></a>
             <!-- HEADER MENU BAR -->
             <input id="menubar" type="image" src="/images/layout/menubar.png" />
         </nav>
@@ -74,34 +80,39 @@
             <img id="wechat" alt="Wechat" src="/images/layout/wechat.png">
         </a>
 
+        {{!-- Arrou Up ICON --}}
         <a id="top-btn" >
             <img id="top"alt="Wechat" src="/images/layout/arrow_up.png">
         </a>
         
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">HaoDoc</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p><img src="/images/layout/QR.jpg" id="QRCode"></p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">HaoDoc</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><img src="/images/layout/QR.jpg" id="QRCode"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            {{{body}}}
 
-         <!-- 'javascript Section -->   
+        {{{body}}}
+        
+
+    </div>
+         <!-- javascript Section -->   
         <script type="text/javascript" src="/js/layout.js"></script>
         {{{_sections.jquery}}}
     </body>
+
 </html>

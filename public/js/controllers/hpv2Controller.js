@@ -7,7 +7,7 @@ console.log("hpvID", hpvID);
 
 var app = new Vue({
 
-    el : "#app",
+    el : "#hpv2_app",
 
     data : {
 
