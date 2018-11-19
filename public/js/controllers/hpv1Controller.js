@@ -59,11 +59,7 @@ $(document).ready(function(){
 		}
 	});
 
-	var app = new Vue({
 
-	    el : "#hpv1_app",
-
-	});
 
 
 
