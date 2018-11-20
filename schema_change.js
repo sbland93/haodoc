@@ -74,56 +74,6 @@ Hospital_Test.find({
 	console.log(docs);
 });
 
-/*
-var hospitalSchema = mongoose.Schema({
-
-	
-	name: String, 
-	city: String,
-	district : String,
-	address : String,
-	tel : String,
-	category : String, //의원, 병원 등
-	homepage: String,
-	subjects : Array,
-	subway: String,
-
-	remarks: String,
-	hospitalID: String,
-
-	xPos: Number, //위도 경도
-	yPos : Number,
-
-	location:{
-		type: {type: String},
-		coordinates: [Number],
-	},
-
-	monStart: String, //월~금 진료시간
-	monClose: String,
-	tueStart: String,
-	tueClose: String,
-	wedStart: String,
-	wedClose: String,
-	thuStart: String,
-	thuClose: String,
-	friStart: String,
-	friClose: String,
-	satStart: String,
-	satClose: String,
-	sunStart: String,
-	sunClose: String,
-	holStart: String,
-	holClose: String,
-
-	reviews: {
-		type: [reviewSchema], default: []
-	},
-
-});
-
-*/
-
 
 
 

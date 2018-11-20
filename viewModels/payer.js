@@ -17,6 +17,7 @@ module.exports = function(payer){
 		wechatID : payer.wechatID,
 		birthDay : payer.birthDay,
 		gender : payer.gender,
+		payment : payer.payment,
 		remarks : payer.remarks,
 		updated_at : payer.updated_at,
 	};

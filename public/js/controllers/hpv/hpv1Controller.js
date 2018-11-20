@@ -33,7 +33,7 @@ var app = new Vue({
 
     	if(newPayer.chineseName && newPayer.englishName && newPayer.gender && newPayer.birthDay && newPayer.phone && newPayer.wechatID){
 			
-
+    		newPayer["coupon"] = hpvID;
 			addPayer(newPayer).then(function(data){
 			
 				if(data.success){		

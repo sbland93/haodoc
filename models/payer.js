@@ -7,6 +7,7 @@ var payerSchema = mongoose.Schema({
 
     payerName: String,
 	coupon: { type: mongoose.Schema.Types.ObjectId, ref: 'Coupon'}, //쿠폰의 아이디를 저장한다.
+	payment : String,
 	email: String,
 	englishName: String,
 	chineseName: String, 

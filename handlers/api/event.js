@@ -35,7 +35,7 @@ module.exports = function(){
 		//Query를 보내면,쿼리에 해당하는 Event에 해당하는 것들을 내보내고
 		//Query가 없으면 모든 Event를 내보낸다.
 		getEvents: function(req, res, next){
-			Event.find(req.query)
+			Event.find(req.query).sort({updated_at:'-1'})
 			.exec(function(err, events){
 				if(err) return next(err);
 				res.json(events.map(eventViewModel));

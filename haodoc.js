@@ -1,6 +1,3 @@
-Array.prototype.diff = function(a) {
-    return this.filter(function(i) {return a.indexOf(i) < 0;});
-};
 
 //credentials보안파일 로드
 var credentials = require('./credentials.js');
@@ -93,7 +90,7 @@ require('./routes/routes.js')(app);
 app.use(function(req, res, next){
 	//200이 default이므로 바꿔준다.
 	res.status(404);
-	res.render('404');
+	res.render('home/main/404');
 });
 
 //커스텀 500 페이지
@@ -101,7 +98,7 @@ app.use(function(err, req, res, next){
 	console.error('Error handler is coming....',err.stack);
 	res.type('text/html');
 	res.status(500);
-	res.render('500');
+	res.render('home/main/500');
 });
 
 function startServer() {

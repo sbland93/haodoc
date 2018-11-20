@@ -1,6 +1,4 @@
 {{#section 'head'}}
-        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-
     <link rel="stylesheet" type="text/css" href="/css/hpv1.css">
     <link rel="stylesheet" type="text/css" href="/css/hpv0.css">
 {{/section}}
@@ -8,7 +6,8 @@
 <div id="hpv0_app">
     <div class="content">
         <h3 class="form-style-9">Step1. 活动指南及使用条款同意 </h3>
-        <form class="form-style-9 stepZeroForm">
+        
+        <form class="form-style-9 stepZeroForm" @submit="checkForm">
             <div class="scroll">
     			<p>HaoDoc 活动指南 <br> </p>    
     			<p>&nbsp;1. HaoDoc提供的HPV活动为 " HPV宫颈癌疫苗9价3次接种".</p>
@@ -18,7 +17,7 @@
                 <p>&nbsp;5. 支付7天以内由于改变想法是可以将购买金额的100%进行退款的. 支付7天后由于改变想法引起的退款只可以退回购买金额手续费5%以外剩下的费用. </p>
                 <p><a href="/rules">&nbsp;6. HaoDoc使用条款可在此处进行确认. </a></p>
     		</div>
-    		<input type="checkbox" name="terms" id="terms">同意HaoDoc服务指南及使用条款 <br><br>
+    		<input type="checkbox" name="terms" id="terms" v-model="terms">同意HaoDoc服务指南及使用条款 <br><br>
     		<div class="scroll">
     			<p>个人信息收集及使用条款同意<br /></p>
                 <p>&nbsp;请仔细阅读以下个人信息收集及使用条款若同意请点击确认.<br></p>
@@ -28,25 +27,29 @@
                 <p>&nbsp;3. 收集项目 : 微信ID, 姓名(中文姓名,韩文姓名，护照姓名), 性别,出生年月日,邮箱<br /></p>
     			<p>&nbsp;4. 保存期间 : 收集日开始3年间保存<br /></p>
     		</div>
-    		<input type="checkbox" name="refundTerms" id="refundTerms">同意HaoDoc服务的个人信息收集及使用条款内容 <br><br>
+    		<input type="checkbox" name="refundTerms" id="refundTerms" v-model="refundTerms">同意HaoDoc服务的个人信息收集及使用条款内容 <br><br>
             <ul>
             	<li>
                     <input type="submit" class="align-right" value="Submit" />
                 </li>
+                <li v-if="errors.length">
+                    <b>Please correct the following error(s):</b>
+                    <ul>
+                      <li v-for="error in errors">\{{ error }}</li>
+                    </ul>
+                </li>
             </ul>
         </form>
-    </div>
 
+    </div>
+    <my-footer></my-footer>
 
 </div>
 
 {{#section 'jquery'}}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.18.0/jquery.validate.min.js"></script>
+    <script src="/js/controllers/hpv/hpv0Controller.js"></script>
 
-    <script src="/js/productjs.js"></script>
-    <script src="/js/api/user.js"></script>
-    <script src="/js/controllers/hpv0Controller.js"></script>
 {{/section}}
 
 

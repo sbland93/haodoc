@@ -1,180 +1,304 @@
 {{#section 'head'}}
     <meta name="Robots" content="nofollow" />
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/maincss.css">
     <link rel="stylesheet" type="text/css" href="/css/admin.css">
 {{/section}}
 
+<div id="app">
+    <div id="wrapper">
+        <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">Admin</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav side-nav">
+                <li class="nav-item">
+                    <a class="nav-link" @click="toggleTo('payerToggle')">쿠폰 신청자</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" @click="toggleTo('participantToggle')">이벤트 신청자</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" @click="toggleTo('couponToggle')">생성된 쿠폰</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" @click="toggleTo('eventToggle')">생성된 이벤트</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" @click="toggleTo('addCouponToggle')">쿠폰 추가하기</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" @click="toggleTo('addEventToggle')">이벤트 추가하기</a>
+                </li>
+            </ul>
+          </div>
+        </nav>
 
-<div id="app" style="background-color:#660000" >
-    <div class="offset-xs-2 col-xs-4">
-        <h3 style="color:white">이벤트신청자 </h3>
-        <div class="whiteColor" v-for=" (participant, index) in participants">
-            <p>
-                <h2 class="whiteColor">\{{index}}</h2>
-                신청이벤트 : \{{participant.eventName}}<br>
-                신청자이름 : \{{participant.participantName}}<br>
-                위챗아이디 : \{{participant.wechatID}}<br>
-                성별 : \{{participant.gender}}<br>
-                메모 : \{{participant.memo}}<br>
-                신청일시 : \{{participant.updated_at | moment}}
-                <hr style="color:white">
-            </p>
+        <div class="container-fluid">
+
+            <div v-show="toggles.participantToggle">
+                <h2>이벤트 신청자</h2>
+                <div>
+                    <table class="table" id="table" >
+                        <thead>
+                            <tr>
+                                <th>NO.</th>
+                                <th>신청이벤트</th>
+                                <th>이름</th>
+                                <th>성별</th>
+                                <th>위챗아이디</th>
+                                <th>메모</th>
+                                <th>신청시간</th>
+                                <th>기능</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for=" (participant, index) in participants">
+                                <td><a href="#">\{{index}}</a></td>
+                                <td>\{{participant.eventName}}</td>
+                                <td>\{{participant.participantName}}</td>
+                                <td>\{{participant.gender}}</td>
+                                <td>\{{participant.wechatID}}</td>
+                                <td>\{{participant.memo}}</td>
+                                <td>\{{participant.updated_at | moment}}</td>
+                                <td><button @click="removeParticipant(participant.id)" class="btn btn-primary">\{{participant.participantName}}삭제</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div v-show="toggles.payerToggle">
+                <h2>쿠폰 신청자</h2>
+
+                <div>
+                    <table class="table" id="table" >
+                        <thead>
+                            <tr>
+                                <th>NO.</th>
+                                <th>쿠폰</th>
+                                <th>Name(CN)</th>
+                                <th>Name(KR)</th>
+                                <th>Name(EN)</th>
+                                <th>성별</th>
+                                <th>생년월일</th>
+                                <th>휴대폰</th>
+                                <th>신청일시</th>
+                                <th>기능</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(payer, index) in payers">
+                                <td><a href="#">\{{index}}</a></td>
+                                <td>\{{payer.coupon.couponName}}</td>
+                                <td>\{{payer.chineseName}}</td>
+                                <td>\{{payer.payerName}}</td>
+                                <td>\{{payer.englishName}}</td>
+                                <td>\{{payer.gender}}</td>
+                                <td>\{{payer.birthDay}}</td>
+                                <td>\{{payer.phone}}</td>
+                                <td>\{{payer.updated_at | moment}}</td>
+                                <td><button @click="removePayer(payer.id)" class="btn btn-primary">\{{payer.chineseName}}삭제</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div v-show="toggles.couponToggle">
+                <h2>생성된 쿠폰</h2>
+
+                <div style="height: auto; overflow: auto">
+                    <table class="table" id="table" >
+                        <thead>
+                            <tr>
+                                <th>NO.</th>
+                                <th>쿠폰</th>
+                                <th>병원이름</th>
+                                <th>병원주소</th>
+                                <th>쿠폰기간</th>
+                                <th>지하철역</th>
+                                <th>쿠폰생성일</th>
+                                <th>기능</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(coupon,index) in coupons">
+                                <td><a href="#">\{{index}}</a></td>
+                                <td>\{{coupon.couponName}}</td>
+                                <td>\{{coupon.hospitalName}}</td>
+                                <td>\{{coupon.address}}</td>
+                                <td>\{{coupon.couponRange}}</td>
+                                <td>\{{coupon.subway}}</td>
+                                <td>\{{coupon.updated_at | moment}}</td>
+                                <td><button class="btn btn-primary" @click="removeCoupon(coupon.id)">쿠폰 삭제</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div v-show="toggles.eventToggle">
+                <h2>생성된 이벤트</h2>
+
+                <div>
+                    <table class="table" id="table" >
+                        <thead>
+                            <tr>
+                                <th>NO.</th>
+                                <th>이벤트명</th>
+                                <th>병원이름</th>
+                                <th>병원주소</th>
+                                <th>이벤트기간</th>
+                                <th>지하철역</th>
+                                <th>이벤트생성일</th>
+                                <th>기능</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(event,index) in events">
+                                <td><a href="#">\{{index}}</a></td>
+                                <td>\{{event.eventName}}</td>
+                                <td>\{{event.hospitalName}}</td>
+                                <td>\{{event.address}}</td>
+                                <td>\{{event.eventRange}}</td>
+                                <td>\{{event.subway}}</td>
+                                <td>\{{event.updated_at | moment}}</td>
+                                <td><button class="btn btn-primary" @click="removeEvent(event.id)">이벤트 삭제</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div v-show="toggles.addEventToggle">
+            <div class="card card-outline-secondary">
+                <div class="card-body" >
+                    <h3 class="text-center">이벤트 추가하기</h3>
+                    <hr>
+                    <form class="form" role="form" id="event-form">
+
+                        <div class="form-group">
+                            <label for="cc_name">이벤트이름</label>
+                            <input type="text" class="form-control" name="eventName">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cc_name">이벤트기간</label>
+                            <input type="text" class="form-control" name="eventRange" placeholder="2018-07-01~2018-11-12">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cc_name">병원이름</label>
+                            <input type="text" class="form-control"  name="hospitalName" placeholder="드림성모안과">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cc_name">역이름</label>
+                            <input type="text" class="form-control" name="subway" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cc_name">병원상세주소</label>
+                            <input type="text" class="form-control" name="address">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cc_name">이벤트 가격</label>
+                            <input type="text" class="form-control"  name="price" placeholder="있는경우만 입력, 560000 처럼 숫자만 입력">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cc_name">썸네일 파일명</label>
+                            <input type="file" class="form-control" name="thumbnailImage"  />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cc_name">상세 이벤트 그림파일1</label>
+                            <input type="file" class="form-control" name="eventImage1" placeholder="반드시 순서를 지켜주세요" />
+                        </div>
+                        <div class="form-group">
+                            <label for="cc_name">상세 이벤트 그림파일2</label>
+                            <input type="file" class="form-control" name="eventImage2" placeholder="반드시 순서를 지켜주세요" />
+                        </div>
+                        <div class="form-group">
+                            <label for="cc_name">상세 이벤트 그림파일3</label>
+                            <input type="file" class="form-control" name="eventImage3" placeholder="반드시 순서를 지켜주세요" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="btn mobile-btn" @click="newEvent">이벤트 만들기</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+
+
+            <div class="card card-outline-secondary" v-show="toggles.addCouponToggle">
+                <div class="card-body" >
+                    <h3 class="text-center">쿠폰 추가하기</h3>
+                    <hr>
+                    <form class="form" role="form" id="coupon-form">
+                        <div class="form-group">
+                            <label for="cc_name">쿠폰이름</label>
+                            <input type="text" class="form-control" name="couponName">
+                        </div>
+                        <div class="form-group">
+                            <label for="cc_name">쿠폰기간</label>
+                            <input type="text" class="form-control" name="couponRange" placeholder="2018-07-01~2018-11-12">
+                        </div>
+                        <div class="form-group">
+                            <label for="cc_name">병원이름</label>
+                            <input type="text" class="form-control"  name="hospitalName" placeholder="드림성모안과">
+                        </div>
+                        <div class="form-group">
+                            <label for="cc_name">역이름</label>
+                            <input type="text" class="form-control" name="subway" >
+                        </div>
+                        <div class="form-group">
+                            <label for="cc_name">병원상세주소</label>
+                            <input type="text" class="form-control" name="address">
+                        </div>
+                        <div class="form-group">
+                            <label for="cc_name">쿠폰 가격</label>
+                            <input type="text" class="form-control"  name="price" placeholder="560000 처럼 숫자만 입력">
+                        </div>
+                        <div class="form-group">
+                            <label for="cc_name">썸네일 파일명</label>
+                            <input type="file" class="form-control" name="thumbnailImage"  />
+                        </div>
+                        <div class="form-group">
+                            <label for="cc_name">상세 쿠폰 그림파일1</label>
+                            <input type="file" class="form-control" name="couponImage1" placeholder="반드시 순서를 지켜주세요" />
+                        </div>
+                        <div class="form-group">
+                            <label for="cc_name">상세 쿠폰 그림파일2</label>
+                            <input type="file" class="form-control" name="couponImage2" placeholder="반드시 순서를 지켜주세요" />
+                        </div>
+                        <div class="form-group">
+                            <label for="cc_name">상세 쿠폰 그림파일3</label>
+                            <input type="file" class="form-control" name="couponImage3" placeholder="반드시 순서를 지켜주세요" />
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn mobile-btn" @click="newCoupon">쿠폰 만들기</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
         </div>
+            
     </div>
+</div>
+
+
+<div id="app">
     
-    <br><br><br>
-
-    <div class="col-xs-4">
-        <h3 style="color:white">쿠폰신청자 </h3>
-        <div stlye="color:white;" v-for="(payer, index) in payers">
-            <p class="whiteColor">
-                <h2 class="whiteColor">\{{index}}</h2>
-                <span v-if="payer.coupon" class="whiteColor">쿠폰이름 : \{{payer.coupon.couponName}}<br></span>
-                <span v-if="payer.coupon" class="whiteColor">쿠폰가격 : \{{payer.coupon.price}}<br></span>
-                <span class="whiteColor">한국어이름 : \{{payer.payerName}}<br></span>
-                <span class="whiteColor">위챗아이디 : \{{payer.wechatID}}<br></span>
-                <span class="whiteColor">성별 : \{{payer.gender}}<br></span>
-                <span class="whiteColor">생년월일 : \{{payer.birthDay}}<br></span>
-                <span class="whiteColor">영어이름 : \{{payer.englishName}}<br></span>
-                <span class="whiteColor">중국어이름 : \{{payer.chineseName}}<br></span>
-                <span class="whiteColor">휴대폰 : \{{payer.phone}}<br></span>
-                <span class="whiteColor">신청일시 : \{{payer.updated_at | moment}}<br></span>
-                <hr>
-            </p>
-        </div>
-    </div>
-
-
-    <ul>
-        ----쿠폰---- 
-        <div v-for="coupon in coupons" style="color:white">\{{coupon.couponName}} / \{{coupon.hospitalName}} / \{{coupon.couponRange}} / \{{coupon.address}} / \{{coupon.subway}}<button class="mobile-btn" @click="removeCoupon(coupon.id)">쿠폰 삭제</button></div> 
-    </ul>
-
-    <ul>
-        ---- 이벤트 ---- 
-        <div v-for="event in events" style="color:white">\{{event.eventName}} / \{{event.hospitalName}} / \{{event.eventRange}} / \{{event.address}} / \{{event.subway}}<button class="mobile-btn" @click="removeEvent(event.id)">이벤트 삭제</button></div> 
-    </ul>
-
-    <span class="anchor" id="formPayment"></span>
-    <hr class="my-5">
-    <!-- form card cc payment -->
-    <div class="card card-outline-secondary">
-        <div class="card-body" >
-            <h3 class="text-center">HaoDoc Event 추가하기</h3>
-            <hr>
-            <form class="form" role="form" id="event-form">
-
-                <div class="form-group">
-                    <label for="cc_name">이벤트이름</label>
-                    <input type="text" class="form-control" name="eventName">
-                </div>
-
-                <div class="form-group">
-                    <label for="cc_name">이벤트기간</label>
-                    <input type="text" class="form-control" name="eventRange" placeholder="2018-07-01~2018-11-12">
-                </div>
-
-                <div class="form-group">
-                    <label for="cc_name">병원이름</label>
-                    <input type="text" class="form-control"  name="hospitalName" placeholder="드림성모안과">
-                </div>
-
-                <div class="form-group">
-                    <label for="cc_name">역이름</label>
-                    <input type="text" class="form-control" name="subway" >
-                </div>
-
-                <div class="form-group">
-                    <label for="cc_name">병원상세주소</label>
-                    <input type="text" class="form-control" name="address">
-                </div>
-
-                <div class="form-group">
-                    <label for="cc_name">이벤트 가격</label>
-                    <input type="text" class="form-control"  name="price" placeholder="있는경우만 입력, 560000 처럼 숫자만 입력">
-                </div>
-
-                <div class="form-group">
-                    <label for="cc_name">썸네일 파일명</label>
-                    <input type="file" class="form-control" name="thumbnailImage"  />
-                </div>
-
-                <div class="form-group">
-                    <label for="cc_name">상세 이벤트 그림파일1</label>
-                    <input type="file" class="form-control" name="eventImage1" placeholder="반드시 순서를 지켜주세요" />
-                </div>
-                <div class="form-group">
-                    <label for="cc_name">상세 이벤트 그림파일2</label>
-                    <input type="file" class="form-control" name="eventImage2" placeholder="반드시 순서를 지켜주세요" />
-                </div>
-                <div class="form-group">
-                    <label for="cc_name">상세 이벤트 그림파일3</label>
-                    <input type="file" class="form-control" name="eventImage3" placeholder="반드시 순서를 지켜주세요" />
-                </div>
-                
-                <div class="form-group">
-                    <button type="submit" class="btn mobile-btn" @click="newEvent">이벤트 만들기</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-
-
-    <div class="card card-outline-secondary">
-        <div class="card-body" >
-            <h3 class="text-center">HaoDoc Coupon Event 추가하기</h3>
-            <hr>
-            <form class="form" role="form" id="coupon-form">
-                <div class="form-group">
-                    <label for="cc_name">쿠폰이름</label>
-                    <input type="text" class="form-control" name="couponName">
-                </div>
-                <div class="form-group">
-                    <label for="cc_name">쿠폰기간</label>
-                    <input type="text" class="form-control" name="couponRange" placeholder="2018-07-01~2018-11-12">
-                </div>
-                <div class="form-group">
-                    <label for="cc_name">병원이름</label>
-                    <input type="text" class="form-control"  name="hospitalName" placeholder="드림성모안과">
-                </div>
-                <div class="form-group">
-                    <label for="cc_name">역이름</label>
-                    <input type="text" class="form-control" name="subway" >
-                </div>
-                <div class="form-group">
-                    <label for="cc_name">병원상세주소</label>
-                    <input type="text" class="form-control" name="address">
-                </div>
-                <div class="form-group">
-                    <label for="cc_name">쿠폰 가격</label>
-                    <input type="text" class="form-control"  name="price" placeholder="560000 처럼 숫자만 입력">
-                </div>
-                <div class="form-group">
-                    <label for="cc_name">썸네일 파일명</label>
-                    <input type="file" class="form-control" name="thumbnailImage"  />
-                </div>
-                <div class="form-group">
-                    <label for="cc_name">상세 쿠폰 그림파일1</label>
-                    <input type="file" class="form-control" name="couponImage1" placeholder="반드시 순서를 지켜주세요" />
-                </div>
-                <div class="form-group">
-                    <label for="cc_name">상세 쿠폰 그림파일2</label>
-                    <input type="file" class="form-control" name="couponImage2" placeholder="반드시 순서를 지켜주세요" />
-                </div>
-                <div class="form-group">
-                    <label for="cc_name">상세 쿠폰 그림파일3</label>
-                    <input type="file" class="form-control" name="couponImage3" placeholder="반드시 순서를 지켜주세요" />
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn mobile-btn" @click="newCoupon">쿠폰 만들기</button>
-                </div>
-            </form>
-        </div>
-    </div>
 </div>
 
 

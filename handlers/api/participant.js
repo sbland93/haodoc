@@ -3,10 +3,11 @@ var participantViewModel = require('../../viewModels/participant.js');
 
 module.exports = function(){
 	return {
+		
 		//Query를 보내면,쿼리에 해당하는 Participant에 해당하는 것들을 내보내고
 		//Query가 없으면 모든 Participant를 내보낸다.
 		getParticipants: function(req, res, next){
-			Participant.find(req.query)
+			Participant.find(req.query).sort({updated_at:'-1'})
 			.exec(function(err, participants){
 				if(err) return next(err);
 				res.json(participants.map(participantViewModel));

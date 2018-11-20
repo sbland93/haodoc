@@ -5,22 +5,16 @@ module.exports = function(){
 	return {
 		
 		info : function(req, res, next){
-
-			Hospital.findById(req.params.id, function(err, hospital){
-				if(err) return next(err);
-				res.render("hospital/hospitalInfo", {
-					hospital : hospital,
-				});
-			})
-			
+			res.render("hospital/hospitalInfo")			
 		},
 
 		subjectInfo : function(req, res, next){
-
 			res.render("hospital/subjectInfo");
+		},
 
-		}
-
+		find : function(req, res, next){
+			res.render('hospital/find');
+		},
 
 	}
 	
