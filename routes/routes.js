@@ -43,9 +43,7 @@ module.exports = function(app){
 	app.get('/hpv2/:id', hpvHandlers.hpv2);
 
 	//For Development Handlers
-	app.get('/main2', homeHandlers.home2);
-	app.get('/find', homeHandlers.find);
-
+	app.get('/find', hospitalHandlers.find);
 	app.get('/subjectInfo', hospitalHandlers.subjectInfo);
 	app.get('/hospital/:id', hospitalHandlers.info);
 

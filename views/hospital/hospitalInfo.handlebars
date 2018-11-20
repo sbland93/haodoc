@@ -1,8 +1,6 @@
 
 
 {{#section 'head'}}
-        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="/css/hospitalInfo.css">
 
@@ -140,11 +138,6 @@
 				    <div style="float : none; margin: 0 auto;">
 			    		<span class="col-xs-12 col-md-4" v-for="photo in hospital.photos">
 			    			<img class="img-responsive" :src="imageHref(photo)">
-			    		</span>
-			    		<span class="col-xs-12 col-md-4">
-			    			<img class="img-responsive" src="/images/hospital/노고산동_신촌연세안과의원_01.JPG">
-			    			<img class="img-responsive" src="/images/hospital/노고산동_신촌연세안과의원_02.JPG">
-			    			<img class="img-responsive" src="/images/hospital/노고산동_신촌연세안과의원_03.JPG">
 			    		</span>
 			    	</div>
 			    </div>
@@ -451,6 +444,6 @@
 {{#section 'jquery'}}
 
 	<script type="text/javascript" src="/js/api/hospital.js"></script>
-	<script type="text/javascript" src="/js/controllers/hospitalInfoController.js"></script>
+	<script type="text/javascript" src="/js/controllers/hospital/hospitalInfoController.js"></script>
 
 {{/section}}

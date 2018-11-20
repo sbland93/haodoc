@@ -2,7 +2,6 @@
   width:31%;
   height: 70px;
   margin: 0.5%;
-
 }
 
 .infoImage{
@@ -41,12 +40,14 @@ body{
   border-top-right-radius:0px;
   top: 1px;
 }
+
 .comment-list .card .card-heading.right {
   border-right-width: 0px;
   /*Panel-heading border radius*/
   border-top-left-radius:0px;
   right: 16px;
 }
+
 .comment-list .card .card-heading .card-body {
   padding-top: 6px;
 }
@@ -54,8 +55,10 @@ body{
   /*For wrapping text in thumbnail*/
   word-wrap: break-word;
 }
+
 /* Portrait tablets and medium desktops */
 @media (min-width: 768px) {
+  
   .comment-list .arrow:after, .comment-list .arrow:before {
     content: "";
     position: absolute;
@@ -102,15 +105,16 @@ body{
     border-width: 15px;
   }
 }
+
 .comment-list .comment-post {
   margin-top: 6px;
 }
 
 
 
-
-
 @media (max-width: 768px) {
+    
+
     .infoCard{
       padding: 0px 0px 0px 0px;
       width: 100%;
@@ -124,9 +128,6 @@ body{
     	width:200px;
     	float : right;
     }
-
-    
-
 
 
 }

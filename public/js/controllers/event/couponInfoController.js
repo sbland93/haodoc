@@ -1,7 +1,6 @@
 
 var url =  window.location.pathname;
 var couponID = url.replace("/coupon/", "");
-console.log("couponID", couponID);
 
 
 var app = new Vue({
@@ -96,7 +95,6 @@ var app = new Vue({
             var self = this;
             //이름 두글자, 비밀번호 세글자, 질문 다섯글자 이상입력
             if(self.newQuestion.name.length > 1 && self.newQuestion.password.length > 2 && self.newQuestion.content.length > 4){
-                console.log(self.newQuestion);
                 updateCoupon(self.couponID, {"$push" : { "questions": self.newQuestion}}).then(function(rtn){
                     if(rtn.success){
                         getCoupon(self.couponID).then(function(coupon){
@@ -107,6 +105,7 @@ var app = new Vue({
                                 wechatID: "",
                                 password: "",
                             };
+                            self.questionToggle = false;
                             alert("问题已经成功提交") // 질문이 등록되었습니다.
                         });    
                     }else{
@@ -126,12 +125,10 @@ var app = new Vue({
             var self = this;
 
             if(self.questionIndex !== -1){
-                console.log("changeQuestion", self.changeQuestion);
 
                 self.coupon.questions[self.questionIndex] = self.changeQuestion;
                 updateCoupon(self.couponID, self.coupon).then(function(rtn){
                     $("#updateModal").modal("hide");
-                    console.log("Finally");
                 });
 
             }
@@ -150,7 +147,6 @@ var app = new Vue({
                         self.coupon.questions[self.answerIndex]["answer"] = self.newAnswer;
                         updateCoupon(self.couponID, self.coupon).then(function(rtn){
                             //답글 작성 완료시, 모달을 끄고(클릭으로), 새롭게 랜더링해준다.
-                            console.log("updateCouponAnser RTN", rtn);
                             self.answerIndex = -1;
                             self.newAnswer =  {
                                 name: "",
@@ -243,7 +239,6 @@ var app = new Vue({
             
             }
 
-            console.log(self.newReview);
             
             addCouponReview(self.newReview).then(function(rtn){
                 if(rtn.success){
@@ -251,7 +246,7 @@ var app = new Vue({
                     alert("感谢您填写后记");
                     // 리뷰를 작성해 주셔서 정말 감사합니다.
                     self.reviewToggle = false;
-                    getCouponReviews().then(function(couponReviews){
+                    getCouponReviews({coupon: couponID}).then(function(couponReviews){
                         self.couponReviews = couponReviews;
                         self.newReview =  {
 
@@ -263,6 +258,7 @@ var app = new Vue({
                             password: "",
                         
                         };
+                        self.reviewToggle = false;
                     });
 
                 }else{

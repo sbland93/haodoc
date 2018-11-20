@@ -1,6 +1,5 @@
 
 var Hospital = require('./models/hospital.js');
-var seedData = require("./서대문구 병원 데이터.js");
 
 
 //Seed All Data From seedData.

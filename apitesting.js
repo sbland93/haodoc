@@ -21,35 +21,6 @@ queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'
 queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1000'); /* */
 queryParams += '&' + encodeURIComponent('ORD') + '=' + encodeURIComponent('NAME'); /* */
 
-// name: String, 
-// city: String,
-// district : String,
-// address : String,
-// tel : String,
-// category : String, //의원, 병원 등
-
-// remarks: String,
-// hpid: String,
-
-// langitude: Number, //위도 경도
-// latitude : Number,
-
-// monStart: Number, //월~금 진료시간
-// monClose: Number,
-// tueStart: Number,
-// tueClose: Number,
-// wedStart: Number,
-// wedClose: Number,
-// thuStart: Number,
-// thuClose: Number,
-// friStart: Number,
-// friClose: Number,
-// satStart: Number,
-// satClose: Number,
-// sunStart: Number,
-// sunClose: Number,
-// holStart: Number,
-// holClose: Number,
 
 var allData = [];
 

@@ -1,29 +1,29 @@
 
-.infoImage{
-	padding:0px 500px 0px 500px;
-	width:100%;
-}
+    .infoImage{
+    	padding:0px 500px 0px 500px;
+    	width:100%;
+    }
 
-.infoCard{
-  padding:0px 500px 0px 500px;
-  width:100%;
-}
-
-
-body{
-	background-color:#660000;
-}
+    .infoCard{
+      padding:0px 500px 0px 500px;
+      width:100%;
+    }
 
 
-#contactInfo{
-	padding-top:0px;
-	margin-top:0px;
-	background-color:white;
-}
+    body{
+    	background-color:#660000;
+    }
 
-.mobile-btn{
-	float:right;
-}
+
+    #contactInfo{
+    	padding-top:0px;
+    	margin-top:0px;
+    	background-color:white;
+    }
+
+    .mobile-btn{
+    	float:right;
+    }
 
 
 
