@@ -1,0 +1,66 @@
+
+
+{{#section 'head'}}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/question.css">
+{{/section}}
+
+
+<br>
+<div class="text-center"><h4>하오닥 문의 서비스</h4></div>   
+
+<div id="app" class="container">
+    <div class="text-center">
+        <a href="/recommend" class="btn btn-primary margin-btn"> 병원 추천 문의 + </a>
+        <a href="/translate" class="btn btn-primary margin-btn"> 증상 번역 문의 + </a>
+        <a href="/accompany" class="btn btn-primary margin-btn"> 동행 서비스 신청 + </a>
+        <a href="/insurance" class="btn btn-primary margin-btn"> 보험 관련 문의 + </a>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="list-group" style="width:100%;">
+            <div v-for="question in questions">
+                <a @click="checkOwner(question)" class="list-group-item clearfix">
+                    <div class="profile-teaser-main">
+                        <h4 class="profile-name">\{{question.name}}<span class="info float-right" style="font-size:0.7em">\{{question.updated_at | moment}}</span></h4>
+                        <div class="profile-info">
+                            <div class="info"><span class=""></span>&nbsp;<span class="">[비공개] [\{{question.category}}]</span>&nbsp;&nbsp;&nbsp;\{{question.name}}님의 비공개글입니다.</div>
+                        </div>
+                        <br>
+                        <div v-show="question.answer" class="list-group-item clearfix" >
+                            <div class="profile-teaser-main">
+                                <h4 class="profile-name">HaoDoc</h4>
+                                <div class="profile-info">
+                                    <div class="info"><span class="">\{{question.name}}</span> 하오닥 입니다. 답변 완료 했습니다. &nbsp;&nbsp;</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a><!-- item -->
+                <br>
+            </div>
+        </div>
+        <br><br><br>
+    </div>
+</div>
+
+
+
+{{#section 'jquery'}}
+    <script type="text/javascript" src="/js/api/recommend.js"></script>
+    <script type="text/javascript" src="/js/api/translate.js"></script>
+    <script type="text/javascript" src="/js/api/accompany.js"></script>
+    <script type="text/javascript" src="/js/api/insurance.js"></script>
+    <script type="text/javascript" src="/js/controllers/question/questionController.js"></script>
+{{/section}}
+
+
+
+
+
+
+
+
+
+
+
