@@ -2,6 +2,9 @@
 var homeHandlers = require('../handlers/home.js')();
 var hpvHandlers = require('../handlers/hpv.js')();
 const hospitalHandlers = require('../handlers/hospital.js')();
+const questionHandlers = require('../handlers/question.js')();
+
+
 var Event = require("../models/event.js");
 
 
@@ -17,6 +20,9 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 module.exports = function(app){
+
+
+
 
 	app.get('/', homeHandlers.home);
 
@@ -47,33 +53,19 @@ module.exports = function(app){
 	app.get('/subjectInfo', hospitalHandlers.subjectInfo);
 	app.get('/hospital/:id', hospitalHandlers.info);
 
+	//For Question Handlers
 
+	app.get('/question', questionHandlers.question);
+	app.get('/recommend', questionHandlers.recommend);
+	app.get('/translate', questionHandlers.translate);
+	app.get('/insurance', questionHandlers.insurance);
+	app.get('/accompany', questionHandlers.accompany);
 
-	app.post('/testing', upload.any(), function(req, res, next){
-		console.log(req.files);
-		var newEventObject = req.body;
-		newEventObject["eventImage"] = ["", "", ""];
-		console.log(newEventObject);
-		for (var i = req.files.length - 1; i >= 0; i--) {
-			var thisFile = req.files[i];
-			if(thisFile["fieldname"] == "thumbnailImage"){
-				newEventObject["thumbnailImage"] = thisFile["filename"];
-			}
-			if(thisFile["fieldname"] == "eventImage1"){
-				newEventObject["eventImage"][0] = thisFile["filename"];
-			}
-			if(thisFile["fieldname"] == "eventImage2"){
-				newEventObject["eventImage"][1] = thisFile["filename"];
-			}
-			if(thisFile["fieldname"] == "eventImage3"){
-				newEventObject["eventImage"][2] = thisFile["filename"];
-			}
-		}
-		console.log(newEventObject);
-		Event.create(newEventObject, function(req, res, next){
-			console.log("here");
-		});
-	});
+	app.get('/recommendInfo/:id', questionHandlers.recommendInfo);
+	app.get('/translateInfo/:id', questionHandlers.translateInfo);
+	app.get('/insuranceInfo/:id', questionHandlers.insuranceInfo);
+	app.get('/accompanyInfo/:id', questionHandlers.accompanyInfo);
+
 
 
 	require('./api/participant.js')(app);
@@ -84,6 +76,10 @@ module.exports = function(app){
 	require('./api/hospital.js')(app);
 	require('./api/subway.js')(app);
 	require('./api/event.js')(app);
+	require('./api/recommend.js')(app);
+	require('./api/insurance.js')(app);
+	require('./api/translate.js')(app);
+	require('./api/accompany.js')(app);
 
 
 

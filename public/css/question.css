@@ -1,0 +1,31 @@
+.infoCard{
+  padding:0px 500px 0px 500px;
+  width:100%;
+}
+
+.profile-teaser-left {
+    float: left; width: 20%; margin-right: 1%;
+}
+
+.profile-teaser-main {
+    float: left; width: 100%;
+}
+
+.info { display: inline-block; margin-right: 10px; color: #777; }
+.info span { font-weight: bold; }
+
+.margin-btn{
+	margin: 10px;
+}
+
+a {color:black;text-decoration:none}
+
+
+@media (max-width: 768px) {
+
+    .infoCard{
+        padding: 0px 0px 0px 0px;
+        width: 100%;
+    } 
+
+}

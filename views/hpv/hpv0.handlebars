@@ -9,7 +9,7 @@
         
         <form class="form-style-9 stepZeroForm" @submit="checkForm">
             <div class="scroll">
-    			<p>HaoDoc 活动指南 <br> </p>    
+    			<p>HaoDoc 活动指南 <br> </p>
     			<p>&nbsp;1. HaoDoc提供的HPV活动为 " HPV宫颈癌疫苗9价3次接种".</p>
                 <p>&nbsp;2. 在HaoDoc官网内进行支付后不需要去医院支付额外的金额.</p>
                 <p>&nbsp;3. HaoDoc担当着顾客与医院之间用Wechat进行连接的服务.</p>
@@ -33,7 +33,7 @@
                     <input type="submit" class="align-right" value="Submit" />
                 </li>
                 <li v-if="errors.length">
-                    <b>Please correct the following error(s):</b>
+                    <b>Please correct the following error(s):</b><br>
                     <ul>
                       <li v-for="error in errors">\{{ error }}</li>
                     </ul>
