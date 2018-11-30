@@ -12,12 +12,16 @@
 	            <div class="media-body">
 	                <div class="media-heading"><h4>\{{accompany.name}}</h4> <span>- \{{accompany.updated_at | moment}}</span></div>
 	                <p>
-	                	- 증상 : \{{accompany.symptom}} <br>
-	                	- 진료과목 : \{{accompany.subject}} <br>
-	                	- 원하는 병원 : \{{accompany.hospital}} <br>
-	                	- 원하는 방문 날짜와 시간 : \{{accompany.day}} <br>
-	                	- 기타 : \{{accompany.remarks}} <br>
-	                	- 위챗아이디 : \{{accompany.wechatID}} <br>
+	                	- 症状{{!-- 증상 --}} : \{{accompany.symptom}} <br>
+	                	- 诊疗科目
+{{!-- 진료과목 --}} : \{{accompany.subject}} <br>
+	                	- [若存在]请填写想访问的医院名称
+{{!-- 원하는 병원 --}} : \{{accompany.hospital}} <br>
+	                	- 预计访问医院日期及时间
+{{!-- 병원 방문 예정일과 시간 --}} : \{{accompany.day}} <br>
+	                	- 其他{{!-- 기타 --}} : \{{accompany.remarks}} <br>
+	                	- 微信账号
+{{!-- 위챗아이디 --}} : \{{accompany.wechatID}} <br>
 	                </p>
 	                <div v-if="accompany.answer" class="media">
 	                    <div class="media-body">
@@ -26,22 +30,23 @@
 	                    </div>
 	                </div>
 	                <div v-if ="!accompany.answer">
-	                	<button class="btn mobile-btn float-right" @click="toggleAnswer">답변달기</button>
-	                	<p>HaoDoc 평균 답변시간은 한시간 이내입니다. 위챗 아이디를 남겨주셨다면, 답변이 달린 후에 연락드리겠습니다.</p>
+	                	<button class="btn mobile-btn float-right" @click="toggleAnswer">回答{{!-- 답변달기 --}}</button>
+	                	<p>HaoDoc平均答复时间为一个小时内，留下微信账号，答复问题后会联系您{{!-- HaoDoc 평균 답변시간은 한시간 이내입니다. 위챗 아이디를 남겨주셨다면, 답변이 달린 후에 연락드리겠습니다. --}}</p>
 	                </div>
 					<div v-show="answerToggle" class="infoCard" id="app">
 						<br><br><br><br>
 					    <div class="card-body">
-					        <h3 class="text-center"> 답변달기 </h3>
+					        <h3 class="text-center"> 回答{{!-- 답변달기 --}} </h3>
 					        <hr>
 					        <div class="form" role="form">
 					            <div class="form-group">
-					                <label for="cc_name">1. 답변 </label>
+					                <label for="cc_name">1. 回答{{!-- 답변 --}} </label>
 					                <textarea type="text" class="form-control" placeholder="여기에 답변 작성 해주세요" v-model="newAnswer"></textarea>
 					            </div>
 					            <hr>
 					            <div class="form-group">
-					                <button type="submit" class="btn mobile-btn" @click="makeAnswer">작성완료</button>
+					                <button type="submit" class="btn mobile-btn" @click="makeAnswer">填写完成
+{{!-- 작성완료 --}}</button>
 					            </div>
 					        </div>
 					    </div>

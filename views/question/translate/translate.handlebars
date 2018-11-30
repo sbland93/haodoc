@@ -35,7 +35,8 @@
 
 <div class="infoCard" id="app">
     <div class="card-body">
-        <h3 class="text-center"> 번역서비스</h3>
+        <h3 class="text-center"> 症状翻译服务
+{{!-- 번역서비스 --}}</h3>
         <hr>
         <div class="form" role="form">
 
@@ -49,34 +50,37 @@
                 <label for="disagree">동의하지 않음</label>            
             </div>
             <div class="form-group">
-                <label>2. 需要翻译的句子</label>
+                <label>2. 需要进行症状翻译的内容</label>
                 {{!-- 2.번역이 필요한 문장.  
                     MODEL : Content--}}
-                <textarea v-model="newTranslate.content" class="form-control" placeholder="번역이 필요한 말" rows="7" ></textarea>
+                <textarea v-model="newTranslate.content" class="form-control" placeholder="需要进行症状翻译的内容{{!-- 번역이 필요한 말 --}}" rows="7" ></textarea>
             </div>
             <div class="form-group">
-                <label>3. 기타<!-- 기타 --></label>
+                <label>3. 其他<!-- 기타 --></label>
                 {{!-- 3. 기타.
                   MODEL : Remarks --}}
-                <input type="text" v-model="newTranslate.remarks" class="form-control" placeholder="기타 하오닥에게 하고싶은 말" >
+                <input type="text" v-model="newTranslate.remarks" class="form-control" placeholder="之外若有其他内容可随意填写
+{{!-- 그 외에 말씀해주실 사항들이 있다면 편하게 적어주세요. --}}" >
             </div>
             <div class="form-group">
-                <label>4. 이름<!-- 이름--></label>
-                <input type="text" v-model="newTranslate.name" class="form-control" placeholder="실명을 기재하지 않으셔도 괜찮습니다" >
+                <label>4. 姓名<!-- 이름--></label>
+                <input type="text" v-model="newTranslate.name" class="form-control" placeholder="可以不用写实名{{!-- 실명을 기재하지 않으셔도 괜찮습니다 --}}" >
             </div>
             <div class="form-group">
-                <label>5. 위챗아이디<!-- 위챗아이디 --></label>
-                <input type="text" v-model="newTranslate.wechatID" class="form-control" placeholder="답이 달릴시에 연락받고 싶다면 남겨주세요" >
+                <label>5. 微信号<!-- 위챗아이디 --></label>
+                <input type="text" v-model="newTranslate.wechatID" class="form-control" placeholder="回答后若想收到我们HaoDoc的联系请填写
+{{!-- 답이 달릴시에 연락받고 싶다면 남겨주세요 --}}" >
             </div>
             <div class="form-group">
-                <label>6. 비밀번호<!-- 비밀번호--></label>
-                <input type="text" v-model="newTranslate.password" class="form-control" placeholder="글의 수정, 삭제에 사용됩니다." >
+                <label>6. 密码<!-- 비밀번호--></label>
+                <input type="text" v-model="newTranslate.password" class="form-control" placeholder="使用于内容修改及删除时
+{{!-- 글의 수정, 삭제에 사용됩니다. --}}" >
             </div>
             <hr>
             <div class="form-group">
-                <button type="submit" class="btn mobile-btn" @click="makeTranslate">문의하기</button>
+                <button type="submit" class="btn mobile-btn" @click="makeTranslate">咨询{{!-- 문의하기 --}}</button>
                 <li v-if="errors.length">
-                    <b>아래사항들을 수정해 주세요.</b><br><br>
+                    <b>请修改以下项目{{!-- 아래사항들을 수정해 주세요. --}}</b><br><br>
                     <ul>
                       <li v-for="error in errors">\{{ error }}</li>
                     </ul>

@@ -39,13 +39,15 @@ var app = new Vue({
                 addInsurance(self.newInsurance).then(function(rtn){
 
                     if(rtn.success){
+                        alert("内容已经填写完成，我们HaoDoc会尽快确认后回复您");
 
-                        alert("글 작성이 완료되었습니다. HaoDoc이 빠르게 확인하고 연락드리겠습니다.")
+                        //alert("글 작성이 완료되었습니다. HaoDoc이 빠르게 확인하고 연락드리겠습니다.")
                         location.href = "/insuranceInfo/" + rtn.id;
                    
                     }else{
-                        
-                        alert("문제가 생겼습니다. 다시한번 시도해주세요!")
+                                                alert("出现了问题，请再次尝试");
+
+                        //alert("문제가 생겼습니다. 다시한번 시도해주세요!")
                    
                     }
 
@@ -57,8 +59,9 @@ var app = new Vue({
                 self.errors = [];
 
                 if(!_a.questionType) self.errors.push("질문 종류는 필수입니다.");
-                if(!_a.name) self.errors.push("이름은 필수로 입력해주셔야 합니다.");
-                if(!_a.password) self.errors.push("비밀번호는 필수로 입력해 주셔야 합니다.");
+                if(!_a.name) self.errors.push("名字必须输入");
+                //if(!_a.name) self.errors.push("이름은 필수로 입력해주셔야 합니다.");
+                if(!_a.password) self.errors.push("密码必须输入");//비밀번호는 필수로 입력해 주셔야 합니다.
 
             }
 

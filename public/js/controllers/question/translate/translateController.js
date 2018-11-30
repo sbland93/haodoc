@@ -40,8 +40,9 @@ var app = new Vue({
                 addTranslate(self.newTranslate).then(function(rtn){
 
                     if(rtn.success){
+                        alert("内容已经填写完成，我们HaoDoc会尽快确认后回复您");
 
-                        alert("글 작성이 완료되었습니다. HaoDoc이 빠르게 확인하고 연락드리겠습니다.")
+                        //alert("글 작성이 완료되었습니다. HaoDoc이 빠르게 확인하고 연락드리겠습니다.")
                         location.href = "/translateInfo/" + rtn.id;
                    
                     }else{

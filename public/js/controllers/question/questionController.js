@@ -26,7 +26,8 @@ var app = new Vue({
                     self.questions = self.questions.concat(rtn);
                     resolve();
                 }else{
-                    alert("문제가 있는것 같습니다. 새로고침 해주세요.");
+                    alert("出错了，请刷新");
+                    //에러입니다. 새로고침을 하고 다시한번 시도해주세요.
                     reject();
                 }
             });
@@ -38,7 +39,8 @@ var app = new Vue({
                     self.questions = self.questions.concat(rtn);
                     resolve();
                 }else{
-                    alert("문제가 있는것 같습니다. 새로고침 해주세요.");
+                    alert("出错了，请刷新");
+                    //에러입니다. 새로고침을 하고 다시한번 시도해주세요.
                     reject();
                 }
             });
@@ -50,7 +52,8 @@ var app = new Vue({
                     self.questions = self.questions.concat(rtn);
                     resolve();
                 }else{
-                    alert("문제가 있는것 같습니다. 새로고침 해주세요.");
+                    alert("出错了，请刷新");
+                    //에러입니다. 새로고침을 하고 다시한번 시도해주세요.
                     reject();
                 }
             });
@@ -63,7 +66,8 @@ var app = new Vue({
                     self.questions = self.questions.concat(rtn);
                     resolve();
                 }else{
-                    alert("문제가 있는것 같습니다. 새로고침 해주세요.");
+                    alert("出错了，请刷新");
+                    //에러입니다. 새로고침을 하고 다시한번 시도해주세요.
                     reject();
                 }
             });
@@ -80,7 +84,8 @@ var app = new Vue({
             })
 
         }).catch(function(rtnArr){
-            alert("문제가 있는것 같습니다. 새로고침 해주세요.");
+            alert("出错了，请刷新");
+            //에러입니다. 새로고침을 하고 다시한번 시도해주세요.
         })
         
 
@@ -107,7 +112,8 @@ var app = new Vue({
                     case "accompany" : targetHref = "/accompanyInfo/"; break;
                     case "translate"  : targetHref = "/translateInfo/"; break;
                     case "insurance"  : targetHref = "/insuranceInfo/"; break;
-                    default   : alert("문제가 생긴 것 같아요. 새로고침 해주세요. "); return; break;
+                    default   : alert("出错了，请刷新 "); return; break;
+                    //에러입니다. 새로고침을 하고 다시한번 시도해주세요.
                 }
 
                 targetHref += question.id;
@@ -115,8 +121,8 @@ var app = new Vue({
                 window.location.href = targetHref;
 
             }else{
-
-                alert("글의 주인이 아닌 것 같아요. 비공개 글은 주인만 확인할 수 있어요!")
+                alert("您好，由于不是内容的填写者，非公开内容只有填写者才可查看");
+                // alert("글의 주인이 아닌 것 같아요. 비공개 글은 주인만 확인할 수 있어요!")
             
             }
         
