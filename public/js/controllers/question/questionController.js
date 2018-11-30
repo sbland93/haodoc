@@ -94,6 +94,24 @@ var app = new Vue({
         moment: function (date) {
             return moment(date).format('MM/DD hh:mm a');
         },
+
+        changeCategory : function(category){
+
+            var rtnValue = "";
+        
+            switch (category) {
+
+                case "recommend"  : rtnValue = "医院推荐"; break;
+                case "accompany" : rtnValue = "陪同服务"; break;
+                case "translate"  : rtnValue = "症状翻译"; break;
+                case "insurance"  : rtnValue = "保险咨询"; break;
+                default   : alert("出错了，请刷新 "); return; break;
+                //에러입니다. 새로고침을 하고 다시한번 시도해주세요.
+            
+            }
+            return rtnValue;
+        
+        }
     },
     methods: {
 
@@ -126,7 +144,9 @@ var app = new Vue({
             
             }
         
-        }
+        },
+
+
 
 
     }

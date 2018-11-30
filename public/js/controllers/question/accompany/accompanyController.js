@@ -46,9 +46,8 @@ var app = new Vue({
                         location.href = "/accompanyInfo/" + rtn.id;
                    
                     }else{
-                                                alert("出现了问题，请再次尝试");
-
-//                        alert("문제가 생겼습니다. 다시한번 시도해주세요!")
+                        alert("出现了问题，请再次尝试");
+                        //alert("문제가 생겼습니다. 다시한번 시도해주세요!")
                    
                     }
 
@@ -61,7 +60,8 @@ var app = new Vue({
 
                 if(!_a.symptom) self.errors.push("症状内容必须输入");
                 //if(!_a.symptom) self.errors.push("증상정보는 필수로 입력해주셔야 합니다.");
-                if(!_a.day) self.errors.push("병원 방문 예정일과 시간 입력 필수입니다.");
+                if(!_a.day) self.errors.push("预计访问医院日期及时间必须输入");
+                //if(!_a.day) self.errors.push("병원 방문 예정일과 시간 입력 필수입니다.");
                 if(!_a.name) self.errors.push("名字必须输入");
                 //if(!_a.name) self.errors.push("이름은 필수로 입력해주셔야 합니다.");
                 if(!_a.password) self.errors.push("密码必须输入");
