@@ -24,7 +24,7 @@
 	                </div>
 	                <div v-if ="!translate.answer">
 	                	<button class="btn mobile-btn float-right" @click="toggleAnswer">답변달기</button>
-	                	<p>HaoDoc 평균 답변시간은 한시간 이내입니다. 위챗 아이디를 남겨주셨다면, 답변이 달린 후에 연락드리겠습니다.</p>
+	                	<p>HaoDoc平均答复时间为一个小时内，留下微信账号，答复问题后会联系您{{!-- HaoDoc 평균 답변시간은 한시간 이내입니다. 위챗 아이디를 남겨주셨다면, 답변이 달린 후에 연락드리겠습니다. --}}</p>
 	                </div>
 					<div v-show="answerToggle" class="infoCard" id="app">
 						<br><br><br><br>
@@ -34,8 +34,7 @@
 					        <div class="form" role="form">
 					            <div class="form-group">
 					                <label for="cc_name">1. 답변 </label>
-					                {{!-- 1.증상 및 받고 싶은 치료 명칭? 
-					                    MODEL : symptom--}}
+					                
 					                <textarea type="text" class="form-control" placeholder="여기에 답변 작성 해주세요" v-model="newAnswer"></textarea>
 					            </div>
 					            <hr>

@@ -7,14 +7,14 @@
 
 
 <br>
-<div class="text-center"><h4>하오닥 문의 서비스</h4></div>   
+<div class="text-center"><h4>HaoDoc咨询服务<!--하오닥 문의 서비스--></h4></div>   
 
 <div id="app" class="container">
     <div class="text-center">
-        <a href="/recommend" class="btn btn-primary margin-btn"> 병원 추천 문의 + </a>
-        <a href="/translate" class="btn btn-primary margin-btn"> 증상 번역 문의 + </a>
-        <a href="/accompany" class="btn btn-primary margin-btn"> 동행 서비스 신청 + </a>
-        <a href="/insurance" class="btn btn-primary margin-btn"> 보험 관련 문의 + </a>
+        <a href="/recommend" class="btn btn-primary margin-btn"> 医院推荐服务 + </a>
+        <a href="/translate" class="btn btn-primary margin-btn"> 症状翻译服务 + </a>
+        <a href="/accompany" class="btn btn-primary margin-btn"> 同行服务申请 + </a>
+        <a href="/insurance" class="btn btn-primary margin-btn"> 保险相关咨询 + </a>
     </div>
     <br><br>
     <div class="row">
@@ -24,14 +24,14 @@
                     <div class="profile-teaser-main">
                         <h4 class="profile-name">\{{question.name}}<span class="info float-right" style="font-size:0.7em">\{{question.updated_at | moment}}</span></h4>
                         <div class="profile-info">
-                            <div class="info"><span class=""></span>&nbsp;<span class="">[비공개] [\{{question.category}}]</span>&nbsp;&nbsp;&nbsp;\{{question.name}}님의 비공개글입니다.</div>
+                            <div class="info"><span class=""></span>&nbsp;<span class="">[非公开] [\{{question.category}}]</span>&nbsp;&nbsp;&nbsp;\{{question.name}}非公开内容{{!-- 님의 비공개 글입니다. --}}</div>
                         </div>
                         <br>
                         <div v-show="question.answer" class="list-group-item clearfix" >
                             <div class="profile-teaser-main">
                                 <h4 class="profile-name">HaoDoc</h4>
                                 <div class="profile-info">
-                                    <div class="info"><span class="">\{{question.name}}</span> 하오닥 입니다. 답변 완료 했습니다. &nbsp;&nbsp;</div>
+                                    <div class="info"><span class="">\{{question.name}}您好，{{!-- 님 --}}</span> 我们是HaoDoc，已经回答完毕{{!-- 하오닥 입니다. 답변 완료 했습니다. --}} &nbsp;&nbsp;</div>
                                 </div>
                             </div>
                         </div>

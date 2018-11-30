@@ -11,12 +11,16 @@
 	            <div class="media-body">
 	                <div class="media-heading"><h4>\{{insurance.name}}</h4> <span>- \{{insurance.updated_at | moment}}</span></div>
 	                <p>
-	                	- 질문종류 : \{{insurance.questionType}} <br>
-	                	- 보험종류 : \{{insurance.kindOfInsurance}} <br>
-	                	- 학교 : \{{insurance.school}} <br>
-	                	- 가입하고싶은 보험 : \{{insurance.whatInsurance}} <br>
-	                	- 기타 : \{{insurance.remarks}} <br>
-	                	- 위챗아이디 : \{{insurance.wechatID}} <br>
+	                	- 问题种类
+{{!-- 질문종류 --}} : \{{insurance.questionType}} <br>
+	                	- 保险种类{{!-- 보험종류 --}} : \{{insurance.kindOfInsurance}} <br>
+	                	- 学校
+{{!-- 학교 --}} : \{{insurance.school}} <br>
+	                	- 想要加入的保险
+{{!-- 가입하고싶은 보험 --}} : \{{insurance.whatInsurance}} <br>
+	                	- 其他{{!-- 기타 --}} : \{{insurance.remarks}} <br>
+	                	- 微信账号
+{{!-- 위챗아이디 --}} : \{{insurance.wechatID}} <br>
 	                </p>
 	                <div v-if="insurance.answer" class="media">
 	                    <div class="media-body">
@@ -26,21 +30,22 @@
 	                </div>
 	                <div v-if ="!insurance.answer">
 	                	<button class="btn mobile-btn float-right" @click="toggleAnswer">답변달기</button>
-	                	<p>HaoDoc 평균 답변시간은 한시간 이내입니다. 위챗 아이디를 남겨주셨다면, 답변이 달린 후에 연락드리겠습니다.</p>
+	                	<p>HaoDoc平均答复时间为一个小时内，留下微信账号，答复问题后会联系您{{!-- HaoDoc 평균 답변시간은 한시간 이내입니다. 위챗 아이디를 남겨주셨다면, 답변이 달린 후에 연락드리겠습니다. --}}</p>
 	                </div>
 					<div v-show="answerToggle" class="infoCard" id="app">
 						<br><br><br><br>
 					    <div class="card-body">
-					        <h3 class="text-center"> 답변달기 </h3>
+					        <h3 class="text-center"> 回答{{!-- 답변달기 --}} </h3>
 					        <hr>
 					        <div class="form" role="form">
 					            <div class="form-group">
-					                <label for="cc_name">1. 답변 </label>
+					                <label for="cc_name">1. 回答{{!-- 답변 --}} </label>
 					                <textarea type="text" class="form-control" placeholder="여기에 답변 작성 해주세요" v-model="newAnswer"></textarea>
 					            </div>
 					            <hr>
 					            <div class="form-group">
-					                <button type="submit" class="btn mobile-btn" @click="makeAnswer">작성완료</button>
+					                <button type="submit" class="btn mobile-btn" @click="makeAnswer">填写完成
+{{!-- 작성완료 --}}</button>
 					            </div>
 					        </div>
 					    </div>
