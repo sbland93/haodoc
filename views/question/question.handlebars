@@ -24,7 +24,7 @@
                     <div class="profile-teaser-main">
                         <h4 class="profile-name">\{{question.name}}<span class="info float-right" style="font-size:0.7em">\{{question.updated_at | moment}}</span></h4>
                         <div class="profile-info">
-                            <div class="info"><span class=""></span>&nbsp;<span class="">[非公开] [\{{question.category}}]</span>&nbsp;&nbsp;&nbsp;\{{question.name}}非公开内容{{!-- 님의 비공개 글입니다. --}}</div>
+                            <div class="info"><span class=""></span>&nbsp;<span class="">[非公开] [\{{question.category | changeCategory}}]</span>&nbsp;&nbsp;&nbsp;\{{question.name}}非公开内容{{!-- 님의 비공개 글입니다. --}}</div>
                         </div>
                         <br>
                         <div v-show="question.answer" class="list-group-item clearfix" >
@@ -47,11 +47,13 @@
 
 
 {{#section 'jquery'}}
+
     <script type="text/javascript" src="/js/api/recommend.js"></script>
     <script type="text/javascript" src="/js/api/translate.js"></script>
     <script type="text/javascript" src="/js/api/accompany.js"></script>
     <script type="text/javascript" src="/js/api/insurance.js"></script>
     <script type="text/javascript" src="/js/controllers/question/questionController.js"></script>
+    
 {{/section}}
 
 

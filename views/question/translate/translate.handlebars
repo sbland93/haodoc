@@ -45,9 +45,9 @@
                 {{!-- 1.하오닥을 통해 번역하는 것을 감사합니다.우리 고객님께 번역서비스 제공할 수 있는데 개인 잘못 표현으로 인해 문제 생길 경우 하오닥 책임지지 않습니다.동의하시면＂동의＂를 선택해주세요. 고객님의 동의를 받은후 최선을 다 해서 변역를 하겠습니다. 
                     MODEL : agreement--}}
                 <input type="radio" id="agree" name="agreement" v-model="newTranslate.agreement" value="true" checked="checked" />
-                <label for="agree">동의</label>
+                <label for="agree">同意{{!-- 동의 --}}</label>
                 <input type="radio" id="disagree" name="agreement" v-model="newTranslate.agreement" value="false" style="margin-left:20px" />
-                <label for="disagree">동의하지 않음</label>            
+                <label for="disagree">不同意{{!-- 동의하지 않음 --}}</label>            
             </div>
             <div class="form-group">
                 <label>2. 需要进行症状翻译的内容</label>

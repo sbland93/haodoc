@@ -45,8 +45,7 @@ var app = new Vue({
                         location.href = "/insuranceInfo/" + rtn.id;
                    
                     }else{
-                                                alert("出现了问题，请再次尝试");
-
+                        alert("出现了问题，请再次尝试");
                         //alert("문제가 생겼습니다. 다시한번 시도해주세요!")
                    
                     }

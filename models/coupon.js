@@ -34,6 +34,7 @@ var couponSchema = mongoose.Schema({
     thumbnailImage: String,
     couponImage: [ String ],
     password : String,
+    remarks : String,
     questions : [ questionSchema ],
 	updated_at : { type: Date, default: Date.now },
 

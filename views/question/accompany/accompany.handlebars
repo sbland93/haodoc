@@ -41,8 +41,7 @@
 
 <div class="infoCard" id="app">
     <div class="card-body">
-        <h3 class="text-center"> 同行服务申请
-{{!-- 동행 서비스 --}}</h3>
+        <h3 class="text-center"> 同行服务申请{{!-- 동행 서비스 --}}</h3>
         <hr>
         <div class="form" role="form">
 
@@ -73,7 +72,7 @@
                 <label>4. 预计访问医院日期及时间</label>
                 {{!-- 5. 병원 방문 예정일과 시간
                     MODEL: day--}}
-                <input type="text" class="form-control" v-model="newAccompany.day" placeholder="ex) 000 00000 00000">
+                <input type="text" class="form-control" v-model="newAccompany.day" placeholder="ex) 2018-10-01 / 12:00 PM">
             </div>
             <div class="form-group">
                 <label>5.其他<!-- 기타 --></label>
@@ -89,13 +88,11 @@
             </div>
             <div class="form-group">
                 <label>8. 密码{{!-- 비밀번호 --}}</label>
-                <input type="text" v-model="newAccompany.password" class="form-control" placeholder="使用于内容修改及删除时
-{{!-- 글의 수정, 삭제에 사용됩니다. --}}" >
+                <input type="text" v-model="newAccompany.password" class="form-control" placeholder="使用于内容修改及删除时{{!-- 글의 수정, 삭제에 사용됩니다. --}}" >
             </div>
             <hr>
             <div class="form-group">
-                <button type="submit" class="btn mobile-btn" @click="makeAccompany">咨询
-{{!-- 문의하기 --}}</button>
+                <button type="submit" class="btn mobile-btn" @click="makeAccompany">咨询{{!-- 문의하기 --}}</button>
                 <li v-if="errors.length">
                     <b>请修改以下项目{{!-- 아래사항들을 수정해 주세요. --}}</b><br><br>
                     <ul>

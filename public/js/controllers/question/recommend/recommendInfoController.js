@@ -32,7 +32,8 @@ var app = new Vue({
             if(rtn.success){
                 self.recommend = rtn;
             }else{
-                alert("문제가 생긴 것 같아요.");
+                alert("出现了问题，请再次尝试");
+                //alert("문제가 생긴것 같습니다.");
             }
         
         });
@@ -44,7 +45,8 @@ var app = new Vue({
         toggleAnswer : function(){
             
             var self = this;
-            var pass=prompt("HaoDoc 만 답변을 남길 수 있어요. 금방 답변을 남겨드릴게요:)")
+            var pass=prompt("只有HaoDoc才可以答复，会马上回复您的")
+            //var pass=prompt("HaoDoc 만 답변을 남길 수 있어요. 금방 답변을 남겨드릴게요:)")
             if(pass !== "inspire") return;
             self.answerToggle = !self.answerToggle;
 
@@ -56,7 +58,8 @@ var app = new Vue({
 
             if(self.newAnswer.length < 10){
                 
-                alert("10글자 이상의 답변을 작성하세요.")
+                alert("请填写10个字以上的回答");
+                //alert("10글자 이상의 답변을 작성하세요.")
                 return;
             
             }
@@ -67,7 +70,8 @@ var app = new Vue({
                 
                 if(rtnValue.success){
                 
-                    alert("답변이 달렸습니다.");
+                    alert("填写完成");
+                    //alert("답변이 달렸습니다.");
                     self.newAnswer = "";
                     self.answerToggle = false;
                     getRecommend(recommendID).then(function(rtn){
@@ -75,14 +79,16 @@ var app = new Vue({
                         if(rtn.success){
                             self.recommend = rtn;
                         }else{
-                            alert("문제가 생긴것 같아요. 새로고침 해주세요.");
+                            alert("出现了问题，请再次尝试");
+                            //alert("문제가 생긴것 같습니다.");
                         }
 
                     })
                 
                 }else{
-                
-                    alert("문제가 생긴것 같습니다.");
+        
+                    alert("出现了问题，请再次尝试");
+                    //alert("문제가 생긴것 같습니다.");
                 
                 }
                 
