@@ -94,7 +94,7 @@
                         <tbody>
                             <tr v-for="(payer, index) in payers">
                                 <td><a href="#">\{{index}}</a></td>
-                                <td>\{{payer.coupon.couponName}}</td>
+                                <td><span v-if="payer.coupon">\{{payer.coupon.couponName}}</span></td>
                                 <td>\{{payer.chineseName}}</td>
                                 <td>\{{payer.payerName}}</td>
                                 <td>\{{payer.englishName}}</td>
