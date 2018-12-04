@@ -10,6 +10,7 @@ module.exports = function(coupon){
 		id: coupon._id,
 		couponName: coupon.couponName,
 		price : coupon.price,
+		remarks : coupon.remarks,
 		questions : coupon.questions,
 		couponRange: coupon.couponRange,
 		hospitalName: coupon.hospitalName,

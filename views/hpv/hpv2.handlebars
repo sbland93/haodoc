@@ -16,7 +16,10 @@
             <p class="text-center" style="color:#BD1622; font-size:1.2em;"><b>支付完成后必须将支付成功画面进行截图</b></p>
 
             <p class="text-center"><b> 活动名称<!-- 이벤트 이름--> : \{{coupon.couponName}}</b></p>   
-            <p class="text-center"><b> 活动价格<!--이벤트가격 --> : ₩\{{coupon.price}}</b></p>
+            <p class="text-center">
+                <b> 活动价格<!--이벤트가격 --> : ₩\{{coupon.price}}</b><br>
+                <span v-if="coupon.remarks"> (其他 : \{{coupon.remarks}})</span>
+            </p>
             <p style="color:#BD1622;"><b>* 微信/支付宝支付没有与中国的银行卡进行连接或是顾客身在中国可能会导致支付时出现问题。<br>
             支付时若出现问题请咨询HaoDoc公众号，我们会迅速帮您解决问题。</b></p>
             <p class="text-center"><b>[ 公众号 ID : HaoDoc ]</b></p>
