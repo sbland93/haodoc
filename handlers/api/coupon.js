@@ -34,7 +34,7 @@ module.exports = function(){
 		//Query를 보내면,쿼리에 해당하는 Coupon에 해당하는 것들을 내보내고
 		//Query가 없으면 모든 Coupon를 내보낸다.
 		getCoupons: function(req, res, next){
-			Coupon.find(req.query)
+			Coupon.find(req.query).sort({updated_at:'-1'})
 			.exec(function(err, coupons){
 				if(err) return next(err);
 				res.json(coupons.map(couponViewModel));
