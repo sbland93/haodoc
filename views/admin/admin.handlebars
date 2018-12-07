@@ -50,6 +50,7 @@
                                 <th>이름</th>
                                 <th>성별</th>
                                 <th>위챗</th>
+                                <th>휴대폰</th>
                                 <th>메모</th>
                                 <th>신청시간</th>
                                 <th>기능</th>
@@ -62,6 +63,7 @@
                                 <td>\{{participant.participantName}}</td>
                                 <td>\{{participant.gender}}</td>
                                 <td>\{{participant.wechatID}}</td>
+                                <td><span v-if="participant.phone">\{{participant.phone}}</span></td>
                                 <td>\{{participant.memo}}</td>
                                 <td>\{{participant.updated_at | moment}}</td>
                                 <td><button @click="removeParticipant(participant.id)" class="btn btn-primary">\{{participant.participantName}}삭제</button></td>

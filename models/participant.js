@@ -6,6 +6,7 @@ var participantSchema = mongoose.Schema({
     participantName: String,
     gender: String,
     wechatID: String,
+    phone : String,
     memo: String,
     eventName: String,
     remarks: String,
