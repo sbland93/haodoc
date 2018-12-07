@@ -16,6 +16,7 @@ var app = new Vue({
 		gender: "",
 		memo: "",
 		eventName: "",
+		phone : "",
 
 	},
 	
@@ -48,6 +49,7 @@ var app = new Vue({
 				gender : self.gender,
 				memo : self.memo,
 				eventName: self.event.eventName,
+				phone : self.phone,
 			
 			};
 
@@ -57,6 +59,7 @@ var app = new Vue({
 					self.wechatID = "";
 					self.gender = "";
 					self.memo = "";
+					self.phone = "";
 					alert("您的活动申请已经成功! 我们会尽快联系您，感谢您的支持与关注");
 				}else{
 					alert("存在未填写的空格.请每个空格都进行填写")

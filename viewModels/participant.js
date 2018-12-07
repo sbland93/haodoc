@@ -13,6 +13,7 @@ module.exports = function(participant){
 		gender: participant.gender,
 		eventName: participant.eventName,
 		wechatID: participant.wechatID,
+		phone : participant.phone,
 		memo: participant.memo,
 		remarks: participant.remarks,
 		updated_at : participant.updated_at,		
