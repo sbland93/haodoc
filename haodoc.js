@@ -95,7 +95,7 @@ app.use(function(req, res, next){
 
 //커스텀 500 페이지
 app.use(function(err, req, res, next){
-	console.error('Error handler is coming....',err.stack);
+	console.error('Error handler is coming....', err.stack);
 	res.type('text/html');
 	res.status(500);
 	res.render('home/main/500');
