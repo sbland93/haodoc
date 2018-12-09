@@ -161,7 +161,7 @@
                     쿠폰기간 : <input type="text" class="form-control" v-model="update_coupon.subway">
                     병원 상세 주소 : <input type="text" class="form-control" v-model="update_coupon.updated_at">
                     썸네일 이미지 : <input type="text" class="form-control" v-model="update_coupon.thumbnailImage">
-                    쿠폰 이미지 : <input type="text" class="form-control" v-for="couponImage in update_coupon.couponImage" v-model="couponImage">
+                    쿠폰 이미지 : <input type="text" class="form-control" v-for="(couponImage, index) in update_coupon.couponImage" v-model="update_coupon.couponImage[index]">
                     <button class="btn btn-primary" @click="changeCoupon">수정완료</button>
                     <button class="btn btn-primary" @click="toggle_change_coupon(update_coupon, -1)">취소</button>
                 </div>
@@ -277,7 +277,7 @@
                     이벤트기간 : <input type="text" class="form-control" v-model="update_event.subway">
                     병원 상세 주소 : <input type="text" class="form-control" v-model="update_event.updated_at">
                     썸네일 이미지 : <input type="text" class="form-control" v-model="update_event.thumbnailImage">
-                    이벤트 이미지 : <input type="text" class="form-control" v-for="eventImage in update_event.eventImage" v-model="eventImage">
+                    이벤트 이미지 : <input type="text" class="form-control" v-for="(eventImage, index) in update_event.eventImage" v-model="update_event.eventImage[index]">
                     <button class="btn btn-primary" @click="changeEvent">수정완료</button>
                     <button class="btn btn-primary" @click="toggle_change_event(update_event, -1)">취소</button>
                 </div>
