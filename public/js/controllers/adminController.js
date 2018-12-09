@@ -271,8 +271,9 @@ var app = new Vue({
 
             var self = this;
             //Vue.set(self.events, self.udpate_event_index, self.update_event);
+            console.log(self.update_coupon);
             updateCoupon(self.update_coupon.id, self.update_coupon).then(function(rtn){
-                
+                console.log(rtn);
                 if(rtn.success){
 
                     alert("쿠폰 수정 완료!");
