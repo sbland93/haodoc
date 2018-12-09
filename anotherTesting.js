@@ -1,10 +1,11 @@
-var stringLength = `[10/11월] 협약 후 5명 고용 ( 직접 고용 3명 / 간접 고용 2명 )
-[10월] 하오닥 웹 베타 서비스 제작 완료 및 출시
-[11월] Tencent를 통한 위챗 기업 공식 계정 출시
-[11월] 베타 서비스 유저 3000명
-[11월] 11월 하오닥 병원 이벤트 결제액 3천만원
-[11월] 한국/중국 양국 상표권 8건 출원 진행
-[10월/11월] 하오닥 병원 제휴 체결 8건
-[10월/11월] 마케팅 제휴 체결 17건`
 
-console.log(stringLength.length);
+var fs = require("fs");
+
+var path = require('path');
+
+console.log(path.join(__dirname + "/public/images/event"));
+
+
+fs.readdir(path.join(__dirname + "/public/images/event"), function(error, fileList){
+	console.log(fileList);
+});

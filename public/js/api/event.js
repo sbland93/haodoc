@@ -65,10 +65,10 @@ var deleteEvent = function(id){
 };
 
 //updateEvent는 데이터만 보내서, ajax로 유저의 아이디를 체크한후, 그 유저아이디를 활용한다.
-var updateEvent = function(data){
+var updateEvent = function(id, data){
 	return new Promise(function(resolve, reject){
 		$.ajax({
-			url: baseEvent,
+			url: baseEvent + '/' + id,
 			method: 'PUT',
 			data: data,
 			success: function(rtnData){

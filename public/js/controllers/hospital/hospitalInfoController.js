@@ -135,12 +135,14 @@ var app = new Vue({
 			self.photos.push("");
 
 		},
+
 		deletePhoto: function(index, event){
 			event.preventDefault();
 			var self = this;
 			var photos = self.photos;
 			photos.splice(index, 1);
 		},
+		
 		updateHospital: function(){
 
 			var self = this;

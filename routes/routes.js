@@ -5,19 +5,6 @@ const hospitalHandlers = require('../handlers/hospital.js')();
 const questionHandlers = require('../handlers/question.js')();
 
 
-var Event = require("../models/event.js");
-
-
-var multer = require("multer");
-var storage = multer.diskStorage({
-	destination: function(req, file, cb){
-		cb(null, 'public/images/event/');
-	},
-	filename: function(req, file, cb){
-		cb(null, Date.now() + file.originalname);
-	},
-});
-var upload = multer({ storage: storage });
 
 module.exports = function(app){
 
@@ -80,6 +67,7 @@ module.exports = function(app){
 	require('./api/insurance.js')(app);
 	require('./api/translate.js')(app);
 	require('./api/accompany.js')(app);
+	require('./api/file.js')(app);
 
 
 
