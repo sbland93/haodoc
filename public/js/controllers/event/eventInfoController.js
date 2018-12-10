@@ -76,6 +76,7 @@ var app = new Vue({
 			if(validation_flag){
 				addParticipant(self.new_participant_obj).then(function(rtn){
 					if(rtn.success){
+						
 						self.new_participant_obj = {
 							participantName: null,
 							wechatID: null,
@@ -84,6 +85,12 @@ var app = new Vue({
 							eventName: null,
 							phone : null,
 						};
+
+						self.terms1 = null;
+						self.terms2 = null;
+						self.term_1_toggle = false;
+						self.term_2_toggle = false;
+
 						alert("您的活动申请已经成功! 我们会尽快联系您，感谢您的支持与关注");
 					}else{
 						alert("存在未填写的空格.请每个空格都进行填写")
