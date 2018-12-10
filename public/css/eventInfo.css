@@ -24,8 +24,13 @@
     .mobile-btn{
     	float:right;
     }
-
-
+    /* 이벤트 신청 Form에서 Scroll이 뜨도록*/
+    .scroll {
+        overflow:scroll;
+        height:200px;
+        padding:10px;
+        background-color : #DCDCDC;
+    }
 
 @media (max-width: 768px) {
 

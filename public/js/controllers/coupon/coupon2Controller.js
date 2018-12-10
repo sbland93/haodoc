@@ -1,23 +1,23 @@
 
     
 var url =  window.location.pathname;
-var hpvID = url.replace("/hpv2/", "");
+var couponID = url.replace("/coupon2/", "");
 
 
 var app = new Vue({
 
-    el : "#hpv2_app",
+    el : "#coupon2_app",
 
     data : {
 
     	coupon : "",
-        hpvID : hpvID,
+        couponID : couponID,
     },
 
     mounted: function(){
     	var self = this;
     	
-        getCoupon(hpvID).then(function(coupon){
+        getCoupon(couponID).then(function(coupon){
             
             self.coupon = coupon;
         });

@@ -1,6 +1,6 @@
 
 var homeHandlers = require('../handlers/home.js')();
-var hpvHandlers = require('../handlers/hpv.js')();
+var couponHandlers = require('../handlers/coupon.js')();
 const hospitalHandlers = require('../handlers/hospital.js')();
 const questionHandlers = require('../handlers/question.js')();
 
@@ -27,13 +27,13 @@ module.exports = function(app){
 	app.get('/coupon/:id', homeHandlers.couponInfo);
 
 
-	//hpv Handlers
-	app.get('/hpv0', hpvHandlers.hpv0);
-	app.get('/hpv0/:id', hpvHandlers.hpv0);
-	app.get('/hpv1', hpvHandlers.hpv1);
-	app.get('/hpv1/:id', hpvHandlers.hpv1);
-	app.get('/hpv2', hpvHandlers.hpv2);
-	app.get('/hpv2/:id', hpvHandlers.hpv2);
+	//coupon Handlers
+	app.get('/coupon0', couponHandlers.coupon0);
+	app.get('/coupon0/:id', couponHandlers.coupon0);
+	app.get('/coupon1', couponHandlers.coupon1);
+	app.get('/coupon1/:id', couponHandlers.coupon1);
+	app.get('/coupon2', couponHandlers.coupon2);
+	app.get('/coupon2/:id', couponHandlers.coupon2);
 
 	//For Development Handlers
 	app.get('/find', hospitalHandlers.find);

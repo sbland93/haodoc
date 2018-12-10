@@ -88,7 +88,7 @@ var app = new Vue({
 
 
         hpvZeroHref: function(){
-            return "/hpv0/" + self.couponID;
+            return "/coupon0/" + self.couponID;
         },
 
         addQuestion : function(){
