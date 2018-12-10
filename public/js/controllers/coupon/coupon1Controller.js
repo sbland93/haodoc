@@ -1,11 +1,11 @@
 	
 var url =  window.location.pathname;
-var hpvID = url.replace("/hpv1/", "");
+var couponID = url.replace("/coupon1/", "");
 
 
 var app = new Vue({
 
-  el:'#hpv1_app',
+  el:'#coupon1_app',
 
   data:{
     errors:[],
@@ -33,12 +33,12 @@ var app = new Vue({
 
     	if(newPayer.chineseName && newPayer.englishName && newPayer.gender && newPayer.birthDay && newPayer.phone && newPayer.wechatID){
 			
-
+    		newPayer["coupon"] = couponID;
 			addPayer(newPayer).then(function(data){
 			
 				if(data.success){		
 					alert('个人信息成功提交!');//개인정보 제출 성공
-					location.href = '/hpv2/' + hpvID;
+					location.href = '/coupon2/' + couponID;
 					return;
 				} 
 				else{

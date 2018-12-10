@@ -39,35 +39,79 @@
 		        <div class="form" role="form">
 		            <div class="form-group">
 		                <label for="cc_name">姓名<!--이름--></label>
-		                <input type="text" v-model="participantName" class="form-control">
+		                <input type="text" v-model="new_participant_obj.participantName" class="form-control">
 		            </div>
 			    	<label>性别<!--성별--></label>
 			        <div class="form-group">
-			            <input type="radio" id="male" name="gender" value="male" v-model="gender" checked="checked" />
+			            <input type="radio" id="male" name="gender" value="male" v-model="new_participant_obj.gender" checked="checked" />
 			            <label for="male">男<!--남자--></label>
-			            <input type="radio" id="female" name="gender" value="female" v-model="gender" style="margin-left:20px" />
+			            <input type="radio" id="female" name="gender" value="female" v-model="new_participant_obj.gender" style="margin-left:20px" />
 			            <label for="female">女<!--여자--></label>
 			        </div>
 			        <div class="form-group">
 	                    <label>电话号码</label> 
-	                    <input type="text" v-model="phone" class="form-control"placeholder="010-1234-5678" />
+	                    <input type="text" v-model="new_participant_obj.phone" class="form-control"placeholder="010-1234-5678" />
 			        </div>
 		            <div class="form-group">
 		                <label>微信账号<!--위챗아이디--></label>
-		                <input type="text" v-model="wechatID" class="form-control" placeholder="若将微信账号开启不允许搜索则我们可能无法联系到您">
+		                <input type="text" v-model="new_participant_obj.wechatID" class="form-control" placeholder="若将微信账号开启不允许搜索则我们可能无法联系到您">
 		            </div>
 		            <div class="form-group">
 		                <label>记录<!--메모--></label>
-		                <input type="text" v-model="memo" class="form-control" placeholder="请填写希望的咨询时间，日期等事项"><!--상담시간, 날짜 등을 입력해주세요.-->
+		                <input type="text" v-model="new_participant_obj.memo" class="form-control" placeholder="请填写希望的咨询时间，日期等事项"><!--상담시간, 날짜 등을 입력해주세요.-->
 		            </div>
 		            <div class="form-group">
 		                <label>活动名称<!--이벤트 이름--></label>
-		                <input type="text" class="form-control" v-model="eventName" disabled :placeholder="event.eventName">
+		                <input type="text" class="form-control" v-model="new_participant_obj.eventName" :placeholder="event.eventName" disabled>
+		            </div>
+
+		            <div class="form-group">
+		            	<br>
+			    		<input type="checkbox" name="terms1" id="terms1" v-model="terms1">个人信息第三方提供同意 (咨询) <button @click="toggle('term_1_toggle')">仔细查看</button>
+			    		<div v-show="term_1_toggle">
+			            	{{!-- 개인정보 제3자 제공동의 (상담) --}}
+			                <label>个人信息第三方提供同意 (咨询)</label>
+				            <div class="scroll">
+				    			<p>个人信息第三方提供同意 (咨询) <br> </p>
+				    			<p>&nbsp;本公司为了可以给会员您顺利的提供我们的医院活动申请服务，我们需要给第三方提供个人信息。</p>
+				                <p>&nbsp;个人信息接收者 : 提供活动服务的医院</p>
+				                <p>&nbsp;个人信息使用目的 : 活动服务的提供及确认</p>
+				                <p>&nbsp;需提供的个人信息 : 医院预约,活动服务提供及确认</p>
+				                <p>&nbsp;需提供的个人信息 : <br>1) 姓名 <br>2) 手机号码 <br>3) 微信ID <br>4) 性别 <br>5) 备注 (特殊事项等) <br></p>
+				                <p>&nbsp;个人信息保存及使用期间 : 直到活动服务提供及医院访问/诊疗的目的达成为止</p>
+				                <p>&nbsp;拒绝同意带来的不利 : 活动服务使用受限</p>
+				                <p>&nbsp;有权不同意个人信息的提供,但不同意时使用活动服务会存在一定的受限. 接收的个人信息不使用于活动服务用途外。</a></p>
+				    		</div>
+				    	</div>
+		            </div>
+		            <div class="form-group">
+		            	<br>
+			    		<input type="checkbox" name="terms2" id="terms2" v-model="terms2">个人信息处理委托同意 <button @click="toggle('term_2_toggle')">仔细查看</button>
+			    		<div v-show="term_2_toggle">
+			            	{{!-- 개인정보 처리 위탁 동의 --}}
+			                <label>个人信息处理委托同意</label>
+				            <div class="scroll">
+				    			<p>个人信息处理委托同意 <br> </p>
+				    			<p>&nbsp;提供接收者 : 进行个人信息处理委托的业务内容</p>
+				                <p>&nbsp;INSPIRE(HaoDoc服务运营企业名称) : 个人信息收集,保管，处理，废除，业务的委托处理</p>
+				                <p>&nbsp;医院代宣传企业 : 活动相关宣传及支付代行业务</p>
+				    		</div>
+			    		</div>
 		            </div>
 		            <hr>
+		            <ul>
+		                <li v-if="errors.length">
+		                	{{!-- 아래사항들을 수정해 주세요 --}}
+		                    <b>请修改以下项目</b><br>
+		                    <ul>
+		                      <li v-for="error in errors">\{{ error }}</li>
+		                    </ul>
+		                </li>
+		            </ul>
 		            <div class="form-group">
 		                <button type="submit" class="btn mobile-btn" @click="newParticipant">申请咨询<!--상담신청하기--></button>
 		            </div>
+		            
 		        </div>
 		    </div>
 		</div>
