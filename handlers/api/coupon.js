@@ -12,11 +12,7 @@ var deleteFiles = function(base_path, file_name_arr){
 		//하나의 transaction 단위로 묶어야 한다. TODO
 		var delete_prmoise = new Promise(function(resolve, reject){
 			fs.unlink(path.join(__dirname + base_path) + file_name_arr[i], (err) => {
-				if (err) reject(err);
-				else{
-					console.log('file deleted', file_name_arr[i]);
-					resolve();
-				}
+				resolve();
 			});
 		});
 
