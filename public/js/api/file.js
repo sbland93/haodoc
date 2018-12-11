@@ -24,6 +24,7 @@ var addFile = function(dir, data){
 	var newBase = baseFile;
 	if(dir === "event") newBase += "/event";
 	if(dir === "coupon") newBase += "/coupon";
+	if(dir === "category") newBase += "/category";
 
 	return new Promise(function(resolve, reject){
 

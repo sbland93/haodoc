@@ -6,11 +6,14 @@ var path = require('path');
 
 
 //body 객체에 담아 보낼것들
-//dir 해당 디렉토리의 별칭 [ "coupon", "event" ] => [ "/coupon/all/", "/event/" ]
+//dir 해당 디렉토리의 별칭 [ "coupon", "event", "category" ] => [ "/coupon/all/", "/event/", "/category/all/" ]
 //fileName => 해당 파일명.
 var dir_dictionary = {
+
 	"coupon" : "../../../public/images/coupon/all",
-	"event" : "../../../public/images/event"
+	"event" : "../../../public/images/event",
+	"category" : "../../../public/images/category/all"
+
 };
 
 

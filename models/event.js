@@ -5,6 +5,7 @@ var eventSchema = mongoose.Schema({
     
     eventName: String,
     eventRange: String,
+    categorys : { type : [ String ], default : [] },
     price : Number,
     hospitalName: String,
     subway: String,

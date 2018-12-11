@@ -6,10 +6,12 @@ module.exports = function(coupon){
 		};
 	}
 	return {
+		
 		success: true,
 		id: coupon._id,
 		couponName: coupon.couponName,
 		price : coupon.price,
+		categorys : coupon.categorys,
 		remarks : coupon.remarks,
 		questions : coupon.questions,
 		couponRange: coupon.couponRange,

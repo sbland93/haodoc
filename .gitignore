@@ -1,0 +1,5 @@
+public/images/coupon/all/*
+public/images/event/*
+!public/images/event/base/*
+public/images/category/all/*
+credentials.js

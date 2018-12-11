@@ -28,6 +28,7 @@ var couponSchema = mongoose.Schema({
     couponName: String,
     couponRange: String,
     price : Number,
+    categorys : { type: [ String ], default: [] },
     hospitalName: String,
     subway: String,
     address: String,
@@ -44,3 +45,7 @@ var couponSchema = mongoose.Schema({
 var Coupon = mongoose.model('Coupon', couponSchema);
 
 module.exports = Coupon;
+
+
+
+

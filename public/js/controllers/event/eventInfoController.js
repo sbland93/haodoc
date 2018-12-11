@@ -13,12 +13,14 @@ var app = new Vue({
 
 
 		new_participant_obj : {
+
 			participantName: null,
 			wechatID: null,
 			gender: null,
 			memo: null,
 			eventName: null,
 			phone : null,
+		
 		},
 		
 		terms1 : null,

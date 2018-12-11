@@ -53,6 +53,10 @@ module.exports = function(app){
 	app.get('/insuranceInfo/:id', questionHandlers.insuranceInfo);
 	app.get('/accompanyInfo/:id', questionHandlers.accompanyInfo);
 
+	//Renewal
+	app.get('/test', function(req, res, next){
+		res.render("test", {layout: false});
+	})
 
 
 	require('./api/participant.js')(app);
@@ -68,6 +72,7 @@ module.exports = function(app){
 	require('./api/translate.js')(app);
 	require('./api/accompany.js')(app);
 	require('./api/file.js')(app);
+	require('./api/category.js')(app);
 
 
 

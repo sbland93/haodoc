@@ -13,6 +13,9 @@ var app = new Vue({
         payers : "",
         coupons: "",
         couponFiles : "",
+        categorys : "",
+        categoryFiles : "",
+        list_array : [ "" ],
 
         //For Update Event Obj
         update_event_toggle : false,
@@ -25,6 +28,7 @@ var app = new Vue({
             hospitalName: "",
             subway: "",
             address: "",
+            categorys : [],
             thumbnailImage: "",
             eventImage: "",
             updated_at: "",
@@ -41,22 +45,37 @@ var app = new Vue({
             hospitalName: "",
             subway: "",
             address: "",
+            categorys : [],
             thumbnailImage: "",
             couponImage: "",
             updated_at: "",
         },
 
+        //For Update Event Obj
+        update_category_toggle : false,
+        update_category_index : -1,
+
+        update_category : {
+            categoryName: "",
+            iconImage : "",
+            content: "",
+            questions: "",
+            updated_at : "",
+        },
+
         toggles : {
-            payerToggle : true,
+            payerToggle : false,
             participantToggle : false,
             couponToggle : false,
             eventToggle : false,
             addCouponToggle : false,
             addEventToggle : false,
-            cateogryToggle : false,
+            categoryToggle : true,
             coupon_file_toggle: false,
             event_file_toggle : false,
         },
+
+
 
 
     },
@@ -88,6 +107,14 @@ var app = new Vue({
         getFiles({dir : "coupon"}).then(function(files){
             self.couponFiles = files;
         });
+
+        getFiles({dir : "category"}).then(function(files){
+            self.categoryFiles = files;
+        });
+
+        getCategorys().then(function(categorys){
+            self.categorys = categorys;
+        })
     
     },
 
@@ -97,6 +124,33 @@ var app = new Vue({
         }
     },
     methods: {
+
+        //추가값을 활용하기 위함
+        change_list_array : function(manipulate_string, event){
+            
+            event.preventDefault();
+            
+            var self = this;
+            
+            if(manipulate_string === "+"){
+              
+                self.list_array.push("");
+            
+            }else if(manipulate_string === "-"){
+              
+                self.list_array.shift();
+           
+            }else if(/^\d+$/.test(manipulate_string)){ //숫자가 들어오면 해당 값을 삭제한다.
+              
+                self.list_array.splice(parseInt(manipulate_string), 1);
+           
+            }else{
+                
+                return false;
+            
+            }
+
+        },
 
         toggleTo : function(target_string){
             var self = this;
@@ -135,9 +189,9 @@ var app = new Vue({
                return false;
             
             }
-
+            console.log(newEvent);
             addEvent(newEvent).then(function(rtn){
-            
+                console.log(rtn);
             	if(rtn.success){
             		alert("추가 완료");
             		location.href = '/event/'+rtn.id;
@@ -169,6 +223,39 @@ var app = new Vue({
                     getFiles({dir: "event"}).then(function(files){
                         self.eventFiles = files;
                         $("#new-event-file").val("");
+                        alert("추가 완료");
+                    });
+
+                }else{
+                    alert("실패!");
+                }
+            
+            });
+
+        },
+
+        new_category_file : function(event){
+            
+            event.preventDefault();
+
+            var self = this;
+
+            //file이 있는지 확인한다.
+            var val = $("#new-category-file").val();
+            
+            if(val == ''){
+               return false;
+            }
+
+            var new_category_file_form = new FormData($("#category-file-form")[0]);
+            
+            addFile("category", new_category_file_form).then(function(rtn){
+            
+                if(rtn.success){
+                    
+                    getFiles({dir: "category"}).then(function(files){
+                        self.categoryFiles = files;
+                        $("#new-category-file").val("");
                         alert("추가 완료");
                     });
 
@@ -230,6 +317,48 @@ var app = new Vue({
 
         },
 
+        toggle_change_category : function(category, index){
+
+            var self = this;
+            self.update_category = category;
+            self.update_category_toggle = !self.update_category_toggle;
+            self.update_category_index = index;
+
+        },
+
+        changeCategory: function(){
+
+            var self = this;
+
+            updateCategory(self.update_category.id, self.update_category).then(function(rtn){
+                
+                if(rtn.success){
+
+                    alert("이벤트 수정 완료!");
+                    //Reload하지 않도록 setting 시킴.
+                    Vue.set(self.categorys, self.update_category_index, self.update_category);
+                    self.update_category_index = -1;
+
+                    self.udpate_category = {
+                        categoryName: "",
+                        iconImage : "",
+                        content: "",
+                        questions: "",
+                        updated_at : "",
+                    };
+
+                    self.update_category_toggle = false;
+
+                }else{
+
+                    alert("수정한게 없거나, 에러가 난거 같아요");
+                
+                }
+            
+            });
+
+        },
+
         changeEvent: function(){
 
             var self = this;
@@ -247,6 +376,7 @@ var app = new Vue({
                         eventName: "",
                         price : "",
                         eventRange: "",
+                        categorys : [],
                         hospitalName: "",
                         subway: "",
                         address: "",
@@ -311,10 +441,24 @@ var app = new Vue({
         	var self = this;
         	deleteEvent(id).then(function(rtn){
         		getEvents().then(function(events){
+                    alert("삭제완료!");
 		        	self.events = events;
 		        });
         		return;
         	});
+        },
+
+        removeCategory: function(id){
+            var pass=prompt("Password")
+            if(pass !== "inspire") return;
+            var self = this;
+            deleteCategory(id).then(function(rtn){
+                getCategorys().then(function(categorys){
+                    alert("삭제완료!");
+                    self.categorys = categorys;
+                });
+                return;
+            });
         },
 
         remove_event_file : function(_fileName){
@@ -339,6 +483,21 @@ var app = new Vue({
                     alert("삭제성공!");
                     getFiles({dir: "coupon"}).then(function(files){
                         self.couponFiles = files;
+                    });
+                }
+            
+            });
+        },
+
+        remove_category_file : function(_fileName){
+            var self = this;
+
+            deleteFile({dir : "category", fileName : _fileName}).then(function(rtn){
+
+                if(rtn.success){
+                    alert("삭제성공!");
+                    getFiles({dir: "category"}).then(function(files){
+                        self.categoryFiles = files;
                     });
                 }
             
@@ -405,8 +564,47 @@ var app = new Vue({
                     alert("추가 완료");
                     location.href = '/coupon/'+rtn.id;
                 }else{
-                    alert("실패!");
+                    alert("필드를 다 채워주셔야 합니다.");
                 } 
+            });
+        },
+
+        newCategory: function(event){
+            event.preventDefault();
+            var self = this;
+            var newCategory = new FormData($("#category-form")[0]);
+
+            //content부분의 엔터 부분을 br로 바꿔주면서 폼을 유지할 수 있도록 한다. 이를 표현할때는 v-html 활용.
+            newCategory.set('content', util_make_html(newCategory.get('content')))
+
+            //file이 있는지 확인한다.
+            var val1 = $("#iconImage").val();
+
+            if(val1 == ''){
+               
+               alert("파일은 필수입니다.");
+               return false;
+            
+            }
+            addCategory(newCategory).then(function(rtn){
+                
+                if(rtn.success){
+
+                    alert("추가 완료");
+                    $("#iconImage").val("");
+                    $("#category-form-categoryName").val("");
+                    $("#category-form-content").val("");
+
+                    getCategorys().then(function(categorys){
+                        self.categorys = categorys;
+                    })
+                
+                }else{
+                
+                    alert("필드를 다 채워주셔야 합니다.");
+                
+                }
+
             });
         },
         
