@@ -54,8 +54,12 @@ module.exports = function(app){
 	app.get('/accompanyInfo/:id', questionHandlers.accompanyInfo);
 
 	//Renewal
-	app.get('/test', function(req, res, next){
-		res.render("test", {layout: false});
+	app.get('/renew', function(req, res, next){
+		res.render("renew/main", {layout: false});
+	})
+
+	app.get('/renew/event', function(req, res, next){
+		res.render("renew/event", {layout:false});
 	})
 
 

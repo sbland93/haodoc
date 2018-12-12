@@ -1,28 +1,7 @@
 var Coupon = require('../../models/coupon.js');
 var couponViewModel = require('../../viewModels/coupon.js');
+var util_server = require('../../util_server.js')();
 
-var fs = require('fs');
-var path = require('path');
-
-
-var deleteFiles = function(base_path, file_name_arr){
-	var delete_promise_arr = [];
-
-	for (var i = file_name_arr.length - 1; i >= 0; i--) {
-		//하나의 transaction 단위로 묶어야 한다. TODO
-		var delete_prmoise = new Promise(function(resolve, reject){
-			fs.unlink(path.join(__dirname + base_path) + file_name_arr[i], (err) => {
-				resolve();
-			});
-		});
-
-		delete_promise_arr.push(delete_prmoise);
-		
-	}
-
-	return delete_promise_arr;
-
-}
 
 
 module.exports = function(){
@@ -94,24 +73,21 @@ module.exports = function(){
 		//id에 해당하는 Coupon를 삭제한다.
 		deleteCoupon: function(req, res, next){
 			if(!req.params.id) return next('No Id');
-			
 			Coupon.findById({_id: req.params.id}, function(err, coupon){
 				if(err) return next(err);
 				var imageArr =  coupon.couponImage;
 				imageArr.push(coupon.thumbnailImage);
-				//couponImages(file이름들)을 받아, 이벤트들을 삭제한다.
-				Promise.all(deleteFiles('../../../public/images/coupon/all/', imageArr)).then(function(rtn){
-					Coupon.remove({_id: req.params.id}, function(err){
+				//eventImages(file이름들)을 받아, 이벤트들을 삭제한다.
+				var couponDir = '/public/images/coupon/all/';
+				util_server.deleteFiles(couponDir, imageArr, function(rtn){
+					coupon.remove(function(err){
 						if(err) return next(err);
 						res.json({
 							success: true,
 							id: req.params.id,
 						});
-					})
-				}).catch(function(rtn){
-					console.log(rtn);
+					});
 				});
-			
 			});
 
 		},

@@ -1,3 +1,10 @@
+
+
+
+
+var util_server = require('../util_server.js')();
+
+
 module.exports = function(category){
 	if(!category){
 		return {
@@ -10,7 +17,7 @@ module.exports = function(category){
 		id: category._id,
         categoryName : category.categoryName,
 		iconImage : category.iconImage,
-		content : category.content,
+		content : util_server.util_make_html(category.content),
 		questions: category.questions,
 		updated_at : category.updated_at,
 	};
