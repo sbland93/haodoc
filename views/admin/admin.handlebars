@@ -28,7 +28,7 @@
                 <li class="nav-item">
                     <a class="nav-link" @click="toggleTo('eventToggle')">이벤트 관리하기</a>
                 </li>
-                 <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" @click="toggleTo('categoryToggle')">카테고리 관리</a>
                 </li>
             </ul>
@@ -131,7 +131,7 @@
                         <tbody>
                             <tr v-for="(event,index) in events">
                                 <td><a href="#">\{{index}}</a></td>
-                                <td>\{{event.eventName}}</td>
+                                <td><a :href="'/event/'+event.id">\{{event.eventName}}</a></td>
                                 <td>\{{event.hospitalName}}</td>
                                 <td>\{{event.address}}</td>
                                 <td>\{{event.eventRange}}</td>
@@ -283,7 +283,6 @@
                                 <th>병원주소</th>
                                 <th>쿠폰기간</th>
                                 <th>지하철역</th>
-                                <th>쿠폰이미지</th>
                                 <th>쿠폰생성일</th>
                                 <th>수정</th>
                                 <th>삭제</th>
@@ -292,15 +291,11 @@
                         <tbody>
                             <tr v-for="(coupon,index) in coupons">
                                 <td><a href="#">\{{index}}</a></td>
-                                <td>\{{coupon.couponName}}</td>
+                                <td><a :href="'/coupon/'+coupon.id">\{{coupon.couponName}}</a></td>
                                 <td>\{{coupon.hospitalName}}</td>
                                 <td>\{{coupon.address}}</td>
                                 <td>\{{coupon.couponRange}}</td>
                                 <td>\{{coupon.subway}}</td>
-                                <td>
-                                    \{{coupon.thumbnailImage}}<br>
-                                    <span v-for="(image, index) in coupon.couponImage">\{{index}}\{{image}}<br></span>
-                                </td>
                                 <td>\{{coupon.updated_at | moment}}</td>
                                 <td><button class="btn btn-primary" @click="toggle_change_coupon(coupon, index)">수정</button></td>
                                 <td><button class="btn btn-primary" @click="removeCoupon(coupon.id)">삭제</button></td>
@@ -461,7 +456,7 @@
                     
                     카테고리이름 : <input type="text" class="form-control" v-model="update_category.categoryName">
                     카테고리 아이콘 파일 : <input type="text" class="form-control" v-model="update_category.iconImage">
-                    카테고리 내용: <textarea rows="13" class="form-control" v-model="update_category.content"></textarea>
+                    카테고리 내용: <textarea rows="13" id="update-category-content" class="form-control" v-model="update_category.content"></textarea>
                     <div v-for="(category, index) in update_category.questions">
                         카테고리 질문 : <input type="text" class="form-control" v-model="update_category.questions[index]">
                         카테고리 답변 : <input type="text" class="form-control" v-model="update_category.questions[index].answer">

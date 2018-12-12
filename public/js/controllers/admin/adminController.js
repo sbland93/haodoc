@@ -1,4 +1,16 @@
+//임시보안 형태
+var pass = prompt("Password");
 
+if(pass !== "inspire"){
+
+    alert("접근이 불가능합니다.");
+    location.href = '/';  
+
+}else{
+
+    alert("환영합니다. 인스파이어 제이 조지 조이 케리 레이첼 가자미!!!!!!!!!!!!!!!");
+
+}
 
 
 var app = new Vue({
@@ -67,10 +79,10 @@ var app = new Vue({
             payerToggle : false,
             participantToggle : false,
             couponToggle : false,
-            eventToggle : false,
+            eventToggle : true,
             addCouponToggle : false,
             addEventToggle : false,
-            categoryToggle : true,
+            categoryToggle : false,
             coupon_file_toggle: false,
             event_file_toggle : false,
         },
@@ -113,6 +125,7 @@ var app = new Vue({
         });
 
         getCategorys().then(function(categorys){
+            console.log(categorys);
             self.categorys = categorys;
         })
     
@@ -573,9 +586,6 @@ var app = new Vue({
             event.preventDefault();
             var self = this;
             var newCategory = new FormData($("#category-form")[0]);
-
-            //content부분의 엔터 부분을 br로 바꿔주면서 폼을 유지할 수 있도록 한다. 이를 표현할때는 v-html 활용.
-            newCategory.set('content', util_make_html(newCategory.get('content')))
 
             //file이 있는지 확인한다.
             var val1 = $("#iconImage").val();

@@ -5,7 +5,7 @@ var multer = require("multer");
 
 var storage_event = multer.diskStorage({
 	destination: function(req, file, cb){
-		cb(null, 'public/images/event/');
+		cb(null, 'public/images/event/all');
 	},
 	filename: function(req, file, cb){
 		cb(null, Date.now() + "_" + file.originalname);

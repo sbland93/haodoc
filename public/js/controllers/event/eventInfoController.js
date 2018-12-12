@@ -56,7 +56,7 @@ var app = new Vue({
 
 		eventImageHref:function(image_file_name){
 
-			return "/images/event/" + image_file_name;
+			return "/images/event/all/" + image_file_name;
 		
 		},
 

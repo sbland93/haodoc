@@ -7,7 +7,6 @@
 
 <div id="app">
 
-
     
     <section class="main-block">
         <div class="container">
@@ -15,18 +14,21 @@
 
                 <!--nav>
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+                        
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">눈성형</a>
+                        <a class="nav-item nav-link" :id="'nav-'+index" data-toggle="tab" :href="'#nav'+index" role="tab" aria-controls="nav-profile" aria-selected="false" v-for="(category, index) in categorys">\{{category.categoryName}}</a>
+
                     </div>
                 </nav>
                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                         Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
                     </div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                    <div class="tab-pane fade" :id="'nav'+index" role="tabpanel" :aria-labelledby="'nav-'+index" v-for="(category, index) in categorys">
+                        <img src="/images/category/all/가슴성형.png"><span v-html="category.content"></span>
                     </div>
                 </div-->
+
                 <div  v-for="coupon in coupons" class="mainbox col-page col-xs-10 col-lg-12" style="padding:40px 0px 80px 0px;">
                     <a :href="couponHref(coupon.id)" class="full-block">
                         <div class="img-block">
@@ -48,6 +50,7 @@
                         </span>
                     </a>
                 </div>
+
                 <!-- 드림성모안과 -->
                 <div  v-for="event in events" class="mainbox col-page col-xs-10 col-lg-12" style="padding:40px 0px 80px 0px;">
                     <a :href="eventHref(event.id)" class="full-block">
@@ -104,6 +107,7 @@
 
     <script type="text/javascript" src="/js/api/event.js"></script>
     <script type="text/javascript" src="/js/api/coupon.js"></script>
+    <!--script type="text/javascript" src="/js/api/category.js"></script-->
     <script type="text/javascript" src="/js/controllers/event/eventController.js"></script>
     <!-- 쿠폰 컨트롤러는 이벤트 컨트롤러에 일시적으로 포함 script type="text/javascript" src="/js/controllers/couponController.js"></script-->
 

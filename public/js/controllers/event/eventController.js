@@ -6,6 +6,7 @@ var app = new Vue({
 
         events: "",
         coupons: "",
+        categorys: "",
 
     },
 
@@ -24,6 +25,12 @@ var app = new Vue({
     
         });
 
+        // getCategorys().then(function(categorys){
+
+        //     self.categorys = categorys;
+
+        // });
+
     
     },
 
@@ -33,12 +40,15 @@ var app = new Vue({
         eventHref : function(id){
             return "/event/" + id;
         },
+
         couponHref : function(id){
             return "/coupon/" + id;
         },
+
         eventThumbnailHref: function(thumb_file_name){
-            return "/images/event/" + thumb_file_name;
+            return "/images/event/all/" + thumb_file_name;
         },
+
         couponThumbnailHref: function(thumb_file_name){
             return "/images/coupon/all/" + thumb_file_name;
         },
