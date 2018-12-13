@@ -99,12 +99,12 @@ var app = new Vue({
         },
 
         toggles : {
-            payerToggle : false,
+            payerToggle : true,
             participantToggle : false,
             couponToggle : false,
             eventToggle : false,
             categoryToggle : false,
-            bannerToggle : true,
+            bannerToggle : false,
         },
 
 
