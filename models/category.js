@@ -1,35 +1,19 @@
 var mongoose = require('mongoose');
 
 
-//question에 대한 answer schema
-var answerSchema = mongoose.Schema({
 
-    name : String,
-    content : String,
-    password: String,
-    updated_at : { type : Date, default : Date.now },
-
-});
-
-//question 스키마
-var questionSchema = mongoose.Schema({
-
-    name : String,
-    wechatID : String,
-    password : String,
-    content : String,
-    answer : { type: answerSchema },
-    updated_at : { type: Date, default: Date.now },
-
-});
 
 var categorySchema = mongoose.Schema({
     
     categoryName: String,
     iconImage : String,
-    content : String,
-    questions : [ questionSchema ],
+    content_1 : String,
+    content_2 : String,
+    questions : [ { content: String, answer: String, updated_at: { type: Date, default: Date.now } } ],
+    caution_1 : [ { content : String, updated_at: { type: Date, default: Date.now } } ],
+    caution_2 : [ { day: String, content: String, updated_at: { type: Date, default: Date.now } }],
     updated_at : { type: Date, default: Date.now },
+    remarks : String,
 
 });
 
@@ -39,3 +23,4 @@ var categorySchema = mongoose.Schema({
 var Category = mongoose.model('Category', categorySchema);
 
 module.exports = Category;
+

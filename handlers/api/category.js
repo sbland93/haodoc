@@ -20,7 +20,7 @@ module.exports = function(){
 		//유저생성을 위한 post에서는 name과 email과 password가 있어야한다.
 		newCategory: function(req, res, next){
 
-			if(req.body.categoryName && req.body.content){
+			if(req.body.categoryName && req.body.content_1 && req.body.content_2){
 				//iconImage 하나밖에 없음
 				var thisFile = req.files[0];
 				req.body["iconImage"] = thisFile["filename"];

@@ -55,11 +55,11 @@ module.exports = function(app){
 
 	//Renewal
 	app.get('/renew', function(req, res, next){
-		res.render("renew/main", {layout: false});
+		res.render('renew/main', {layout: false});
 	})
 
 	app.get('/renew/event', function(req, res, next){
-		res.render("renew/event", {layout:false});
+		res.render('renew/event', {layout:false});
 	})
 
 
@@ -77,6 +77,7 @@ module.exports = function(app){
 	require('./api/accompany.js')(app);
 	require('./api/file.js')(app);
 	require('./api/category.js')(app);
+	require('./api/banner.js')(app);
 
 
 

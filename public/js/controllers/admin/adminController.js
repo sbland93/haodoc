@@ -1,16 +1,16 @@
 //임시보안 형태
-var pass = prompt("Password");
+// var pass = prompt("Password");
 
-if(pass !== "inspire"){
+// if(pass !== "inspire"){
 
-    alert("접근이 불가능합니다.");
-    location.href = '/';  
+//     alert("접근이 불가능합니다.");
+//     location.href = '/';  
 
-}else{
+// }else{
 
-    alert("환영합니다. 인스파이어 제이 조지 조이 케리 레이첼 가자미!!!!!!!!!!!!!!!");
+//     alert("환영합니다. 인스파이어 제이 조지 조이 케리 레이첼 가자미!!!!!!!!!!!!!!!");
 
-}
+// }
 
 
 var app = new Vue({
@@ -19,15 +19,20 @@ var app = new Vue({
 
     data : {
 
+        payers : "",
     	participants : "",
     	events : "",
         eventFiles : "",
-        payers : "",
         coupons: "",
         couponFiles : "",
         categorys : "",
         categoryFiles : "",
-        list_array : [ "" ],
+        banners: "",
+        bannerFiles : "",
+
+        list_array : [ {} ],
+        list_array_2 : [ {} ],
+        list_array_3 : [ {} ],
 
         //For Update Event Obj
         update_event_toggle : false,
@@ -70,21 +75,36 @@ var app = new Vue({
         update_category : {
             categoryName: "",
             iconImage : "",
-            content: "",
-            questions: "",
+            content_1: "",
+            content_2: "",
+            questions : "",
+            caution_1 : "",
+            caution_2 : "",
             updated_at : "",
+            remarks: "",
+        },
+
+        //For Update Event Obj
+        update_banner_toggle : false,
+        update_banner_index : -1,
+
+        update_banner : {
+
+            bannerImage: "",
+            url : "",
+            remarks: "",
+            category : "",
+            updated_at: "",
+        
         },
 
         toggles : {
             payerToggle : false,
             participantToggle : false,
             couponToggle : false,
-            eventToggle : true,
-            addCouponToggle : false,
-            addEventToggle : false,
+            eventToggle : false,
             categoryToggle : false,
-            coupon_file_toggle: false,
-            event_file_toggle : false,
+            bannerToggle : true,
         },
 
 
@@ -112,6 +132,15 @@ var app = new Vue({
         	self.events = events;
         });
 
+        getCategorys().then(function(categorys){
+            self.categorys = categorys;
+        });
+
+        getBanners().then(function(banners){
+            console.log(banners);
+            self.banners = banners;
+        });
+
         getFiles({dir: "event"}).then(function(files){
             self.eventFiles = files;
         });
@@ -124,10 +153,9 @@ var app = new Vue({
             self.categoryFiles = files;
         });
 
-        getCategorys().then(function(categorys){
-            console.log(categorys);
-            self.categorys = categorys;
-        })
+        getFiles({dir : "banner"}).then(function(files){
+            self.bannerFiles = files;
+        });
     
     },
 
@@ -139,7 +167,7 @@ var app = new Vue({
     methods: {
 
         //추가값을 활용하기 위함
-        change_list_array : function(manipulate_string, event){
+        change_list_array : function(_arr, manipulate_string, event){
             
             event.preventDefault();
             
@@ -147,15 +175,15 @@ var app = new Vue({
             
             if(manipulate_string === "+"){
               
-                self.list_array.push("");
+                _arr.push({});
             
             }else if(manipulate_string === "-"){
               
-                self.list_array.shift();
+                _arr.shift();
            
             }else if(/^\d+$/.test(manipulate_string)){ //숫자가 들어오면 해당 값을 삭제한다.
               
-                self.list_array.splice(parseInt(manipulate_string), 1);
+                _arr.splice(parseInt(manipulate_string), 1);
            
             }else{
                 
@@ -166,6 +194,7 @@ var app = new Vue({
         },
 
         toggleTo : function(target_string){
+
             var self = this;
             for(key in self.toggles){
                 self.toggles[key] = false;
@@ -173,14 +202,15 @@ var app = new Vue({
                     self.toggles[key] = true;
                 }
             }
+
         },
 
         moment: function (date) {
-          return moment(date);
+            return moment(date);
         },
 
         date: function (date) {
-          return moment(date).format('MMMM Do YYYY, hh:mmm:ss a');
+            return moment(date).format('MMMM Do YYYY, hh:mmm:ss a');
         },
 
         newEvent: function(event){
@@ -212,6 +242,99 @@ var app = new Vue({
             		alert("실패!");
             	}
             
+            });
+        },
+
+        newCoupon: function(event){
+            event.preventDefault();
+            var self = this;
+            var newCoupon = new FormData($("#coupon-form")[0]);
+            //file이 있는지 확인한다.
+            var val1 = $("#coupon-image-1").val();
+            var val2 = $("#coupon-image-2").val();
+            var val3 = $("#coupon-image-3").val();
+            var val4 = $("#coupon-thumbnail-image").val();
+
+            if(val1 == '' || val2 == '' || val3 == '' || val4 == ''){
+               
+               alert("파일은 필수입니다.");
+               return false;
+            
+            }
+            addCoupon(newCoupon).then(function(rtn){
+                if(rtn.success){
+                    alert("추가 완료");
+                    location.href = '/coupon/'+rtn.id;
+                }else{
+                    alert("필드를 다 채워주셔야 합니다.");
+                } 
+            });
+        },
+
+        newCategory: function(event){
+            event.preventDefault();
+            var self = this;
+            var newCategory = new FormData($("#category-form")[0]);
+
+            //file이 있는지 확인한다.
+            var val1 = $("#iconImage").val();
+
+            if(val1 == ''){
+               
+               alert("파일은 필수입니다.");
+               return false;
+            
+            }
+            addCategory(newCategory).then(function(rtn){
+                
+                if(rtn.success){
+
+                    alert("추가 완료");
+                    //class로 val를 한번에 없애게끔.
+                    $("#iconImage").val("");
+                    $("#category-form-categoryName").val("");
+                    $("#category-form-content").val("");
+
+                    getCategorys().then(function(categorys){
+                        self.categorys = categorys;
+                    })
+                
+                }else{
+                
+                    alert("필드를 다 채워주셔야 합니다.");
+                
+                }
+
+            });
+        },
+
+        newBanner: function(event){
+            event.preventDefault();
+            var self = this;
+            var newBanner = new FormData($("#banner-form")[0]);
+
+            //file이 있는지 확인한다.
+            var val1 = $("#bannerImage").val();
+
+            if(val1 == ''){
+               
+               alert("파일은 필수입니다.");
+               return false;
+            
+            }
+            addBanner(newBanner).then(function(rtn){
+                
+                if(rtn.success){
+
+                    alert("추가 완료");
+                    getBanners().then(function(banners){
+                        self.banners = banners;
+                    });
+                
+                }else{
+                    alert("필드를 다 채워주셔야 합니다.");
+                }
+
             });
         },
 
@@ -312,6 +435,38 @@ var app = new Vue({
 
         },
 
+        new_banner_file : function(event){
+            
+            event.preventDefault();
+
+            var self = this;
+
+            //file이 있는지 확인한다.
+            var val = $("#new-banner-file").val();
+            if(val == ''){
+               return false;
+            }
+
+            var new_banner_file_form = new FormData($("#banner-file-form")[0]);
+            
+            addFile("banner", new_banner_file_form).then(function(rtn){
+            
+                if(rtn.success){
+                    
+                    getFiles({dir: "banner"}).then(function(files){
+                        self.bannerFiles = files;
+                        $("#new-banner-file").val("");
+                        alert("추가 완료");
+                    });
+
+                }else{
+                    alert("실패!");
+                }
+            
+            });
+
+        },
+
         toggle_change_event : function(event, index){
 
             var self = this;
@@ -339,6 +494,15 @@ var app = new Vue({
 
         },
 
+        toggle_change_banner : function(banner, index){
+
+            var self = this;
+            self.update_banner = banner;
+            self.update_banner_toggle = !self.update_banner_toggle;
+            self.update_banner_index = index;
+
+        },
+
         changeCategory: function(){
 
             var self = this;
@@ -351,14 +515,6 @@ var app = new Vue({
                     //Reload하지 않도록 setting 시킴.
                     Vue.set(self.categorys, self.update_category_index, self.update_category);
                     self.update_category_index = -1;
-
-                    self.udpate_category = {
-                        categoryName: "",
-                        iconImage : "",
-                        content: "",
-                        questions: "",
-                        updated_at : "",
-                    };
 
                     self.update_category_toggle = false;
 
@@ -448,7 +604,80 @@ var app = new Vue({
 
         },
 
+        changeBanner: function(){
+
+            var self = this;
+
+            updateBanner(self.update_banner.id, self.update_banner).then(function(rtn){
+
+                if(rtn.success){
+
+                    alert("배너 수정 완료!");
+                    //Reload하지 않도록 setting 시킴.
+                    Vue.set(self.banners, self.update_banner_index, self.update_banner);
+                    self.update_banner_index = -1;
+
+                    self.udpate_banner = {
+                        bannerImage: "",
+                        url : "",
+                        remarks: "",
+                        category : "",
+                        updated_at: "",
+                    },
+
+                    self.update_banner_toggle = false;
+
+                }else{
+
+                    alert("수정한게 없거나, 에러가 난거 같아요");
+                
+                }
+            
+            });
+
+        },
+
+        removePayer: function(id){
+            var pass=prompt("Password")
+            if(pass !== "inspire") return;
+            var self = this;
+            deletePayer(id).then(function(rtn){
+                alert("삭제 완료");
+                getPayers().then(function(payers){
+                    self.payers = payers;
+                });
+                return;
+            });
+        },
+
+        removeParticipant: function(id){
+            var pass=prompt("Password")
+            if(pass !== "inspire") return;
+            var self = this;
+            deleteParticipant(id).then(function(rtn){
+                alert("삭제 완료");
+                getParticipants().then(function(participants){
+                    self.participants = participants;
+                });
+                return;
+            });
+        },
+
+        removeCoupon: function(id){
+            var pass=prompt("Password")
+            if(pass !== "inspire") return;
+            var self = this;
+            deleteCoupon(id).then(function(rtn){
+                alert("삭제 완료");
+                getCoupons().then(function(coupons){
+                    self.coupons = coupons;
+                });
+                return;
+            });
+        },
+
         removeEvent: function(id){
+
         	var pass=prompt("Password")
 			if(pass !== "inspire") return;
         	var self = this;
@@ -459,9 +688,11 @@ var app = new Vue({
 		        });
         		return;
         	});
+       
         },
 
         removeCategory: function(id){
+
             var pass=prompt("Password")
             if(pass !== "inspire") return;
             var self = this;
@@ -472,9 +703,24 @@ var app = new Vue({
                 });
                 return;
             });
+        
+        },
+
+        removeBanner : function(id){
+            var pass=prompt("Password")
+            if(pass !== "inspire") return;
+            var self = this;
+            deleteBanner(id).then(function(rtn){
+                getBanners().then(function(banners){
+                    alert("삭제완료!");
+                    self.banners = banners;
+                });
+                return;
+            });
         },
 
         remove_event_file : function(_fileName){
+
             var self = this;
             deleteFile({dir : "event", fileName : _fileName}).then(function(rtn){
 
@@ -486,6 +732,7 @@ var app = new Vue({
                 }
             
             });
+        
         },
 
         remove_coupon_file : function(_fileName){
@@ -517,106 +764,22 @@ var app = new Vue({
             });
         },
 
-        removeCoupon: function(id){
-            var pass=prompt("Password")
-            if(pass !== "inspire") return;
+        remove_banner_file : function(_fileName){
             var self = this;
-            deleteCoupon(id).then(function(rtn){
-                alert("삭제 완료");
-                getCoupons().then(function(coupons){
-                    self.coupons = coupons;
-                });
-                return;
-            });
-        },
 
-        removePayer: function(id){
-            var pass=prompt("Password")
-            if(pass !== "inspire") return;
-            var self = this;
-            deletePayer(id).then(function(rtn){
-                alert("삭제 완료");
-                getPayers().then(function(payers){
-                    self.payers = payers;
-                });
-                return;
-            });
-        },
+            deleteFile({dir : "banner", fileName : _fileName}).then(function(rtn){
 
-        removeParticipant: function(id){
-            var pass=prompt("Password")
-            if(pass !== "inspire") return;
-            var self = this;
-            deleteParticipant(id).then(function(rtn){
-                alert("삭제 완료");
-                getParticipants().then(function(participants){
-                    self.participants = participants;
-                });
-                return;
-            });
-        },
-
-        newCoupon: function(event){
-            event.preventDefault();
-            var self = this;
-            var newCoupon = new FormData($("#coupon-form")[0]);
-            //file이 있는지 확인한다.
-            var val1 = $("#coupon-image-1").val();
-            var val2 = $("#coupon-image-2").val();
-            var val3 = $("#coupon-image-3").val();
-            var val4 = $("#coupon-thumbnail-image").val();
-
-            if(val1 == '' || val2 == '' || val3 == '' || val4 == ''){
-               
-               alert("파일은 필수입니다.");
-               return false;
-            
-            }
-            addCoupon(newCoupon).then(function(rtn){
                 if(rtn.success){
-                    alert("추가 완료");
-                    location.href = '/coupon/'+rtn.id;
-                }else{
-                    alert("필드를 다 채워주셔야 합니다.");
-                } 
-            });
-        },
-
-        newCategory: function(event){
-            event.preventDefault();
-            var self = this;
-            var newCategory = new FormData($("#category-form")[0]);
-
-            //file이 있는지 확인한다.
-            var val1 = $("#iconImage").val();
-
-            if(val1 == ''){
-               
-               alert("파일은 필수입니다.");
-               return false;
-            
-            }
-            addCategory(newCategory).then(function(rtn){
-                
-                if(rtn.success){
-
-                    alert("추가 완료");
-                    $("#iconImage").val("");
-                    $("#category-form-categoryName").val("");
-                    $("#category-form-content").val("");
-
-                    getCategorys().then(function(categorys){
-                        self.categorys = categorys;
-                    })
-                
-                }else{
-                
-                    alert("필드를 다 채워주셔야 합니다.");
-                
+                    alert("삭제성공!");
+                    getFiles({dir: "banner"}).then(function(files){
+                        self.bannerFiles = files;
+                    });
                 }
-
+            
             });
         },
+
+        
         
 
 

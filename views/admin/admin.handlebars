@@ -31,6 +31,9 @@
                 <li class="nav-item">
                     <a class="nav-link" @click="toggleTo('categoryToggle')">카테고리 관리</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" @click="toggleTo('bannerToggle')">배너 관리</a>
+                </li>
             </ul>
           </div>
         </nav>
@@ -230,9 +233,9 @@
                             <div class="form-group" v-for="(_a, index) in list_array">
                                 <label for="cc_name">카테고리 \{{index}}</label>
                                 <input type="text" class="form-control" name="categorys[]">
-                                <button class="btn btn-danger" @click="change_list_array(index, $event)">카테고리 \{{index}}제거</button>
+                                <button class="btn btn-danger" @click="change_list_array(list_array, index, $event)">카테고리 \{{index}}제거</button>
                             </div>
-                            <button class="btn btn-danger" @click="change_list_array('+', $event)">카테고리추가</button>
+                            <button class="btn btn-danger" @click="change_list_array(list_array, '+', $event)">카테고리추가</button>
 
                             <div class="form-group">
                                 <label for="cc_name">이벤트 가격</label>
@@ -387,9 +390,9 @@
                             <div class="form-group" v-for="(_a, index) in list_array">
                                 <label for="cc_name">카테고리 \{{index}}</label>
                                 <input type="text" class="form-control" name="categorys[]">
-                                <button class="btn btn-danger" @click="change_list_array(index, $event)">카테고리 \{{index}}제거</button>
+                                <button class="btn btn-danger" @click="change_list_array(list_array, index, $event)">카테고리 \{{index}}제거</button>
                             </div>
-                            <button class="btn btn-danger" @click="change_list_array('+', $event)">카테고리추가</button>
+                            <button class="btn btn-danger" @click="change_list_array(list_array, '+', $event)">카테고리추가</button>
 
                             <div class="form-group">
                                 <label for="cc_name">쿠폰 가격</label>
@@ -435,7 +438,6 @@
                                 <th>NO.</th>
                                 <th>이름</th>
                                 <th>아이콘파일</th>
-                                <th>내용</th>
                                 <th>수정</th>
                                 <th>삭제</th>
                             </tr>
@@ -445,26 +447,64 @@
                                 <td><a href="#">\{{index}}</a></td>
                                 <td>\{{category.categoryName}}</td>
                                 <td>\{{category.iconImage}}</td>
-                                <td><span v-html="category.content"></span></td>
                                 <td><button class="btn btn-primary" @click="toggle_change_category(category, index)">수정</button></td>
                                 <td><button @click="removeCategory(category.id)" class="btn btn-primary">삭제</button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+               
                 <div class="form" role="form" v-show="update_category_toggle">
-                    
-                    카테고리이름 : <input type="text" class="form-control" v-model="update_category.categoryName">
-                    카테고리 아이콘 파일 : <input type="text" class="form-control" v-model="update_category.iconImage">
-                    카테고리 내용: <textarea rows="13" id="update-category-content" class="form-control" v-model="update_category.content"></textarea>
-                    <div v-for="(category, index) in update_category.questions">
-                        카테고리 질문 : <input type="text" class="form-control" v-model="update_category.questions[index]">
-                        카테고리 답변 : <input type="text" class="form-control" v-model="update_category.questions[index].answer">
+                    <div class="form-group">
+                        <label for="cc_name">카테고리이름</label>
+                        <input type="text" class="form-control" id="category-form-categoryName" name="categoryName" v-model="update_category.categoryName">
                     </div>
+                    <div class="form-group">
+                        <label for="cc_name">아이콘 파일</label>
+                        <input type="text" name="iconImage" class="form-control" id="iconImage" v-model="update_category.iconImage" />
+                    </div>
+                    <div class="form-group">
+                        <label for="cc_name">카테고리 설명[위]</label>
+                        <textarea rows="5" type="text" class="form-control" id="category-form-content" name="content_1" v-model="update_category.content_1"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="cc_name">카테고리 설명[아래]</label>
+                        <textarea rows="5" type="text" class="form-control" id="category-form-content" name="content_2" v-model="update_category.content_2"></textarea>
+                    </div>
+
+                    <div class="form-group" v-for="(question, index) in update_category.questions">
+                        <label for="cc_name">질문 세트 \{{index}}</label>
+                        질문 : <input type="text" class="form-control" v-model="update_category.questions[index].content">
+                        응답 : <textarea class="form-control" v-model="update_category.questions[index].answer"></textarea>
+                        <button class="btn btn-danger float-right" @click="update_category.questions[index].splice(index, 1)">질문 \{{index}} 삭제</button>
+                    </div>
+                    <button class="btn btn-danger" @click="change_list_array(update_category.questions, '+', $event)">질의응답 추가</button>
+
+                    <div class="form-group" v-for="(caution, index) in update_category.caution_1">
+                        <label for="cc_name">전 주의사항 \{{index}}</label>
+                        내용 : <textarea class="form-control" v-model="update_category.caution_1[index]['content']"></textarea>
+                        <button class="btn btn-danger float-right" @click="update_category.caution_1.splice(index, 1)">전 주의사항 \{{index}} 삭제</button>
+                    </div>
+                    <button class="btn btn-danger" @click="change_list_array(update_category.caution_1, '+', $event)">전 주의사항 추가</button>
+
+                    <div class="form-group" v-for="(caution, index) in update_category.caution_2">
+                        <label for="cc_name">후 주의사항 \{{index}}</label><br>
+                        Day : <input type="text" class="form-control" v-model="update_category.caution_2[index]['day']">
+                        내용 : <textarea class="form-control" v-model="update_category.caution_2[index]['content']"></textarea>
+                        <button class="btn btn-danger float-right" @click="update_category.caution_2.splice(index, 1)">후 주의사항 \{{index}} 삭제</button>
+                    </div>
+                    <button class="btn btn-danger" @click="change_list_array(update_category.caution_2, '+', $event)">후 주의사항 추가</button>
+
+                    <div class="form-group">
+                        <label for="cc_name">특이사항</label>
+                        <input type="text" v-model="update_category.remarks" class="form-control" id="remarks" />
+                    </div>
+
                     <button class="btn btn-primary" @click="changeCategory">수정완료</button>
                     <button class="btn btn-primary" @click="toggle_change_category(update_category, -1)">취소</button>
-                
+
                 </div>
+
                 <br><br><br>
 
                 <h2>카테고리 이미지</h2>
@@ -511,14 +551,164 @@
                             <label for="cc_name">아이콘 파일</label>
                             <input type="file" name="iconImage" class="form-control" id="iconImage" />
                         </div>
+
+
                         <div class="form-group">
-                            <label for="cc_name">카테고리 설명 내용</label>
-                            <textarea rows="13" type="text" class="form-control" id="category-form-content" name="content"></textarea>
+                            <label for="cc_name">카테고리 설명[위]</label>
+                            <textarea rows="5" type="text" class="form-control" id="category-form-content" name="content_1"></textarea>
                         </div>
+
+                        <div class="form-group">
+                            <label for="cc_name">카테고리 설명[아래]</label>
+                            <textarea rows="5" type="text" class="form-control" id="category-form-content" name="content_2"></textarea>
+                        </div>
+
+                        <div class="form-group" v-for="(_a, index) in list_array">
+                            <label for="cc_name">질문 세트 \{{index}}</label>
+                            질문 : <input type="text" class="form-control" :name="'questions['+index+'][content]'">
+                            응답 : <textarea class="form-control" :name="'questions['+index+'][answer]'"></textarea>
+                            <button class="btn btn-danger float-right" @click="change_list_array(list_array, index, $event)">질문 \{{index}} 삭제</button>
+                        </div>
+                        <button class="btn btn-danger" @click="change_list_array(list_array, '+', $event)">질의응답 추가</button>
+
+                        <div class="form-group" v-for="(_a, index) in list_array_2">
+                            <label for="cc_name">전 주의사항 \{{index}}</label>
+                            내용 : <textarea class="form-control" :name="'caution_1['+index+'][content]'"></textarea>
+                            <button class="btn btn-danger float-right" @click="change_list_array(list_array2, index, $event)">전 주의사항 \{{index}} 삭제</button>
+                        </div>
+                        <button class="btn btn-danger" @click="change_list_array(list_array_2, '+', $event)">전 주의사항 추가</button>
+
+                        <div class="form-group" v-for="(_a, index) in list_array_3">
+                            <label for="cc_name">후 주의사항 \{{index}}</label><br>
+                            Day : <input type="text" class="form-control" :name="'caution_2['+index+'][day]'">
+                            내용 : <textarea class="form-control" :name="'caution_2['+index+'][content]'"></textarea>
+                            <button class="btn btn-danger float-right" @click="change_list_array(list_array3, index, $event)">후 주의사항 \{{index}} 삭제</button>
+                        </div>
+                        <button class="btn btn-danger" @click="change_list_array(list_array_3, '+', $event)">후 주의사항 추가</button>
+
+                        <div class="form-group">
+                            <label for="cc_name">특이사항</label>
+                            <input type="text" name="remarks" class="form-control" id="remarks" />
+                        </div>
+
                         <div class="form-group">
                             <button type="submit" class="btn mobile-btn" @click="newCategory">카테고리 만들기</button>
                         </div>
+
                     </form>
+                </div>
+
+            </div>
+
+
+            <div v-show="toggles.bannerToggle">
+
+                <h2>생성된 배너</h2>
+
+                <div style="height: auto; overflow: auto">
+                    <table class="table" id="table" >
+                        <thead>
+                            <tr>
+                                <th>NO.</th>
+                                <th>배너파일</th>
+                                <th>URL</th>
+                                <th>Category</th>
+                                <th>배너설명</th>
+                                <th>배너생성일</th>
+                                <th>수정</th>
+                                <th>삭제</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(banner,index) in banners">
+                                <td><a href="#">\{{index}}</a></td>
+                                <td>\{{banner.bannerImage}}</td>
+                                <td>\{{banner.url}}</td>
+                                <td>\{{banner.category}}</td>
+                                <td>\{{banner.remarks}}</td>
+                                <td>\{{banner.updated_at | moment}}</td>
+                                <td><button class="btn btn-primary" @click="toggle_change_banner(banner, index)">수정</button></td>
+                                <td><button class="btn btn-primary" @click="removeBanner(banner.id)">삭제</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form" role="form" v-show="update_banner_toggle">
+                    배너파일 : <input type="text" class="form-control" v-model="update_banner.bannerImage">
+                    URL : <input type="text" class="form-control" v-model="update_banner.url">
+                    Category : 
+                    <div class="form-group">
+                        <label for="category">카테고리</label><br>
+                        <label class="radio-inline"><input id="category" type="radio" class="form-control" name="category" value="MAIN" v-model="update_banner.category">메인페이지</label>
+                        <label class="radio-inline"><input id="category" type="radio" class="form-control" name="category" value="EVENT" v-model="update_banner.category">이벤트페이지</label>
+                    </div>
+                    생성일 : <input type="text" class="form-control" v-model="update_banner.updated_at">
+                    <button class="btn btn-primary" @click="changeBanner">수정완료</button>
+                    <button class="btn btn-primary" @click="toggle_change_banner(update_banner, -1)">취소</button>
+                </div>
+
+
+                <h2>배너 이미지</h2>
+                <form class="form" role="form" id="banner-file-form">
+
+                    <div class="form-group">
+                        <label for="cc_name">배너 이미지 파일</label>
+                        <input type="file" class="form-control" id="new-banner-file" name="file" accept="image/*"/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn mobile-btn" @click="new_banner_file">배너 파일 추가하기</button>
+                    </div>
+
+                </form>
+
+                <div style="height: auto; overflow: auto">
+                    <table class="table" id="table" >
+                        <thead>
+                            <tr>
+                                <th>NO.</th>
+                                <th>배너 이미지</th>
+                                <th>기능</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-if="file.fileName" v-for="(file,index) in bannerFiles">
+                                <td><a href="#">\{{index}}</a></td>
+                                <td>\{{file.fileName}}</td>
+                                <td><button class="btn btn-primary" @click="remove_banner_file(file.fileName)">삭제</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="card card-outline-secondary">
+                    <div class="card-body" >
+                        <h3 class="text-center">배너 추가하기</h3>
+                        <hr>
+                        <form class="form" role="form" id="banner-form">
+                            <div class="form-group">
+                                <label for="cc_name">배너 파일</label>
+                                <input type="file" class="form-control" id="new-banner-image" name="bannerImage" />
+                            </div>
+                            <div class="form-group">
+                                <label for="cc_name">URL</label>
+                                <input type="text" class="form-control" name="url">
+                            </div>
+                            <div class="form-group">
+                                <label for="category">카테고리</label><br>
+                                <label class="radio-inline"><input id="category" type="radio" class="form-control" name="category" value="MAIN">메인페이지</label>
+                                <label class="radio-inline"><input id="category" type="radio" class="form-control" name="category" value="EVENT">이벤트페이지</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="cc_name">배너설명</label>
+                                <input type="text" class="form-control" name="remarks" placeholder="관리용 설명(외부노출안됨)">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn mobile-btn" @click="newBanner">배너 만들기</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
             </div>
@@ -538,6 +728,7 @@
     <script type="text/javascript" src="/js/api/file.js"></script> 
     <script type="text/javascript" src="/js/api/event.js"></script> 
     <script type="text/javascript" src="/js/api/coupon.js"></script>  
+    <script type="text/javascript" src="/js/api/banner.js"></script>  
     <script type="text/javascript" src="/js/api/payer.js"></script>
     <script type="text/javascript" src="/js/api/category.js"></script>
     <script type="text/javascript" src="/js/api/participant.js"></script>  

@@ -18,6 +18,14 @@ module.exports = function(){
 
 		},
 
+		//_arr에 obj를돌며, obj[attr_string] (textarea영역)의 값을 <br>로 변경해주기 위함. 
+		map_make_html : function(_arr, attr_string){
+			_arr.map(function(obj){
+				obj[attr_string] = obj[attr_string].replace( /\r\n/g, "<br>" );
+			});
+			return _arr;
+		},
+
 		async_read_file : function(fileDir, cb){
 
 			fs.readdir(path.join(__dirname + fileDir), cb);
