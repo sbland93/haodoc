@@ -1,4 +1,3 @@
-임시보안 형태
 var pass = prompt("Password");
 
 if(pass !== "inspire"){
