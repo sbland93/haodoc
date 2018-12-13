@@ -1,16 +1,16 @@
-//임시보안 형태
-// var pass = prompt("Password");
+임시보안 형태
+var pass = prompt("Password");
 
-// if(pass !== "inspire"){
+if(pass !== "inspire"){
 
-//     alert("접근이 불가능합니다.");
-//     location.href = '/';  
+    alert("접근이 불가능합니다.");
+    location.href = '/';  
 
-// }else{
+}else{
 
-//     alert("환영합니다. 인스파이어 제이 조지 조이 케리 레이첼 가자미!!!!!!!!!!!!!!!");
+    alert("환영합니다. 인스파이어 제이 조지 조이 케리 레이첼 가자미!!!!!!!!!!!!!!!");
 
-// }
+}
 
 
 var app = new Vue({
