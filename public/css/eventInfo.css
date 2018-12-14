@@ -1,12 +1,14 @@
 
     .infoImage{
-    	padding:0px 500px 0px 500px;
-    	width:100%;
+        padding:0px 200px 0px 200px;
+        width:55%;
+
     }
 
     .infoCard{
-      padding:0px 500px 0px 500px;
-      width:100%;
+          padding:0px 200px 0px 200px;
+          width:55%;
+          margin : 0 auto;
     }
 
 
@@ -40,18 +42,15 @@
     } 
 
 
-
     .infoImage{
     	padding: 0px 0px 0px 0px;
     	width: 100%;
     } 
-
 
     .mobile-btn{
     	width:200px;
     	float : right;
     }
     
-
 
 }
