@@ -622,7 +622,7 @@
                         <tbody>
                             <tr v-for="(banner,index) in banners">
                                 <td><a href="#">\{{index}}</a></td>
-                                <td>\{{banner.bannerImage}}</td>
+                                <td>웹 : \{{banner.bannerImage}}<br>모바일 : \{{banner.mobileImage}}</td>
                                 <td>\{{banner.url}}</td>
                                 <td>\{{banner.category}}</td>
                                 <td>\{{banner.remarks}}</td>
@@ -689,7 +689,11 @@
                         <form class="form" role="form" id="banner-form">
                             <div class="form-group">
                                 <label for="cc_name">배너 파일</label>
-                                <input type="file" class="form-control" id="new-banner-image" name="bannerImage" />
+                                <input type="file" class="form-control" id="bannerImage" name="bannerImage" />
+                            </div>
+                            <div class="form-group">
+                                <label for="cc_name">모바일 배너 파일</label>
+                                <input type="file" class="form-control" id="mobileImage" name="mobileImage" />
                             </div>
                             <div class="form-group">
                                 <label for="cc_name">URL</label>

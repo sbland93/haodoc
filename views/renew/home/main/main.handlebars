@@ -1,0 +1,205 @@
+
+
+
+{{!-- <div class="wrapper"> --}}
+
+
+
+	<div id="main_app" class="container">
+
+		<div class="section-main">
+			<div class="inner relative">
+				<div class="lnb">
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide eye"><a href="javascript:;">눈</a></div>
+							<div class="swiper-slide nose"><a href="javascript:;">코</a></div>
+						</div>
+					</div>
+					<div class="swiper-button-next"></div>
+				</div>
+			</div>
+
+			<div class="slide-main">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide slide-01">
+							<div class="inner"><a href="javascript:;"></a></div>
+						</div>
+						<div class="swiper-slide slide-02">
+							<div class="inner"><a href="javascript:;"></a></div>
+						</div>
+						<div class="swiper-slide slide-03">
+							<div class="inner"><a href="javascript:;"></a></div>
+						</div>
+					</div>
+					<div class="swiper-pagination"></div>
+					<div class="swiper-button-next"></div>
+    			<div class="swiper-button-prev"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="lnb-m">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<a href="javascript:;" class="eye">
+							<div class="icon"></div>
+							<div class="text">눈</div>
+						</a>
+						<a href="javascript:;" class="face">
+							<div class="icon"></div>
+							<div class="text">안면윤곽</div>
+						</a>
+					</div>
+					<div class="swiper-slide">
+						<a href="javascript:;" class="nose">
+							<div class="icon"></div>
+							<div class="text">코</div>
+						</a>
+						<a href="javascript:;" class="fat">
+							<div class="icon"></div>
+							<div class="text">지방이식</div>
+						</a>
+					</div>
+					<div class="swiper-slide">
+						<a href="javascript:;" class="botox">
+							<div class="icon"></div>
+							<div class="text">보톡스</div>
+						</a>
+						<a href="javascript:;" class="teeth">
+							<div class="icon"></div>
+							<div class="text">치아</div>
+						</a>
+					</div>
+					<div class="swiper-slide">
+						<a href="javascript:;" class="pillar">
+							<div class="icon"></div>
+							<div class="text">필러</div>
+						</a>
+						<a href="javascript:;" class="hair">
+							<div class="icon"></div>
+							<div class="text">머리이식</div>
+						</a>
+					</div>
+					<div class="swiper-slide">
+						<a href="javascript:;" class="breast">
+							<div class="icon"></div>
+							<div class="text">가슴</div>
+						</a>
+						<a href="javascript:;" class="diet">
+							<div class="icon">diet</div>
+							<div class="text">디톡스</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="swiper-pagination"></div>
+		</div>
+
+		<div class="section-contents">
+			<div class="inner cf">
+				<div class="box-feed fr">
+					<h2>피 드</h2>
+					<div class="banner cf">
+						<div class="left-m">
+							<a href="javascript:;">
+								<img src="/renew/images/banner_feed_01.jpg" alt="">
+							</a>
+						</div>
+						<div class="right-m">
+							<a href="javascript:;">
+								<img src="/renew/images/banner_feed_02.jpg" alt="">
+							</a>
+							<a href="javascript:;">
+								<img src="/renew/images/banner_feed_03.jpg" alt="">
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="box-all fr">
+					<!--div class="relative cf">
+						<h2 class="fl">전부</h2>
+						<div class="swiper-container fl">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide"><a href="javascript:;">눈</a></div>
+								<div class="swiper-slide"><a href="javascript:;">코</a></div>
+								<div class="swiper-slide"><a href="javascript:;">안면윤곽</a></div>
+								<div class="swiper-slide"><a href="javascript:;">모발이식</a></div>
+								<div class="swiper-slide"><a href="javascript:;">제모</a></div>
+								<div class="swiper-slide"><a href="javascript:;">레이져시술</a></div>
+							</div>
+						</div>
+						<div class="swiper-button-next"></div>
+					</div-->
+
+				<div class="box-fold event active">
+					<div class="title">이벤트 한눈에 모아보기~!</div>
+					<div class="content cf">
+						<ul class="box-event">
+							<li><a href="javascript:;" class="coupon cf">
+								<div class="image vertical-middle fl">
+									<img src="/renew/images/img_event_01.jpg" alt="">
+								</div>
+								<div class="detail fr">
+									<div class="cf">
+										<span class="name">[보셀르의원]</span>
+										<span class="date">2018.12.27-2019.01.05</span>
+									</div>
+									<div class="text sc">
+										<div class="event ellipsis">宫颈癌疫苗 9价 EVENT</div>
+										<div class="description ellipsis-multi">鼓楼站</div>
+									</div>
+									<div class="bottom cf">
+										<div class="view fl">720</div>
+										<div class="price fr">
+											<div class="before">720000</div>
+											<div class="current">₩590000</div>
+										</div>
+									</div>
+								</div>
+							</a></li>
+							<li v-for="(event, index) in events"><a :href="'/event/'+ event.id" class="cf">
+								<div class="image vertical-middle fl">
+									<img :src="'/images/event/all/' + event.thumbnailImage " alt="">
+								</div>
+								<div class="detail fr">
+									<div class="cf">
+										<span class="name">\{{event.hospitalName}}</span>
+										<span class="date">\{{event.eventRange}}</span>
+									</div>
+									<div class="text sc">
+										<div class="event ellipsis">\{{event.eventName}}</div>
+										<div class="description ellipsis-multi">\{{event.subway}}</div>
+									</div>
+									<div class="bottom cf">
+										<!--div class="view fl">720</div-->
+										<div class="price fr">
+											<!--div class="before">720000</div-->
+											<div class="current">\{{event.price}}</div>
+										</div>
+									</div>
+								</div>
+							</a></li>
+						</ul>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+{{!-- </div> --}}
+
+<div class="fixed-right">
+	<a href="javascript:;" class="btn-more"></a>
+	<a href="javascript:;" class="btn-qr sc">咨 询</a>
+</div>
+
+{{#section 'jquery'}}
+	<script src="/js/api/event.js"></script>
+	<script src="/js/controllers/main/mainController.js"></script>
+{{/section}}

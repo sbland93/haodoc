@@ -1,15 +1,15 @@
-var pass = prompt("Password");
+// var pass = prompt("Password");
 
-if(pass !== "inspire"){
+// if(pass !== "inspire"){
 
-    alert("접근이 불가능합니다.");
-    location.href = '/';  
+//     alert("접근이 불가능합니다.");
+//     location.href = '/';  
 
-}else{
+// }else{
 
-    alert("환영합니다. 인스파이어 제이 조지 조이 케리 레이첼 가자미!!!!!!!!!!!!!!!");
+//     alert("환영합니다. 인스파이어 제이 조지 조이 케리 레이첼 가자미!!!!!!!!!!!!!!!");
 
-}
+// }
 
 
 var app = new Vue({
@@ -98,12 +98,12 @@ var app = new Vue({
         },
 
         toggles : {
-            payerToggle : true,
+            payerToggle : false,
             participantToggle : false,
             couponToggle : false,
             eventToggle : false,
             categoryToggle : false,
-            bannerToggle : false,
+            bannerToggle : true,
         },
 
 
@@ -308,19 +308,22 @@ var app = new Vue({
         },
 
         newBanner: function(event){
+
             event.preventDefault();
             var self = this;
             var newBanner = new FormData($("#banner-form")[0]);
 
             //file이 있는지 확인한다.
             var val1 = $("#bannerImage").val();
+            var val2 = $("#mobileImage").val();
 
-            if(val1 == ''){
+            if(val1 == '' || val2 == ''){
                
                alert("파일은 필수입니다.");
                return false;
             
             }
+
             addBanner(newBanner).then(function(rtn){
                 
                 if(rtn.success){

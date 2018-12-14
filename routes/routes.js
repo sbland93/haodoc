@@ -56,11 +56,19 @@ module.exports = function(app){
 	//Renewal
 	app.get('/renew', function(req, res, next){
 		res.render('renew/main', {layout: false});
-	})
+	});
 
 	app.get('/renew/event', function(req, res, next){
 		res.render('renew/event', {layout:false});
-	})
+	});
+
+	app.get('/test/renew', function(req, res, next){
+		res.render('renew/home/main/main', { layout: "renew/layout.handlebars" });
+	});
+
+	app.get('/test/renew/event', function(req, res, next){
+		res.render('renew/home/event/event', { layout: "renew/layout.handlebars" });
+	});
 
 
 	require('./api/participant.js')(app);
