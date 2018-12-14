@@ -90,6 +90,7 @@
                                 <th>성별</th>
                                 <th>생년월일</th>
                                 <th>휴대폰</th>
+                                <th>할인쿠폰번호</th>
                                 <th>신청일시</th>
                                 <th>기능</th>
                             </tr>
@@ -105,6 +106,7 @@
                                 <td>\{{payer.gender}}</td>
                                 <td>\{{payer.birthDay}}</td>
                                 <td>\{{payer.phone}}</td>
+                                <td>\{{payer.couponNumber}}</td>
                                 <td>\{{payer.updated_at | moment}}</td>
                                 <td><button @click="removePayer(payer.id)" class="btn btn-primary">\{{payer.chineseName}}삭제</button></td>
                             </tr>

@@ -19,6 +19,7 @@ module.exports = function(payer){
 		gender : payer.gender,
 		payment : payer.payment,
 		remarks : payer.remarks,
+		couponNumber : payer.couponNumber,
 		updated_at : payer.updated_at,
 	};
 };

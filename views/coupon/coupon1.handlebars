@@ -34,6 +34,9 @@
                     <label for="wechatID">微信号</label> <input type="text" v-model="newPayer.wechatID" name="wechatID" class="field-style field-full align-none" id="wechatID" placeholder="EX)HaoDoc" />
                 </li>
                 <li>
+                    <label for="couponNumber">优惠券</label> <input type="text" v-model="newPayer.couponNumber" name="couponNumber" class="field-style field-full align-none" id="couponNumber" placeholder="请输入优惠券号码" />
+                </li>
+                <li>
                     <input type="submit" class="align-right" value="Submit" />
                 </li>
                 <li v-if="errors.length">

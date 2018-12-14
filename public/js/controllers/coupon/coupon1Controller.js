@@ -18,6 +18,7 @@ var app = new Vue({
 		birthDay:null,
 		phone: null,
 		wechatID: null,
+		couponNumber : null,
     }
     
   },
