@@ -16,6 +16,7 @@ var payerSchema = mongoose.Schema({
 	birthDay : String,
 	gender : String,
 	remarks: String,
+	couponNumber: String,
 	updated_at: {type: Date, default: Date.now },
 
 });
