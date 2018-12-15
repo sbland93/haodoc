@@ -136,27 +136,27 @@
 					</div-->
 
 				<div class="box-fold event active">
-					<div class="title">이벤트 한눈에 모아보기~!</div>
+					<div class="title">이벤트 모아보기</div>
 					<div class="content cf">
 						<ul class="box-event">
-							<li><a href="javascript:;" class="coupon cf">
+							<li v-for="(coupon, index) in coupons"><a :href="'/coupon/'+coupon.id" class="coupon cf">
 								<div class="image vertical-middle fl">
-									<img src="/renew/images/img_event_01.jpg" alt="">
+									<img :src="'/images/coupon/all/'+coupon.thumbnailImage" alt="">
 								</div>
 								<div class="detail fr">
 									<div class="cf">
-										<span class="name">[보셀르의원]</span>
-										<span class="date">2018.12.27-2019.01.05</span>
+										<span class="name">\{{coupon.hospitalName}}</span>
+										<span class="date">\{{coupon.couponRange}}</span>
 									</div>
 									<div class="text sc">
-										<div class="event ellipsis">宫颈癌疫苗 9价 EVENT</div>
-										<div class="description ellipsis-multi">鼓楼站</div>
+										<div class="event ellipsis">\{{coupon.couponName}}</div>
+										<div class="description ellipsis-multi">\{{coupon.subway}}</div>
 									</div>
 									<div class="bottom cf">
-										<div class="view fl">720</div>
+										<!--div class="view fl">720</div-->
 										<div class="price fr">
-											<div class="before">720000</div>
-											<div class="current">₩590000</div>
+											<!--div class="before">720000</div-->
+											<div class="current">\{{coupon.price}}</div>
 										</div>
 									</div>
 								</div>
@@ -187,6 +187,7 @@
 					</div>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 
@@ -201,5 +202,7 @@
 
 {{#section 'jquery'}}
 	<script src="/js/api/event.js"></script>
-	<script src="/js/controllers/main/mainController.js"></script>
+	<script src="/js/api/coupon.js"></script>
+	<script src="/js/util/util.js"></script>
+	<script src="/renew/js/main/mainController.js"></script>
 {{/section}}

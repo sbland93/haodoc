@@ -164,7 +164,10 @@ var app = new Vue({
         }
     },
     methods: {
-
+        
+        getEvents : function(){
+            util_vue_init(this, getEvents, "events");
+        },
         //추가값을 활용하기 위함
         change_list_array : function(_arr, manipulate_string, event){
             
