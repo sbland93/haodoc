@@ -20,11 +20,14 @@ var getFiles = function(data){
 
 
 //Vue.js 초기화 전용/ self.data_name = returnValue
-var util_data_init = function(vue_self, which_func, data_name){
-			
-	which_func().then(function(_rtn){ 
-		vue_self[data_name] = _rtn;
-	}).catch(function(_rtn){
+var util_data_init = function(vue_self, which_func, data_name, cb){
+	
+	if(!cb){
+		var cb = function(_rtn){ 
+			vue_self[data_name] = _rtn;
+		};	
+	}
+	which_func().then(cb).catch(function(_rtn){
 		console.log(_rtn);
 	});
 

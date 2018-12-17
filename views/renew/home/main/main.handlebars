@@ -1,140 +1,71 @@
 
-
-
-{{!-- <div class="wrapper"> --}}
-
-
-
-	<div id="main_app" class="container">
-
-		<div class="section-main">
-			<div class="inner relative">
-				<div class="lnb">
-					<div class="swiper-container">
-						<div class="swiper-wrapper">
-							<div class="swiper-slide eye"><a href="javascript:;">눈</a></div>
-							<div class="swiper-slide nose"><a href="javascript:;">코</a></div>
-						</div>
-					</div>
-					<div class="swiper-button-next"></div>
-				</div>
-			</div>
-
-			<div class="slide-main">
+{{!-- 컨테이너영역 --}}
+<div id="main_app" class="container">
+	{{!-- 메인섹션 --}}
+	<div class="section-main">
+		<!-- 카테고리 영역 -->
+		<div class="inner relative">
+			<div class="lnb">
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
-						<div class="swiper-slide slide-01">
-							<div class="inner"><a href="javascript:;"></a></div>
-						</div>
-						<div class="swiper-slide slide-02">
-							<div class="inner"><a href="javascript:;"></a></div>
-						</div>
-						<div class="swiper-slide slide-03">
-							<div class="inner"><a href="javascript:;"></a></div>
-						</div>
+						<span v-for="(category, index) in categorys">
+							<div :class="'swiper-slide '+index">
+								<a :href="'/test/renew/event?category='+category.categoryName">
+									<img :src="'/images/category/all/'+category.iconImage" alt="">\{{category.categoryName}}
+								</a>
+							</div>
+						</span>
 					</div>
-					<div class="swiper-pagination"></div>
-					<div class="swiper-button-next"></div>
-    			<div class="swiper-button-prev"></div>
 				</div>
+				<div class="swiper-button-next"></div>
 			</div>
 		</div>
-
-		<div class="lnb-m">
+		{{!-- /카테고리 영역 --}}
+		{{!-- 배너 영역 --}}
+		<div class="slide-main">
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide">
-						<a href="javascript:;" class="eye">
-							<div class="icon"></div>
-							<div class="text">눈</div>
-						</a>
-						<a href="javascript:;" class="face">
-							<div class="icon"></div>
-							<div class="text">안면윤곽</div>
+					<div v-for="(banner, index) in banners" :class="'swiper-slide slide-0'+(index+1)">
+						<a :href="banner.url" class="image vertical-middle">
+							<img :src="'/images/banner/all/' + banner.bannerImage" alt="" class="pc">
+							<!--img src="/renew/images/img_slide_01.jpg" alt="" class="pc"-->
+							<img :src="'/images/banner/all/' + banner.mobileImage" alt="" class="mobile">
 						</a>
 					</div>
-					<div class="swiper-slide">
-						<a href="javascript:;" class="nose">
-							<div class="icon"></div>
-							<div class="text">코</div>
-						</a>
-						<a href="javascript:;" class="fat">
-							<div class="icon"></div>
-							<div class="text">지방이식</div>
-						</a>
-					</div>
-					<div class="swiper-slide">
-						<a href="javascript:;" class="botox">
-							<div class="icon"></div>
-							<div class="text">보톡스</div>
-						</a>
-						<a href="javascript:;" class="teeth">
-							<div class="icon"></div>
-							<div class="text">치아</div>
-						</a>
-					</div>
-					<div class="swiper-slide">
-						<a href="javascript:;" class="pillar">
-							<div class="icon"></div>
-							<div class="text">필러</div>
-						</a>
-						<a href="javascript:;" class="hair">
-							<div class="icon"></div>
-							<div class="text">머리이식</div>
+				</div>
+				<div class="swiper-pagination"></div>
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+			</div>
+		</div>
+		{{!-- /배너영역 --}}
+	</div>
+	{{!-- /메인섹션 --}}
+	{{!-- 컨텐츠섹션 --}}
+	<div class="section-contents">
+		<div class="inner cf">
+			{{!-- 피드영역 --}}
+			<div class="box-feed fr">
+				<h2>피 드</h2>
+				<div class="banner cf">
+					<div class="left-m">
+						<a href="javascript:;">
+							<img src="/renew/images/banner_feed_01.jpg" alt="">
 						</a>
 					</div>
-					<div class="swiper-slide">
-						<a href="javascript:;" class="breast">
-							<div class="icon"></div>
-							<div class="text">가슴</div>
+					<div class="right-m">
+						<a href="javascript:;">
+							<img src="/renew/images/banner_feed_02.jpg" alt="">
 						</a>
-						<a href="javascript:;" class="diet">
-							<div class="icon">diet</div>
-							<div class="text">디톡스</div>
+						<a href="javascript:;">
+							<img src="/renew/images/banner_feed_03.jpg" alt="">
 						</a>
 					</div>
 				</div>
 			</div>
-			<div class="swiper-pagination"></div>
-		</div>
-
-		<div class="section-contents">
-			<div class="inner cf">
-				<div class="box-feed fr">
-					<h2>피 드</h2>
-					<div class="banner cf">
-						<div class="left-m">
-							<a href="javascript:;">
-								<img src="/renew/images/banner_feed_01.jpg" alt="">
-							</a>
-						</div>
-						<div class="right-m">
-							<a href="javascript:;">
-								<img src="/renew/images/banner_feed_02.jpg" alt="">
-							</a>
-							<a href="javascript:;">
-								<img src="/renew/images/banner_feed_03.jpg" alt="">
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="box-all fr">
-					<!--div class="relative cf">
-						<h2 class="fl">전부</h2>
-						<div class="swiper-container fl">
-							<div class="swiper-wrapper">
-								<div class="swiper-slide"><a href="javascript:;">눈</a></div>
-								<div class="swiper-slide"><a href="javascript:;">코</a></div>
-								<div class="swiper-slide"><a href="javascript:;">안면윤곽</a></div>
-								<div class="swiper-slide"><a href="javascript:;">모발이식</a></div>
-								<div class="swiper-slide"><a href="javascript:;">제모</a></div>
-								<div class="swiper-slide"><a href="javascript:;">레이져시술</a></div>
-							</div>
-						</div>
-						<div class="swiper-button-next"></div>
-					</div-->
-
+			{{!--/피드영역 --}}
+			{{!--이벤트영역 --}}
+			<div class="box-all fr">
 				<div class="box-fold event active">
 					<div class="title">이벤트 모아보기</div>
 					<div class="content cf">
@@ -187,22 +118,25 @@
 					</div>
 					</div>
 				</div>
-				
 			</div>
+			{{!-- /이벤트영역 --}}
 		</div>
-
 	</div>
-
-{{!-- </div> --}}
+	{{!-- /컨텐츠섹션 --}}
+</div>
+{{!-- /컨테이너영역 --}}
 
 <div class="fixed-right">
 	<a href="javascript:;" class="btn-more"></a>
 	<a href="javascript:;" class="btn-qr sc">咨 询</a>
 </div>
 
+
 {{#section 'jquery'}}
 	<script src="/js/api/event.js"></script>
 	<script src="/js/api/coupon.js"></script>
+	<script src="/js/api/banner.js"></script>
+	<script src="/js/api/category.js"></script>
 	<script src="/js/util/util.js"></script>
-	<script src="/renew/js/main/mainController.js"></script>
+	<script src="/renew/js/controllers/mainController.js"></script>
 {{/section}}

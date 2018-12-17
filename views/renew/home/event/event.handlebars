@@ -1,20 +1,18 @@
 
 
-<div class="container sub">
+<div class="container sub" id="event_app">
+
 
 	<div class="section-main sub">
 		<div class="inner">
 			<div class="slide-main">
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
-						<div class="swiper-slide slide-01">
-							<a href="javascript:;"></a>
-						</div>
-						<div class="swiper-slide slide-02">
-							<a href="javascript:;"></a>
-						</div>
-						<div class="swiper-slide slide-03">
-							<a href="javascript:;"></a>
+						<div v-for="(banner, index) in banners" :class="'swiper-slide slide-0'+(index+1)">
+							<a href="javascript:;" class="image vertical-middle">
+								<img :src="'/images/banner/all/' + banner.bannerImage" alt="" class="pc">
+								<img :src="'/images/banner/all/' + banner.mobileImage" alt="" class="mobile">
+							</a>
 						</div>
 					</div>
 					<div class="swiper-pagination"></div>
@@ -30,8 +28,6 @@
 			<li><a href="javascript:;" class="active">전체</a></li>
 			<li><a href="javascript:;">이벤트</a></li>
 			<li><a href="javascript:;">바로구매</a></li>
-			<li><a href="javascript:;">최신이벤트</a></li>
-			<li><a href="javascript:;">랭킹</a></li>
 		</ul>
 	</div>
 
@@ -40,18 +36,10 @@
 			<div class="box-sub-content">
 				<div class="box-all">
 					<div class="relative cf">
-						<h2 class="fl">눈</h2>
+						<h2 class="fl"><span v-if="category">\{{category.categoryName}}</span><div v-else>전부</div></h2>
 						<div class="swiper-container fl">
 							<div class="swiper-wrapper">
-								<div class="swiper-slide"><a href="javascript:;">코</a></div>
-								<div class="swiper-slide"><a href="javascript:;">안면윤곽</a></div>
-								<div class="swiper-slide"><a href="javascript:;">모발이식</a></div>
-								<div class="swiper-slide"><a href="javascript:;">제모</a></div>
-								<div class="swiper-slide"><a href="javascript:;">레이져시술</a></div>
-								<div class="swiper-slide"><a href="javascript:;">코</a></div>
-								<div class="swiper-slide"><a href="javascript:;">안면윤곽</a></div>
-								<div class="swiper-slide"><a href="javascript:;">모발이식</a></div>
-								<div class="swiper-slide"><a href="javascript:;">제모</a></div>
+								<div class="swiper-slide" v-for="(category, index) in categorys"><a href="javascript:;">\{{category.categoryName}}</a></div>
 							</div>
 						</div>
 						<div class="swiper-button-next"></div>
@@ -61,15 +49,13 @@
 				<div class="box-fold all first">
 					<div class="title">눈 수술에 대한 모든것</div>
 					<div class="content cf">
-						<div class="icon eye fl"></div>
+						<div class="icon fl"><img :src="'/images/category/all/'+category.iconImage" alt=""></div>
 						<div class="text fr">
 							<ul>
-								<li>주요시술 : 앞트임 , 뒤트임 , 안검하수 </li>
-								<li>회복기간 : 한달, 붓기빠짐(6개월) </li>
-								<li>회복기간 : </li>
+								<li><span v-html="category.content_1"></span></li>
 							</ul>
 							<div class="description">
-								첫째 다크 서클의 형성을 위한 두 가지 이유 때문에 늦게 파란색 검은 눈을 형성하는 밤, 피로 및 기타 요인, 원인 눈 정맥 혈액,미세혈관보존의 효과가있습니다.
+								<span v-html="category.content_2"></span>
 							</div>
 						</div>
 					</div>
@@ -78,17 +64,11 @@
 				<div class="box-fold faq">
 					<div class="title">눈 수술에 대해 많이 묻는 질문</div>
 					<div class="content cf">
-						<div class="question">히알루 론산은 안전한가요?</div>
-						<div class="answer">
-							Hyaluronic acid는 히알루 론산으로도 알려져 있으며, 인간의 피부와 진피의 주요 매트릭스 성분 중 하나입니다. 히알루 론산은 원래 피부에서 발견되며 피부와 신체의 수분을 흡수합니다. 그러나 자연 상태의 히알루 론산 분자는 48 시간 동안 유지 된 후에 만 ​​분해 될 수 있습니다. 히알루 론산 가교제 주입 번들 관련 가교제, 큰, 중간 및 작은 분자량, 생체 내에서의 히알루 론산의 기간 연장 형성로서 작용하는 부가된다. Crosslinker 기술은 히알루 론산의 품질을 측정하는 중요한 요소 중 하나입니다. 권위있는 보건기구에 의해 인증 된 히알루 론산은 특정 기간 내에 완전한 분해의보고를 제공해야하므로, 법적으로 인증 된 히알루 론산 제품이면 안전하다고 간주 될 수 있습니다.
-						</div>
-						<div class="question">히알루 론산은 안전한가요?</div>
-						<div class="answer">
-							Hyaluronic acid는 히알루 론산으로도 알려져 있으며, 인간의 피부와 진피의 주요 매트릭스 성분 중 하나입니다. 히알루 론산은 원래 피부에서 발견되며 피부와 신체의 수분을 흡수합니다. 그러나 자연 상태의 히알루 론산 분자는 48 시간 동안 유지 된 후에 만 ​​분해 될 수 있습니다. 히알루 론산 가교제 주입 번들 관련 가교제, 큰, 중간 및 작은 분자량, 생체 내에서의 히알루 론산의 기간 연장 형성로서 작용하는 부가된다. Crosslinker 기술은 히알루 론산의 품질을 측정하는 중요한 요소 중 하나입니다. 권위있는 보건기구에 의해 인증 된 히알루 론산은 특정 기간 내에 완전한 분해의보고를 제공해야하므로, 법적으로 인증 된 히알루 론산 제품이면 안전하다고 간주 될 수 있습니다.
-						</div>
-						<div class="question">히알루 론산은 안전한가요?</div>
-						<div class="answer">
-							Hyaluronic acid는 히알루 론산으로도 알려져 있으며, 인간의 피부와 진피의 주요 매트릭스 성분 중 하나입니다. 히알루 론산은 원래 피부에서 발견되며 피부와 신체의 수분을 흡수합니다. 그러나 자연 상태의 히알루 론산 분자는 48 시간 동안 유지 된 후에 만 ​​분해 될 수 있습니다. 히알루 론산 가교제 주입 번들 관련 가교제, 큰, 중간 및 작은 분자량, 생체 내에서의 히알루 론산의 기간 연장 형성로서 작용하는 부가된다. Crosslinker 기술은 히알루 론산의 품질을 측정하는 중요한 요소 중 하나입니다. 권위있는 보건기구에 의해 인증 된 히알루 론산은 특정 기간 내에 완전한 분해의보고를 제공해야하므로, 법적으로 인증 된 히알루 론산 제품이면 안전하다고 간주 될 수 있습니다.
+						<div v-for="(question, index) in category.questions">
+							<div class="question"><span v-html="question.content"></span></div>
+							<div class="answer">
+								<span v-html="question.answer"></span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -100,9 +80,9 @@
 							<div class="step fl">전</div>
 							<div class="text fr">
 								<ul class="list-bullet">
-									<li>수술하루 전 화장을하지 말고, 얼굴을 깨끗하게 유지하십시오.</li>
-									<li>여성은 멍이 들거나 부어 오르는 것을 막기 위해 생리 기간을 피하고 임산부는 수유중인 여성에게 사전에 의사에게 알릴 필요가있다.</li>
-									<li>수술하루 전 화장을하지 말고, 얼굴을 깨끗하게 유지하십시오.</li>
+									<li v-for="(caution, index) in category.caution_1">
+										<span v-html="caution.content"></span>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -110,22 +90,10 @@
 							<div class="step fl">후</div>
 							<div class="text fr">
 								<ul>
-									<li>
-										<div class="day">0 일 ~ 3 일</div>
+									<li v-for="(caution, index) in category.caution_2">
+										<div class="day">\{{caution.day}}</div>
 										<div>
-											주입 한 후 12 시간 주입 영역과 피 접촉 내 2. 온수 욕조를 세척하지 않은 깨끗하고 건조 주사 부위의 유지는, 격렬한 운동을, 얼음 날 (3)의 첫 번째 주사 후, 이하에서 30 분 이상; 4. 터치 주사 부위 충전재의 균일 한 분포를 유지하기 위해 빈번한 안면 근육의 움직임을 방지하기 위해, 주입을 누르지 않는다.
-										</div>
-									</li>
-									<li>
-										<div class="day">0 일 ~ 3 일</div>
-										<div>
-											하루에 화장을하지 말고, 얼굴을 깨끗하게 유지하십시오.
-										</div>
-									</li>
-									<li>
-										<div class="day">0 일 ~ 3 일</div>
-										<div>
-											하루에 화장을하지 말고, 얼굴을 깨끗하게 유지하십시오.
+											<span v-html="caution.content"></span>
 										</div>
 									</li>
 								</ul>
@@ -138,68 +106,46 @@
 					<div class="title">이벤트 한눈에 모아보기~!</div>
 					<div class="content cf">
 						<ul class="box-event">
-							<li><a href="javascript:;" class="coupon cf">
+							<li v-for="(coupon, index) in coupons"><a :href="'/coupon/'+coupon.id" class="coupon cf">
 								<div class="image vertical-middle fl">
-									<img src="/renew/images/img_event_01.jpg" alt="">
+									<img :src="'/images/coupon/all/'+coupon.thumbnailImage" alt="">
 								</div>
 								<div class="detail fr">
 									<div class="cf">
-										<span class="name">[보셀르의원]</span>
-										<span class="date">2018.12.27-2019.01.05</span>
+										<span class="name">\{{coupon.hospitalName}}</span>
+										<span class="date">\{{coupon.couponRange}}</span>
 									</div>
 									<div class="text sc">
-										<div class="event ellipsis">宫颈癌疫苗 9价 EVENT</div>
-										<div class="description ellipsis-multi">鼓楼站</div>
+										<div class="event ellipsis">\{{coupon.couponName}}</div>
+										<div class="description ellipsis-multi">\{{coupon.subway}}</div>
 									</div>
 									<div class="bottom cf">
-										<div class="view fl">720</div>
+										<!--div class="view fl">720</div-->
 										<div class="price fr">
-											<div class="before">720000</div>
-											<div class="current">₩590000</div>
+											<!--div class="before">720000</div-->
+											<div class="current">\{{coupon.price}}</div>
 										</div>
 									</div>
 								</div>
 							</a></li>
-							<li><a href="javascript:;" class="cf">
+							<li v-for="(event, index) in events"><a :href="'/event/'+ event.id" class="cf">
 								<div class="image vertical-middle fl">
-									<img src="/renew/images/img_event_02.jpg" alt="">
+									<img :src="'/images/event/all/' + event.thumbnailImage " alt="">
 								</div>
 								<div class="detail fr">
 									<div class="cf">
-										<span class="name">[보셀르의원]</span>
-										<span class="date">2018.12.27-2019.01.05</span>
+										<span class="name">\{{event.hospitalName}}</span>
+										<span class="date">\{{event.eventRange}}</span>
 									</div>
 									<div class="text sc">
-										<div class="event ellipsis">宫颈癌疫苗 9价 EVENT</div>
-										<div class="description ellipsis-multi">鼓楼站</div>
+										<div class="event ellipsis">\{{event.eventName}}</div>
+										<div class="description ellipsis-multi">\{{event.subway}}</div>
 									</div>
 									<div class="bottom cf">
-										<div class="view fl">720</div>
+										<!--div class="view fl">720</div-->
 										<div class="price fr">
-											<div class="before">720000</div>
-											<div class="current">₩590000</div>
-										</div>
-									</div>
-								</div>
-							</a></li>
-							<li><a href="javascript:;" class="cf">
-								<div class="image vertical-middle fl">
-									<img src="/renew/images/img_event_01.jpg" alt="">
-								</div>
-								<div class="detail fr">
-									<div class="cf">
-										<span class="name">[보셀르의원]</span>
-										<span class="date">2018.12.27-2019.01.05</span>
-									</div>
-									<div class="text sc">
-										<div class="event ellipsis">宫颈癌疫苗 9价 EVENT</div>
-										<div class="description ellipsis-multi">鼓楼站</div>
-									</div>
-									<div class="bottom cf">
-										<div class="view fl">720</div>
-										<div class="price fr">
-											<div class="before">720000</div>
-											<div class="current">₩590000</div>
+											<!--div class="before">720000</div-->
+											<div class="current">\{{event.price}}</div>
 										</div>
 									</div>
 								</div>
@@ -219,5 +165,13 @@
 	<a href="javascript:;" class="btn-qr sc">咨 询</a>
 </div>
 
+{{#section 'jquery'}}
+	<script src="/js/api/event.js"></script>
+	<script src="/js/api/coupon.js"></script>
+	<script src="/js/api/banner.js"></script>
+	<script src="/js/api/category.js"></script>
+	<script src="/js/util/util.js"></script>
+	<script type="text/javascript" src="/renew/js/controllers/eventController.js"></script>
+{{/section}}
 
 

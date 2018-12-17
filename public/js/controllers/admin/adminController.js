@@ -34,9 +34,8 @@ var app = new Vue({
         list_array_3 : [ {} ],
 
         updateIndex : -1,
-        updateObj : {
+        updateObj : {},
 
-        },
         update_event_toggle : false,
         update_coupon_toggle : false,
         update_category_toggle : false,
@@ -47,16 +46,10 @@ var app = new Vue({
             participantToggle : false,
             couponToggle : false,
             eventToggle : false,
-            categoryToggle : false,
-            bannerToggle : true,
+            categoryToggle : true,
+            bannerToggle : false,
         },
 
-        eventSet : {
-            update_toggle : "update_event_toggle",
-            updateFunc : updateEvent,
-            getFunc : getEvents,
-            deleteFunc : deleteEvent,
-        },
 
 
     },
@@ -255,7 +248,8 @@ var app = new Vue({
 
             event.preventDefault();
             var self = this;
-            var newBanner = new FormData($("#banner-form")[0]);
+            var new_banner_form = $("#banner-form")[0];
+            var newBanner = new FormData(new_banner_form);
 
             //file이 있는지 확인한다.
             var val1 = $("#bannerImage").val();
@@ -269,6 +263,7 @@ var app = new Vue({
                 
                 if(rtn.success){
                     alert("추가 완료");
+                    new_banner_form.reset();
                     util_data_init(self, getBanners, "banners");
                 }else{
                     alert("필드를 다 채워주셔야 합니다.");
@@ -372,6 +367,12 @@ var app = new Vue({
                 if(rtn.success){
                     alert("삭제완료!");
                     util_data_init(self, getFunc, dataName);
+                    //dataName이 현재, "categorys" -> category
+                    if(dataName === "categorys" || dataName === "coupons" ||
+                     dataName === "events" || dataName === "banners"){
+                        dataName = dataName.slice(0, -1);
+                        util_file_init(self, dataName, dataName+"Files")
+                    }
                 }else{
                     alert("실패!");
                 }
@@ -384,7 +385,7 @@ var app = new Vue({
         },
         removeParticipant: function(id){
             var self = this;
-            self.removeThing(deleteParticipant, id, getParticipants, "payers");
+            self.removeThing(deleteParticipant, id, getParticipants, "participants");
         },
         removeCoupon: function(id){
             var self = this;
@@ -396,11 +397,11 @@ var app = new Vue({
         },
         removeCategory: function(id){
             var self = this;
-            self.removeCategory(deleteCategory, id, getCategorys, "categorys");
+            self.removeThing(deleteCategory, id, getCategorys, "categorys");
         },
         removeBanner : function(id){
             var self = this;
-            self.removeBanner(deleteBanner, id, getBanners, "banners");
+            self.removeThing(deleteBanner, id, getBanners, "banners");
         },
 
 
