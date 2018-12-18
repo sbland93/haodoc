@@ -388,7 +388,11 @@
                                 <label for="cc_name">병원상세주소</label>
                                 <input type="text" class="form-control" name="address">
                             </div>
-
+                            <div class="form-group">
+                                <label for="cc_name">예약금 모델 인가요?</label>
+                                <label class="radio-inline"><input id="category" type="radio" class="form-control" name="isDeposit" value="true">예약금 모델</label>
+                                <label class="radio-inline"><input id="category" type="radio" class="form-control" name="isDeposit" value="false">쿠폰</label>
+                            </div>
                             <div class="form-group" v-for="(_a, index) in list_array">
                                 <label for="cc_name">카테고리 \{{index}}</label>
                                 <input type="text" class="form-control" name="categorys[]">
@@ -400,6 +404,16 @@
                                 <label for="cc_name">쿠폰 가격</label>
                                 <input type="number" class="form-control" name="price" placeholder="560000 처럼 숫자만 입력">
                             </div>
+                            <div class="form-group">
+                                <label for="cc_name">원래 가격</label>
+                                <input type="number" class="form-control" name="originalPrice" placeholder="560000 처럼 숫자만 입력">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cc_name">예약금?</label>
+                                <input type="number" class="form-control" name="deposit" placeholder="예약금모델인 경우 해당하는 예약금 을 숫자로만">
+                            </div>
+
                             <div class="form-group">
                                 <label for="cc_name">특이 사항</label>
                                 <input type="text" class="form-control" name="remarks" placeholder="특이사항">

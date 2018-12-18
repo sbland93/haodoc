@@ -27,7 +27,10 @@ var couponSchema = mongoose.Schema({
     
     couponName: String,
     couponRange: String,
+    originalPrice : Number, //원래가격
     price : Number,
+    isDeposit : Boolean, //예약금 모델인지 여부
+    deposit : Number, //예약금 가격
     categorys : { type: [ String ], default: [] },
     hospitalName: String,
     subway: String,
