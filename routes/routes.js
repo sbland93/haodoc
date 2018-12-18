@@ -19,7 +19,6 @@ module.exports = function(app){
 	app.get('/team', homeHandlers.team);
 	app.get('/rules', homeHandlers.rules);
 	app.get('/personal', homeHandlers.personal);
-	
 	app.get('/event', homeHandlers.events);
 	app.get('/event/:id', homeHandlers.eventInfo);
 
@@ -56,11 +55,27 @@ module.exports = function(app){
 	//Renewal
 	app.get('/renew', function(req, res, next){
 		res.render('renew/main', {layout: false});
-	})
+	});
 
 	app.get('/renew/event', function(req, res, next){
 		res.render('renew/event', {layout:false});
-	})
+	});
+
+	app.get('/test/renew', function(req, res, next){
+		res.render('renew/home/main/main', { layout: "renew/layout.handlebars" });
+	});
+
+	app.get('/test/renew/event', function(req, res, next){
+		res.render('renew/home/event/event', { layout: "renew/layout.handlebars" });
+	});
+
+	app.get('/test/renew/event/:id', function(req, res, next){
+		res.render('renew/home/event/eventInfo', { layout: "renew/layout.handlebars" });
+	});
+
+	app.get('/test/renew/coupon/:id', function(req, res, next){
+		res.render('renew/home/coupon/couponInfo', { layout: "renew/layout.handlebars" });
+	});
 
 
 	require('./api/participant.js')(app);

@@ -45,6 +45,7 @@ module.exports = function(){
 				//하나의 transaction 단위로 묶어야 한다. 추가로, file 삭제 error 처리는 하지 않고 있다.
 				//이미지 관리를 자율로 하기때문에 NODIR 에러가 빈번히 발생, 이를 막기 위함.
 				var delete_prmoise = new Promise(function(resolve, reject){
+					if(!file_name_arr[i]) return resolve();
 					fs.unlink(path.join(__dirname + fileDir) + file_name_arr[i], (err) => {
 						resolve();
 					});

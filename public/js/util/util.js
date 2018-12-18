@@ -1,32 +1,45 @@
 
 
+var baseFile = "/api/file";
+
+var getFiles = function(data){
+	return new Promise(function(resolve, reject){
+		$.ajax({
+			url: baseFile,
+			method: 'GET',
+			data: data,
+			success: function(rtnData){
+				resolve(rtnData);
+			},
+			fail: function(rtnData){
+				reject(rtnData);
+			},
+		});
+	});
+};
 
 
-
-
-//NameSpace util
-
-
-
-
-
-
-
-//content의 엔터를 유지해주기 위해, 파싱해주는 함수.
-//obj와 key로 접근하는 이유는 obj에 그대로 접근해서 변경하기 위함. 
-var util_make_html = function(target){
-
-	return target.replace(/\r\n/g,"<br>");
+//Vue.js 초기화 전용/ self.data_name = returnValue
+var util_data_init = function(vue_self, which_func, data_name, cb){
+	
+	if(!cb){
+		var cb = function(_rtn){ 
+			vue_self[data_name] = _rtn;
+		};	
+	}
+	which_func().then(cb).catch(function(_rtn){
+		console.log(_rtn);
+	});
 
 }
 
 
+var util_file_init = function(vue_self, dirString, data_name){
 
+	getFiles({dir : dirString}).then(function(_rtn){
+		vue_self[data_name] = _rtn;
+	}).catch(function(_rtn){
+		console.log(_rtn);
+	});
 
-
-
-
-
-
-
-
+}

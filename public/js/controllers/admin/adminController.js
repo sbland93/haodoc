@@ -1,15 +1,15 @@
-var pass = prompt("Password");
+// var pass = prompt("Password");
 
-if(pass !== "inspire"){
+// if(pass !== "inspire"){
 
-    alert("접근이 불가능합니다.");
-    location.href = '/';  
+//     alert("접근이 불가능합니다.");
+//     location.href = '/';  
 
-}else{
+// }else{
 
-    alert("환영합니다. 인스파이어 제이 조지 조이 케리 레이첼 가자미!!!!!!!!!!!!!!!");
+//     alert("환영합니다. 인스파이어 제이 조지 조이 케리 레이첼 가자미!!!!!!!!!!!!!!!");
 
-}
+// }
 
 
 var app = new Vue({
@@ -33,79 +33,22 @@ var app = new Vue({
         list_array_2 : [ {} ],
         list_array_3 : [ {} ],
 
-        //For Update Event Obj
+        updateIndex : -1,
+        updateObj : {},
+
         update_event_toggle : false,
-        update_event_index : -1,
-
-        update_event : {
-            eventName: "",
-            price : "",
-            eventRange: "",
-            hospitalName: "",
-            subway: "",
-            address: "",
-            categorys : [],
-            thumbnailImage: "",
-            eventImage: "",
-            updated_at: "",
-        },
-
-        //For Update Event Obj
         update_coupon_toggle : false,
-        update_coupon_index : -1,
-
-        update_coupon : {
-            couponName: "",
-            price : "",
-            couponRange: "",
-            hospitalName: "",
-            subway: "",
-            address: "",
-            categorys : [],
-            thumbnailImage: "",
-            couponImage: "",
-            updated_at: "",
-        },
-
-        //For Update Event Obj
         update_category_toggle : false,
-        update_category_index : -1,
-
-        update_category : {
-            categoryName: "",
-            iconImage : "",
-            content_1: "",
-            content_2: "",
-            questions : "",
-            caution_1 : "",
-            caution_2 : "",
-            updated_at : "",
-            remarks: "",
-        },
-
-        //For Update Event Obj
         update_banner_toggle : false,
-        update_banner_index : -1,
-
-        update_banner : {
-
-            bannerImage: "",
-            url : "",
-            remarks: "",
-            category : "",
-            updated_at: "",
-        
-        },
 
         toggles : {
-            payerToggle : true,
+            payerToggle : false,
             participantToggle : false,
             couponToggle : false,
             eventToggle : false,
-            categoryToggle : false,
+            categoryToggle : true,
             bannerToggle : false,
         },
-
 
 
 
@@ -115,46 +58,49 @@ var app = new Vue({
     	
     	var self = this;
         
-        getPayers().then(function(payers){
-            self.payers = payers;
-        });
+        var init_data_arr = [
+            {
+                func_name : getPayers, data_name : "payers"
+            },
+            {
+                func_name : getCoupons, data_name: "coupons"
+            },
+            {
+                func_name : getParticipants, data_name : "participants"
+            },
+            {
+                func_name : getEvents, data_name: "events"
+            },
+            {
+                func_name : getCategorys, data_name: "categorys"
+            },
+            {
+                func_name : getBanners, data_name: "banners"
+            },
+        ];        
 
-        getCoupons().then(function(coupons){
-            self.coupons = coupons;
-        });
+        for (var i = init_data_arr.length - 1; i >= 0; i--) {
+            util_data_init(self, init_data_arr[i].func_name, init_data_arr[i].data_name);
+        }
+        
+        var init_file_arr = [
+            {
+                dirString : "event", data_name : "eventFiles"
+            },
+            {
+                dirString : "coupon", data_name : "couponFiles"
+            },
+            {
+                dirString : "category", data_name : "categoryFiles"
+            },
+            {
+                dirString : "banner", data_name : "bannerFiles"
+            },
+        ];
 
-        getParticipants().then(function(participants){
-        	self.participants = participants;
-        });
-
-        getEvents().then(function(events){
-        	self.events = events;
-        });
-
-        getCategorys().then(function(categorys){
-            self.categorys = categorys;
-        });
-
-        getBanners().then(function(banners){
-            console.log(banners);
-            self.banners = banners;
-        });
-
-        getFiles({dir: "event"}).then(function(files){
-            self.eventFiles = files;
-        });
-
-        getFiles({dir : "coupon"}).then(function(files){
-            self.couponFiles = files;
-        });
-
-        getFiles({dir : "category"}).then(function(files){
-            self.categoryFiles = files;
-        });
-
-        getFiles({dir : "banner"}).then(function(files){
-            self.bannerFiles = files;
-        });
+        for (var i = init_file_arr.length - 1; i >= 0; i--) {
+            util_file_init(self, init_file_arr[i].dirString, init_file_arr[i].data_name);
+        }
     
     },
 
@@ -207,7 +153,6 @@ var app = new Vue({
         moment: function (date) {
             return moment(date);
         },
-
         date: function (date) {
             return moment(date).format('MMMM Do YYYY, hh:mmm:ss a');
         },
@@ -231,7 +176,7 @@ var app = new Vue({
                return false;
             
             }
-            console.log(newEvent);
+
             addEvent(newEvent).then(function(rtn){
                 console.log(rtn);
             	if(rtn.success){
@@ -273,11 +218,10 @@ var app = new Vue({
         newCategory: function(event){
             event.preventDefault();
             var self = this;
-            var newCategory = new FormData($("#category-form")[0]);
+            var newCategory = new FormData($("#add-category-form")[0]);
 
             //file이 있는지 확인한다.
-            var val1 = $("#iconImage").val();
-
+            var val1 = $("#icon-image-file").val();
             if(val1 == ''){
                
                alert("파일은 필수입니다.");
@@ -289,47 +233,38 @@ var app = new Vue({
                 if(rtn.success){
 
                     alert("추가 완료");
-                    //class로 val를 한번에 없애게끔.
-                    $("#iconImage").val("");
-                    $("#category-form-categoryName").val("");
-                    $("#category-form-content").val("");
-
-                    getCategorys().then(function(categorys){
-                        self.categorys = categorys;
-                    })
+                    //form에 추가시에 적어뒀던 데이터 삭제, categorys 초기화.
+                    $("#add-category-form")[0].reset();
+                    util_data_init(self, getCategorys, "categorys");
                 
                 }else{
-                
                     alert("필드를 다 채워주셔야 합니다.");
-                
                 }
 
             });
         },
 
         newBanner: function(event){
+
             event.preventDefault();
             var self = this;
-            var newBanner = new FormData($("#banner-form")[0]);
+            var new_banner_form = $("#banner-form")[0];
+            var newBanner = new FormData(new_banner_form);
 
             //file이 있는지 확인한다.
             var val1 = $("#bannerImage").val();
+            var val2 = $("#mobileImage").val();
 
-            if(val1 == ''){
-               
+            if(val1 == '' || val2 == ''){
                alert("파일은 필수입니다.");
                return false;
-            
             }
             addBanner(newBanner).then(function(rtn){
                 
                 if(rtn.success){
-
                     alert("추가 완료");
-                    getBanners().then(function(banners){
-                        self.banners = banners;
-                    });
-                
+                    new_banner_form.reset();
+                    util_data_init(self, getBanners, "banners");
                 }else{
                     alert("필드를 다 채워주셔야 합니다.");
                 }
@@ -337,449 +272,139 @@ var app = new Vue({
             });
         },
 
-        new_event_file : function(event){
-            
+        //dirName에 해당하는, File을 생성하는 함수.
+        //id가 new-dirName-file인 form의 파일을 가져와서 추가한다.
+        newFile : function(dirName, event){
             event.preventDefault();
 
             var self = this;
 
-            //file이 있는지 확인한다.
-            var val = $("#new-event-file").val();
+            //file이 있는지 확인한다. new-event-file형식의 id를 규칙으로 매김.
+            var val = $("#new-"+dirName+"-file").val();
             if(val == ''){
                return false;
             }
-
-            var new_event_file_form = new FormData($("#event-file-form")[0]);
+            var fileForm = $("#"+dirName+"-file-form")[0]
+            var new_file_form = new FormData(fileForm);
             
-            addFile("event", new_event_file_form).then(function(rtn){
-            
+            //dirName(ex. "event", "banner", ..)에 해당하는, 파일을 추가한다.
+            addFile(dirName, new_file_form).then(function(rtn){
                 if(rtn.success){
-                    
-                    getFiles({dir: "event"}).then(function(files){
-                        self.eventFiles = files;
-                        $("#new-event-file").val("");
-                        alert("추가 완료");
-                    });
-
+                    //파일폼을 비워주고, 파일 렌더링 리스트를 초기화.
+                    fileForm.reset();
+                    util_file_init(self, dirName, dirName+"Files");
+                    alert("추가성공!");
                 }else{
                     alert("실패!");
                 }
-            
             });
-
         },
 
-        new_category_file : function(event){
-            
-            event.preventDefault();
-
+        //파일 삭제 함수.
+        //_driName("event", "banner", ..)에 해당하는 fileName의 파일을 삭제한다.
+        removeFile : function(_dirName, _fileName){
             var self = this;
-
-            //file이 있는지 확인한다.
-            var val = $("#new-category-file").val();
-            
-            if(val == ''){
-               return false;
-            }
-
-            var new_category_file_form = new FormData($("#category-file-form")[0]);
-            
-            addFile("category", new_category_file_form).then(function(rtn){
-            
+            deleteFile({dir : _dirName, fileName : _fileName}).then(function(rtn){
                 if(rtn.success){
-                    
-                    getFiles({dir: "category"}).then(function(files){
-                        self.categoryFiles = files;
-                        $("#new-category-file").val("");
-                        alert("추가 완료");
-                    });
-
-                }else{
-                    alert("실패!");
+                    alert("삭제성공!");
+                    util_file_init(self, _dirName, _dirName+"Files");
                 }
-            
             });
-
         },
 
-        new_coupon_file : function(event){
-            
-            event.preventDefault();
-
+        //update시에, 하나의 toggleChange함수를 사용하는데, 
+        //updateObj에 update하고 싶은 obj를 넣고, 해당 obj의 배열 내의 index를 넣어준다.
+        toggleChange : function(oldObj, updateToggle, index){
             var self = this;
+            self.updateObj = oldObj;
+            self[updateToggle] = !self[updateToggle];
+            self.updateIndex = index;
+        },
 
-            //file이 있는지 확인한다.
-            var val = $("#new-coupon-file").val();
-            if(val == ''){
-               return false;
-            }
-
-            var new_coupon_file_form = new FormData($("#coupon-file-form")[0]);
-            
-            addFile("coupon", new_coupon_file_form).then(function(rtn){
-            
+        //updateObj에 해당하는 값의 id로 들어가 update 시키는 함수.
+        changeThing : function(whichFunc, dataString, toggleString){
+            var self = this;
+            whichFunc(self.updateObj.id, self.updateObj).then(function(rtn){
+                
                 if(rtn.success){
-                    
-                    getFiles({dir: "coupon"}).then(function(files){
-                        self.couponFiles = files;
-                        $("#new-coupon-file").val("");
-                        alert("추가 완료");
-                    });
-
+                    alert("수정 완료!");
+                    //Reload하지 않도록 setting 시킴.
+                    Vue.set(self[dataString], self.updateIndex, self.updateObj);
+                    self.updateIndex = -1;
+                    self.updateObj = {};
+                    self[toggleString] = false;
                 }else{
-                    alert("실패!");
+                    alert("수정한게 없거나, 에러가 난거 같아요");
                 }
-            
+
             });
-
-        },
-
-        new_banner_file : function(event){
-            
-            event.preventDefault();
-
-            var self = this;
-
-            //file이 있는지 확인한다.
-            var val = $("#new-banner-file").val();
-            if(val == ''){
-               return false;
-            }
-
-            var new_banner_file_form = new FormData($("#banner-file-form")[0]);
-            
-            addFile("banner", new_banner_file_form).then(function(rtn){
-            
-                if(rtn.success){
-                    
-                    getFiles({dir: "banner"}).then(function(files){
-                        self.bannerFiles = files;
-                        $("#new-banner-file").val("");
-                        alert("추가 완료");
-                    });
-
-                }else{
-                    alert("실패!");
-                }
-            
-            });
-
-        },
-
-        toggle_change_event : function(event, index){
-
-            var self = this;
-            self.update_event = event;
-            self.update_event_toggle = !self.update_event_toggle;
-            self.update_event_index = index;
-
-        },
-
-        toggle_change_coupon : function(coupon, index){
-
-            var self = this;
-            self.update_coupon = coupon;
-            self.update_coupon_toggle = !self.update_coupon_toggle;
-            self.update_coupon_index = index;
-
-        },
-
-        toggle_change_category : function(category, index){
-
-            var self = this;
-            self.update_category = category;
-            self.update_category_toggle = !self.update_category_toggle;
-            self.update_category_index = index;
-
-        },
-
-        toggle_change_banner : function(banner, index){
-
-            var self = this;
-            self.update_banner = banner;
-            self.update_banner_toggle = !self.update_banner_toggle;
-            self.update_banner_index = index;
-
         },
 
         changeCategory: function(){
-
             var self = this;
-
-            updateCategory(self.update_category.id, self.update_category).then(function(rtn){
-                
-                if(rtn.success){
-
-                    alert("이벤트 수정 완료!");
-                    //Reload하지 않도록 setting 시킴.
-                    Vue.set(self.categorys, self.update_category_index, self.update_category);
-                    self.update_category_index = -1;
-
-                    self.update_category_toggle = false;
-
-                }else{
-
-                    alert("수정한게 없거나, 에러가 난거 같아요");
-                
-                }
-            
-            });
-
+            self.changeThing(updateCategory, "categorys", "update_category_toggle");
         },
-
         changeEvent: function(){
-
             var self = this;
-            //Vue.set(self.events, self.udpate_event_index, self.update_event);
-            updateEvent(self.update_event.id, self.update_event).then(function(rtn){
-                
-                if(rtn.success){
-
-                    alert("이벤트 수정 완료!");
-                    //Reload하지 않도록 setting 시킴.
-                    Vue.set(self.events, self.update_event_index, self.update_event);
-                    self.update_event_index = -1;
-
-                    self.udpate_event = {
-                        eventName: "",
-                        price : "",
-                        eventRange: "",
-                        categorys : [],
-                        hospitalName: "",
-                        subway: "",
-                        address: "",
-                        thumbnailImage: "",
-                        eventImage: "",
-                        updated_at: "",
-                    };
-
-                    self.update_event_toggle = false;
-
-                }else{
-
-                    alert("수정한게 없거나, 에러가 난거 같아요");
-                
-                }
-            
-            });
-
+            self.changeThing(updateEvent, "events", "update_event_toggle");
         },
-
         changeCoupon: function(){
-
             var self = this;
-            //Vue.set(self.events, self.udpate_event_index, self.update_event);
-            console.log(self.update_coupon);
-            updateCoupon(self.update_coupon.id, self.update_coupon).then(function(rtn){
-                console.log(rtn);
-                if(rtn.success){
-
-                    alert("쿠폰 수정 완료!");
-                    //Reload하지 않도록 setting 시킴.
-                    Vue.set(self.coupons, self.update_coupon_index, self.update_coupon);
-                    self.update_coupon_index = -1;
-
-                    self.udpate_coupon = {
-                        couponName: "",
-                        price : "",
-                        couponRange: "",
-                        hospitalName: "",
-                        subway: "",
-                        address: "",
-                        thumbnailImage: "",
-                        couponImage: "",
-                        updated_at: "",
-                    };
-
-                    self.update_coupon_toggle = false;
-
-                }else{
-
-                    alert("수정한게 없거나, 에러가 난거 같아요");
-                
-                }
-            
-            });
-
+            self.changeThing(updateCoupon, "coupons", "update_coupon_toggle");
+        },
+        changeBanner: function(){
+            var self = this;
+            self.changeThing(updateBanner, "banners", "update_banner_toggle");
         },
 
-        changeBanner: function(){
+        //id를 받아 해당 model의 obj를 삭제해주는 함수.
+        removeThing : function(deleteFunc, id, getFunc, dataName){
 
+            var pass=prompt("Password")
+            if(pass !== "inspire") return;
             var self = this;
-
-            updateBanner(self.update_banner.id, self.update_banner).then(function(rtn){
-
+            deleteFunc(id).then(function(rtn){
                 if(rtn.success){
-
-                    alert("배너 수정 완료!");
-                    //Reload하지 않도록 setting 시킴.
-                    Vue.set(self.banners, self.update_banner_index, self.update_banner);
-                    self.update_banner_index = -1;
-
-                    self.udpate_banner = {
-                        bannerImage: "",
-                        url : "",
-                        remarks: "",
-                        category : "",
-                        updated_at: "",
-                    },
-
-                    self.update_banner_toggle = false;
-
+                    alert("삭제완료!");
+                    util_data_init(self, getFunc, dataName);
+                    //dataName이 현재, "categorys" -> category
+                    if(dataName === "categorys" || dataName === "coupons" ||
+                     dataName === "events" || dataName === "banners"){
+                        dataName = dataName.slice(0, -1);
+                        util_file_init(self, dataName, dataName+"Files")
+                    }
                 }else{
-
-                    alert("수정한게 없거나, 에러가 난거 같아요");
-                
+                    alert("실패!");
                 }
-            
             });
-
         },
 
         removePayer: function(id){
-            var pass=prompt("Password")
-            if(pass !== "inspire") return;
             var self = this;
-            deletePayer(id).then(function(rtn){
-                alert("삭제 완료");
-                getPayers().then(function(payers){
-                    self.payers = payers;
-                });
-                return;
-            });
+            self.removeThing(deletePayer, id, getPayers, "payers");
         },
-
         removeParticipant: function(id){
-            var pass=prompt("Password")
-            if(pass !== "inspire") return;
             var self = this;
-            deleteParticipant(id).then(function(rtn){
-                alert("삭제 완료");
-                getParticipants().then(function(participants){
-                    self.participants = participants;
-                });
-                return;
-            });
+            self.removeThing(deleteParticipant, id, getParticipants, "participants");
         },
-
         removeCoupon: function(id){
-            var pass=prompt("Password")
-            if(pass !== "inspire") return;
             var self = this;
-            deleteCoupon(id).then(function(rtn){
-                alert("삭제 완료");
-                getCoupons().then(function(coupons){
-                    self.coupons = coupons;
-                });
-                return;
-            });
+            self.removeThing(deleteCoupon, id, getCoupons, "coupons");
         },
-
         removeEvent: function(id){
-
-        	var pass=prompt("Password")
-			if(pass !== "inspire") return;
-        	var self = this;
-        	deleteEvent(id).then(function(rtn){
-        		getEvents().then(function(events){
-                    alert("삭제완료!");
-		        	self.events = events;
-		        });
-        		return;
-        	});
-       
+            var self = this;
+            self.removeThing(deleteEvent, id, getEvents, "events");
         },
-
         removeCategory: function(id){
-
-            var pass=prompt("Password")
-            if(pass !== "inspire") return;
             var self = this;
-            deleteCategory(id).then(function(rtn){
-                getCategorys().then(function(categorys){
-                    alert("삭제완료!");
-                    self.categorys = categorys;
-                });
-                return;
-            });
-        
+            self.removeThing(deleteCategory, id, getCategorys, "categorys");
         },
-
         removeBanner : function(id){
-            var pass=prompt("Password")
-            if(pass !== "inspire") return;
             var self = this;
-            deleteBanner(id).then(function(rtn){
-                getBanners().then(function(banners){
-                    alert("삭제완료!");
-                    self.banners = banners;
-                });
-                return;
-            });
+            self.removeThing(deleteBanner, id, getBanners, "banners");
         },
 
-        remove_event_file : function(_fileName){
 
-            var self = this;
-            deleteFile({dir : "event", fileName : _fileName}).then(function(rtn){
-
-                if(rtn.success){
-                    alert("삭제성공!");
-                    getFiles({dir: "event"}).then(function(files){
-                        self.eventFiles = files;
-                    });
-                }
-            
-            });
-        
-        },
-
-        remove_coupon_file : function(_fileName){
-            var self = this;
-            deleteFile({dir : "coupon", fileName : _fileName}).then(function(rtn){
-
-                if(rtn.success){
-                    alert("삭제성공!");
-                    getFiles({dir: "coupon"}).then(function(files){
-                        self.couponFiles = files;
-                    });
-                }
-            
-            });
-        },
-
-        remove_category_file : function(_fileName){
-            var self = this;
-
-            deleteFile({dir : "category", fileName : _fileName}).then(function(rtn){
-
-                if(rtn.success){
-                    alert("삭제성공!");
-                    getFiles({dir: "category"}).then(function(files){
-                        self.categoryFiles = files;
-                    });
-                }
-            
-            });
-        },
-
-        remove_banner_file : function(_fileName){
-            var self = this;
-
-            deleteFile({dir : "banner", fileName : _fileName}).then(function(rtn){
-
-                if(rtn.success){
-                    alert("삭제성공!");
-                    getFiles({dir: "banner"}).then(function(files){
-                        self.bannerFiles = files;
-                    });
-                }
-            
-            });
-        },
-
-        
-        
 
 
     }

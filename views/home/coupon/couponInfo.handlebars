@@ -9,35 +9,53 @@
 
 <div id="app">
 
-    <img :src="couponImageHref(coupon.thumbnailImage)" class="infoImage">
+    <div class="text-center">
+        <img :src="couponImageHref(coupon.thumbnailImage)" class="infoImage">
 
-	<div class="infoCard">
-		<div class="card" style="background-color:#660000; border: 1px solid gray;">
-			<div style="margin:10px; color:white;">
-				<span style="font-size:1.2em">\{{coupon.couponName}}</span>
-                <div style="font-size:1em">
-    				<span>\{{coupon.couponRange}} </span><br>
-                    <span>\{{coupon.hospitalName}}</span><br>
-                    <span style="font-size:0.8em">(\{{coupon.address}})</span><br>
-                    <span v-show="coupon.price">₩\{{coupon.price}}</span><br>
-                    <a :href="hpvZeroHref()" style="color:white;"><button class="btn mobile-btn">支付<!--결제하기--></button></a>
-                </div>
-			</div>
-		</div>
-	</div>
+    	<div class="infoCard">
+    		<div class="card" style="background-color:#660000; border: 1px solid gray;">
+    			<div style="margin:10px; color:white;">
+    				<span style="font-size:1.5em">\{{coupon.couponName}}</span>
+                    <div style="font-size:1.3em">
+        				<span>\{{coupon.couponRange}} </span><br>
+                        <span>\{{coupon.hospitalName}}</span><br>
+                        <span style="font-size:1em">(\{{coupon.address}})</span><br>
+                        <span v-show="coupon.price">₩\{{coupon.price}}</span><br>
+                        <a :href="hpvZeroHref()" style="color:white;"><button class="btn mobile-btn">支付<!--결제하기--></button></a>
+                    </div>
+    			</div>
+    		</div>
+    	</div>
 
-	<img v-for="imageName in coupon.couponImage" :src="couponImageHref(imageName)" class="infoImage">
-	<img src="/images/coupon/base/coupon_info.png" class="infoImage">
+    	<img v-for="imageName in coupon.couponImage" :src="couponImageHref(imageName)" class="infoImage">
+    	<img src="/images/coupon/base/coupon_info.png" class="infoImage">
+    </div>
 
 	<div class="infoCard">
 		<div style="border: solid 1px white;">
-			<div style="margin:10px; color:white;">
+            {{!-- 쿠폰 모델일 경우 --}}
+            <div v-if="!coupon.isDeposit" style="margin:10px; color:white;">
+                [退款指南]<br>
+                1. 请填写一下您的姓名,手机号码,购买的商品信息(医院名, 接种名),退款理由,银行账号(无存折入账时)发送给wechat. <br>
+                2. 确认完商品是否使用后会一起进行退款处理. <br>
+                3. 支付后10天之内由于改变主意而引起的退款行为是可以将购买金额进行100% 退款的. <br>支付10天后由于单纯改变主意而引起的退款除了购买金额的手续费5%外其他的可进行退款. (根据韩国公正交易法.) <br>医院访问咨询后若出现不适合进行接种的结果时与期间无关，购买金额100%可进行退款. <br>
+                4. 退款金额根据微信,支付宝等方式的不同，最晚可能需要5天时间. <br>
+            </div>
+            {{!-- /쿠폰 모델일 경우 --}}
+            {{!-- 예약금일 경우 --}}
+			<div v-if="coupon.isDeposit" style="margin:10px; color:white;">
 				[退款指南]<br>
-				1. 请填写一下您的姓名,手机号码,购买的商品信息(医院名, 接种名),退款理由,银行账号(无存折入账时)发送给wechat. <br>
-				2. 确认完商品是否使用后会一起进行退款处理. <br>
-				3. 支付后10天之内由于改变主意而引起的退款行为是可以将购买金额进行100% 退款的. <br>支付10天后由于单纯改变主意而引起的退款除了购买金额的手续费5%外其他的可进行退款. (根据韩国公正交易法.) <br>医院访问咨询后若出现不适合进行接种的结果时与期间无关，购买金额100%可进行退款. <br>
-				4. 退款金额根据微信,支付宝等方式的不同，最晚可能需要5天时间. <br>
+				1. 请填写一下您的姓名,手机号码,购买的商品信息(医院名, 商品名称),退款理由,银行账号(无存折入账时)发送给wechat.<br>
+				2. 与医院进行最终确认后进行退款处理  <br>
+				3. 退款金额根据微信,支付宝等方式的不同，最晚可能需要5天时间. <br>
+				4. 退款时无法积累积分 <br>
+                {{!-- 
+                1. 성함, 핸드폰번호, 구매한 상품정보 (병원명, 상품명), 환불이유, 은행계좌(무통장 입금시)를 작성해 wechat으로 보내십시오.
+                2. 병원과 연락 및 최종 확인 후 환불처리가 진행됩니다.
+                3. 환불은 위챗, 알리페이 등에 따라 5일 이상 소요될 수 있습니다.
+                4. 환불 시 포인트는 적립되지 않습니다. --}}
 			</div>
+            {{!-- /예약일 경우 --}}
 		</div>
 	</div>
 

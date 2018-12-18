@@ -142,30 +142,30 @@
                                 <td>\{{event.eventRange}}</td>
                                 <td>\{{event.subway}}</td>
                                 <td>\{{event.updated_at | moment}}</td>
-                                <td><button class="btn btn-primary" @click="toggle_change_event(event, index)">수정</button></td>
+                                <td><button class="btn btn-primary" @click="toggleChange(event, 'update_event_toggle', index)">수정</button></td>
                                 <td><button class="btn btn-primary" @click="removeEvent(event.id)">삭제</button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="form" role="form" v-show="update_event_toggle">
-                    이벤트이름 : <input type="text" class="form-control" v-model="update_event.eventName">
-                    이벤트기간 : <input type="text" class="form-control" v-model="update_event.eventRange">
-                    이벤트가격 : <input type="number" class="form-control" v-model="update_event.price" placeholder="숫자만가능">
-                    병원이름 : <input type="text" class="form-control" v-model="update_event.hospitalName">
-                    지하철역이름 : <input type="text" class="form-control" v-model="update_event.subway">
-                    병원주소 : <input type="text" class="form-control" v-model="update_event.address">
-                    <div v-for="(category, index) in update_event.categorys">
-                        카테고리 \{{index}} : <input type="text" class="form-control" v-model="update_event.categorys[index]">
-                        <button class="btn btn-danger" @click="update_event.categorys.splice(index, 1)"> 카테고리 \{{index}} 제거 </button>
+                <div class="form" role="form" v-if="update_event_toggle">
+                    이벤트이름 : <input type="text" class="form-control" v-model="updateObj.eventName">
+                    이벤트기간 : <input type="text" class="form-control" v-model="updateObj.eventRange">
+                    이벤트가격 : <input type="number" class="form-control" v-model="updateObj.price" placeholder="숫자만가능">
+                    병원이름 : <input type="text" class="form-control" v-model="updateObj.hospitalName">
+                    지하철역이름 : <input type="text" class="form-control" v-model="updateObj.subway">
+                    병원주소 : <input type="text" class="form-control" v-model="updateObj.address">
+                    <div v-for="(category, index) in updateObj.categorys">
+                        카테고리 \{{index}} : <input type="text" class="form-control" v-model="updateObj.categorys[index]">
+                        <button class="btn btn-danger" @click="updateObj.categorys.splice(index, 1)"> 카테고리 \{{index}} 제거 </button>
                         <br>
                     </div>
-                    <button class="btn btn-danger" @click="update_event.categorys.push('')">카테고리 추가</button><br>
-                    이벤트생성일 : <input type="text" class="form-control" v-model="update_event.updated_at">
-                    썸네일 이미지 : <input type="text" class="form-control" v-model="update_event.thumbnailImage">
-                    이벤트 이미지 : <input type="text" class="form-control" v-for="(eventImage, index) in update_event.eventImage" v-model="update_event.eventImage[index]">
+                    <button class="btn btn-danger" @click="updateObj.categorys.push('')">카테고리 추가</button><br>
+                    이벤트생성일 : <input type="text" class="form-control" v-model="updateObj.updated_at">
+                    썸네일 이미지 : <input type="text" class="form-control" v-model="updateObj.thumbnailImage">
+                    이벤트 이미지 : <input type="text" class="form-control" v-for="(eventImage, index) in updateObj.eventImage" v-model="updateObj.eventImage[index]">
                     <button class="btn btn-primary" @click="changeEvent">수정완료</button>
-                    <button class="btn btn-primary" @click="toggle_change_event(update_event, -1)">취소</button>
+                    <button class="btn btn-primary" @click="toggleChange(updateObj, 'update_event_toggle', -1)">취소</button>
                 </div>
 
 
@@ -178,7 +178,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <button type="submit" class="btn mobile-btn" @click="new_event_file">이벤트 파일 추가하기</button>
+                        <button type="submit" class="btn mobile-btn" @click="newFile('event', $event)">이벤트 파일 추가하기</button>
                     </div>
 
                 </form>
@@ -195,7 +195,7 @@
                             <tr v-if="file.fileName" v-for="(file,index) in eventFiles">
                                 <td><a href="#">\{{index}}</a></td>
                                 <td>\{{file.fileName}}</td>
-                                <td><button class="btn btn-primary" @click="remove_event_file(file.fileName)">삭제</button></td>
+                                <td><button class="btn btn-primary" @click="removeFile('event', file.fileName)">삭제</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -302,30 +302,34 @@
                                 <td>\{{coupon.couponRange}}</td>
                                 <td>\{{coupon.subway}}</td>
                                 <td>\{{coupon.updated_at | moment}}</td>
-                                <td><button class="btn btn-primary" @click="toggle_change_coupon(coupon, index)">수정</button></td>
+                                <td><button class="btn btn-primary" @click="toggleChange(coupon, 'update_coupon_toggle' ,index)">수정</button></td>
                                 <td><button class="btn btn-primary" @click="removeCoupon(coupon.id)">삭제</button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="form" role="form" v-show="update_coupon_toggle">
-                    쿠폰이름 : <input type="text" class="form-control" v-model="update_coupon.couponName">
-                    병원이름 : <input type="text" class="form-control" v-model="update_coupon.hospitalName">
-                    쿠폰가격 : <input type="number" class="form-control" v-model="update_coupon.price" placeholder="숫자만가능">
-                    상세주소 : <input type="text" class="form-control" v-model="update_coupon.address">
-                    쿠폰기간 : <input type="text" class="form-control" v-model="update_coupon.couponRange">
-                    지하철역 : <input type="text" class="form-control" v-model="update_coupon.subway">
-                    생성날짜 : <input type="text" class="form-control" v-model="update_coupon.updated_at">
-                    <div v-for="(category, index) in update_coupon.categorys">
-                        카테고리 \{{index}} : <input type="text" class="form-control" v-model="update_coupon.categorys[index]">
-                        <button class="btn btn-danger" @click="update_coupon.categorys.splice(index, 1)"> 카테고리 \{{index}} 제거 </button>
+                <div class="form" role="form" v-if="update_coupon_toggle">
+                    쿠폰이름 : <input type="text" class="form-control" v-model="updateObj.couponName">
+                    병원이름 : <input type="text" class="form-control" v-model="updateObj.hospitalName">
+                    원래가격 : <input type="number" class="form-control" v-model="updateObj.originalPrice" placeholder="숫자만가능">
+                    카테고리
+                    <label class="radio-inline"><input id="category" type="radio" class="form-control" name="isDeposit" value="true" v-model="updateObj.isDeposit">예약금 모델</label>
+                    <label class="radio-inline"><input id="category" type="radio" class="form-control" name="isDeposit" value="false" v-model="updateObj.isDeposit">쿠폰</label>
+                    할인가격 : <input type="number" class="form-control" v-model="updateObj.price" placeholder="숫자만가능">
+                    상세주소 : <input type="text" class="form-control" v-model="updateObj.address">
+                    쿠폰기간 : <input type="text" class="form-control" v-model="updateObj.couponRange">
+                    지하철역 : <input type="text" class="form-control" v-model="updateObj.subway">
+                    생성날짜 : <input type="text" class="form-control" v-model="updateObj.updated_at">
+                    <div v-for="(category, index) in updateObj.categorys">
+                        카테고리 \{{index}} : <input type="text" class="form-control" v-model="updateObj.categorys[index]">
+                        <button class="btn btn-danger" @click="updateObj.categorys.splice(index, 1)"> 카테고리 \{{index}} 제거 </button>
                         <br>
                     </div>
-                    <button class="btn btn-danger" @click="update_coupon.categorys.push('')">카테고리 추가</button><br>
-                    썸네일 이미지 : <input type="text" class="form-control" v-model="update_coupon.thumbnailImage">
-                    쿠폰 이미지 : <input type="text" class="form-control" v-for="(couponImage, index) in update_coupon.couponImage" v-model="update_coupon.couponImage[index]">
+                    <button class="btn btn-danger" @click="updateObj.categorys.push('')">카테고리 추가</button><br>
+                    썸네일 이미지 : <input type="text" class="form-control" v-model="updateObj.thumbnailImage">
+                    쿠폰 이미지 : <input type="text" class="form-control" v-for="(couponImage, index) in updateObj.couponImage" v-model="updateObj.couponImage[index]">
                     <button class="btn btn-primary" @click="changeCoupon">수정완료</button>
-                    <button class="btn btn-primary" @click="toggle_change_coupon(update_coupon, -1)">취소</button>
+                    <button class="btn btn-primary" @click="toggleChange(updateObj, 'update_coupon_toggle', -1)">취소</button>
                 </div>
 
 
@@ -338,7 +342,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <button type="submit" class="btn mobile-btn" @click="new_coupon_file">쿠폰 파일 추가하기</button>
+                        <button type="submit" class="btn mobile-btn" @click="newFile('coupon', $event)">쿠폰 파일 추가하기</button>
                     </div>
 
                 </form>
@@ -356,7 +360,7 @@
                             <tr v-if="file.fileName" v-for="(file,index) in couponFiles">
                                 <td><a href="#">\{{index}}</a></td>
                                 <td>\{{file.fileName}}</td>
-                                <td><button class="btn btn-primary" @click="remove_coupon_file(file.fileName)">삭제</button></td>
+                                <td><button class="btn btn-primary" @click="removeFile('coupon', file.fileName)">삭제</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -364,7 +368,7 @@
 
 
                 <div class="card card-outline-secondary">
-                    <div class="card-body" >
+                    <div class="card-body">
                         <h3 class="text-center">쿠폰 추가하기</h3>
                         <hr>
                         <form class="form" role="form" id="coupon-form">
@@ -388,7 +392,11 @@
                                 <label for="cc_name">병원상세주소</label>
                                 <input type="text" class="form-control" name="address">
                             </div>
-
+                            <div class="form-group">
+                                <label for="cc_name">예약금 모델 인가요?</label><br>
+                                <label class="radio-inline"><input id="category" type="radio" class="form-control" name="isDeposit" value="true">예약금 모델</label>
+                                <label class="radio-inline"><input id="category" type="radio" class="form-control" name="isDeposit" value="false">쿠폰</label>
+                            </div>
                             <div class="form-group" v-for="(_a, index) in list_array">
                                 <label for="cc_name">카테고리 \{{index}}</label>
                                 <input type="text" class="form-control" name="categorys[]">
@@ -400,6 +408,16 @@
                                 <label for="cc_name">쿠폰 가격</label>
                                 <input type="number" class="form-control" name="price" placeholder="560000 처럼 숫자만 입력">
                             </div>
+                            <div class="form-group">
+                                <label for="cc_name">원래 가격</label>
+                                <input type="number" class="form-control" name="originalPrice" placeholder="560000 처럼 숫자만 입력">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cc_name">예약금?</label>
+                                <input type="number" class="form-control" name="deposit" placeholder="예약금모델인 경우 해당하는 예약금 을 숫자로만">
+                            </div>
+
                             <div class="form-group">
                                 <label for="cc_name">특이 사항</label>
                                 <input type="text" class="form-control" name="remarks" placeholder="특이사항">
@@ -449,61 +467,61 @@
                                 <td><a href="#">\{{index}}</a></td>
                                 <td>\{{category.categoryName}}</td>
                                 <td>\{{category.iconImage}}</td>
-                                <td><button class="btn btn-primary" @click="toggle_change_category(category, index)">수정</button></td>
+                                <td><button class="btn btn-primary" @click="toggleChange(category,'update_category_toggle' ,index)">수정</button></td>
                                 <td><button @click="removeCategory(category.id)" class="btn btn-primary">삭제</button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                
-                <div class="form" role="form" v-show="update_category_toggle">
+                <div class="form" role="form" v-if="update_category_toggle">
                     <div class="form-group">
                         <label for="cc_name">카테고리이름</label>
-                        <input type="text" class="form-control" id="category-form-categoryName" name="categoryName" v-model="update_category.categoryName">
+                        <input type="text" class="form-control" id="category-form-categoryName" name="categoryName" v-model="updateObj.categoryName">
                     </div>
                     <div class="form-group">
                         <label for="cc_name">아이콘 파일</label>
-                        <input type="text" name="iconImage" class="form-control" id="iconImage" v-model="update_category.iconImage" />
+                        <input type="text" name="iconImage" class="form-control" id="iconImage" v-model="updateObj.iconImage" />
                     </div>
                     <div class="form-group">
                         <label for="cc_name">카테고리 설명[위]</label>
-                        <textarea rows="5" type="text" class="form-control" id="category-form-content" name="content_1" v-model="update_category.content_1"></textarea>
+                        <textarea rows="5" type="text" class="form-control" id="category-form-content" name="content_1" v-model="updateObj.content_1"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="cc_name">카테고리 설명[아래]</label>
-                        <textarea rows="5" type="text" class="form-control" id="category-form-content" name="content_2" v-model="update_category.content_2"></textarea>
+                        <textarea rows="5" type="text" class="form-control" id="category-form-content" name="content_2" v-model="updateObj.content_2"></textarea>
                     </div>
 
-                    <div class="form-group" v-for="(question, index) in update_category.questions">
+                    <div class="form-group" v-for="(question, index) in updateObj.questions">
                         <label for="cc_name">질문 세트 \{{index}}</label>
-                        질문 : <input type="text" class="form-control" v-model="update_category.questions[index].content">
-                        응답 : <textarea class="form-control" v-model="update_category.questions[index].answer"></textarea>
-                        <button class="btn btn-danger float-right" @click="update_category.questions[index].splice(index, 1)">질문 \{{index}} 삭제</button>
+                        질문 : <input type="text" class="form-control" v-model="updateObj.questions[index].content">
+                        응답 : <textarea class="form-control" v-model="updateObj.questions[index].answer"></textarea>
+                        <button class="btn btn-danger float-right" @click="updateObj.questions.splice(index, 1)">질문 \{{index}} 삭제</button>
                     </div>
-                    <button class="btn btn-danger" @click="change_list_array(update_category.questions, '+', $event)">질의응답 추가</button>
+                    <button class="btn btn-danger" @click="change_list_array(updateObj.questions, '+', $event)">질의응답 추가</button>
 
-                    <div class="form-group" v-for="(caution, index) in update_category.caution_1">
+                    <div class="form-group" v-for="(caution, index) in updateObj.caution_1">
                         <label for="cc_name">전 주의사항 \{{index}}</label>
-                        내용 : <textarea class="form-control" v-model="update_category.caution_1[index]['content']"></textarea>
-                        <button class="btn btn-danger float-right" @click="update_category.caution_1.splice(index, 1)">전 주의사항 \{{index}} 삭제</button>
+                        내용 : <textarea class="form-control" v-model="updateObj.caution_1[index]['content']"></textarea>
+                        <button class="btn btn-danger float-right" @click="updateObj.caution_1.splice(index, 1)">전 주의사항 \{{index}} 삭제</button>
                     </div>
-                    <button class="btn btn-danger" @click="change_list_array(update_category.caution_1, '+', $event)">전 주의사항 추가</button>
+                    <button class="btn btn-danger" @click="change_list_array(updateObj.caution_1, '+', $event)">전 주의사항 추가</button>
 
-                    <div class="form-group" v-for="(caution, index) in update_category.caution_2">
+                    <div class="form-group" v-for="(caution, index) in updateObj.caution_2">
                         <label for="cc_name">후 주의사항 \{{index}}</label><br>
-                        Day : <input type="text" class="form-control" v-model="update_category.caution_2[index]['day']">
-                        내용 : <textarea class="form-control" v-model="update_category.caution_2[index]['content']"></textarea>
-                        <button class="btn btn-danger float-right" @click="update_category.caution_2.splice(index, 1)">후 주의사항 \{{index}} 삭제</button>
+                        Day : <input type="text" class="form-control" v-model="updateObj.caution_2[index]['day']">
+                        내용 : <textarea class="form-control" v-model="updateObj.caution_2[index]['content']"></textarea>
+                        <button class="btn btn-danger float-right" @click="updateObj.caution_2.splice(index, 1)">후 주의사항 \{{index}} 삭제</button>
                     </div>
-                    <button class="btn btn-danger" @click="change_list_array(update_category.caution_2, '+', $event)">후 주의사항 추가</button>
+                    <button class="btn btn-danger" @click="change_list_array(updateObj.caution_2, '+', $event)">후 주의사항 추가</button>
 
                     <div class="form-group">
                         <label for="cc_name">특이사항</label>
-                        <input type="text" v-model="update_category.remarks" class="form-control" id="remarks" />
+                        <input type="text" v-model="updateObj.remarks" class="form-control" id="remarks" />
                     </div>
 
                     <button class="btn btn-primary" @click="changeCategory">수정완료</button>
-                    <button class="btn btn-primary" @click="toggle_change_category(update_category, -1)">취소</button>
+                    <button class="btn btn-primary" @click="toggleChange(updateObj, 'update_category_toggle' ,-1)">취소</button>
 
                 </div>
 
@@ -518,7 +536,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <button type="submit" class="btn mobile-btn" @click="new_category_file">카테고리 파일 추가하기</button>
+                        <button type="submit" class="btn mobile-btn" @click="newFile('category', $event)">카테고리 파일 추가하기</button>
                     </div>
 
                 </form>
@@ -535,7 +553,7 @@
                             <tr v-if="file.fileName" v-for="(file,index) in categoryFiles">
                                 <td><a href="#">\{{index}}</a></td>
                                 <td>\{{file.fileName}}</td>
-                                <td><button class="btn btn-primary" @click="remove_category_file(file.fileName)">삭제</button></td>
+                                <td><button class="btn btn-primary" @click="removeFile('category', file.fileName)">삭제</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -544,17 +562,16 @@
                 <div class="card-body" id="category-div">
                     <h3 class="text-center">카테고리 추가하기</h3>
                     <hr>
-                    <form class="form" role="form" id="category-form">
+                    <form class="form" role="form" id="add-category-form">
                         <div class="form-group">
                             <label for="cc_name">카테고리이름</label>
                             <input type="text" class="form-control" id="category-form-categoryName" name="categoryName">
                         </div>
                         <div class="form-group">
                             <label for="cc_name">아이콘 파일</label>
-                            <input type="file" name="iconImage" class="form-control" id="iconImage" />
+                            <input type="file" id="icon-image-file" name="iconImage" class="form-control"  />
                         </div>
-
-
+                        
                         <div class="form-group">
                             <label for="cc_name">카테고리 설명[위]</label>
                             <textarea rows="5" type="text" class="form-control" id="category-form-content" name="content_1"></textarea>
@@ -624,29 +641,30 @@
                         <tbody>
                             <tr v-for="(banner,index) in banners">
                                 <td><a href="#">\{{index}}</a></td>
-                                <td>\{{banner.bannerImage}}</td>
+                                <td>웹 : \{{banner.bannerImage}}<br>모바일 : \{{banner.mobileImage}}</td>
                                 <td>\{{banner.url}}</td>
                                 <td>\{{banner.category}}</td>
                                 <td>\{{banner.remarks}}</td>
                                 <td>\{{banner.updated_at | moment}}</td>
-                                <td><button class="btn btn-primary" @click="toggle_change_banner(banner, index)">수정</button></td>
+                                <td><button class="btn btn-primary" @click="toggleChange(banner, 'update_banner_toggle' ,index)">수정</button></td>
                                 <td><button class="btn btn-primary" @click="removeBanner(banner.id)">삭제</button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="form" role="form" v-show="update_banner_toggle">
-                    배너파일 : <input type="text" class="form-control" v-model="update_banner.bannerImage">
-                    URL : <input type="text" class="form-control" v-model="update_banner.url">
+                <div class="form" role="form" v-if="update_banner_toggle">
+                    배너파일 : <br><input type="text" class="form-control" v-model="updateObj['bannerImage']">
+                    <br><input type="text" class="form-control" v-model="updateObj['mobileImage']">
+                    URL : <input type="text" class="form-control" v-model="updateObj['url']">
                     Category : 
                     <div class="form-group">
                         <label for="category">카테고리</label><br>
-                        <label class="radio-inline"><input id="category" type="radio" class="form-control" name="category" value="MAIN" v-model="update_banner.category">메인페이지</label>
-                        <label class="radio-inline"><input id="category" type="radio" class="form-control" name="category" value="EVENT" v-model="update_banner.category">이벤트페이지</label>
+                        <label class="radio-inline"><input id="category" type="radio" class="form-control" name="category" value="MAIN" v-model="updateObj['category']">메인페이지</label>
+                        <label class="radio-inline"><input id="category" type="radio" class="form-control" name="category" value="EVENT" v-model="updateObj['category']">이벤트페이지</label>
                     </div>
-                    생성일 : <input type="text" class="form-control" v-model="update_banner.updated_at">
+                    생성일 : <input type="text" class="form-control" v-model="updateObj['updated_at']">
                     <button class="btn btn-primary" @click="changeBanner">수정완료</button>
-                    <button class="btn btn-primary" @click="toggle_change_banner(update_banner, -1)">취소</button>
+                    <button class="btn btn-primary" @click="toggleChange(updateObj, 'update_banner_toggle', -1)">취소</button>
                 </div>
 
 
@@ -659,7 +677,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <button type="submit" class="btn mobile-btn" @click="new_banner_file">배너 파일 추가하기</button>
+                        <button type="submit" class="btn mobile-btn" @click="newFile('banner', $event)">배너 파일 추가하기</button>
                     </div>
 
                 </form>
@@ -677,7 +695,7 @@
                             <tr v-if="file.fileName" v-for="(file,index) in bannerFiles">
                                 <td><a href="#">\{{index}}</a></td>
                                 <td>\{{file.fileName}}</td>
-                                <td><button class="btn btn-primary" @click="remove_banner_file(file.fileName)">삭제</button></td>
+                                <td><button class="btn btn-primary" @click="removeFile('banner', file.fileName)">삭제</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -691,7 +709,11 @@
                         <form class="form" role="form" id="banner-form">
                             <div class="form-group">
                                 <label for="cc_name">배너 파일</label>
-                                <input type="file" class="form-control" id="new-banner-image" name="bannerImage" />
+                                <input type="file" class="form-control" id="bannerImage" name="bannerImage" />
+                            </div>
+                            <div class="form-group">
+                                <label for="cc_name">모바일 배너 파일</label>
+                                <input type="file" class="form-control" id="mobileImage" name="mobileImage" />
                             </div>
                             <div class="form-group">
                                 <label for="cc_name">URL</label>
@@ -734,6 +756,7 @@
     <script type="text/javascript" src="/js/api/payer.js"></script>
     <script type="text/javascript" src="/js/api/category.js"></script>
     <script type="text/javascript" src="/js/api/participant.js"></script>  
+    <script type="text/javascript" src="/js/util/util.js"></script>  
     <script type="text/javascript" src="/js/controllers/admin/adminController.js"></script>  
 {{/section}}
 

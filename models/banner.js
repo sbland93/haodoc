@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var bannerSchema = mongoose.Schema({
     
     bannerImage: String,
+    mobileImage : String,
     url : String,
     remarks : String,
     category : {

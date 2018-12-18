@@ -18,8 +18,8 @@ var app = new Vue({
     	var self = this;
     	
         getCoupon(couponID).then(function(coupon){
-            
             self.coupon = coupon;
+            console.log(coupon);
         });
     
     },

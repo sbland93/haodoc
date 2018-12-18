@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126136412-1"></script>
+        
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-126136412-1');
+        </script>
+
+        <!-- Google Tag Manager --> 
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': 
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], 
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); 
+        })(window,document,'script','dataLayer','GTM-5TCV8J3');</script> 
+        <!-- End Google Tag Manager -->
+        
+
+        <meta charset="utf-8" />
+        <title>HaoDoc(하오닥)</title>
+        <link rel="icon" href="/images/layout/favicon.ico" type="/images/ico">
+        <link rel="canonical" href="http://www.haodoc.co.kr">
+
+        <!-- Jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+
+        <!-- BootStrap -->
+        <!--script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+        </script-->
+
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+        <meta name="description" content="为在韩华人提供免费韩国医疗信息服务的平台 HaoDoc(하오닥)" />
+        <meta name="keywords" content="하오닥, HaoDoc, 为在韩华人提供免费韩国医疗信息服务的平台 " />
+        <meta property="og:title" content="HaoDoc(하오닥)">
+        <meta property="og:description" content="为在韩华人提供免费韩国医疗信息服务的平台 (하오닥)" />
+        <meta property="og:image" content="images/layout/thumbnail.jpg" />
+       
+        <!-- Gsuite 용 -->
+        <meta name="google-site-verification" content="GkEvRms7vI1Eamz8dMycBihFkootSnMpOXmu0dsa6CY" />
+        <meta content="yes" name="apple-mobile-web-app-capable" />
+        <meta content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
+
+        {{!-- For Naver Map API --}}
+        <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=OP0DNCxnLS8RuXxQNNjW&submodules=geocoder"></script>
+
+        <!-- For IE Promise Debugging -->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+        {{!-- For Vue.js 2 --}}
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        
+        <link rel="stylesheet" href="/renew/css/common.css">
+        <link rel="stylesheet" href="/renew/css/index.css">
+        <link rel="stylesheet" href="/renew/css/event.css">
+        <link rel="stylesheet" href="/renew/css/swiper.min.css">
+        {{{_sections.head}}}
+
+    </head>
+    <body>
+        <div class="wrapper">
+
+            <div class="header">
+                <div class="inner cf">
+                    <h1 class="fl"><a href="/test/renew"></a></h1>
+                    <!--a href="javascript:;" class="btn-user fr cf">
+                        <span class="name sc fl">414宝宝丽丽</span>
+                        <span class="image vertical-middle fl"><img src="/renew/images/img_user_default.png" alt=""></span>
+                    </a-->
+                </div>
+
+                <div class="nav">
+                    <div class="inner">
+                        <ul class="cf">
+                            <li><a href="/test/renew/" id="home" class="active">홈</a></li>
+                            <!--li><a href="/test/renew/event" id="review">후기</a></li-->
+                            <li><a href="/test/renew/event" id="event">이벤트</a></li>
+                            <li><a href="/find" id="Feed">병원</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Arrou Up ICON --}}
+            <!--a id="top-btn" >
+                <img id="top"alt="Wechat" src="/images/layout/arrow_up.png">
+            </a-->
+            
+
+            {{{body}}}
+        </div>
+
+    </div>
+
+        <!-- javascript Section -->   
+        <script type="text/javascript" src="/js/layout.js"></script>
+        <script type="text/javascript" src="/js/util/util.js"></script>
+        
+        <script src="/renew/js/swiper.min.js"></script>
+        <script src="/renew/js/common.js"></script>
+
+        {{{_sections.jquery}}}
+
+    </body>
+
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5TCV8J3"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+</html>
