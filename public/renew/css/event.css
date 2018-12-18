@@ -168,7 +168,7 @@
   .box-fold.first{margin-top: 15px;}
   .box-fold .title{font-size: 14px; height: 30px; line-height: 30px; background-size: 15px 7px;}
   .box-fold.all .content{padding: 10px;}
-  .box-fold.all .icon{width: 40px; height: 40px; background-size: 30px auto;}
+  .box-fold.all .icon img{width: 40px; height: 40px; background-size: 30px auto;}
   .box-fold.all .icon:after{font-size: 14px; bottom: -3px; right: -3px;}
   .box-fold.all .text{width: calc(100% - 55px);}
   .box-fold.all .text li{font-size: 13px;}

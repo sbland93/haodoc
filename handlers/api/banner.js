@@ -22,8 +22,8 @@ module.exports = function(){
 				var mobile_Image = req.files[1];
 
 				if(banner_Image["fieldname"] === "bannerImage" 
-					&& mobile_Image["fieldname"] === "mobile_Image"){
-				
+					&& mobile_Image["fieldname"] === "mobileImage"){
+					
 					req.body["bannerImage"] = banner_Image["filename"];
 					req.body["mobileImage"] = mobile_Image["filename"];
 
