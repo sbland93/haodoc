@@ -12,6 +12,8 @@ module.exports = function(coupon){
 		couponName: coupon.couponName,
 		originalPrice : coupon.originalPrice,
 		price : coupon.price,
+		isDeposit : coupon.isDeposit,
+		deposit : coupon.deposit,
 		categorys : coupon.categorys,
 		remarks : coupon.remarks,
 		questions : coupon.questions,

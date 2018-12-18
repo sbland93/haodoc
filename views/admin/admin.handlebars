@@ -311,7 +311,11 @@
                 <div class="form" role="form" v-if="update_coupon_toggle">
                     쿠폰이름 : <input type="text" class="form-control" v-model="updateObj.couponName">
                     병원이름 : <input type="text" class="form-control" v-model="updateObj.hospitalName">
-                    쿠폰가격 : <input type="number" class="form-control" v-model="updateObj.price" placeholder="숫자만가능">
+                    원래가격 : <input type="number" class="form-control" v-model="updateObj.originalPrice" placeholder="숫자만가능">
+                    카테고리
+                    <label class="radio-inline"><input id="category" type="radio" class="form-control" name="isDeposit" value="true" v-model="updateObj.isDeposit">예약금 모델</label>
+                    <label class="radio-inline"><input id="category" type="radio" class="form-control" name="isDeposit" value="false" v-model="updateObj.isDeposit">쿠폰</label>
+                    할인가격 : <input type="number" class="form-control" v-model="updateObj.price" placeholder="숫자만가능">
                     상세주소 : <input type="text" class="form-control" v-model="updateObj.address">
                     쿠폰기간 : <input type="text" class="form-control" v-model="updateObj.couponRange">
                     지하철역 : <input type="text" class="form-control" v-model="updateObj.subway">
@@ -389,7 +393,7 @@
                                 <input type="text" class="form-control" name="address">
                             </div>
                             <div class="form-group">
-                                <label for="cc_name">예약금 모델 인가요?</label>
+                                <label for="cc_name">예약금 모델 인가요?</label><br>
                                 <label class="radio-inline"><input id="category" type="radio" class="form-control" name="isDeposit" value="true">예약금 모델</label>
                                 <label class="radio-inline"><input id="category" type="radio" class="form-control" name="isDeposit" value="false">쿠폰</label>
                             </div>

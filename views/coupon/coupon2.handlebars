@@ -17,7 +17,9 @@
 
             <p class="text-center"><b> 活动名称<!-- 이벤트 이름--> : \{{coupon.couponName}}</b></p>   
             <p class="text-center">
-                <b> 活动价格<!--이벤트가격 --> : ₩\{{coupon.price}}</b><br>
+                {{!-- 예약금모델일 경우/ 결제모델일 경우 분리 --}}
+                <b v-if="coupon.isDeposit"> 预约金<!--이벤트가격 --> : ₩\{{coupon.deposit}}</b><br>
+                <b v-if="!coupon.isDeposit"> 活动价格<!--이벤트가격 --> : ₩\{{coupon.price}}</b><br>
                 <span v-if="coupon.remarks"> (其他 : \{{coupon.remarks}})</span>
             </p>
             <p style="color:#BD1622;"><b>* 微信/支付宝支付没有与中国的银行卡进行连接或是顾客身在中国可能会导致支付时出现问题。<br>

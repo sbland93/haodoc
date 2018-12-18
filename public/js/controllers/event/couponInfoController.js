@@ -77,15 +77,12 @@ var app = new Vue({
     methods: {
 
         moment: function (date) {
-          return moment(date);
+            return moment(date);
         },
 
         couponImageHref: function(image_file_name){
-            
             return "/images/coupon/all/" + image_file_name;
-        
         },
-
 
         hpvZeroHref: function(){
             return "/coupon0/" + self.couponID;
