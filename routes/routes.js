@@ -77,6 +77,12 @@ module.exports = function(app){
 		res.render('renew/home/coupon/couponInfo', { layout: "renew/layout.handlebars" });
 	});
 
+	app.get('/term1', function(req, res, next){
+		res.render('renew/home/other/term1', { layout: "renew/layout.handlebars" });
+	});
+	app.get('/term2', function(req, res, next){
+		res.render('renew/home/other/term2', { layout: "renew/layout.handlebars" });
+	});
 
 	require('./api/participant.js')(app);
 	require('./api/couponReview.js')(app);

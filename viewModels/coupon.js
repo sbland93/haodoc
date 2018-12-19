@@ -9,6 +9,7 @@ module.exports = function(coupon){
 		
 		success: true,
 		id: coupon._id,
+		isCoupon: true,
 		couponName: coupon.couponName,
 		originalPrice : coupon.originalPrice,
 		price : coupon.price,

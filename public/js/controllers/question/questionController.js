@@ -81,7 +81,7 @@ var app = new Vue({
                 var b_time = new Date(b.updated_at).getTime();
                 return b_time - a_time;
             
-            })
+            });
 
         }).catch(function(rtnArr){
             alert("出错了，请刷新");

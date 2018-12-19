@@ -8,6 +8,7 @@ module.exports = function(event){
 	return {
 		success: true,
 		id: event._id,
+		isCoupon: false,
 		eventName: event.eventName,
 		price : event.price,
 		categorys : event.categorys,
