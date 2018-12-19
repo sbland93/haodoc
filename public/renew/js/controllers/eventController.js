@@ -25,7 +25,18 @@ var app = new Vue({
 	mounted : function(){
 
 		var self = this;
-		
+		//categorys 초기화 후에, queryString에 카테고리가 존재한다면
+		//해당하는 category를 찾아, self.cateogry에 초기화.
+		var categoryPromise = new Promise(function(resolve, reject){
+			getCategorys().then(function(rtn){
+				self.categorys = rtn;
+				if(_categoryName !== allString){
+					self.findCategory(_categoryName);
+					resolve();
+				}
+			});
+		});
+
 		var eventPromise = new Promise(function(resolve, reject){
 			getEvents().then(function(_rtn){
 				self.events = _rtn;
@@ -40,7 +51,7 @@ var app = new Vue({
 			});
 		});
 
-		Promise.all([eventPromise, couponPromise]).then(function(){
+		Promise.all([categoryPromise, eventPromise, couponPromise]).then(function(){
 
 			self.products = self.coupons.concat(self.events);
 			self.products = util_sort_updated_at(self.products);
@@ -50,14 +61,7 @@ var app = new Vue({
 		});
 
 		util_data_init(this, getBanners, "banners");
-		//categorys 초기화 후에, queryString에 카테고리가 존재한다면
-		//해당하는 category를 찾아, self.cateogry에 초기화.
-		getCategorys().then(function(rtn){
-			self.categorys = rtn;
-			if(_categoryName !== allString){
-				self.findCategory(_categoryName);
-			}
-		});
+		
 
 	},
 
@@ -68,7 +72,7 @@ var app = new Vue({
 			var self = this;
 			self.sortedList = self[self.sortBase];
 			self.sortedList = self.sortCategory(self.sortedList);
-			setTimeout(common_make_box, 250);
+			setTimeout(common_make_box, 250); //common.js 안에 있는 함수, box에 클릭이벤트를 다시 묶어준다.
 		},
 
 		//_arr을 받아서, 현재 카테고리를 포함하는 객체만 모아서 배열을 돌려준다.
@@ -76,9 +80,11 @@ var app = new Vue({
 		sortCategory : function(_arr){
 			var self = this;
 			if(!self.category) return _arr;
-			return _arr.filter((el) => {
+			var returnArr =  _arr.filter((el) => {
 				return el.categorys.includes(self.category.categoryName);
 			});
+			console.log(returnArr);
+			return returnArr;
 		},
 
 		//category이름을 넣어주면 해당하는 카테고리를 카테고리리스트(categorys)에서 찾아서

@@ -103,9 +103,9 @@ h2{font-size: 32px; color: #e63434;}
 .section-contents{margin-top: 30px;}
 
 .box-all{width: 680px; padding: 0 20px; box-sizing: border-box;}
-.box-all h2{position: relative; width: 90px;}
+.box-all h2{position: relative; width: 140px;}
 .box-all h2:after{position: absolute; right: 0; top: 50%; margin-top: -18px; content: ''; width: 2px; height: 36px; background: #bfbfbf;}
-.box-all .swiper-container{width: calc(100% - 160px); margin: 0 30px 0 35px;}
+.box-all .swiper-container{width: calc(100% - 160px); margin: 0 30px 0 15px;}
 .box-all .swiper-slide{width: auto;}
 .box-all .swiper-slide a{display: block; line-height: 41px; text-align: center; font-size: 23px; color: #717171; transition: all 0.4s;}
 .box-all .swiper-slide a:hover{color: #e63434;}
