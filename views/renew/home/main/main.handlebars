@@ -11,6 +11,7 @@
 						<span v-for="(category, index) in categorys">
 							<div :class="'swiper-slide '+index">
 								<a :href="'/test/renew/event?category='+category.categoryName">
+									{{!-- <img :src="'/images/category/all/'+category.iconImage" alt="">\{{category.categoryName}} --}}
 									<img :src="'/images/category/all/'+category.iconImage" alt="">\{{category.categoryName}}
 								</a>
 							</div>
@@ -41,24 +42,49 @@
 		{{!-- /배너영역 --}}
 	</div>
 	{{!-- /메인섹션 --}}
+
+	{{!-- 모바일 카테고리 --}}
+	<div class="lnb-m">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+
+				<div v-for="(category, index) in categorys" v-if="categorys[index*2]" class="swiper-slide" >
+					<a :href="'/test/renew/event?category='+categorys[index*2].categoryName">
+						<div class="icon"><img :src="'/images/category/all/'+categorys[index*2].iconImage" alt=""></div>
+						<div class="text">\{{categorys[index*2].categoryName}}</div>
+					</a>
+					<a :href="'/test/renew/event?category='+categorys[index*2+1].categoryName" v-if="categorys[index*2 +1]">
+						<div class="icon"><img :src="'/images/category/all/'+categorys[index*2+1].iconImage" alt=""></div>
+						<div class="text">\{{categorys[index*2+1].categoryName}}</div>
+					</a>
+				</div>
+				
+				
+			</div>
+		</div>
+		<div class="swiper-pagination"></div>
+	</div>
+
+	{{!-- /모바일 카테고리 --}}
+
 	{{!-- 컨텐츠섹션 --}}
 	<div class="section-contents">
 		<div class="inner cf">
 			{{!-- 피드영역 --}}
 			<div class="box-feed fr">
-				<h2>피 드</h2>
+				<h2>精彩活动 {{!-- 최근활동 --}}</h2>
 				<div class="banner cf">
 					<div class="left-m">
-						<a href="javascript:;">
-							<img src="/renew/images/banner_feed_01.jpg" alt="">
+						<a href="https://mp.weixin.qq.com/s?__biz=Mzg4NzAzMzQ5OQ==&mid=2247483813&idx=3&sn=89ee4923b74954822113b62d7645f561&chksm=cf91da51f8e65347bb7ee933072bf812f46551a0624cdf275464b0a7d6c701f42279bf979b66&token=687913300&lang=zh_CN#rd">
+							<img src="/images/feed/all/피드_화이트닝.png" alt="">
 						</a>
 					</div>
 					<div class="right-m">
-						<a href="javascript:;">
-							<img src="/renew/images/banner_feed_02.jpg" alt="">
+						<a href="http://www.haodoc.co.kr/coupon/5c066e88f53fdc6fc892f29d?utm_source=haodoc&utm_medium=homepagebanner&utm_campaign=lizhulan">
+							<img src="/images/feed/all/피드_리쥬란.png" alt="">
 						</a>
-						<a href="javascript:;">
-							<img src="/renew/images/banner_feed_03.jpg" alt="">
+						<a href="http://www.haodoc.co.kr/coupon/5c1730493281e4315f0c146e?utm_source=haodoc&utm_medium=homepagebanner&utm_campaign=xinnianmubiao">
+							<img src="/images/feed/all/피드_새해이벤트.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -67,53 +93,56 @@
 			{{!--이벤트영역 --}}
 			<div class="box-all fr">
 				<div class="box-fold event active">
-					<div class="title">이벤트 모아보기</div>
+					<div class="title">相关活动{{!-- 이벤트 모아보기 --}}</div>
 					<div class="content cf">
 						<ul class="box-event">
-							<li v-for="(coupon, index) in coupons"><a :href="'/coupon/'+coupon.id" class="coupon cf">
-								<div class="image vertical-middle fl">
-									<img :src="'/images/coupon/all/'+coupon.thumbnailImage" alt="">
-								</div>
-								<div class="detail fr">
-									<div class="cf">
-										<span class="name">\{{coupon.hospitalName}}</span>
-										<span class="date">\{{coupon.couponRange}}</span>
+							<li v-for="(product, index) in products"
+							:class="product.isCoupon? 'coupon': ''">
+								<a v-if="product.isCoupon" :href="'/test/renew/coupon/'+product.id" class="cf">
+									<div class="image vertical-middle fl">
+										<img :src="'/images/coupon/all/'+product.thumbnailImage" alt="">
 									</div>
-									<div class="text sc">
-										<div class="event ellipsis">\{{coupon.couponName}}</div>
-										<div class="description ellipsis-multi">\{{coupon.subway}}</div>
-									</div>
-									<div class="bottom cf">
-										<!--div class="view fl">720</div-->
-										<div class="price fr">
-											<!--div class="before">720000</div-->
-											<div class="current">\{{coupon.price}}</div>
+									<div class="detail fr">
+										<div class="cf">
+											<span class="name">\{{product.hospitalName}}</span>
+											<span class="date">\{{product.couponRange}}</span>
+										</div>
+										<div class="text sc">
+											<div class="event ellipsis">\{{product.couponName}}</div>
+											<div class="description ellipsis-multi">\{{product.subway}}</div>
+										</div>
+										<div class="bottom cf">
+											<!--div class="view fl">720</div-->
+											<div class="price fr">
+												<!--div class="before">720000</div-->
+												<div class="current">\{{product.price}}</div>
+											</div>
 										</div>
 									</div>
-								</div>
-							</a></li>
-							<li v-for="(event, index) in events"><a :href="'/event/'+ event.id" class="cf">
-								<div class="image vertical-middle fl">
-									<img :src="'/images/event/all/' + event.thumbnailImage " alt="">
-								</div>
-								<div class="detail fr">
-									<div class="cf">
-										<span class="name">\{{event.hospitalName}}</span>
-										<span class="date">\{{event.eventRange}}</span>
+								</a>
+								<a v-if="!product.isCoupon" :href="'/test/renew/event/'+ product.id" class="cf">
+									<div class="image vertical-middle fl">
+										<img :src="'/images/event/all/' + product.thumbnailImage " alt="">
 									</div>
-									<div class="text sc">
-										<div class="event ellipsis">\{{event.eventName}}</div>
-										<div class="description ellipsis-multi">\{{event.subway}}</div>
-									</div>
-									<div class="bottom cf">
-										<!--div class="view fl">720</div-->
-										<div class="price fr">
-											<!--div class="before">720000</div-->
-											<div class="current">\{{event.price}}</div>
+									<div class="detail fr">
+										<div class="cf">
+											<span class="name">\{{product.hospitalName}}</span>
+											<span class="date">\{{product.eventRange}}</span>
+										</div>
+										<div class="text sc">
+											<div class="event ellipsis">\{{product.eventName}}</div>
+											<div class="description ellipsis-multi">\{{product.subway}}</div>
+										</div>
+										<div class="bottom cf">
+											<!--div class="view fl">720</div-->
+											<div class="price fr">
+												<!--div class="before">720000</div-->
+												<div class="current">\{{product.price}}</div>
+											</div>
 										</div>
 									</div>
-								</div>
-							</a></li>
+								</a>
+							</li>
 						</ul>
 					</div>
 					</div>

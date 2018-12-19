@@ -57,11 +57,14 @@
 
         {{!-- For Vue.js 2 --}}
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-        
+        {{!-- For Moment --}}
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+        {{!-- For CSS --}}
         <link rel="stylesheet" href="/renew/css/common.css">
         <link rel="stylesheet" href="/renew/css/index.css">
         <link rel="stylesheet" href="/renew/css/event.css">
         <link rel="stylesheet" href="/renew/css/swiper.min.css">
+
         {{{_sections.head}}}
 
     </head>
@@ -80,10 +83,10 @@
                 <div class="nav">
                     <div class="inner">
                         <ul class="cf">
-                            <li><a href="/test/renew/" id="home" class="active">홈</a></li>
+                            <li><a href="/test/renew/" id="home" class="active">首页 {{!-- 홈 --}}</a></li>
                             <!--li><a href="/test/renew/event" id="review">후기</a></li-->
-                            <li><a href="/test/renew/event" id="event">이벤트</a></li>
-                            <li><a href="/find" id="Feed">병원</a></li>
+                            <li><a href="/test/renew/event" id="event">安心体验{{!-- 안심경험 --}}</a></li>
+                            <!--li><a href="/find" id="Feed">병원</a></li-->
                         </ul>
                     </div>
                 </div>

@@ -1,3 +1,5 @@
+var common_make_box;
+
 $(document).ready(function() {
   // lnb
   var swiper = new Swiper('.lnb .swiper-container', {
@@ -56,11 +58,7 @@ $(document).ready(function() {
       spaceBetween: 0,
       slidesPerView: 5,
       slidesPerGroup: 4,
-      loop: true,
-      autoplay: {
-        delay: 4000,
-        disableOnInteraction: false,
-      },
+      loop: false,
       pagination: {
         el: '.lnb-m .swiper-pagination',
         clickable: true,
@@ -117,10 +115,10 @@ $(document).ready(function() {
     $('.btn-qr').removeClass('active');
   });
 
-  var makeQuestionFold = function(){
+  common_make_box = function(){
     // box fold slide up down
     $('.box-fold.active').find('.content').slideDown();
-    $('.box-fold .title').click(function(){
+    $('.box-fold .title').unbind('click').click(function(){
       if($(this).next('.content').is(':visible')){
         $(this).parents('.box-fold').removeClass('active');
         $(this).parents('.box-fold').find('.content').slideUp();
@@ -130,7 +128,7 @@ $(document).ready(function() {
       }
     });
 
-    $('.box-fold .question').click(function(){
+    $('.box-fold .question').unbind('click').click(function(){
       if($(this).next('.answer').is(':visible')){
         $(this).next('.answer').slideUp();
       }else{
@@ -140,7 +138,7 @@ $(document).ready(function() {
     });
   }
   //TODO 타이밍 맞추기
-  setTimeout(makeQuestionFold, 400);
+  setTimeout(common_make_box, 400);
 
   // sub content background
   var winHeight = $(window).height();
@@ -149,47 +147,6 @@ $(document).ready(function() {
   $('.box-sub-content').css('min-height',subContHeight);
   $('.box-sub-content.full').css('min-height',subContHeightFull);
   $('.box-sub-content.auto').css('min-height', 'auto');
-
-  // fixed bottom event
-  /*$('.fixed-bottom .btn-expand, .fixed-bottom-mobile .btn-apply').click(function(){
-    $('.fixed-bottom').toggleClass('active');
-  });
-
-  var hospitalInfo = $('.box-hospital-info').offset().top;
-  $('.btn-hospital-info').click(function(e){
-    e.preventDefault();
-    $('html, body').animate({
-      scrollTop: hospitalInfo
-    }, 400)
-  });
-
-  $(document).mouseup(function (e){
-  var container = $('.fixed-bottom');
-    if( container.has(e.target).length === 0){
-    container.removeClass('active');
-    }
-  });
-
-  // event detail tab
-  $('.tab-menu li').click(function(){
-    var index = $(this).index();
-    $('.tab-menu li a').removeClass('active');
-    $(this).find('a').addClass('active');
-    $('.tab-cont > div').css('display','none');
-    $('.tab-cont > div').eq(index).css('display','block');
-  });
-
-  // event hospital detail img
-  var setImageClick = function(){
-    $('.box-hospital-info li').click(function(){
-        var clickLi = $(this).html();
-        $(this).remove();
-        $('.box-hospital-info ul').prepend('<li class="image vertical-middle">' + clickLi + '</li>');
-        $('.box-hospital-info li').unbind("click").on("click", setImageClick);
-    }); 
-  }
-  setImageClick();
-*/
 
 
 });

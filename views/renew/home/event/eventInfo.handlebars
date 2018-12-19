@@ -1,266 +1,236 @@
 
+<div id="event-info-app">
 
-<div class="header">
-	<div class="inner cf">
-		<h1 class="fl"><a href="javascript:;"></a></h1>
-		<a href="javascript:;" class="btn-user fr cf">
-			<span class="name sc fl">414宝宝丽丽</span>
-			<span class="image vertical-middle fl"><img src="/renew/images/img_user_default.png" alt=""></span>
-		</a>
-	</div>
+	<div class="container sub exist-bottom">
 
-	<div class="nav">
-		<div class="inner">
-			<ul class="cf">
-				<li><a href="javascript:;">홈</a></li>
-				<li><a href="javascript:;">후기</a></li>
-				<li><a href="javascript:;" class="active">이벤트</a></li>
-				<li><a href="javascript:;">피드</a></li>
-			</ul>
-		</div>
-	</div>
-
-	<div class="current">
-		<a href="javascript:;" class="btn-back"></a>
-		<div class="title">보셀르 의원</div>
-	</div>
-</div>
-
-<div class="container sub exist-bottom">
-
-	<div class="section-contents sub">
-		<div class="inner cf">
-			<div class="section-event-detail">
-				<h3 class="bar">[ 보셀르 의원 HPV 9가 백신 이벤트 ]</h3>
-				<ul class="box-event">
-					<li class="coupon cf">
-						<div class="image vertical-middle fl">
-							<img src="/renew/images/img_event_03.jpg" alt="">
-						</div>
-						<div class="detail fr">
-							<div class="cf">
-								<span class="name">[보셀르의원]</span>
-								<span class="date">2018.12.27-2019.01.05</span>
+		<div class="section-contents sub">
+			<div class="inner cf">
+				<div class="section-event-detail">
+					<h3 class="bar">\{{event.eventName}}</h3>
+					<ul class="box-event">
+						<li class="cf">
+							<div class="image vertical-middle fl">
+								<img :src="'/images/event/all/'+event.thumbnailImage" alt="">
 							</div>
-							<div class="text sc">
-								<div class="event ellipsis">宫颈癌疫苗 9价 EVENT</div>
-								<div class="description ellipsis-multi">鼓楼站</div>
-							</div>
-							<div class="bottom cf">
-								<div class="view fl">720</div>
-								<div class="price fr">
-									<div class="before">720000</div>
-									<div class="current">₩590000</div>
-								</div>
-							</div>
-						</div>
-					</li>
-				</ul>
-
-				<div class="box-event-info">
-					<img src="/renew/images/img_event_detail.jpg" alt="">
-				</div>
-
-				<div class="box-hospital-info">
-					<h3 class="bar margin-none">병원상세</h3>
-					<ul class="cf">
-						<li class="image vertical-middle"><img src="/renew/images/img_hospital_detail_01.jpg" alt=""></li>
-						<li class="image vertical-middle"><img src="/renew/images/img_hospital_detail_02.jpg" alt=""></li>
-						<li class="image vertical-middle"><img src="/renew/images/img_hospital_detail_03.jpg" alt=""></li>
-					</ul>
-				</div>
-			</div>
-			
-			<div class="section-qna-review">
-				<h3 class="bar">후기</h3>
-				<div class="box-content">
-					<ul class="tab-menu sc cf">
-						<li><a href="javascript:;" class="active">写下后记</a></li>
-					</ul>
-					<div class="tab-cont">
-						<div class="tab-cont-01">
-							<div class="box-write">
-								<h4 class="sc">&nbsp;</h4>
-								<table class="sc">
-									<tr>
-										<th>姓名</th>
-										<td><input type="text" placeholder="可以不用填写真实姓名"></td>
-									</tr>
-									<tr>
-										<th>满意度</th>
-										<td>
-											<input type="radio" name="point" id="5"><label for="5">5</label>
-											<input type="radio" name="point" id="4"><label for="4">4</label>
-											<input type="radio" name="point" id="3"><label for="3">3</label>
-											<input type="radio" name="point" id="2"><label for="2">2</label>
-											<input type="radio" name="point" id="1"><label for="1">1</label>
-										</td>
-									</tr>
-									<tr>
-										<th>使用的优惠券</th>
-										<td><input type="text" value="THE-CLIM 宫颈癌疫苗 9价 EVENT" disabled></td>
-									</tr>
-									<tr>
-										<th>一次性密码</th>
-										<td><input type="text" placeholder="修改及删除时便用的一次性密码"></td>
-									</tr>
-									<tr>
-										<th>微信账号</th>
-										<td><input type="text" placeholder="提问后若想得到我们的答复请填写，不公开" class="w300"></td>
-									</tr>
-									<tr>
-										<td colspan="2">
-											<textarea name="" id="" cols="30" rows="10" placeholder="咨询事项"></textarea>
-										</td>
-									</tr>
-								</table>
+							<div class="detail fr">
 								<div class="cf">
-									<a href="javascript:;" class="btn-write sc fr">咨  询</a>
+									<span class="name">[\{{event.hospitalName}}]</span>
+									<span class="date">\{{event.eventRange}}</span>
+								</div>
+								<div class="text sc">
+									<div class="event ellipsis">\{{event.eventName}}</div>
+									<div class="description ellipsis-multi">\{{event.subway}}</div>
+								</div>
+								<div class="bottom cf">
+									<!--div class="view fl">720</div-->
+									<div class="price fr">
+										<!--div class="before">720000</div-->
+										<div class="current">₩\{{event.price}}</div>
+									</div>
 								</div>
 							</div>
-							<div class="box-review">
-								<h4 class="sc">后记</h4>
-								<ul class="list-review">
-									<li>
-										<div class="cf">
-											<div class="name fl">사용자이름</div>
-											<div class="date fr">11/14 01:19 pm</div>
-										</div>
-										<div class="cf">
-											<div class="box-info fl">
-												<table>
-													<tr>
-														<th>병원이름</th>
-														<td>THE-CLIM 宫颈癌疫苗 9价 EVENT</td>
-													</tr>
-													<tr>
-														<th>시술명</th>
-														<td>더끌림산부인과</td>
-													</tr>
-												</table>
-												<div class="text sc">挺好了！</div>
+						</li>
+					</ul>
+
+					<div class="box-event-info">
+						<h3 class="bar">详情{{!-- 상세이미지 --}}</h3>
+						<img :src="'/images/event/all/'+image" v-for="image in event.eventImage" alt="">
+					</div>
+
+					<!--div class="box-hospital-info">
+						<h3 class="bar margin-none">병원상세</h3>
+						<ul class="cf">
+							<li class="image vertical-middle"><img src="/renew/images/img_hospital_detail_01.jpg" alt=""></li>
+							<li class="image vertical-middle"><img src="/renew/images/img_hospital_detail_02.jpg" alt=""></li>
+							<li class="image vertical-middle"><img src="/renew/images/img_hospital_detail_03.jpg" alt=""></li>
+						</ul>
+					</div-->
+
+				</div>
+				{{!-- 후기 --}}
+				<!--div class="section-qna-review">
+					<h3 class="bar"></h3>
+					<div class="box-content">
+						<ul class="tab-menu sc cf">
+							<li><a href="javascript:;" class="active">写下后记</a></li>
+						</ul>
+						<div class="tab-cont">
+							<div class="tab-cont-01">
+								<div class="box-write">
+									<h4 class="sc">&nbsp;</h4>
+									<table class="sc">
+										<tr>
+											<th>姓名</th>
+											<td><input type="text" placeholder="可以不用填写真实姓名"></td>
+										</tr>
+										<tr>
+											<th>满意度</th>
+											<td>
+												<input type="radio" name="point" id="5"><label for="5">5</label>
+												<input type="radio" name="point" id="4"><label for="4">4</label>
+												<input type="radio" name="point" id="3"><label for="3">3</label>
+												<input type="radio" name="point" id="2"><label for="2">2</label>
+												<input type="radio" name="point" id="1"><label for="1">1</label>
+											</td>
+										</tr>
+										<tr>
+											<th>使用的优惠券</th>
+											<td><input type="text" value="THE-CLIM 宫颈癌疫苗 9价 EVENT" disabled></td>
+										</tr>
+										<tr>
+											<th>一次性密码</th>
+											<td><input type="text" placeholder="修改及删除时便用的一次性密码"></td>
+										</tr>
+										<tr>
+											<th>微信账号</th>
+											<td><input type="text" placeholder="提问后若想得到我们的答复请填写，不公开" class="w300"></td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<textarea name="" id="" cols="30" rows="10" placeholder="咨询事项"></textarea>
+											</td>
+										</tr>
+									</table>
+									<div class="cf">
+										<a href="javascript:;" class="btn-write sc fr">咨  询</a>
+									</div>
+								</div>
+								<div class="box-review">
+									<h4 class="sc">后记</h4>
+									<ul class="list-review">
+										<li>
+											<div class="cf">
+												<div class="name fl">사용자이름</div>
+												<div class="date fr">11/14 01:19 pm</div>
 											</div>
-											<div class="box-point sc fr">
-												<div class="point">满意度</div>
-												<div class="number">4</div>
-												<div class="description">5分满分</div>
+											<div class="cf">
+												<div class="box-info fl">
+													<table>
+														<tr>
+															<th>병원이름</th>
+															<td>THE-CLIM 宫颈癌疫苗 9价 EVENT</td>
+														</tr>
+														<tr>
+															<th>시술명</th>
+															<td>더끌림산부인과</td>
+														</tr>
+													</table>
+													<div class="text sc">挺好了！</div>
+												</div>
+												<div class="box-point sc fr">
+													<div class="point">满意度</div>
+													<div class="number">4</div>
+													<div class="description">5分满分</div>
+												</div>
 											</div>
-										</div>
-									</li>
-									<li>
-										<div class="cf">
-											<div class="name fl">사용자이름</div>
-											<div class="date fr">11/14 01:19 pm</div>
-										</div>
-										<div class="cf">
-											<div class="box-info fl">
-												<table>
-													<tr>
-														<th>병원이름</th>
-														<td>THE-CLIM 宫颈癌疫苗 9价 EVENT</td>
-													</tr>
-													<tr>
-														<th>시술명</th>
-														<td>더끌림산부인과</td>
-													</tr>
-												</table>
-												<div class="text sc">挺好了！</div>
-											</div>
-											<div class="box-point sc fr">
-												<div class="point">满意度</div>
-												<div class="number">4</div>
-												<div class="description">5分满分</div>
-											</div>
-										</div>
-									</li>
-								</ul>
+										</li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
+				</div-->
+				{{!-- /후기 --}}
+			</div>
+		</div>
+
+	</div>
+
+
+	<div class="fixed-bottom">
+		<div class="inner">
+			<a href="javascript:;" class="btn-expand"></a>
+			<div class="title cf">
+				<div class="name fl">[ \{{event.hospitalName}} ]</div>
+				<div class="event sc fl">\{{event.eventName}}</div>
+				<div class="button fr" id="btn-expand">咨询</div>
+			</div>
+		</div>
+		<div class="content cf">
+			<div class="write fl">
+				<h3>\{{event.eventName}} 咨询</h3>
+				<div class="cf">
+					<span class="table1">
+					<table class="fl">
+						<tr>
+							<th>姓名<!--이름--></th>
+							<td><input type="text" class="sm" v-model="new_participant_obj.participantName"></td>
+						</tr>
+						<tr>
+							<th>微信账号<!--위챗아이디--></th>
+							<td><input type="text" v-model="new_participant_obj.wechatID" placeholder="若将微信账号开启不允许搜索则我们可能无法联系到您"><!--검색을 허용해주세요.--></td>
+						</tr>
+						<tr>
+							<th class="sc">记录<!--메모--></th>
+							<td><input type="text" v-model="new_participant_obj.memo" placeholder="请填写希望的咨询时间，日期等事项"><!--상담시간, 날짜 등을 입력해주세요.--></td>
+						</tr>
+					</table>
+					</span>
+					<span class="table2">
+					<table class="fl">
+						<tr>
+							<th>性别<!--성별--></th>
+							<td>
+								<input type="radio" name="gender" id="male" value="male" v-model="new_participant_obj.gender"><label for="male">男</label>
+								<input type="radio" name="gender" id="female" value="female" v-model="new_participant_obj.gender"><label for="female">女</label>
+							</td>
+						</tr>
+						<tr>
+							<th class="sc">电话号码<!--전화번호--></th>
+							<td><input type="text" v-model="new_participant_obj.phone" class="form-control"placeholder="010-1234-5678" /></td>
+						</tr>
+						<tr>
+							<th class="sc">活动名称<!--이벤트 이름--></th>
+							<td><input type="text" v-model="new_participant_obj.eventName" :placeholder="event.eventName" disabled></td>
+						</tr>
+					</table>
+					</span>
 				</div>
 			</div>
+			<div class="button fr">
+				<div><input type="checkbox" id="consult" v-model="terms1"><label for="consult"><a href="/term1" target="_blank">个人信息第三方提供同意(咨询)</a></label></div>
+				<div><input type="checkbox" id="privacy" v-model="terms2"><label for="privacy"><a href="/term2" target="_blank">个人信息处理委托同意</a></label></div>
+				<ul>
+		            <li v-if="errors.length">
+		            	{{!-- 아래사항들을 수정해 주세요 --}}
+		                <b>请修改以下项目</b><br>
+		                <ul>
+		                  <li v-for="error in errors">\{{ error }}</li>
+		                </ul>
+		            </li>
+		        </ul>
+				<div class="cf">
+					<!--a href="javascript:;" class="btn-hospital-info fl">병&nbsp;원<br />정&nbsp;보</a-->
+					<a class="btn-event-apply fr" @click="newParticipant">申请咨询<!--상담신청하기--></a>
+				</div>
+			</div>
+			<h3></h3>
 		</div>
 	</div>
 
-</div>
-
-
-<div class="fixed-bottom">
-	<div class="inner">
-		<a href="javascript:;" class="btn-expand"></a>
-		<div class="title cf">
-			<div class="name fl">[ 보셀르 의원 ]</div>
-			<div class="event sc fl">宫颈癌疫苗 9价 EVENT</div>
-			<div class="button fr">신청하기</div>
-		</div>
-	</div>
-	<div class="content cf">
-		<div class="write fl">
-			<h3>이벤트 신청</h3>
-			<div class="cf">
-				<table class="fl">
-					<tr>
-						<th>이름</th>
-						<td><input type="text" class="sm"></td>
-					</tr>
-					<tr>
-						<th>전화번호</th>
-						<td><input type="text"></td>
-					</tr>
-					<tr>
-						<th class="sc">记录</th>
-						<td><input type="text"></td>
-					</tr>
-				</table>
-				<table class="fl">
-					<tr>
-						<th>성별</th>
-						<td>
-							<input type="radio" name="gender" id="male"><label for="male">男</label>
-							<input type="radio" name="gender" id="female"><label for="female">女</label>
-						</td>
-					</tr>
-					<tr>
-						<th class="sc">微信号码</th>
-						<td><input type="text"></td>
-					</tr>
-					<tr>
-						<th class="sc">活动名称</th>
-						<td><input type="text" value="校园女神套餐" disabled></td>
-					</tr>
-				</table>
+	<div class="fixed-bottom-mobile cf">
+		<div class="title fl">
+			<div class="fl">
+				<div class="name">[\{{event.hospitalName}}]</div>
+				<div class="event cs">\{{event.eventName}}</div>
+			</div>
+			<div class="fr">
+				<!--div class="before">720000</div-->
+				<div class="current">₩\{{event.price}}</div>
 			</div>
 		</div>
-		<div class="button fr">
-			<div><input type="checkbox" id="consult"><label for="consult">个人信息第三方提供同意(咨询)</label></div>
-			<div><input type="checkbox" id="privacy"><label for="privacy">个人信息处理委托同意</label></div>
-			<div class="cf">
-				<a href="javascript:;" class="btn-hospital-info fl">병&nbsp;원<br />정&nbsp;보</a>
-				<a href="javascript:;" class="btn-event-apply fr">이벤트 신청</a>
-			</div>
+		<div class="button fr cf">
+			<!--a href="javascript:;" class="btn-hospital-info fl"></a-->
+			<a href="javascript:;" class="btn-apply fl">咨&nbsp;询</a>
 		</div>
-		<h3></h3>
 	</div>
-</div>
 
-<div class="fixed-bottom-mobile cf">
-	<div class="title fl">
-		<div class="fl">
-			<div class="name">[보셀르의원]</div>
-			<div class="event cs">宫颈癌疫苗 9价 EVENT</div>
-		</div>
-		<div class="fr">
-			<div class="before">720000</div>
-			<div class="current">₩590,000</div>
-		</div>
-	</div>
-	<div class="button fr cf">
-		<a href="javascript:;" class="btn-hospital-info fl"></a>
-		<a href="javascript:;" class="btn-apply fl">신&nbsp;청</a>
-	</div>
 </div>
 
 
-	{{#section 'jquery'}}
-		<script type="text/javascript" src="/renew/js/productInfo.js"></script>
-	{{/section}}
+{{#section 'jquery'}}
+	<script type="text/javascript" src="/renew/js/productInfo.js"></script>
+	<script type="text/javascript" src="/js/api/event.js"></script>
+	<script type="text/javascript" src="/js/api/participant.js"></script>
+	<script type="text/javascript" src="/renew/js/controllers/eventInfoController.js"></script>
+{{/section}}

@@ -1,30 +1,30 @@
 
-	
+<div id="coupon-info-app">
 	<div class="container sub exist-bottom">
 
 		<div class="section-contents sub">
 			<div class="inner cf">
 				<div class="section-event-detail">
-					<h3 class="bar">[ 보셀르 의원 HPV 9가 백신 이벤트</h3>
+					<h3 class="bar">[ \{{coupon.couponName}} ] </h3>
 					<ul class="box-event">
 						<li class="coupon cf">
 							<div class="image vertical-middle fl">
-								<img src="/renew/images/img_event_03.jpg" alt="">
+								<img :src="'/images/coupon/all/'+coupon.thumbnailImage" alt="">
 							</div>
 							<div class="detail fr">
 								<div class="cf">
-									<span class="name">[보셀르의원]</span>
-									<span class="date">2018.12.27-2019.01.05</span>
+									<span class="name">[\{{coupon.hospitalName}}]</span>
+									<span class="date">\{{coupon.couponRange}}</span>
 								</div>
 								<div class="text sc">
-									<div class="event ellipsis">宫颈癌疫苗 9价 EVENT</div>
-									<div class="description ellipsis-multi">鼓楼站</div>
+									<div class="event ellipsis">\{{coupon.couponName}}</div>
+									<div class="description ellipsis-multi">\{{coupon.subway}}</div>
 								</div>
 								<div class="bottom cf">
-									<div class="view fl">720</div>
+									<!--div class="view fl">720</div-->
 									<div class="price fr">
-										<div class="before">720000</div>
-										<div class="current">₩590000</div>
+										<!--div class="before">720000</div-->
+										<div class="current">₩\{{coupon.price}}</div>
 									</div>
 								</div>
 							</div>
@@ -32,88 +32,95 @@
 					</ul>
 
 					<div class="box-event-info">
-						<img src="/renew/images/img_event_detail.jpg" alt="">
+						<h3 class="bar">详情{{!-- 상세이미지 --}}</h3>
+						<img :src="'/images/coupon/all/'+image" v-for="image in coupon.couponImage" alt="">
+						{{!-- 쿠폰 모델일 경우 --}}
+			            <div v-if="!coupon.isDeposit" style="margin:12px; font-size:18px;">
+			                [退款指南]<br>
+			                1. 请填写一下您的姓名,手机号码,购买的商品信息(医院名, 接种名),退款理由,银行账号(无存折入账时)发送给wechat. <br>
+			                2. 确认完商品是否使用后会一起进行退款处理. <br>
+			                3. 支付后10天之内由于改变主意而引起的退款行为是可以将购买金额进行100% 退款的. <br>支付10天后由于单纯改变主意而引起的退款除了购买金额的手续费5%外其他的可进行退款. (根据韩国公正交易法.) <br>医院访问咨询后若出现不适合进行接种的结果时与期间无关，购买金额100%可进行退款. <br>
+			                4. 退款金额根据微信,支付宝等方式的不同，最晚可能需要5天时间. <br>
+			            </div>
+			            {{!-- /쿠폰 모델일 경우 --}}
+			            {{!-- 예약금일 경우 --}}
+						<div v-if="coupon.isDeposit" style="margin:12px; font-size:18px;">
+							[退款指南]<br>
+							1. 请填写一下您的姓名,手机号码,购买的商品信息(医院名, 商品名称),退款理由,银行账号(无存折入账时)发送给wechat.<br>
+							2. 与医院进行最终确认后进行退款处理  <br>
+							3. 退款金额根据微信,支付宝等方式的不同，最晚可能需要5天时间. <br>
+							4. 退款时无法积累积分 <br>
+			                {{!-- 
+			                1. 성함, 핸드폰번호, 구매한 상품정보 (병원명, 상품명), 환불이유, 은행계좌(무통장 입금시)를 작성해 wechat으로 보내십시오.
+			                2. 병원과 연락 및 최종 확인 후 환불처리가 진행됩니다.
+			                3. 환불은 위챗, 알리페이 등에 따라 5일 이상 소요될 수 있습니다.
+			                4. 환불 시 포인트는 적립되지 않습니다. --}}
+						</div>
+			            {{!-- /예약일 경우 --}}
 					</div>
 
-					<div class="box-hospital-info">
+					<!--div class="box-hospital-info">
 						<h3 class="bar margin-none">병원상세</h3>
 						<ul class="cf">
 							<li class="image vertical-middle"><img src="/renew/images/img_hospital_detail_01.jpg" alt=""></li>
 							<li class="image vertical-middle"><img src="/renew/images/img_hospital_detail_02.jpg" alt=""></li>
 							<li class="image vertical-middle"><img src="/renew/images/img_hospital_detail_03.jpg" alt=""></li>
 						</ul>
-					</div>
+					</div-->
 				</div>
 
 				<div class="section-qna-review">
-					<h3 class="bar">질문 & 후기</h3>
+					<h3 class="bar">咨询&后记</h3>
 					<div class="box-content">
 						<ul class="tab-menu sc cf">
 							<li><a href="javascript:;" class="active">提问</a></li>
-							<li><a href="javascript:;">写下后记</a></li>
+							<li><a href="javascript:;">后记</a></li>
 						</ul>
 						<div class="tab-cont">
 							<div class="tab-cont-01">
 								<div class="box-write">
-									<h4 class="sc">THE-CLIM 宫颈癌疫苗 9价 EVENT   Q&A</h4>
+									<h4 class="sc">\{{coupon.couponName}} Q&A</h4>
 									<table class="sc">
 										<tr>
-											<th>姓名</th>
-											<td><input type="text" placeholder="可以不用填写真实姓名"></td>
+											<th>姓名<!--이름--></th>
+											<td><input type="text" v-model="newQuestion.name" placeholder="可以不用填写真实姓名"><!--실명을 적지 않으셔도 괜찮습니다.--></td>
 										</tr>
 										<tr>
-											<th>一次性密码</th>
-											<td><input type="text" placeholder="修改及删除时便用的一次性密码"></td>
+											<th>一次性密码<!--비밀번호--></th>
+											<td><input type="text" v-model="newQuestion.password" placeholder="修改及删除时使用的一次性密码"><!--글 수정, 삭제에 사용할 일회용 비밀번호--></td>
 										</tr>
 										<tr>
-											<th>微信账号</th>
-											<td><input type="text" placeholder="提问后若想得到我们的答复请填写，不公开" class="w300"></td>
+											<th>微信账号<!--위챗아이디--></th>
+											<td><input type="text" v-model="newQuestion.wechatID" placeholder="提问后若想得到我们的答复请填写，不公开" class="w300"><!--답이 달릴시에 연락받고싶다면 적어주세요. 공개되지 않습니다. --></td>
 										</tr>
 										<tr>
 											<td colspan="2">
-												<textarea name="" id="" cols="30" rows="10" placeholder="咨询事项"></textarea>
+												<textarea name="" id="" cols="30" rows="10" v-model="newQuestion.content" placeholder="请将想提问的问题进行填写，我们HaoDoc确认后会尽快回复您"><!--궁금하신 점을 적어주세요 하오닥이 확인 즉시 답해드립니다.--></textarea>
 											</td>
 										</tr>
 									</table>
 									<div class="cf">
-										<a href="javascript:;" class="btn-write sc fr">咨  询</a>
+										<a class="btn-write sc fr" @click="addQuestion">咨询<!--문의하기--></a>
 									</div>
 								</div>
 								<div class="box-qna">
-									<h4 class="sc">Q&A</h4>
+									<h4 class="sc">咨询<!--문의하기--></h4>
 									<ul class="list-qna">
-										<li>
+										<li v-for="(question, index) in coupon.questions">
 											<div class="cf">
-												<div class="name fl">Rachelss</div>
-												<div class="date fr">11/14 01:19 pm</div>
+												<div class="name fl">\{{question.name}}</div>
+												<div class="date fr">\{{question.updated_at | moment}}</div>
 											</div>
-											<div class="question sc">Q0.  是接种在哪个部位的呢?</div>
-											<div class="cf">
-												<a href="javascript:;" class="btn-modify fr">修&nbsp;&nbsp;改</a>
-											</div>
-											<div class="box-answer">
-												<div class="cf">
-													<div class="name fl">HaoDoc</div>
-													<div class="date fr">11/14 01:22 pm</div>
-												</div>
-												<div class="answer">A.   HPV9价疫苗0.5ml，大部分在三角肌部位打肌肉注射</div>
-											</div>
-										</li>
-										<li>
-											<div class="cf">
-												<div class="name fl">Rachelss</div>
-												<div class="date fr">11/14 01:19 pm</div>
-											</div>
-											<div class="question sc">Q0.  是接种在哪个部位的呢?</div>
+											<div class="question sc">Q\{{index}}.&nbsp;&nbsp;\{{question.content}}</div>
 											<div class="cf">
 												<a href="javascript:;" class="btn-modify fr">修&nbsp;&nbsp;改</a>
 											</div>
-											<div class="box-answer">
+											<div class="box-answer" v-if="question.answer">
 												<div class="cf">
-													<div class="name fl">HaoDoc</div>
-													<div class="date fr">11/14 01:22 pm</div>
+													<div class="name fl">\{{question.answer.name}}</div>
+													<div class="date fr">\{{question.answer.updated_at | moment}}</div>
 												</div>
-												<div class="answer">A.   HPV9价疫苗0.5ml，大部分在三角肌部位打肌肉注射</div>
+												<div class="answer">A. &nbsp;&nbsp;\{{question.answer.content}}</div>
 											</div>
 										</li>
 									</ul>
@@ -125,91 +132,65 @@
 									<table class="sc">
 										<tr>
 											<th>姓名</th>
-											<td><input type="text" placeholder="可以不用填写真实姓名"></td>
+											<td><input type="text" v-model="newReview.name" placeholder="可以不用填写真实姓名"><!--실명을 적지 않으셔도 괜찮습니다.--></td>
 										</tr>
 										<tr>
 											<th>满意度</th>
 											<td>
-												<input type="radio" name="point" id="5"><label for="5">5</label>
-												<input type="radio" name="point" id="4"><label for="4">4</label>
-												<input type="radio" name="point" id="3"><label for="3">3</label>
-												<input type="radio" name="point" id="2"><label for="2">2</label>
-												<input type="radio" name="point" id="1"><label for="1">1</label>
+												<input type="radio" name="score" id="5" value="5" v-model="newReview.score"><label for="5">5</label>
+												<input type="radio" name="score" id="4"  value="4" v-model="newReview.score"><label for="4">4</label>
+												<input type="radio" name="score" id="3"  value="3" v-model="newReview.score"><label for="3">3</label>
+												<input type="radio" name="score" id="2"  value="2" v-model="newReview.score"><label for="2">2</label>
+												<input type="radio" name="score" id="1"  value="1" v-model="newReview.score"><label for="1">1</label>
 											</td>
 										</tr>
 										<tr>
-											<th>使用的优惠券</th>
-											<td><input type="text" value="THE-CLIM 宫颈癌疫苗 9价 EVENT" disabled></td>
+											<th>使用的优惠券<!-- 사용 쿠폰 --></th>
+											<td><input type="text" :placeholder="coupon.couponName" disabled></td>
 										</tr>
 										<tr>
-											<th>一次性密码</th>
-											<td><input type="text" placeholder="修改及删除时便用的一次性密码"></td>
+											<th>一次性密码<!-- 비밀번호 --></th>
+											<td><input type="text" v-model="newReview.password" placeholder="修改及删除时使用的一次性密码"><!--글 수정, 삭제에 사용할 일회용 비밀번호--></td>
 										</tr>
 										<tr>
 											<th>微信账号</th>
-											<td><input type="text" placeholder="提问后若想得到我们的答复请填写，不公开" class="w300"></td>
+											<td><textarea type="text" v-model="newReview.wechatID" placeholder="（选择项目）进行后记活动时为给予礼物所需，绝不公开" class="w300"></textarea><!--리뷰 이벤트 진행시에 선물 발송을 위해 수집됩니다. 외부에 공개 되지 않습니다.--></td>
 										</tr>
 										<tr>
 											<td colspan="2">
-												<textarea name="" id="" cols="30" rows="10" placeholder="咨询事项"></textarea>
+												<textarea name="" id="" cols="30" rows="10" v-model="newReview.content" placeholder="请留下诊疗的专业性，亲切性，设施的清洁度等相关使用后记吧！大家的后记会给其他人很大的帮助"><!--진료의 전문성, 친절성, 시설의 청결도 등 사용 후기를 남겨주세요. 여러분의 후기가 다른 분들께 큰 도움이 됩니다.--></textarea>
 											</td>
 										</tr>
 									</table>
 									<div class="cf">
-										<a href="javascript:;" class="btn-write sc fr">咨  询</a>
+										<a class="btn-write sc fr" @click="newCouponReview">写下后记<!--리뷰남기기--></a>
 									</div>
 								</div>
 								<div class="box-review">
 									<h4 class="sc">后记</h4>
 									<ul class="list-review">
-										<li>
+										<li v-for="review in couponReviews">
 											<div class="cf">
-												<div class="name fl">사용자이름</div>
-												<div class="date fr">11/14 01:19 pm</div>
+												<div class="name fl">\{{review.name}}</div>
+												<div class="date fr">\{{review.updated_at | moment}}</div>
 											</div>
 											<div class="cf">
 												<div class="box-info fl">
 													<table>
 														<tr>
 															<th>병원이름</th>
-															<td>THE-CLIM 宫颈癌疫苗 9价 EVENT</td>
+															<td>\{{review.coupon.hospitalName}}</td>
 														</tr>
 														<tr>
 															<th>시술명</th>
-															<td>더끌림산부인과</td>
+															<td>\{{review.coupon.couponName}}</td>
 														</tr>
 													</table>
-													<div class="text sc">挺好了！</div>
+													<div class="text sc">\{{review.content}}</div>
 												</div>
 												<div class="box-point sc fr">
 													<div class="point">满意度</div>
-													<div class="number">4</div>
-													<div class="description">5分满分</div>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="cf">
-												<div class="name fl">사용자이름</div>
-												<div class="date fr">11/14 01:19 pm</div>
-											</div>
-											<div class="cf">
-												<div class="box-info fl">
-													<table>
-														<tr>
-															<th>병원이름</th>
-															<td>THE-CLIM 宫颈癌疫苗 9价 EVENT</td>
-														</tr>
-														<tr>
-															<th>시술명</th>
-															<td>더끌림산부인과</td>
-														</tr>
-													</table>
-													<div class="text sc">挺好了！</div>
-												</div>
-												<div class="box-point sc fr">
-													<div class="point">满意度</div>
-													<div class="number">4</div>
+													<div class="number">\{{review.score}}</div>
 													<div class="description">5分满分</div>
 												</div>
 											</div>
@@ -231,29 +212,29 @@
 		<div class="inner">
 			<a href="javascript:;" class="btn-expand"></a>
 			<div class="title cf">
-				<div class="name fl">[ 보셀르 의원 ]</div>
-				<div class="event sc fl">宫颈癌疫苗 9价 EVENT</div>
-				<div class="price fr"><span class="before">720000</span>₩590,000</div>
+				<div class="name fl">[ \{{coupon.hospitalName}} ]</div>
+				<div class="event sc fl">\{{coupon.couponName}}</div>
+				<div class="price fr"><!--span class="before">720000</span-->₩\{{coupon.price}}</div>
 			</div>
 		</div>
 		<div class="content cf">
 			<div class="write fl">
 				<div class="cf">
 					<div class="info fl">
-						<div class="name">[보셀르의원] <span class="description sc">鼓楼站</span></div>
-						<div class="event sc">宫颈癌疫苗 9价 EVENT</div>
+						<div class="name">[\{{coupon.hospitalName}}] <span class="description sc">\{{coupon.subway}}</span></div>
+						<div class="event sc">\{{coupon.couponName}}</div>
 					</div>
 					<div class="detail fr">
-						<div class="notice">주의사항 확인 후 결제</div>
-						<div class="before">720000</div>
-						<div class="current">₩590,000</div>
+						<!--div class="notice">주의사항 확인 후 결제</div-->
+						<!--div class="before">720000</div-->
+						<div class="current">₩\{{coupon.price}}</div>
 					</div>
 				</div>
 			</div>
 			<div class="button fr">
 				<div class="cf">
-					<a href="javascript:;" class="btn-hospital-info fl">병&nbsp;원<br />정&nbsp;보</a>
-					<a href="javascript:;" class="btn-event-apply sc fr">支&nbsp;&nbsp;付</a>
+					<!--a href="javascript:;" class="btn-hospital-info fl">병&nbsp;원<br />정&nbsp;보</a-->
+					<a :href="'/coupon0/'+coupon.id" class="btn-event-apply sc fr">支&nbsp;&nbsp;付</a>
 				</div>
 			</div>
 			<h3></h3>
@@ -263,24 +244,27 @@
 	<div class="fixed-bottom-mobile cf">
 		<div class="title fl">
 			<div class="fl">
-				<div class="name">[보셀르의원]</div>
-				<div class="event cs">宫颈癌疫苗 9价 EVENT</div>
+				<div class="name">[\{{coupon.hospitalName}}]</div>
+				<div class="event cs">\{{coupon.couponName}}</div>
 			</div>
 			<div class="fr">
-				<div class="before">720000</div>
-				<div class="current">₩590,000</div>
+				<!--div class="before">720000</div-->
+				<div class="current">₩\{{coupon.price}}</div>
 			</div>
 		</div>
 		<div class="button fr cf">
-			<a href="javascript:;" class="btn-hospital-info fl"></a>
-			<a href="javascript:;" class="btn-apply sc fl">支&nbsp;付</a>
+			<!--a href="javascript:;" class="btn-hospital-info fl"></a-->
+			<a :href="'/coupon0/'+coupon.id" class="btn-apply sc fl">支&nbsp;付</a>
 		</div>
 	</div>
 
+</div>
 
-
-	{{#section 'jquery'}}
-		<script type="text/javascript" src="/renew/js/productInfo.js"></script>
-	{{/section}}
+{{#section 'jquery'}}
+	<script type="text/javascript" src="/js/api/coupon.js"></script>
+	<script type="text/javascript" src="/js/api/couponReview.js"></script>
+	<script type="text/javascript" src="/renew/js/controllers/couponInfoController.js"></script>
+	<script type="text/javascript" src="/renew/js/productInfo.js"></script>
+{{/section}}
 
 

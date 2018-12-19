@@ -43,3 +43,14 @@ var util_file_init = function(vue_self, dirString, data_name){
 	});
 
 }
+
+//_arr을 넣으면, 시간순으로 정렬해주는 함수.
+var util_sort_updated_at = function(_arr){
+	
+	return _arr.sort(function(a, b){
+	    var a_time = new Date(a.updated_at).getTime();
+	    var b_time = new Date(b.updated_at).getTime();
+	    return b_time - a_time;
+	});
+
+};
