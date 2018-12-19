@@ -34,11 +34,11 @@
 .box-event li.coupon .detail:before{position: absolute; right: 0; top: 0; content: 'coupon'; display: block; width: 102px; height: 102px; background: url('../images/bg_coupon.png') no-repeat center; font-size: 18px; color: #fff; text-align: right; padding: 15px 2px 0 0; box-sizing: border-box;}
 .box-event .image{width: 340px; height: 256px;}
 .box-event .detail{position: relative; width: calc(100% - 340px); height: 256px; padding: 25px 20px; box-sizing: border-box;}
-.box-event .name{font-size: 24px; color: #cc2626;}
-.box-event .date{font-size: 20px; color: #a29f9f;}
+.box-event .name{font-size: 20px; color: #cc2626;}
+.box-event .date{font-size: 13px; color: #a29f9f;}
 .box-event .text{position: relative; line-height: 1.2; margin-top: 5px;}
-.box-event .event{height: 48px; font-size: 40px; color: #271b1b;}
-.box-event .description{height: 68px; font-size: 27px; color: #a29f9f;}
+.box-event .event{height: 48px; font-size: 23px; color: #271b1b;}
+.box-event .description{height: 68px; font-size: 20px; color: #a29f9f;}
 .box-event .bottom{position: absolute; width: 100%; left: 0; bottom: 0; padding: 0 20px 15px; box-sizing: border-box;}
 .box-event .view{position: relative; line-height: 47px; font-size: 22px; color: #a29f9f; padding-left: 50px;}
 .box-event .view:before{position: absolute; left: 0; top: 0; display: block; content: ''; width: 42px; height: 47px; background: url('../images/icon_eye.png') no-repeat left center; opacity: 0.7;}
@@ -107,13 +107,13 @@
 .list-review li .box-point .number{font-size: 66px; color: #666;}
 .list-review li .box-point .description{font-size: 12px; color: #666;}
 
-.fixed-bottom{position: fixed; z-index: 400; left: 0; bottom: -200px; width: 100%; background: #fff; border: 2px solid #eb3d3d; border-bottom: none; box-sizing: border-box; transition: all 0.4s;}
+.fixed-bottom{position: fixed; z-index: 400; left: 0; bottom: -300px; width: 100%; background: #fff; border: 2px solid #eb3d3d; border-bottom: none; box-sizing: border-box; transition: all 0.4s;}
 .fixed-bottom.active{bottom: 0;}
 .fixed-bottom.active .btn-expand{background-image: url('../images/arrow_down.png');}
 .fixed-bottom .btn-expand{position: absolute; left: 50%; margin-left: -87px; top: -26px; display: block; width: 174px; height: 26px; border-radius: 5px 5px 0 0; background: url('../images/arrow_up.png') no-repeat center #ed5050;}
 .fixed-bottom .title{height: 75px; line-height: 75px; padding: 0 20px;}
-.fixed-bottom .title .name{font-size: 33px; color: #e53434;}
-.fixed-bottom .title .event{font-size: 31px; color: #271b1b; margin-left: 25px;}
+.fixed-bottom .title .name{font-size: 25px; color: #e53434;}
+.fixed-bottom .title .event{font-size: 26px; color: #271b1b; margin-left: 25px;}
 .fixed-bottom .title .button{font-size: 35px; color: #be0303; font-style: italic; font-weight: 500;}
 .fixed-bottom .title .button:before{display: inline-block; vertical-align: middle; line-height: 67px; margin-bottom: 8px; content: '-------------------'; font-size: 24px; color: #717171; font-weight: 700; line-height: 75px;}
 .fixed-bottom .title .price{font-size: 35px; color: #be0303; font-style: italic;}
@@ -135,18 +135,18 @@
 .fixed-bottom .content .button .btn-hospital-info{display: block; width: 98px; height: 94px; border: 3px solid #ed5050; box-sizing: border-box; font-size: 30px; color: #ed5050; text-align: center; font-weight: 700; line-height: 1.2; padding-top: 8px; border-radius: 10px;}
 .fixed-bottom .content .button .btn-event-apply{display: block; width: 274px; height: 94px; font-size: 50px; color: #fff; text-align: center; line-height: 94px; border-radius: 10px; background: #ed5050;}
 
-.fixed-bottom.buy{bottom: -126px;}
+.fixed-bottom.buy{bottom: -130px;}
 .fixed-bottom.buy.active{bottom: 0;}
 .fixed-bottom.buy .write{padding-right: 20px; box-sizing: border-box;}
 .fixed-bottom.buy .content{width: 954px; padding: 0; padding-bottom: 30px;}
 .fixed-bottom.buy .content .info{line-height: 1.2; margin-top: 20px;}
-.fixed-bottom.buy .content .name{font-size: 27px; color: #cc2626; font-weight: 700;}
+.fixed-bottom.buy .content .name{font-size: 20px; color: #cc2626; font-weight: 700;}
 .fixed-bottom.buy .content .description{font-size: 19px; color: #a29f9f; font-weight: 400;}
-.fixed-bottom.buy .content .event{font-size: 31px; color: #271b1b;}
+.fixed-bottom.buy .content .event{font-size: 20px; color: #271b1b;}
 .fixed-bottom.buy .content .detail{text-align: right; margin-top: 10px;}
 .fixed-bottom.buy .content .notice{font-size: 16px; color: #ed5050; font-weight: 700;}
 .fixed-bottom.buy .content .before{font-size: 19px; color: #ccc; text-decoration: line-through;}
-.fixed-bottom.buy .content .current{font-size: 35px; color: #be0303; font-style: italic; font-weight: 500; line-height: 0.8;}
+.fixed-bottom.buy .content .current{font-size: 20px; color: #be0303; font-style: italic; font-weight: 500; line-height: 0.8;}
 .fixed-bottom.buy .content .button{margin-top: 0;}
 .fixed-bottom.buy .content .button .cf{margin-top: 0;}
 
@@ -155,9 +155,9 @@
 .fixed-bottom-mobile .title .fl{margin-top: 6px;}
 .fixed-bottom-mobile .title .fr{margin-top: 8px; text-align: right; line-height: 1; text-align: right;}
 .fixed-bottom-mobile .name{font-size: 12px; color: #cc2626;}
-.fixed-bottom-mobile .event{font-size: 13px; color: #271b1b;}
+.fixed-bottom-mobile .event{font-size: 12px; color: #271b1b;}
 .fixed-bottom-mobile .before{font-size: 12px; color: #ccc; text-decoration: line-through;}
-.fixed-bottom-mobile .current{font-size: 17px; color: #be0303; font-style: italic;}
+.fixed-bottom-mobile .current{font-size: 12px; color: #be0303; font-style: italic;}
 .fixed-bottom-mobile .btn-hospital-info{display: block; width: 46px; height: 50px; background: url('../images/btn_hospital.png') no-repeat center #df3e3e; background-size: 29px;}
 .fixed-bottom-mobile .btn-apply{display: block; width: 64px; height: 50px; border-left: 1px solid #d68888; background: #df3e3e; line-height: 50px; text-align: center; font-size: 20px; color: #f6f6f6;}
 

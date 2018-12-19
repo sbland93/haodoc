@@ -248,12 +248,12 @@
 				<div class="event cs">\{{coupon.couponName}}</div>
 			</div>
 			<div class="fr">
-				<!--div class="before">720000</div-->
-				<div class="current">₩\{{coupon.price}}</div>
+				{{!-- <div class="before">720000</div>
+				<div class="current">₩\{{coupon.price}}</div> --}}
 			</div>
 		</div>
 		<div class="button fr cf">
-			<!--a href="javascript:;" class="btn-hospital-info fl"></a-->
+			<a href="javascript:;" class="fl current">₩\{{coupon.price}}</a>
 			<a :href="'/coupon0/'+coupon.id" class="btn-apply sc fl">支&nbsp;付</a>
 		</div>
 	</div>
