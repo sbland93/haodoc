@@ -33,7 +33,8 @@ var app = new Vue({
 				if(_categoryName !== allString){
 					self.findCategory(_categoryName);
 					resolve();
-				}
+				}else resolve();
+
 			});
 		});
 
@@ -56,6 +57,7 @@ var app = new Vue({
 			self.products = self.coupons.concat(self.events);
 			self.products = util_sort_updated_at(self.products);
 			self.sortedList = self.products;
+			console.log(self.sortedList);
 			self.doSort();
 
 		});
@@ -83,7 +85,6 @@ var app = new Vue({
 			var returnArr =  _arr.filter((el) => {
 				return el.categorys.includes(self.category.categoryName);
 			});
-			console.log(returnArr);
 			return returnArr;
 		},
 

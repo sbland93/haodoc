@@ -31,7 +31,7 @@
 .box-event li{position: relative; background: #fff;}
 .box-event li:nth-child(n+2){border-top: 2px solid #f5f5f5}
 .box-event li a{position: relative; display: block;}
-.box-event li.coupon .detail:before{position: absolute; right: 0; top: 0; content: 'coupon'; display: block; width: 102px; height: 102px; background: url('../images/bg_coupon.png') no-repeat center; font-size: 18px; color: #fff; text-align: right; padding: 15px 2px 0 0; box-sizing: border-box;}
+.box-event li.coupon .detail:before{position: absolute; right: 0; top: 0; content: '超值体验'; display: block; width: 102px; height: 102px; background: url('../images/bg_coupon.png') no-repeat center; font-size: 18px; color: #fff; text-align: right; padding: 15px 2px 0 0; box-sizing: border-box;}
 .box-event .image{width: 340px; height: 256px;}
 .box-event .detail{position: relative; width: calc(100% - 340px); height: 256px; padding: 25px 20px; box-sizing: border-box;}
 .box-event .name{font-size: 20px; color: #cc2626;}
