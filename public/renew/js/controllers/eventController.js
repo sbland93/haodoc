@@ -57,8 +57,10 @@ var app = new Vue({
 			self.products = self.coupons.concat(self.events);
 			self.products = util_sort_updated_at(self.products);
 			self.sortedList = self.products;
-			console.log(self.sortedList);
+			setTimeout(common_make_swiper, 250); //common.js 안에 있는 함수, box에 클릭이벤트를 다시 묶어준다.
 			self.doSort();
+
+
 
 		});
 
@@ -66,6 +68,7 @@ var app = new Vue({
 		
 
 	},
+
 
 	methods: {
 		
@@ -75,6 +78,7 @@ var app = new Vue({
 			self.sortedList = self[self.sortBase];
 			self.sortedList = self.sortCategory(self.sortedList);
 			setTimeout(common_make_box, 250); //common.js 안에 있는 함수, box에 클릭이벤트를 다시 묶어준다.
+
 		},
 
 		//_arr을 받아서, 현재 카테고리를 포함하는 객체만 모아서 배열을 돌려준다.

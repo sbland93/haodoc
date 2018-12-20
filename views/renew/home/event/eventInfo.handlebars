@@ -1,5 +1,5 @@
 
-<div id="event-info-app">
+<div id="event-info-app" v-cloak>
 
 	<div class="container sub exist-bottom">
 
@@ -25,7 +25,9 @@
 									<!--div class="view fl">720</div-->
 									<div class="price fr">
 										<!--div class="before">720000</div-->
-										<div class="current">₩\{{event.price}}</div>
+										<div class="current">
+											<span class="small">(\{{event.price | changeCNY }}) </span> \{{event.price | price}}
+										</div>
 									</div>
 								</div>
 							</div>
@@ -211,12 +213,12 @@
 	<div class="fixed-bottom-mobile cf">
 		<div class="title fl">
 			<div class="fl">
-				<div class="name">[\{{event.hospitalName}}]</div>
+				<div class="name">[\{{event.hospitalName}}]&nbsp; &nbsp;<span class="current"><span class="small">(\{{event.price | changeCNY}}) </span> \{{event.price | price}}</span> </div>
 				<div class="event cs">\{{event.eventName}}</div>
 			</div>
 			<div class="fr">
 				<!--div class="before">720000</div-->
-				<div class="current">₩\{{event.price}}</div>
+				{{!-- <span class="current">₩\{{event.price}}</span> --}}
 			</div>
 		</div>
 		<div class="button fr cf">

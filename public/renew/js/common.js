@@ -1,16 +1,26 @@
-var common_make_box;
+
+//외부 노출 함수.
+var common_make_box, common_make_swiper;
+
+Vue.filter('price',function (price) {
+        
+    if(price > 10000){
+      price = price / 10000;
+      price = price + "万韩元";
+    }
+    return price;
+});
+
+Vue.filter('changeCNY', function(price){
+
+  price = parseInt(price / 163);
+  price = "约" + price + "人民币";
+  return price;
+
+});
 
 $(document).ready(function() {
-  // lnb
-  var swiper = new Swiper('.lnb .swiper-container', {
-    spaceBetween: 0,
-    slidesPerView: 9,
-    direction: 'vertical',
-    loop: false,
-    navigation: {
-      nextEl: '.lnb .swiper-button-next',
-    },
-  });
+  
 
   // lnb 2depth
   $('.lnb .swiper-slide.eye').mouseenter(function(){
@@ -52,7 +62,17 @@ $(document).ready(function() {
     $(this).css({'width':'0','padding-left':'0','padding-right':'0'});
   });
 
-  var common_make_swiper = function(){
+  common_make_swiper = function(){
+    // lnb
+    var swiper = new Swiper('.lnb .swiper-container', {
+      spaceBetween: 0,
+      slidesPerView: 9,
+      direction: 'vertical',
+      loop: false,
+      navigation: {
+        nextEl: '.lnb .swiper-button-next',
+      },
+    });
     // lnb mobile
     var swiper = new Swiper('.lnb-m .swiper-container', {
       spaceBetween: 0,
@@ -85,7 +105,7 @@ $(document).ready(function() {
     });
 
     // box all category
-  var swiper = new Swiper('.box-all .swiper-container', {
+    var swiper = new Swiper('.box-all .swiper-container', {
       loop: false,
       spaceBetween: 20,
       slidesPerView: 'auto',
@@ -93,27 +113,29 @@ $(document).ready(function() {
         nextEl: '.box-all .swiper-button-next',
       },
     });
+    // btn more
+    $('.btn-more').click(function(){
+      if($('.btn-qr').is(':visible')){
+        $('.btn-more').removeClass('active');
+        $('.btn-qr').css('display','none');
+      }else{
+        $('.btn-more').addClass('active');
+        $('.btn-qr').css('display','block');
+      }
+    });
+
   }
   //For Delay Some Time => Swiper가 Vue를 잡기 위함.
-  setTimeout(common_make_swiper, 350);
+  //setTimeout(common_make_swiper, 1000);
 
-  // btn more
-  $('.btn-more').click(function(){
-    if($('.btn-qr').is(':visible')){
-      $('.btn-more').removeClass('active');
-      $('.btn-qr').css('display','none');
-    }else{
-      $('.btn-more').addClass('active');
-      $('.btn-qr').css('display','block');
-    }
-  });
+  
 
   // banner qr
-  $('.btn-qr').hover(function(){
-    $('.btn-qr').addClass('active');
-  },function(){
-    $('.btn-qr').removeClass('active');
-  });
+  // $('.btn-qr').hover(function(){
+  //   $('.btn-qr').addClass('active');
+  // },function(){
+  //   $('.btn-qr').removeClass('active');
+  // });
 
   common_make_box = function(){
     // box fold slide up down

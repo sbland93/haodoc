@@ -34,7 +34,7 @@
 .box-event li.coupon .detail:before{position: absolute; right: 0; top: 0; content: '超值体验'; display: block; width: 102px; height: 102px; background: url('../images/bg_coupon.png') no-repeat center; font-size: 18px; color: #fff; text-align: right; padding: 15px 2px 0 0; box-sizing: border-box;}
 .box-event .image{width: 340px; height: 256px;}
 .box-event .detail{position: relative; width: calc(100% - 340px); height: 256px; padding: 25px 20px; box-sizing: border-box;}
-.box-event .name{font-size: 20px; color: #cc2626;}
+.box-event .name{font-size: 18px; color: #cc2626;}
 .box-event .date{font-size: 13px; color: #a29f9f;}
 .box-event .text{position: relative; line-height: 1.2; margin-top: 5px;}
 .box-event .event{height: 48px; font-size: 23px; color: #271b1b;}
@@ -44,7 +44,8 @@
 .box-event .view:before{position: absolute; left: 0; top: 0; display: block; content: ''; width: 42px; height: 47px; background: url('../images/icon_eye.png') no-repeat left center; opacity: 0.7;}
 .box-event .price{position: relative; text-align: right;}
 .box-event .before{position: absolute; right: 0; bottom: 35px; font-size: 27px; color: #a29f9f; text-decoration: line-through;}
-.box-event .current{font-size: 34px; color: #be0303; font-style: italic;}
+.box-event .current{font-size: 23px; color: #be0303; font-style: italic;}
+.box-event .current .small{font-size: 17px; color: #be0303; font-style: italic;}
 
 /* apply */
 .section-event-detail{padding: 75px 60px 130px; background: #f5f5f5;}
@@ -112,11 +113,11 @@
 .fixed-bottom.active .btn-expand{background-image: url('../images/arrow_down.png');}
 .fixed-bottom .btn-expand{position: absolute; left: 50%; margin-left: -87px; top: -26px; display: block; width: 174px; height: 26px; border-radius: 5px 5px 0 0; background: url('../images/arrow_up.png') no-repeat center #ed5050;}
 .fixed-bottom .title{height: 75px; line-height: 75px; padding: 0 20px;}
-.fixed-bottom .title .name{font-size: 25px; color: #e53434;}
-.fixed-bottom .title .event{font-size: 26px; color: #271b1b; margin-left: 25px;}
+.fixed-bottom .title .name{font-size: 20px; color: #e53434;}
+.fixed-bottom .title .event{font-size: 20px; color: #271b1b; margin-left: 25px;}
 .fixed-bottom .title .button{font-size: 35px; color: #be0303; font-style: italic; font-weight: 500;}
 .fixed-bottom .title .button:before{display: inline-block; vertical-align: middle; line-height: 67px; margin-bottom: 8px; content: '-------------------'; font-size: 24px; color: #717171; font-weight: 700; line-height: 75px;}
-.fixed-bottom .title .price{font-size: 35px; color: #be0303; font-style: italic;}
+.fixed-bottom .title .price{font-size: 20px; color: #be0303; font-style: italic;}
 .fixed-bottom .title .price .before{font-size: 23px; color: #717171; text-decoration: line-through; padding-right: 5px;}
 .fixed-bottom .content{width: 1500px; padding: 0 30px 25px 30px; margin: 0 auto; box-sizing: border-box;}
 .fixed-bottom .content .write{width: calc(100% - 400px);}
@@ -154,17 +155,17 @@
 .fixed-bottom-mobile .title{width: calc(100% - 120px); box-sizing: border-box; padding-left: 10px;}
 .fixed-bottom-mobile .title .fl{margin-top: 6px;}
 .fixed-bottom-mobile .title .fr{margin-top: 8px; text-align: right; line-height: 1; text-align: right;}
-.fixed-bottom-mobile .name{font-size: 12px; color: #cc2626;}
-.fixed-bottom-mobile .event{font-size: 12px; color: #271b1b;}
+.fixed-bottom-mobile .name{font-size: 11px; color: #cc2626;}
+.fixed-bottom-mobile .event{font-size: 11px; color: #271b1b;}
 .fixed-bottom-mobile .before{font-size: 12px; color: #ccc; text-decoration: line-through;}
-.fixed-bottom-mobile .current{font-size: 12px; color: #be0303; font-style: italic;}
+.fixed-bottom-mobile .current{font-size: 10px; color: #be0303; font-style: italic;}
 .fixed-bottom-mobile .btn-hospital-info{display: block; width: 46px; height: 50px; background: url('../images/btn_hospital.png') no-repeat center #df3e3e; background-size: 29px;}
 .fixed-bottom-mobile .btn-apply{display: block; width: 64px; height: 50px; border-left: 1px solid #d68888; background: #df3e3e; line-height: 50px; text-align: center; font-size: 20px; color: #f6f6f6;}
 
 /* media query */
 @media screen and (max-width: 1199px){
-  .box-fold{margin: 15px 7px 0; width: calc(100% - 14px);}
-  .box-fold.first{margin-top: 15px;}
+  .box-fold{margin: 7px 7px 0; width: calc(100% - 14px);}
+  .box-fold.first{margin-top: 8px;}
   .box-fold .title{font-size: 14px; height: 30px; line-height: 30px; background-size: 15px 7px;}
   .box-fold.all .content{padding: 10px;}
   .box-fold.all .icon{width: 40px; height: 40px; background-size: 30px auto; line-height: 34px;}
@@ -187,15 +188,16 @@
   .box-event li.coupon .detail:before{transform: scale(0.5); right: -25px; top: -27px; opacity: 0.8;}
   .box-event .image{width: 148px; height: 111px;}
   .box-event .detail{width: calc(100% - 148px); height: 111px; padding: 10px;}
-  .box-event .name{font-size: 14px;}
+  .box-event .name{font-size: 13px;}
   .box-event .date{font-size: 10px;}
-  .box-event .event{height: 20px; font-size: 17px;}
+  .box-event .event{height: 20px; font-size: 17px; margin-bottom:3px;}
   .box-event .description{height: 30px; font-size: 13px;}
   .box-event .bottom{padding: 0 10px;}
   .box-event .view{font-size: 12px; line-height: 21px; padding-left: 25px;}
   .box-event .view:before{width: 20px; height: 21px; background-size: 20px 11px;}
   .box-event .before{font-size: 12px; bottom: 15px;}
-  .box-event .current{font-size: 15px;}
+  .box-event .current{font-size: 20px; padding-bottom: 8px;}
+  .box-event .current .small{font-size: 12px;}
 
   .section-event-detail{padding: 0; margin-top: 8px;}
   .section-event-detail > h3.bar{display: none;}

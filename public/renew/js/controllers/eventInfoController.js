@@ -1,6 +1,6 @@
 
 var url =  window.location.pathname;
-var eventID = url.replace("/test/renew/event/", "");
+var eventID = url.replace("/event/", "");
 
 var app = new Vue({
 
@@ -32,6 +32,7 @@ var app = new Vue({
 		errors : [],
 
 	},
+
 	
 	mounted: function(){
 		
@@ -41,10 +42,11 @@ var app = new Vue({
 			self.event = event;
 			//이벤트 이름을 잡고 있도록
 			self.new_participant_obj.eventName = event.eventName;
-		
 		});
 	
 	},
+
+	
 	methods: {
 		
 		//toggling

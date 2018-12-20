@@ -1,6 +1,6 @@
 
 {{!-- 컨테이너영역 --}}
-<div id="main_app" class="container">
+<div id="main_app" class="container" v-cloak>
 	{{!-- 메인섹션 --}}
 	<div class="section-main">
 		<!-- 카테고리 영역 -->
@@ -10,7 +10,7 @@
 					<div class="swiper-wrapper">
 						<span v-for="(category, index) in categorys">
 							<div :class="'swiper-slide '+index">
-								<a :href="'/test/renew/event?category='+category.categoryName">
+								<a :href="'/event?category='+category.categoryName">
 									{{!-- <img :src="'/images/category/all/'+category.iconImage" alt="">\{{category.categoryName}} --}}
 									<img :src="'/images/category/all/'+category.iconImage" alt="">\{{category.categoryName}}
 								</a>
@@ -49,11 +49,11 @@
 			<div class="swiper-wrapper">
 
 				<div v-for="(category, index) in categorys" v-if="categorys[index*2]" class="swiper-slide" >
-					<a :href="'/test/renew/event?category='+categorys[index*2].categoryName">
+					<a :href="'/event?category='+categorys[index*2].categoryName">
 						<div class="icon"><img :src="'/images/category/all/'+categorys[index*2].iconImage" alt=""></div>
 						<div class="text">\{{categorys[index*2].categoryName}}</div>
 					</a>
-					<a :href="'/test/renew/event?category='+categorys[index*2+1].categoryName" v-if="categorys[index*2 +1]">
+					<a :href="'/event?category='+categorys[index*2+1].categoryName" v-if="categorys[index*2 +1]">
 						<div class="icon"><img :src="'/images/category/all/'+categorys[index*2+1].iconImage" alt=""></div>
 						<div class="text">\{{categorys[index*2+1].categoryName}}</div>
 					</a>
@@ -92,20 +92,22 @@
 			{{!--/피드영역 --}}
 			{{!--이벤트영역 --}}
 			<div class="box-all fr">
+				<h2 class="dn">相关活动 {{!-- 이벤트 모아보기 --}}</h2>
 				<div class="box-fold event active">
-					<div class="title">相关活动{{!-- 이벤트 모아보기 --}}</div>
+			{{!-- <div class="title">相关活动</div>--}}	
 					<div class="content cf">
 						<ul class="box-event">
 							<li v-for="(product, index) in products"
 							:class="product.isCoupon? 'coupon': ''">
-								<a v-if="product.isCoupon" :href="'/test/renew/coupon/'+product.id" class="cf">
+								<a v-if="product.isCoupon" :href="'/coupon/'+product.id" class="cf">
 									<div class="image vertical-middle fl">
 										<img :src="'/images/coupon/all/'+product.thumbnailImage" alt="">
 									</div>
 									<div class="detail fr">
 										<div class="cf">
+											{{!-- <div class="event ellipsis">\{{product.couponName}}</div> --}}
 											<span class="name">\{{product.hospitalName}}</span><br>
-											<span class="date">\{{product.couponRange}}</span>
+											{{!-- <span class="date">\{{product.couponRange}}</span> --}}
 										</div>
 										<div class="text sc">
 											<div class="event ellipsis">\{{product.couponName}}</div>
@@ -114,20 +116,23 @@
 										<div class="bottom cf">
 											<!--div class="view fl">720</div-->
 											<div class="price fr">
-												<!--div class="before">720000</div-->
-												<div class="current">₩\{{product.price}}</div>
+												{{!-- <div class="before">720000</div> --}}
+												<div class="current">
+													<span class="small">(\{{product.price | changeCNY}}) </span> \{{product.price | price}}
+												</div>
+												
 											</div>
 										</div>
 									</div>
 								</a>
-								<a v-if="!product.isCoupon" :href="'/test/renew/event/'+ product.id" class="cf">
+								<a v-if="!product.isCoupon" :href="'/event/'+ product.id" class="cf">
 									<div class="image vertical-middle fl">
 										<img :src="'/images/event/all/' + product.thumbnailImage " alt="">
 									</div>
 									<div class="detail fr">
 										<div class="cf">
 											<span class="name">\{{product.hospitalName}}</span><br>
-											<span class="date">\{{product.eventRange}}</span>
+											{{!-- <span class="date">\{{product.eventRange}}</span> --}}
 										</div>
 										<div class="text sc">
 											<div class="event ellipsis">\{{product.eventName}}</div>
@@ -137,7 +142,9 @@
 											<!--div class="view fl">720</div-->
 											<div class="price fr">
 												<!--div class="before">720000</div-->
-												<div class="current">₩\{{product.price}}</div>
+												<div class="current">
+													<span class="small">(\{{product.price | changeCNY}} )</span> \{{product.price | price}}
+												</div>
 											</div>
 										</div>
 									</div>
@@ -155,10 +162,7 @@
 </div>
 {{!-- /컨테이너영역 --}}
 
-<div class="fixed-right">
-	<a href="javascript:;" class="btn-more"></a>
-	<a href="javascript:;" class="btn-qr sc">咨 询</a>
-</div>
+
 
 
 {{#section 'jquery'}}

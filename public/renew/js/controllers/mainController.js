@@ -12,7 +12,7 @@ var app = new Vue({
 		banners: "",
 		categorys: "",
 	},
-	
+
 	
 	mounted : function(){
 
@@ -42,11 +42,11 @@ var app = new Vue({
 
 
 		util_data_init(this, getBanners, "banners");
-		getCategorys().then(function(rtn){
-			console.log(rtn);
-		})
-		util_data_init(this, getCategorys, "categorys");
 
+		getCategorys().then(function(categorys){
+			self.categorys = categorys;
+			setTimeout(common_make_swiper, 300);
+		});
 	},
 
 	
