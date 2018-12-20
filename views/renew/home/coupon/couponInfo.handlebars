@@ -1,5 +1,5 @@
 
-<div id="coupon-info-app">
+<div id="coupon-info-app" v-cloak>
 	<div class="container sub exist-bottom">
 
 		<div class="section-contents sub">
@@ -24,7 +24,9 @@
 									<!--div class="view fl">720</div-->
 									<div class="price fr">
 										<!--div class="before">720000</div-->
-										<div class="current">₩\{{coupon.price}}</div>
+										<div class="current">
+											<span class="small">(\{{coupon.price | changeCNY}})</span> \{{coupon.price | price}}
+										</div>
 									</div>
 								</div>
 							</div>
@@ -35,7 +37,7 @@
 						<h3 class="bar">详情{{!-- 상세이미지 --}}</h3>
 						<img :src="'/images/coupon/all/'+image" v-for="image in coupon.couponImage" alt="">
 						{{!-- 쿠폰 모델일 경우 --}}
-			            <div v-if="!coupon.isDeposit" style="margin:12px; font-size:18px;">
+			            <div v-if="!coupon.isDeposit" style="margin:5px; font-size:13px;">
 			                [退款指南]<br>
 			                1. 请填写一下您的姓名,手机号码,购买的商品信息(医院名, 接种名),退款理由,银行账号(无存折入账时)发送给wechat. <br>
 			                2. 确认完商品是否使用后会一起进行退款处理. <br>
@@ -44,7 +46,7 @@
 			            </div>
 			            {{!-- /쿠폰 모델일 경우 --}}
 			            {{!-- 예약금일 경우 --}}
-						<div v-if="coupon.isDeposit" style="margin:12px; font-size:18px;">
+						<div v-if="coupon.isDeposit" style="margin:5px; font-size:13px;">
 							[退款指南]<br>
 							1. 请填写一下您的姓名,手机号码,购买的商品信息(医院名, 商品名称),退款理由,银行账号(无存折入账时)发送给wechat.<br>
 							2. 与医院进行最终确认后进行退款处理  <br>
@@ -73,7 +75,7 @@
 					<h3 class="bar">咨询&后记</h3>
 					<div class="box-content">
 						<ul class="tab-menu sc cf">
-							<li><a href="javascript:;" class="active">提问</a></li>
+							<li><a href="javascript:;" class="active">咨询</a></li>
 							<li><a href="javascript:;">后记</a></li>
 						</ul>
 						<div class="tab-cont">
@@ -214,7 +216,7 @@
 			<div class="title cf">
 				<div class="name fl">[ \{{coupon.hospitalName}} ]</div>
 				<div class="event sc fl">\{{coupon.couponName}}</div>
-				<div class="price fr"><!--span class="before">720000</span-->₩\{{coupon.price}}</div>
+				<div class="price fr"><span class="small">(\{{coupon.price | changeCNY}})</span> \{{coupon.price | price}}</div>
 			</div>
 		</div>
 		<div class="content cf">
@@ -227,7 +229,9 @@
 					<div class="detail fr">
 						<!--div class="notice">주의사항 확인 후 결제</div-->
 						<!--div class="before">720000</div-->
-						<div class="current">₩\{{coupon.price}}</div>
+						<div class="current">
+							<span class="small">(\{{coupon.price | changeCNY}})</span> \{{coupon.price | price}}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -244,16 +248,15 @@
 	<div class="fixed-bottom-mobile cf">
 		<div class="title fl">
 			<div class="fl">
-				<div class="name">[\{{coupon.hospitalName}}]</div>
+				<div class="name">[\{{coupon.hospitalName}}]&nbsp; &nbsp;<span class="current"><span class="small">(\{{coupon.price | changeCNY}}) </span> \{{coupon.price | price}}</span></div>
 				<div class="event cs">\{{coupon.couponName}}</div>
 			</div>
 			<div class="fr">
-				{{!-- <div class="before">720000</div>
-				<div class="current">₩\{{coupon.price}}</div> --}}
+				{{!-- <div class="before">720000</div> --}}
+				
 			</div>
 		</div>
 		<div class="button fr cf">
-			<a href="javascript:;" class="fl current">₩\{{coupon.price}}</a>
 			<a :href="'/coupon0/'+coupon.id" class="btn-apply sc fl">支&nbsp;付</a>
 		</div>
 	</div>

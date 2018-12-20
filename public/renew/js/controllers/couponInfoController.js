@@ -1,6 +1,6 @@
 
 var url =  window.location.pathname;
-var couponID = url.replace("/test/renew/coupon/", "");
+var couponID = url.replace("/coupon/", "");
 
 
 var app = new Vue({
@@ -54,7 +54,7 @@ var app = new Vue({
         reviewToggle: false,
 
     },
-    
+
     mounted: function(){
         //마운트 시에, 쿠폰의 정보와, 쿠폰의 리뷰들을 불러온다.
         var self = this;
