@@ -131,11 +131,11 @@
 									</div>
 									<div class="detail fr">
 										<div class="cf">
-											<span class="name">\{{product.hospitalName}}</span><br>
+											<span class="name">\{{product.hospitalName | split_hospital_name }}</span><br>
 											{{!-- <span class="date">\{{product.eventRange}}</span> --}}
 										</div>
 										<div class="text sc">
-											<div class="event ellipsis">\{{product.eventName}}</div>
+											<div class="event ellipsis">\{{product.eventName | split_event_name }}</div>
 											<div class="description ellipsis-multi">\{{product.subway}}</div>
 										</div>
 										<div class="bottom cf">
