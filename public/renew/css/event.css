@@ -108,7 +108,7 @@
 .list-review li .box-point .number{font-size: 66px; color: #666;}
 .list-review li .box-point .description{font-size: 12px; color: #666;}
 
-.fixed-bottom{position: fixed; z-index: 400; left: 0; bottom: -300px; width: 100%; background: #fff; border: 2px solid #eb3d3d; border-bottom: none; box-sizing: border-box; transition: all 0.4s;}
+.fixed-bottom{position: fixed; z-index: 400; left: 0; bottom: -210px; width: 100%; background: #fff; border: 2px solid #eb3d3d; border-bottom: none; box-sizing: border-box; transition: all 0.4s;}
 .fixed-bottom.active{bottom: 0;}
 .fixed-bottom.active .btn-expand{background-image: url('../images/arrow_down.png');}
 .fixed-bottom .btn-expand{position: absolute; left: 50%; margin-left: -87px; top: -26px; display: block; width: 174px; height: 26px; border-radius: 5px 5px 0 0; background: url('../images/arrow_up.png') no-repeat center #ed5050;}

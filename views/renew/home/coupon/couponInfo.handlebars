@@ -25,7 +25,7 @@
 									<div class="price fr">
 										<!--div class="before">720000</div-->
 										<div class="current">
-											<span class="small">(\{{coupon.price | changeCNY}})</span> \{{coupon.price | price}}
+											<span class="small">\{{coupon.price | changeCNY}}</span> \{{coupon.price | price}}
 										</div>
 									</div>
 								</div>
@@ -214,9 +214,9 @@
 		<div class="inner">
 			<a href="javascript:;" class="btn-expand"></a>
 			<div class="title cf">
-				<div class="name fl">[ \{{coupon.hospitalName}} ]</div>
-				<div class="event sc fl">\{{coupon.couponName}}</div>
-				<div class="price fr"><span class="small">(\{{coupon.price | changeCNY}})</span> \{{coupon.price | price}}</div>
+				<div class="name fl">[ \{{coupon.hospitalName | split_hospital_name}} ]</div>
+				<div class="event sc fl">\{{coupon.couponName | split_event_name}}</div>
+				<div class="price fr"><span class="small">\{{coupon.price | changeCNY}}</span> \{{coupon.price | price}}</div>
 			</div>
 		</div>
 		<div class="content cf">
@@ -230,7 +230,7 @@
 						<!--div class="notice">주의사항 확인 후 결제</div-->
 						<!--div class="before">720000</div-->
 						<div class="current">
-							<span class="small">(\{{coupon.price | changeCNY}})</span> \{{coupon.price | price}}
+							<span class="small">\{{coupon.price | changeCNY}}</span> \{{coupon.price | price}}
 						</div>
 					</div>
 				</div>
@@ -248,8 +248,8 @@
 	<div class="fixed-bottom-mobile cf">
 		<div class="title fl">
 			<div class="fl">
-				<div class="name">[\{{coupon.hospitalName}}]&nbsp; &nbsp;<span class="current"><span class="small">(\{{coupon.price | changeCNY}}) </span> \{{coupon.price | price}}</span></div>
-				<div class="event cs">\{{coupon.couponName}}</div>
+				<div class="name">[\{{coupon.hospitalName | split_hospital_name}}]&nbsp; &nbsp;<span class="current"><span class="small">\{{coupon.price | changeCNY}} </span> \{{coupon.price | price}}</span></div>
+				<div class="event cs">\{{coupon.couponName | split_event_name}}</div>
 			</div>
 			<div class="fr">
 				{{!-- <div class="before">720000</div> --}}
