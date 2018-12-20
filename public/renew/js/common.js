@@ -3,7 +3,8 @@
 var common_make_box, common_make_swiper;
 
 Vue.filter('price',function (price) {
-        
+    
+    if(price === 0) return '咨询';
     if(price > 10000){
       price = price / 10000;
       price = price + "万韩元";
@@ -13,9 +14,24 @@ Vue.filter('price',function (price) {
 
 Vue.filter('changeCNY', function(price){
 
+  if(price === 0) return '';
   price = parseInt(price / 163);
-  price = "约" + price + "人民币";
+  price = "(约" + price + "人民币)";
   return price;
+
+});
+
+Vue.filter('split_hospital_name', function(name){
+
+  if(name.indexOf('(') === -1) return name;
+  return name.split('(')[0];
+
+});
+
+Vue.filter('split_event_name', function(name){
+
+  if(name.indexOf(']') === -1) return name;
+  return name.split(']')[1];
 
 });
 

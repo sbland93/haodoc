@@ -26,7 +26,7 @@
 									<div class="price fr">
 										<!--div class="before">720000</div-->
 										<div class="current">
-											<span class="small">(\{{event.price | changeCNY }}) </span> \{{event.price | price}}
+											<span class="small">\{{event.price | changeCNY }} </span> \{{event.price | price}}
 										</div>
 									</div>
 								</div>
@@ -213,8 +213,8 @@
 	<div class="fixed-bottom-mobile cf">
 		<div class="title fl">
 			<div class="fl">
-				<div class="name">[\{{event.hospitalName}}]&nbsp; &nbsp;<span class="current"><span class="small">(\{{event.price | changeCNY}}) </span> \{{event.price | price}}</span> </div>
-				<div class="event cs">\{{event.eventName}}</div>
+				<div class="name">[\{{event.hospitalName | split_hospital_name}}]&nbsp; &nbsp;<span class="current"><span class="small">\{{event.price | changeCNY}} </span> \{{event.price | price}}</span> </div>
+				<div class="event cs">\{{event.eventName | split_event_name}}</div>
 			</div>
 			<div class="fr">
 				<!--div class="before">720000</div-->
