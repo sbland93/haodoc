@@ -122,11 +122,11 @@
 									</div>
 									<div class="detail fr">
 										<div class="cf">
-											<span class="name">\{{product.hospitalName}}</span>
+											<span class="name">\{{product.hospitalName | split_hospital_name }}</span>
 											{{!-- <span class="date">\{{product.couponRange}}</span> --}}
 										</div>
 										<div class="text sc">
-											<div class="event ellipsis">\{{product.couponName}}</div>
+											<div class="event ellipsis">\{{product.couponName | split_event_name }}</div>
 											<div class="description ellipsis-multi">\{{product.subway}}</div>
 										</div>
 										<div class="bottom cf">
@@ -146,11 +146,11 @@
 									</div>
 									<div class="detail fr">
 										<div class="cf">
-											<span class="name">\{{product.hospitalName}}</span>
+											<span class="name">\{{product.hospitalName | split_hospital_name }}</span>
 											{{!-- <span class="date">\{{product.eventRange}}</span> --}}
 										</div>
 										<div class="text sc">
-											<div class="event ellipsis">\{{product.eventName}}</div>
+											<div class="event ellipsis">\{{product.eventName | split_event_name }}</div>
 											<div class="description ellipsis-multi">\{{product.subway}}</div>
 										</div>
 										<div class="bottom cf">
