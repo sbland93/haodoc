@@ -9,8 +9,8 @@
 .box-fold.all .icon{position: relative;; width: 100px; height: 100px; border-radius: 50%; background: no-repeat center #f5f5f5; line-height: 94px; text-align: center;}
 .box-fold.all .icon:after{position: absolute; bottom: 0; right: 0; font-size: 32px; height: 65px;}
 .box-fold.all .icon img{vertical-align: middle;}
-/*.box-fold.all .icon.eye:after{content: '눈';}
-*/.box-fold.all .text{width: calc(100% - 130px);}
+/*.box-fold.all .icon.eye:after{content: '눈';}*/
+.box-fold.all .text{width: calc(100% - 130px);}
 .box-fold.all .text ul{border-bottom: 2px solid #fad1d1; padding-bottom: 3px;}
 .box-fold.all .text li{font-size: 16px;}
 .box-fold.all .description{font-size: 12px; padding-top: 3px;}
@@ -79,9 +79,9 @@
 .section-qna-review td textarea{display: block; width: 100%; height: 130px; border: 2px solid #e5e5e5; box-sizing: border-box; padding: 5px 10px; font-family: 'Noto Sans SC', sans-serif; font-size: 22px; color: #808080;}
 .section-qna-review .btn-write{display: block; width: 116px; height: 36px; background: #7c7c7c; text-align: center; line-height: 36px; font-size: 20px; color: #fff; border-radius: 8px; margin-top: 15px;}
 
-.box-qna{margin-top: 25px;}
-.box-qna h4{text-align: center; font-size: 44px; color: #666; font-weight: 300; letter-spacing: 20px;}
-.list-qna{margin-top: 5px;}
+.box-qna{ margin-top: 25px; }
+.box-qna h4{ text-align: center; font-size: 44px; color: #666; font-weight: 300; letter-spacing: 20px; }
+.list-qna{ margin-top: 5px;}
 .list-qna li:nth-child(n+2){margin-top: 5px;}
 .list-qna li{border: 2px solid #e5e5e5; padding: 20px 28px 40px;}
 .list-qna li .name{font-size: 22px; color: #424242; line-height: 48px;}
@@ -135,21 +135,22 @@
 .fixed-bottom .content .button .cf{margin-top: 10px;}
 .fixed-bottom .content .button .btn-hospital-info{display: block; width: 98px; height: 94px; border: 3px solid #ed5050; box-sizing: border-box; font-size: 30px; color: #ed5050; text-align: center; font-weight: 700; line-height: 1.2; padding-top: 8px; border-radius: 10px;}
 .fixed-bottom .content .button .btn-event-apply{display: block; width: 274px; height: 94px; font-size: 50px; color: #fff; text-align: center; line-height: 94px; border-radius: 10px; background: #ed5050;}
+.fixed-bottom .btn-apply-exposure{width: 100px; height: 25px; font-size: 20px; color: #fff; text-align: center; line-height: 25px; border-radius: 5px; background: #ed5050;}
 
 .fixed-bottom.buy{bottom: -130px;}
 .fixed-bottom.buy.active{bottom: 0;}
 .fixed-bottom.buy .write{padding-right: 20px; box-sizing: border-box;}
-.fixed-bottom.buy .content{width: 954px; padding: 0; padding-bottom: 30px;}
+.fixed-bottom.buy .content{width: 1200px; padding: 0; padding-bottom: 30px;}
 .fixed-bottom.buy .content .info{line-height: 1.2; margin-top: 20px;}
 .fixed-bottom.buy .content .name{font-size: 20px; color: #cc2626; font-weight: 700;}
 .fixed-bottom.buy .content .description{font-size: 19px; color: #a29f9f; font-weight: 400;}
-.fixed-bottom.buy .content .event{font-size: 20px; color: #271b1b;}
-.fixed-bottom.buy .content .detail{text-align: right; margin-top: 10px;}
-.fixed-bottom.buy .content .notice{font-size: 16px; color: #ed5050; font-weight: 700;}
-.fixed-bottom.buy .content .before{font-size: 19px; color: #ccc; text-decoration: line-through;}
-.fixed-bottom.buy .content .current{font-size: 20px; color: #be0303; font-style: italic; font-weight: 500; line-height: 0.8;}
-.fixed-bottom.buy .content .button{margin-top: 0;}
-.fixed-bottom.buy .content .button .cf{margin-top: 0;}
+.fixed-bottom.buy .content .event{ font-size: 20px; color: #271b1b; }
+.fixed-bottom.buy .content .detail{ text-align: right; margin-top: 10px; }
+.fixed-bottom.buy .content .notice{ font-size: 16px; color: #ed5050; font-weight: 700; }
+.fixed-bottom.buy .content .before{ font-size: 19px; color: #ccc; text-decoration: line-through; }
+.fixed-bottom.buy .content .current{ font-size: 20px; color: #be0303; font-style: italic; font-weight: 500; line-height: 0.8; }
+.fixed-bottom.buy .content .button{ margin-top: 0; }
+.fixed-bottom.buy .content .button .cf{ margin-top: 0; }
 
 .fixed-bottom-mobile{display: none; position: fixed; z-index: 400; left: 0; bottom: 0; width: 100%; height: 50px; background: #fff;}
 .fixed-bottom-mobile .title{width: calc(100% - 120px); box-sizing: border-box; padding-left: 10px;}
