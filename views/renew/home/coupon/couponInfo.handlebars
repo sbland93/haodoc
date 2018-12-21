@@ -72,10 +72,10 @@
 				</div>
 
 				<div class="section-qna-review">
-					<h3 class="bar">咨询&后记</h3>
+					<h3 class="bar">搜索医院&后记</h3>
 					<div class="box-content">
 						<ul class="tab-menu sc cf">
-							<li><a href="javascript:;" class="active">咨询</a></li>
+							<li><a href="javascript:;" class="active">搜索医院</a></li>
 							<li><a href="javascript:;">后记</a></li>
 						</ul>
 						<div class="tab-cont">
@@ -102,11 +102,11 @@
 										</tr>
 									</table>
 									<div class="cf">
-										<a class="btn-write sc fr" @click="addQuestion">咨询<!--문의하기--></a>
+										<a class="btn-write sc fr" @click="addQuestion">搜索医院<!--문의하기--></a>
 									</div>
 								</div>
 								<div class="box-qna">
-									<h4 class="sc">咨询<!--문의하기--></h4>
+									<h4 class="sc">搜索医院<!--문의하기--></h4>
 									<ul class="list-qna">
 										<li v-for="(question, index) in coupon.questions">
 											<div class="cf">
@@ -216,7 +216,11 @@
 			<div class="title cf">
 				<div class="name fl">[ \{{coupon.hospitalName | split_hospital_name}} ]</div>
 				<div class="event sc fl">\{{coupon.couponName | split_event_name}}</div>
-				<div class="price fr"><span class="small">\{{coupon.price | changeCNY}}</span> \{{coupon.price | price}}</div>
+				<div class="price fr">
+					<span class="small">\{{coupon.price | changeCNY}}</span> 
+					\{{coupon.price | price}}&nbsp;&nbsp;
+					<a class="btn-apply-exposure" :href="'/coupon0/'+coupon.id">&nbsp;&nbsp;支&nbsp;&nbsp;付&nbsp;&nbsp;</a>
+				</div>
 			</div>
 		</div>
 		<div class="content cf">
