@@ -6,7 +6,7 @@
 .box-fold.active .title{background-color: #d03f3f; color: #fff; background-image: url('../images/arrow_fold_up.png');}
 .box-fold .content{background: #fff; margin-top: 5px;}
 .box-fold.all .content{padding: 20px 35px;}
-.box-fold.all .icon{position: relative;; width: 100px; height: 100px; border-radius: 50%; background: no-repeat center #f5f5f5; line-height: 94px; text-align: center;}
+.box-fold.all .icon{position: relative; width: 100px; height: 100px; border-radius: 50%; /*background: no-repeat center #f5f5f5;*/ line-height: 94px; text-align: center;}
 .box-fold.all .icon:after{position: absolute; bottom: 0; right: 0; font-size: 32px; height: 65px;}
 .box-fold.all .icon img{vertical-align: middle;}
 /*.box-fold.all .icon.eye:after{content: '눈';}*/
