@@ -4,7 +4,7 @@ var common_make_box, common_make_swiper;
 
 Vue.filter('price',function (price) {
     
-    if(price === 0) return '搜索医院';
+    if(price === 0) return '安心咨询';
     if(price > 10000){
       price = price / 10000;
       price = price + "万韩元";
