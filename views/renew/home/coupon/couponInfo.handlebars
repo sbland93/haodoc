@@ -72,16 +72,16 @@
 				</div>
 
 				<div class="section-qna-review">
-					<h3 class="bar">搜索医院&后记</h3>
+					<h3 class="bar">提问&后记</h3>
 					<div class="box-content">
 						<ul class="tab-menu sc cf">
-							<li><a href="javascript:;" class="active">搜索医院</a></li>
+							<li><a href="javascript:;" class="active">提问</a></li>
 							<li><a href="javascript:;">后记</a></li>
 						</ul>
 						<div class="tab-cont">
 							<div class="tab-cont-01">
 								<div class="box-write">
-									<h4 class="sc">\{{coupon.couponName}} Q&A</h4>
+									<h4 class="sc">\{{coupon.couponName}} 提问</h4>
 									<table class="sc">
 										<tr>
 											<th>姓名<!--이름--></th>
@@ -102,11 +102,11 @@
 										</tr>
 									</table>
 									<div class="cf">
-										<a class="btn-write sc fr" @click="addQuestion">搜索医院<!--문의하기--></a>
+										<a class="btn-write sc fr" @click="addQuestion">提问<!--문의하기--></a>
 									</div>
 								</div>
 								<div class="box-qna">
-									<h4 class="sc">搜索医院<!--문의하기--></h4>
+									<h4 class="sc">提问<!--문의하기--></h4>
 									<ul class="list-qna">
 										<li v-for="(question, index) in coupon.questions">
 											<div class="cf">
