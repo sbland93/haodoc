@@ -1,3 +1,6 @@
+{{#section 'head'}}
+	<link rel="stylesheet" type="text/css" href="/renew/css/couponInfo.css">
+{{/section}}
 
 <div id="coupon-info-app" v-cloak>
 	<div class="container sub exist-bottom">
@@ -115,7 +118,12 @@
 											</div>
 											<div class="question sc">Q\{{index}}.&nbsp;&nbsp;\{{question.content}}</div>
 											<div class="cf">
-												<a href="javascript:;" class="btn-modify fr">修&nbsp;&nbsp;改</a>
+												<a @click="removeQuestion(index, question)" class="btn-modify fr">删除{{!-- 삭제 --}}</a>
+
+												<a @click="toggle_update_question(index, question)" class="btn-modify fr">修改{{!-- 수정 --}}</a>
+
+	                        					<a v-show="!question.answer" @click="toggle_add_answer(index)" class="btn-modify fr"><i class="fa fa-reply"></i>回答{{!-- 응답하기 --}}</a>
+
 											</div>
 											<div class="box-answer" v-if="question.answer">
 												<div class="cf">
@@ -209,6 +217,74 @@
 	</div>
 
 
+<!-- 답글추가 Modal -->
+<modal v-if="add_answer_toggle" @close="add_answer_toggle = false" class="modal-form">
+
+	<h3 slot="header">답글달기</h3>
+	<div slot="body">
+		<table>
+	        <tr>
+				<th>姓名</th>
+				<td><input type="text" v-model="updateObj.name" placeholder="응답자이름(HaoDoc)"></td>
+			</tr>
+			<tr>
+				<th>一次性密码<!-- 비밀번호 --></th>
+				<td><input type="text" v-model="updateObj.password" placeholder="修改及删除时使用的一次性密码"><!--글 수정, 삭제에 사용할 일회용 비밀번호--></td>
+			</tr>
+			<tr>
+				<th>응답사항</th>
+				<td colspan="2">
+					<textarea name="" id="" cols="30" rows="10" v-model="updateObj.content" placeholder="응답사항을 적어주세요"><!--진료의 전문성, 친절성, 시설의 청결도 등 사용 후기를 남겨주세요. 여러분의 후기가 다른 분들께 큰 도움이 됩니다.--></textarea>
+				</td>
+			</tr>
+	        <hr>
+		</table>
+	</div>
+	<div slot="footer" align="right">
+		<button class="button" @click="addAnswer"> 작성 완료 </button>
+		<button class="button" @click="add_answer_toggle = false"> 취소 </button>
+	</div>
+
+</modal>
+<!-- /답글추가 Modal -->
+
+<!-- 질문수정 Modal -->
+<modal v-if="question_update_toggle" @close="question_update_toggle = false" class="modal-form">
+
+	<h3 slot="header">提问修改{{!-- 문의수정 --}}</h3>
+	<div slot="body">
+		<table>
+	        <tr>
+				<th>姓名<!--이름--></th>
+				<td><input type="text" class="form-control" v-model="updateObj.name" placeholder="可以不用填写真实姓名"><!--실명을 적지 않으셔도 괜찮습니다.--></td>
+			</tr>
+			<tr>
+				<th>一次性密码<!-- 비밀번호 --></th>
+				<td><input type="text" v-model="updateObj.password" placeholder="修改及删除时使用的一次性密码"><!--글 수정, 삭제에 사용할 일회용 비밀번호--></td>
+			</tr>
+			<tr>
+				<th>微信账号<!--위챗아이디--></th>
+				<td colspan="2">
+					<input type="text" class="form-control" v-model="updateObj.wechatID" placeholder="提问后若想得到我们的答复请填写，不公开"><!--답이 달릴시에 연락받고싶다면 적어주세요. 공개되지 않습니다. -->
+				</td>
+			</tr>
+			<tr>
+				<th>咨询事项<!--문의사항--></th>
+				<td colspan="2">
+					<textarea rows="5" class="form-control" v-model="updateObj.content" placeholder="请将想提问的问题进行填写，我们HaoDoc确认后会尽快回复您"><!--궁금하신 점을 적어주세요 하오닥이 확인 즉시 답해드립니다.--></textarea>
+				</td>
+			</tr>
+	        <hr>
+		</table>
+	</div>
+	<div slot="footer" align="right">
+		<button class="button" @click="updateQuestion"> 작성 완료 </button>
+		<button class="button" @click="question_update_toggle = false"> 취소 </button>
+	</div>
+
+</modal>
+<!-- /답글추가 Modal -->
+
 
 	<div class="fixed-bottom buy">
 		<div class="inner">
@@ -264,6 +340,14 @@
 			<a :href="'/coupon0/'+coupon.id" class="btn-apply sc fl">支&nbsp;付</a>
 		</div>
 	</div>
+
+
+
+
+	<br><br>
+
+
+
 
 </div>
 

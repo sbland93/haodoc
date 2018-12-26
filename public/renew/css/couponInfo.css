@@ -1,0 +1,94 @@
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  width: 1000px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-header h3 {
+  margin-top: 0;
+  color: #808080;
+}
+
+.modal-body {
+  margin: 20px 0;
+}
+
+.modal-default-button {
+  float: right;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.modal-form h3{font-size: 35px; color: #ed5050; font-weight: 500;}
+.modal-form table{width: 100%;}
+.modal-form th{width: 20%; font-size: 22px; color: #808080; text-align: left; font-weight: 400;}
+.modal-form td{padding: 5px 0;}
+.modal-form td textarea{height: 80px; border: 2px solid #e5e5e5; width:80%; font-size: 19px;}
+.modal-form td input[type=text]{display: block; width: 80%; height: 32px; border: 2px solid #e5e5e5; box-sizing: border-box; font-family: 'Noto Sans SC', sans-serif; border-radius: 0 0 8px 0; padding: 0 5px; font-size: 19px;}
+.modal-form td input[type=text].sm{width: 150px;}
+/*.modal-form .button{width: 200px; box-sizing: border-box; padding-left: 10px; margin-top: 10px;}*/
+.modal-form .button{ display: block; width: 116px; height: 36px; background: #7c7c7c; text-align: center; line-height: 36px; font-size: 20px; color: #fff; border-radius: 8px; margin-top: 15px; }
+
+/* media query */
+@media screen and (max-width: 1199px){
+
+  .modal-container {
+    width: 100%;
+  }
+  .modal-form .button{
+    width: 50px; height: 20px; line-height: 20px; font-size: 12px; border-radius: 5px; margin-top: 10px; margin-right:15%;
+  }
+  .modal-form table{
+    float: none; width: 100%;
+  }
+  .modal-form th{
+    width: 20%; font-size: 13px;
+  }
+  .modal-form td{padding: 5px 0;}
+  .modal-form td input[type=text]{width: 80%; height: 30px; font-size: 12px;}
+  .modal-form h3{font-size: 19px; margin-bottom: 5px;}
+
+}

@@ -36,17 +36,19 @@ var app = new Vue({
         updateIndex : -1,
         updateObj : {},
 
+        update_participant_toggle : false,
+        update_payer_toggle : false,
         update_event_toggle : false,
         update_coupon_toggle : false,
         update_category_toggle : false,
         update_banner_toggle : false,
 
         toggles : {
-            payerToggle : false,
+            payerToggle : true,
             participantToggle : false,
             couponToggle : false,
             eventToggle : false,
-            categoryToggle : true,
+            categoryToggle : false,
             bannerToggle : false,
         },
 
@@ -325,7 +327,6 @@ var app = new Vue({
         changeThing : function(whichFunc, dataString, toggleString){
             var self = this;
             whichFunc(self.updateObj.id, self.updateObj).then(function(rtn){
-                
                 if(rtn.success){
                     alert("수정 완료!");
                     //Reload하지 않도록 setting 시킴.
@@ -338,6 +339,16 @@ var app = new Vue({
                 }
 
             });
+        },
+
+        changeParticipant: function(){
+            var self = this;
+            self.changeThing(updateParticipant, "participants", "update_participant_toggle");
+        },
+
+        changePayer: function(){
+            var self = this;
+            self.changeThing(updatePayer, "payers", "update_payer_toggle");
         },
 
         changeCategory: function(){

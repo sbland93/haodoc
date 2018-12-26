@@ -22,16 +22,16 @@ Vue.filter('changeCNY', function(price){
 });
 
 Vue.filter('split_hospital_name', function(name){
-
+  if(!name) return;
   if(name.indexOf('(') === -1) return name;
   return name.split('(')[0];
 
 });
 
 Vue.filter('split_event_name', function(name){
-
-  if(name.indexOf(']') === -1) return name;
-  return name.split(']')[1];
+  if(!name) return;
+  if(name.indexOf('[') === -1 || name.indexOf(']') === -1) return name;
+  return name.split('[')[1].split(']')[0];
 
 });
 
@@ -66,7 +66,6 @@ $(document).ready(function() {
   $('.lnb .swiper-slide.teeth').mouseenter(function(){
     $('.box-lnb-2depth.teeth').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
   });
-
 
   $('.lnb .swiper-slide').mouseleave(function(){
     $('.box-lnb-2depth').css({'width':'0','padding-left':'0','padding-right':'0'});

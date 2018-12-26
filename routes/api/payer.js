@@ -20,6 +20,6 @@ module.exports = function(app){
 	app.delete('/api/payer/:id', payerHandlers.deletePayer);
 
 	//id에 해당하는 user를 요청본문을 토대로 업데이트한다.
-	app.put('/api/payer', payerHandlers.updatePayer);
+	app.put('/api/payer/:id', payerHandlers.updatePayer);
 
 }

@@ -54,6 +54,7 @@
                                 <th>휴대폰</th>
                                 <th>메모</th>
                                 <th>신청시간</th>
+                                <th>비고사항</th>
                                 <th>기능</th>
                             </tr>
                         </thead>
@@ -67,10 +68,19 @@
                                 <td><span v-if="participant.phone">\{{participant.phone}}</span></td>
                                 <td>\{{participant.memo}}</td>
                                 <td>\{{participant.updated_at | moment}}</td>
-                                <td><button @click="removeParticipant(participant.id)" class="btn btn-primary">\{{participant.participantName}}삭제</button></td>
+                                <td>\{{participant.remarks}}</td>
+                                <td>
+                                    <button class="btn btn-primary" @click="toggleChange(participant, 'update_participant_toggle', index)">수정</button>
+                                    <button @click="removeParticipant(participant.id)" class="btn btn-primary">삭제</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="form" role="form" v-if="update_participant_toggle">
+                    비고사항 : <input type="text" class="form-control" v-model="updateObj.remarks">
+                    <button class="btn btn-primary" @click="changeParticipant">수정완료</button>
+                    <button class="btn btn-primary" @click="toggleChange(updateObj, 'update_participant_toggle', -1)">취소</button>
                 </div>
             </div>
 
@@ -92,6 +102,7 @@
                                 <th>휴대폰</th>
                                 <th>할인쿠폰번호</th>
                                 <th>신청일시</th>
+                                <th>비고사항</th>
                                 <th>기능</th>
                             </tr>
                         </thead>
@@ -108,10 +119,19 @@
                                 <td>\{{payer.phone}}</td>
                                 <td>\{{payer.couponNumber}}</td>
                                 <td>\{{payer.updated_at | moment}}</td>
-                                <td><button @click="removePayer(payer.id)" class="btn btn-primary">\{{payer.chineseName}}삭제</button></td>
+                                <td>\{{payer.remarks}}</td>
+                                <td>
+                                    <button class="btn btn-primary" @click="toggleChange(payer, 'update_payer_toggle', index)">수정</button>
+                                    <button @click="removePayer(payer.id)" class="btn btn-primary">삭제</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="form" role="form" v-if="update_payer_toggle">
+                    비고사항 : <input type="text" class="form-control" v-model="updateObj.remarks">
+                    <button class="btn btn-primary" @click="changePayer">수정완료</button>
+                    <button class="btn btn-primary" @click="toggleChange(updateObj, 'update_payer_toggle', -1)">취소</button>
                 </div>
             </div>
 

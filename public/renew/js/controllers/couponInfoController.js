@@ -10,44 +10,20 @@ var app = new Vue({
     data : {
 
         //쿠폰과 쿠폰리뷰들
+        couponID : couponID,
         coupon : '',
         couponReviews: '',
-        
-        newQuestion : {
-            name: "",
-            content: "",
-            wechatID: "",
-            password: "",
-        },
-        
-        changeQuestion:{
-            name : "",
-            content: "",
-            wechatID: "",
-            password: "",
-        },
-        
-        newAnswer : {
-            name: "",
-            password : "",
-            content: "",
-        },
-        
-        newReview: {
 
-            name : "",
-            coupon: "",
-            content: "",
-            score: "",
-            wechatID: "",
-            password: "",
-        
-        },
+        add_answer_toggle: false,
+        question_update_toggle: false,
+
+        newQuestion : {},
+        newReview: {},
+        updateObj : {},
+
 
         //질문에 대한 응답이나, 질문 업데이트시 잡고있는 flag 변수
-        answerIndex : -1,
-        questionIndex : -1,
-        couponID : couponID,
+        updateIndex : -1,
 
         // 질문하기, 리뷰남기기 클릭시에 questionToggle로 질문시트가 내려옴
         questionToggle: false,
@@ -116,109 +92,99 @@ var app = new Vue({
 
         },
 
-        // question을 update하는 modal이 생성되었을 시에 변경후에 업데이트 버튼을 누르면,
+
+        removeQuestion : function(index, question){
+            
+            var self = this;
+            var pass=prompt("Password");
+            if(pass !== question.password) return;
+
+            self.coupon.questions.splice(index, 1); //배열에서 해당 index의 question삭제 후
+            updateCoupon(self.couponID, self.coupon).then(function(rtn){
+                if(rtn.success){
+                    alert("删除");
+                }else{
+                    alert("出错了，请刷新");
+                }
+            });
+
+
+        },
+
+        //answer-modald에서 답글완성 클릭시, 
+        toggle_add_answer : function(index){
+
+            var self = this;
+            var pass = prompt("Password");
+            if(pass !== "inspire") return;
+            self.updateIndex = index;
+            self.add_answer_toggle = true;
+        },
+
+        //answer-modald에서 답글완성 클릭시, 
+        toggle_update_question : function(index, oldObj){
+
+            var self = this;
+            var pass = prompt("Password");
+            if(pass !== "inspire" && pass !== oldObj.password) return;
+            self.updateIndex = index;
+            self.question_update_toggle = true;
+            self.updateObj = oldObj;
+
+        },
+
+        addAnswer: function(){
+            var self = this;
+            //이름 두글자 이상, 비밀번호 세글자 이상, 응답 다섯글자 이상
+            if(self.updateObj.name.length > 1 && self.updateObj.password.length > 2 && self.updateObj.content.length > 4 ){
+                //index에 해당하는 질문이 있는지 파악 후에, 해당 index의 질문에 대답을 추가한다.
+                if(self.coupon.questions && self.coupon.questions[self.updateIndex]){
+                    self.coupon.questions[self.updateIndex]["answer"] = self.updateObj;
+                    updateCoupon(self.couponID, self.coupon).then(function(rtn){
+                        //답글 작성 완료시, 모달을 끄고(클릭으로), 새롭게 랜더링해준다.
+                        if(rtn.success){
+                            self.updateIndex = -1;
+                            self.updateObj =  {};
+                            self.add_answer_toggle = false;
+                            Vue.set(self.coupon.questions, self.updateIndex, self.coupon.questions[self.updateIndex]);
+                            alert("답글 작성 완료.");
+                        }else{
+                            alert("에러가 있는거 같네요. 새로고침후 다시 시도해주세요.");
+                        }
+                    });
+                }else{
+                    alert("出错了，请刷新"); //에러입니다. 새로고침을 하고 다시한번 시도해봐주세요.
+                }
+            }else{
+                alert("이름은 두글자 이상, 비밀번호는 세글자 이상, 질문은 다섯자 이상으로 해주세요!");
+            }
+
+        },
+
+
+        // 해당 questions[index]에 update된 Obj를 넣은후에 통채로 보내 업데이트 시킨다.
         updateQuestion: function(){
             
             var self = this;
+            self.coupon.questions[self.updateIndex] = self.updateObj;
+            
+            updateCoupon(self.couponID, self.coupon).then(function(rtn){
+                
+                if(rtn.success){
 
-            if(self.questionIndex !== -1){
-
-                self.coupon.questions[self.questionIndex] = self.changeQuestion;
-                updateCoupon(self.couponID, self.coupon).then(function(rtn){
-                    $("#updateModal").modal("hide");
-                });
-
-            }
-        
-        },
-        //answer-modald에서 답글완성 클릭시, 
-        addAnswer : function(){
-            var self = this;
-
-            //제대로 answerIndex가 변경되어서, 타겟 질문을 잡고있는지 확인 후
-            if(self.answerIndex !== -1){
-                //이름 두글자 이상, 비밀번호 세글자 이상, 응답 다섯글자 이상
-                if(self.newAnswer.name.length > 1 && self.newAnswer.password.length > 2 && self.newAnswer.content.length > 4 ){
-                    //index에 해당하는 질문이 있는지 파악 후에, 해당 index의 질문에 대답을 추가한다.
-                    if(self.coupon.questions && self.coupon.questions[self.answerIndex]){
-                        self.coupon.questions[self.answerIndex]["answer"] = self.newAnswer;
-                        updateCoupon(self.couponID, self.coupon).then(function(rtn){
-                            //답글 작성 완료시, 모달을 끄고(클릭으로), 새롭게 랜더링해준다.
-                            self.answerIndex = -1;
-                            self.newAnswer =  {
-                                name: "",
-                                password : "",
-                                content: "",
-                            },
-                            alert("답글 작성 완료.");
-                            $('#dismissAnswerModal').click();
-                            getCoupon(self.couponID).then(function(coupon){
-                                self.coupon = coupon;
-                            });
-                        });
-                    }
-                    
+                    self.updateIndex = -1;
+                    self.updateObj =  {};
+                    self.question_update_toggle = false;
+                    Vue.set(self.coupon.questions, self.updateIndex, self.updateObj);
+                    alert("问题已经成功提交") // 질문이 등록되었습니다.
                 }else{
-                    alert("이름은 두글자 이상, 비밀번호는 세글자 이상, 질문은 다섯자 이상으로 해주세요!");
+                    alert("出错了，请刷新"); //에러입니다. 새로고침을 하고 다시한번 시도해봐주세요.
                 }
-            }
+            
+            });
 
-        },
-
-        toggleQuestion : function(){
-
-            var self = this;
-
-            self.reviewToggle = false;
-            self.questionToggle = !self.questionToggle;
         
         },
-
-        toggleReview : function(){
-           
-            var self = this;
-
-            self.questionToggle = false;
-            self.reviewToggle = !self.reviewToggle;
-
-        },
-
-        changeAnswerIndex : function(index){
-            var self = this;
-            self.answerIndex = index;
-            var pass=prompt("Password");
-            if(pass !== "inspire") return;
-            $("#answerModal").modal("show");
-            return;
-        },
-
-        // question Update를 하고 싶으면, index를 받아서 해당하는 question 값을 넣고, modal을 띄워준다.
-        questionUpdate : function(index){
-            var self = this;
-            self.questionIndex = index;
-            var thisQuestion = self.coupon.questions[index];
-            var pass=prompt("Password");
-            if(pass !== thisQuestion.password) return;
-
-            //비밀번호를 맞추면, update-question-modal에 v-model로 잡고있는 changeQuestion에 값을 넣고 
-            self.changeQuestion = thisQuestion;
-            $("#updateModal").modal("show");
-            return;
-        },
-
-        //review를 업데이트 하고 싶으면, index에 해당하는 review 값을 띄워지는 modal창에서 사용하고 있는
-        //changeReview값에 넣고, modal을 띄워준다.
-        /*reviewUpdate: function(index){
-            var self = this;
-            self.reviewIndex = index;
-            var thisReview = self.couponReviews[index];
-            var pass = prompt("Password");
-            if(pass !== thisReview.password) return;
-
-            self.changeReview = thisReview;
-            $("updateReview").modal()
-
-        }*/
 
         //coupon review 작성하기 클릭시, 
         newCouponReview : function(){
