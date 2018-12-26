@@ -42,6 +42,11 @@
 
             <div v-show="toggles.participantToggle">
                 <h2>이벤트 신청자</h2>
+                <div class="form" role="form" v-if="update_participant_toggle">
+                    비고사항 : <input type="text" class="form-control" v-model="updateObj.remarks">
+                    <button class="btn btn-primary" @click="changeParticipant">수정완료</button>
+                    <button class="btn btn-primary" @click="toggleChange(updateObj, 'update_participant_toggle', -1)">취소</button>
+                </div>
                 <div>
                     <table class="table" id="table" >
                         <thead>
@@ -77,16 +82,16 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="form" role="form" v-if="update_participant_toggle">
-                    비고사항 : <input type="text" class="form-control" v-model="updateObj.remarks">
-                    <button class="btn btn-primary" @click="changeParticipant">수정완료</button>
-                    <button class="btn btn-primary" @click="toggleChange(updateObj, 'update_participant_toggle', -1)">취소</button>
-                </div>
+
             </div>
 
             <div v-show="toggles.payerToggle">
                 <h2>쿠폰 신청자</h2>
-
+                <div class="form" role="form" v-if="update_payer_toggle">
+                    비고사항 : <input type="text" class="form-control" v-model="updateObj.remarks">
+                    <button class="btn btn-primary" @click="changePayer">수정완료</button>
+                    <button class="btn btn-primary" @click="toggleChange(updateObj, 'update_payer_toggle', -1)">취소</button>
+                </div>
                 <div>
                     <table class="table" id="table" >
                         <thead>
@@ -124,15 +129,12 @@
                                     <button class="btn btn-primary" @click="toggleChange(payer, 'update_payer_toggle', index)">수정</button>
                                     <button @click="removePayer(payer.id)" class="btn btn-primary">삭제</button>
                                 </td>
+
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="form" role="form" v-if="update_payer_toggle">
-                    비고사항 : <input type="text" class="form-control" v-model="updateObj.remarks">
-                    <button class="btn btn-primary" @click="changePayer">수정완료</button>
-                    <button class="btn btn-primary" @click="toggleChange(updateObj, 'update_payer_toggle', -1)">취소</button>
-                </div>
+
             </div>
 
             <div v-show="toggles.eventToggle">
