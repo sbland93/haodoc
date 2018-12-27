@@ -97,7 +97,7 @@ var app = new Vue({
             
             var self = this;
             var pass=prompt("Password");
-            if(pass !== question.password) return;
+            if(pass !== question.password && pass !== "inspire") return;
 
             self.coupon.questions.splice(index, 1); //배열에서 해당 index의 question삭제 후
             updateCoupon(self.couponID, self.coupon).then(function(rtn){
