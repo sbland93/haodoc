@@ -7,7 +7,7 @@ jQuery(window).load(function() {
     
     var swiper = new Swiper('.slide-feed .swiper-container', {
       slidesPerView: 1.12,
-      spaceBetween: 20,
+      spaceBetween: 10,
       centeredSlides: true,
       navigation: {
         nextEl: '.slide-feed .swiper-button-next',

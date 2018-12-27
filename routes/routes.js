@@ -23,7 +23,6 @@ module.exports = function(app){
 	app.get('/', function(req, res, next){
 		res.render('renew/home/main/main', { layout: "renew/layout.handlebars" });
 	});
-	// app.get('/', homeHandlers.home);
 
 	//home Handlers
 	app.get('/about', homeHandlers.about);
@@ -31,15 +30,19 @@ module.exports = function(app){
 	app.get('/team', homeHandlers.team);
 	app.get('/rules', homeHandlers.rules);
 	app.get('/personal', homeHandlers.personal);
+
 	app.get('/feed', function(req, res, next){
 		res.render('renew/home/feed/feed', { layout: "renew/layout.handlebars" });
 	});
+
 	app.get('/event', function(req, res, next){
 		res.render('renew/home/event/event', { layout: "renew/layout.handlebars" });
 	});
+
 	app.get('/event/:id', checkID, function(req, res, next){
 		res.render('renew/home/event/eventInfo', { layout: "renew/layout.handlebars" });
 	});
+
 	app.get('/coupon/:id', checkID, function(req, res, next){
 		res.render('renew/home/coupon/couponInfo', { layout: "renew/layout.handlebars" });
 	});
@@ -117,6 +120,7 @@ module.exports = function(app){
 	require('./api/accompany.js')(app);
 	require('./api/feed.js')(app);
 	require('./api/file.js')(app);
+	require('./api/highCategory.js')(app);
 	require('./api/category.js')(app);
 	require('./api/banner.js')(app);
 
