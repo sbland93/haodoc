@@ -10,6 +10,7 @@ module.exports = function(event){
 		id: event._id,
 		isCoupon: false,
 		eventName: event.eventName,
+		originalPrice : event.originalPrice,
 		price : event.price,
 		categorys : event.categorys,
 		eventRange: event.eventRange,

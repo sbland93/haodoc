@@ -1,0 +1,71 @@
+.section-main.feed{height: 320px;}
+.slide-feed{background: #f5f5f5;}
+.slide-feed .swiper-slide a{height: 320px; overflow: hidden;}
+.slide-feed .swiper-slide a .mobile{display: none;}
+.slide-feed .swiper-slide a img{border-radius: 50px;}
+.slide-feed .swiper-button-prev{left: 50%; margin-left: -400px; margin-top: -19px; width: 38px; height: 38px; background: url('../images/arrow_slide_prev.png') no-repeat center; background-size: 38px 38px;}
+.slide-feed .swiper-button-next{right: 50%; margin-right: -400px; margin-top: -19px; width: 38px; height: 38px; background: url('../images/arrow_slide_next.png') no-repeat center; background-size: 38px 38px;}
+.slide-feed .swiper-pagination-bullet{display: none; width: 65px; height: 10px; border-radius: 5px; background: #9a0000; opacity: 1;}
+.slide-feed .swiper-pagination-bullet-active{background: #fff;}
+.slide-feed .swiper-pagination-bullets{bottom: 15px;}
+
+.box-sub-content.feed{padding-left: 30px; padding-right: 30px;}
+.box-sub-content.feed .box-all{margin: 0 30px; width: calc(100% - 60px);}
+
+.list-feed{margin-top: 40px;}
+.list-feed > li{float: left; width: calc(33.3% - 12px); margin-right: 18px; background: #fff; transition: all 0.4s;}
+.list-feed > li:nth-child(3n){margin-right: 0;}
+.list-feed > li:nth-child(n+4){margin-top: 35px;}
+.list-feed > li:hover{box-shadow: 0 0 20px rgba(0,0,0,0.2);}
+.list-feed li a{display: block;}
+.list-feed li .thubmail{height: 178px;}
+.list-feed li .thubmail .mobile{display: none;}
+.list-feed li .text{padding: 15px;}
+.list-feed li .title{height: 33px; font-size: 24px; color: #717171; font-weight: 700;}
+.list-feed li .description{height: 32px; font-size: 16px; color: #8d8d8d; line-height: 1; margin-top: 5px;}
+.list-feed li .list-tag{margin-top: 30px;}
+.list-feed li .list-tag li{font-size: 14px;}
+.list-feed li .bottom{margin-top: 5px;}
+.list-feed li .user{width: calc(100% - 80px);}
+.list-feed li .icon{width: 32px; height: 32px; border-radius: 50%;}
+.list-feed li .info{font-size: 12px; color: #8d8d8d; margin: 4px 0 0 5px; line-height: 1;}
+.list-feed li .heart{width: 80px; margin-top: 8px; text-align: right;}
+.list-feed li .heart input[type=checkbox]{display: none;}
+
+.label-heart{background: url('../images/label_heart.png') no-repeat left center; padding-left: 25px; font-size: 16px; color: #b8b8b8;}
+.label-heart.active{background-image: url('../images/label_heart_on.png');}
+
+/* media query */
+@media screen and (max-width: 1199px){
+  .section-search .inner{padding: 10px;}
+  .section-search .box{height: 34px; border-radius: 17px;}
+  .section-search h2{width: 60px; font-size: 15px; line-height: 24px; margin: 5px 0;}
+  .section-search input[type=text]{width: calc(100% - 60px); height: 34px; font-size: 15px;}
+  .section-main.feed{height: 145px;}
+  .slide-feed .swiper-slide a{height: 145px;}
+  .slide-feed .swiper-slide a img{border-radius: 30px;}
+
+  .box-sub-content.feed .box-all{margin: 0; width: 100%;}
+  .box-sub-content.feed{padding: 15px 0 60px;}
+  .list-feed{margin: 0; padding: 14px 14px 0;}
+  .list-feed > li{width: calc(50% - 7px); margin: 0;}
+  .list-feed > li:nth-child(2n){margin-left: 14px;}
+  .list-feed > li:nth-child(n+3){margin-top: 14px;}
+  .list-feed li .thubmail{height: 100px;}
+  .list-feed li .thubmail .pc{display: none;}
+  .list-feed li .thubmail .mobile{display: block;}
+  .list-feed li .text{padding: 5px;}
+  .list-feed li .title{height: 18px; font-size: 13px;}
+  .list-feed li .description{height: 24px; font-size: 12px;}
+  .list-feed li .list-tag{margin-top: 10px;}
+  .list-feed li .list-tag li{font-size: 11px;}
+  .list-feed li .list-tag li:nth-child(n+3){display: none;}
+  .list-feed li .icon{width: 20px; height: 20px;}
+  .list-feed li .info{font-size: 10px;}
+  .list-feed li .user{width: calc(100% - 50px);}
+  .list-feed li .heart{width: 50px;}
+  .label-heart{font-size: 10px; background-size: 15px auto; padding-left: 18px;}
+
+  .slide-feed .swiper-pagination-bullet{display: inline-block; width: 24px; height: 4px; border-radius: 2px; margin: 0 2px !important;}
+  .slide-feed .swiper-pagination-bullets{bottom: 5px;}
+}

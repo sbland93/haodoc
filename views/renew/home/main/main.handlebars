@@ -116,7 +116,7 @@
 										<div class="bottom cf">
 											<!--div class="view fl">720</div-->
 											<div class="price fr">
-												{{!-- <div class="before">720000</div> --}}
+												<div class="before" v-if="product.originalPrice > 0">\{{product.originalPrice | price}}</div>
 												<div class="current">
 													<span class="small">\{{product.price | changeCNY}} </span> \{{product.price | price}}
 												</div>
@@ -141,7 +141,7 @@
 										<div class="bottom cf">
 											<!--div class="view fl">720</div-->
 											<div class="price fr">
-												<!--div class="before">720000</div-->
+												<div class="before" v-if="product.originalPrice > 0">\{{product.originalPrice | price}}</div>
 												<div class="current">
 													<span class="small">\{{product.price | changeCNY}} </span> \{{product.price | price}}
 												</div>
@@ -170,6 +170,5 @@
 	<script src="/js/api/coupon.js"></script>
 	<script src="/js/api/banner.js"></script>
 	<script src="/js/api/category.js"></script>
-	<script src="/js/util/util.js"></script>
 	<script src="/renew/js/controllers/mainController.js"></script>
 {{/section}}

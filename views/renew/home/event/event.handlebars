@@ -132,7 +132,7 @@
 										<div class="bottom cf">
 											<!--div class="view fl">720</div-->
 											<div class="price fr">
-												<!--div class="before">720000</div-->
+												<div class="before" v-if="product.originalPrice > 0">\{{product.originalPrice | price}}</div>
 												<div class="current">
 													<span class="small">\{{product.price | changeCNY}} </span> \{{product.price | price}}
 												</div>
@@ -156,7 +156,7 @@
 										<div class="bottom cf">
 											<!--div class="view fl">720</div-->
 											<div class="price fr">
-												<!--div class="before">720000</div-->
+												<div class="before" v-if="product.originalPrice > 0">\{{product.originalPrice | price}}</div>
 												<div class="current">
 													<span class="small">\{{product.price | changeCNY}} </span> \{{product.price | price}}
 												</div>

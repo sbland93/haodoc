@@ -26,6 +26,7 @@ var addFile = function(dir, data){
 	if(dir === "coupon") newBase += "/coupon";
 	if(dir === "category") newBase += "/category";
 	if(dir === "banner") newBase += "/banner";
+	if(dir === "feed") newBase += "/feed";
 
 	return new Promise(function(resolve, reject){
 

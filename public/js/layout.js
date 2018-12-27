@@ -60,6 +60,9 @@ $(document).ready(function() {
 	});
 
 
+	Vue.filter('moment', function (date) {
+        return moment(date).format('MM/DD hh:mm a');
+    })
 
 
 	$('#top-btn').on('click', function(){

@@ -28,6 +28,8 @@ var app = new Vue({
         categoryFiles : "",
         banners: "",
         bannerFiles : "",
+        feeds : "",
+        feedFiles : "",
 
         list_array : [ {} ],
         list_array_2 : [ {} ],
@@ -42,6 +44,7 @@ var app = new Vue({
         update_coupon_toggle : false,
         update_category_toggle : false,
         update_banner_toggle : false,
+        update_feed_toggle : false,
 
         toggles : {
             payerToggle : true,
@@ -50,6 +53,7 @@ var app = new Vue({
             eventToggle : false,
             categoryToggle : false,
             bannerToggle : false,
+            feedToggle : false,
         },
 
 
@@ -79,6 +83,9 @@ var app = new Vue({
             {
                 func_name : getBanners, data_name: "banners"
             },
+            {
+                func_name : getFeeds, data_name: "feeds"
+            },
         ];        
 
         for (var i = init_data_arr.length - 1; i >= 0; i--) {
@@ -98,6 +105,9 @@ var app = new Vue({
             {
                 dirString : "banner", data_name : "bannerFiles"
             },
+            {
+                dirString : "feed", data_name : "feedFiles"
+            },
         ];
 
         for (var i = init_file_arr.length - 1; i >= 0; i--) {
@@ -107,9 +117,13 @@ var app = new Vue({
     },
 
     filters: {
+
         moment: function (date) {
+          
           return moment(date).format('MM/DD hh:mm a');
+        
         }
+    
     },
     methods: {
 
@@ -274,6 +288,34 @@ var app = new Vue({
             });
         },
 
+        newFeed: function(event){
+
+            event.preventDefault();
+            var self = this;
+            var new_feed_form = $("#feed-form")[0];
+            var newFeed = new FormData(new_feed_form);
+
+            //file이 있는지 확인한다.
+            var val1 = $("#feedImage").val();
+            var val2 = $("#feed-mobile-image").val();
+
+            if(val1 == '' || val2 == ''){
+               alert("파일은 필수입니다.");
+               return false;
+            }
+            addFeed(newFeed).then(function(rtn){
+                
+                if(rtn.success){
+                    alert("추가 완료");
+                    new_feed_form.reset();
+                    util_data_init(self, getFeeds, "feeds");
+                }else{
+                    alert("필드를 다 채워주셔야 합니다.");
+                }
+
+            });
+        },
+
         //dirName에 해당하는, File을 생성하는 함수.
         //id가 new-dirName-file인 form의 파일을 가져와서 추가한다.
         newFile : function(dirName, event){
@@ -345,12 +387,10 @@ var app = new Vue({
             var self = this;
             self.changeThing(updateParticipant, "participants", "update_participant_toggle");
         },
-
         changePayer: function(){
             var self = this;
             self.changeThing(updatePayer, "payers", "update_payer_toggle");
         },
-
         changeCategory: function(){
             var self = this;
             self.changeThing(updateCategory, "categorys", "update_category_toggle");
@@ -366,6 +406,10 @@ var app = new Vue({
         changeBanner: function(){
             var self = this;
             self.changeThing(updateBanner, "banners", "update_banner_toggle");
+        },
+        changeFeed: function(){
+            var self = this;
+            self.changeThing(updateFeed, "feeds", "update_feed_toggle");
         },
 
         //id를 받아 해당 model의 obj를 삭제해주는 함수.
@@ -413,6 +457,10 @@ var app = new Vue({
         removeBanner : function(id){
             var self = this;
             self.removeThing(deleteBanner, id, getBanners, "banners");
+        },
+        removeFeed : function(id){
+            var self = this;
+            self.removeThing(deleteFeed, id, getFeeds, "feeds");
         },
 
 

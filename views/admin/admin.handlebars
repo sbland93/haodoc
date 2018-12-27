@@ -34,6 +34,9 @@
                 <li class="nav-item">
                     <a class="nav-link" @click="toggleTo('bannerToggle')">배너 관리</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" @click="toggleTo('feedToggle')">피드 관리</a>
+                </li>
             </ul>
           </div>
         </nav>
@@ -173,7 +176,8 @@
                 <div class="form" role="form" v-if="update_event_toggle">
                     이벤트이름 : <input type="text" class="form-control" v-model="updateObj.eventName">
                     이벤트기간 : <input type="text" class="form-control" v-model="updateObj.eventRange">
-                    이벤트가격 : <input type="number" class="form-control" v-model="updateObj.price" placeholder="숫자만가능">
+                    원래가격 : <input type="number" class="form-control" v-model="updateObj.originalPrice" placeholder="숫자만가능">
+                    할인가격 : <input type="number" class="form-control" v-model="updateObj.price" placeholder="숫자만가능">
                     병원이름 : <input type="text" class="form-control" v-model="updateObj.hospitalName">
                     지하철역이름 : <input type="text" class="form-control" v-model="updateObj.subway">
                     병원주소 : <input type="text" class="form-control" v-model="updateObj.address">
@@ -267,6 +271,11 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="cc_name">이벤트 가격</label>
+                                <input type="number" class="form-control"  name="price" placeholder="있는경우만 입력, 560000 처럼 숫자만 입력">
+                            </div>
+
+                            <div class="form-group">
                                 <label for="cc_name">썸네일 파일명</label>
                                 <input type="file" class="form-control" id="event-thumbnail-image" name="thumbnailImage"  />
                             </div>
@@ -330,6 +339,7 @@
                         </tbody>
                     </table>
                 </div>
+
                 <div class="form" role="form" v-if="update_coupon_toggle">
                     쿠폰이름 : <input type="text" class="form-control" v-model="updateObj.couponName">
                     병원이름 : <input type="text" class="form-control" v-model="updateObj.hospitalName">
@@ -761,6 +771,139 @@
 
 
 
+            <div v-show="toggles.feedToggle">
+
+                <h2>생성된 피드</h2>
+
+                <div style="height: auto; overflow: auto">
+                    <table class="table" id="table" >
+                        <thead>
+                            <tr>
+                                <th>NO.</th>
+                                <th>피드파일</th>
+                                <th>URL</th>
+                                <th>제목</th>
+                                <th>해시태그</th>
+                                <th>조회수</th>
+                                <th>피드생성일</th>
+                                <th>수정</th>
+                                <th>삭제</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(feed,index) in feeds">
+                                <td><a href="#">\{{index}}</a></td>
+                                <td>웹 : \{{feed.feedImage}}<br>모바일 : \{{feed.mobileImage}}</td>
+                                <td>\{{feed.url}}</td>
+                                <td>\{{feed.title}}</td>
+                                <td><span v-for="hashtag in feed.hashtags">\{{hashtag}} </span></td>
+                                <td>\{{feed.views}}</td>
+                                <td>\{{feed.updated_at | moment}}</td>
+                                <td><button class="btn btn-primary" @click="toggleChange(feed, 'update_feed_toggle' ,index)">수정</button></td>
+                                <td><button class="btn btn-primary" @click="removeFeed(feed.id)">삭제</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form" role="form" v-if="update_feed_toggle">
+                    피드파일 : <br><input type="text" class="form-control" v-model="updateObj['feedImage']">
+                    <br><input type="text" class="form-control" v-model="updateObj['mobileImage']">
+                    URL : <input type="text" class="form-control" v-model="updateObj['url']">
+                    제목 : <input type="text" class="form-control" v-model="updateObj['title']">
+                    내용 : <input type="text" class="form-control" v-model="updateObj['content']">
+                    조회수 : <input type="number" class="form-control" v-model="updateObj['views']">
+                    생성일 : <input type="text" class="form-control" v-model="updateObj['updated_at']">
+                    <div v-for="(hashtag, index) in updateObj['hashtags']">
+                        해시태그 \{{index}} : <input type="text" class="form-control" v-model="updateObj['hashtags'][index]">
+                        <button class="btn btn-danger" @click="updateObj['hashtags'].splice(index, 1)"> 해시태그 \{{index}} 제거 </button>
+                        <br>
+                    </div>
+                    <button class="btn btn-danger" @click="updateObj['hashtags'].push('')">해시태그 추가</button><br>
+                    <button class="btn btn-primary" @click="changeFeed">수정완료</button>
+                    <button class="btn btn-primary" @click="toggleChange(updateObj, 'update_feed_toggle', -1)">취소</button>
+                </div>
+
+
+                <h2>피드 이미지</h2>
+                <form class="form" role="form" id="feed-file-form">
+
+                    <div class="form-group">
+                        <label for="cc_name">피드 이미지 파일</label>
+                        <input type="file" class="form-control" id="new-feed-file" name="file" accept="image/*"/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn mobile-btn" @click="newFile('feed', $event)">피드 파일 추가하기</button>
+                    </div>
+
+                </form>
+
+                <div style="height: auto; overflow: auto">
+                    <table class="table" id="table" >
+                        <thead>
+                            <tr>
+                                <th>NO.</th>
+                                <th>피드 이미지</th>
+                                <th>기능</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-if="file.fileName" v-for="(file,index) in feedFiles">
+                                <td><a href="#">\{{index}}</a></td>
+                                <td>\{{file.fileName}}</td>
+                                <td><button class="btn btn-primary" @click="removeFile('feed', file.fileName)">삭제</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="card card-outline-secondary">
+                    <div class="card-body" >
+                        <h3 class="text-center">피드 추가하기</h3>
+                        <hr>
+                        <form class="form" role="form" id="feed-form">
+                            <div class="form-group">
+                                <label for="cc_name">피드 파일</label>
+                                <input type="file" class="form-control" id="feedImage" name="feedImage" />
+                            </div>
+                            <div class="form-group">
+                                <label for="cc_name">모바일 피드 파일</label>
+                                <input type="file" class="form-control" id="feed-mobile-image" name="mobileImage" />
+                            </div>
+                            <div class="form-group">
+                                <label for="cc_name">URL</label>
+                                <input type="text" class="form-control" name="url">
+                            </div>
+                            <div class="form-group">
+                                <label for="cc_name">제목</label>
+                                <input type="text" class="form-control" name="title">
+                            </div>
+                            <div class="form-group">
+                                <label for="cc_name">설명</label>
+                                <input type="text" class="form-control" name="content">
+                            </div>
+                            <div class="form-group">
+                                <label for="cc_name">초기 조회수</label>
+                                <input type="number" class="form-control" name="views">
+                            </div>
+                            <div class="form-group" v-for="(_a, index) in list_array">
+                                <label for="cc_name">해시태그 \{{index}}</label><br>
+                                해시태그 : <input type="text" class="form-control" :name="'hashtags['+index+']'">
+                                <button class="btn btn-danger float-right" @click="change_list_array(list_array, index, $event)">해시태그 \{{index}} 삭제</button>
+                            </div>
+                            <button class="btn btn-danger" @click="change_list_array(list_array, '+', $event)">해시태그 추가</button>
+                            <div class="form-group">
+                                <button type="submit" class="btn mobile-btn" @click="newFeed">피드 만들기</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+
+
 
 
         </div>
@@ -778,7 +921,7 @@
     <script type="text/javascript" src="/js/api/payer.js"></script>
     <script type="text/javascript" src="/js/api/category.js"></script>
     <script type="text/javascript" src="/js/api/participant.js"></script>  
-    <script type="text/javascript" src="/js/util/util.js"></script>  
+    <script type="text/javascript" src="/js/api/feed.js"></script>  
     <script type="text/javascript" src="/js/controllers/admin/adminController.js"></script>  
 {{/section}}
 

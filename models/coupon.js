@@ -27,8 +27,8 @@ var couponSchema = mongoose.Schema({
     
     couponName: String,
     couponRange: String,
-    originalPrice : Number, //원래가격
-    price : Number,
+    originalPrice : {type: Number, default: 0}, //원래가격
+    price : {type: Number, default: 0},
     isDeposit : Boolean, //예약금 모델인지 여부
     deposit : Number, //예약금 가격
     categorys : { type: [ String ], default: [] },

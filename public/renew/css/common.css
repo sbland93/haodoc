@@ -157,6 +157,18 @@ h2{font-size: 32px; color: #e63434;}
 h3.bar{height: 50px; background: #e74747; font-size: 24px; font-weight: 400; line-height: 50px; padding: 0 20px; color: #fff; margin-bottom: 18px;}
 h3.bar.margin-none{margin: 0;}
 
+.list-tag{margin-top: 2px;}
+.list-tag li{float: left; font-size: 12px; color: #e63737; font-weight: 700; margin: 0 3px;}
+.list-tag li:first-child{margin-left: 0;}
+.list-tag li:last-child{margin-right: 0;}
+
+.section-search{}
+.section-search .inner{padding: 35px 53px 30px; background: #f5f5f5;}
+.section-search .box{height: 56px; background: #fff; border-radius: 28px; overflow: hidden;}
+.section-search h2{width: 100px; text-align: center; line-height: 36px; margin: 10px 0; border-right: 1px solid #e63434; box-sizing: border-box;}
+.section-search input[type=text]{display: block; width: calc(100% - 100px); height: 56px; padding: 0 10px; box-sizing: border-box; font-size: 24px;}
+
+
 /* media query */
 @media screen and (max-width: 1199px){
   .dn { display: none; }

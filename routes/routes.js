@@ -31,18 +31,18 @@ module.exports = function(app){
 	app.get('/team', homeHandlers.team);
 	app.get('/rules', homeHandlers.rules);
 	app.get('/personal', homeHandlers.personal);
-	// app.get('/event', homeHandlers.events);
+	app.get('/feed', function(req, res, next){
+		res.render('renew/home/feed/feed', { layout: "renew/layout.handlebars" });
+	});
 	app.get('/event', function(req, res, next){
 		res.render('renew/home/event/event', { layout: "renew/layout.handlebars" });
 	});
 	app.get('/event/:id', checkID, function(req, res, next){
 		res.render('renew/home/event/eventInfo', { layout: "renew/layout.handlebars" });
 	});
-	// app.get('/event/:id', homeHandlers.eventInfo);
 	app.get('/coupon/:id', checkID, function(req, res, next){
 		res.render('renew/home/coupon/couponInfo', { layout: "renew/layout.handlebars" });
 	});
-	// app.get('/coupon/:id', homeHandlers.couponInfo);
 
 
 	//coupon Handlers
@@ -115,6 +115,7 @@ module.exports = function(app){
 	require('./api/insurance.js')(app);
 	require('./api/translate.js')(app);
 	require('./api/accompany.js')(app);
+	require('./api/feed.js')(app);
 	require('./api/file.js')(app);
 	require('./api/category.js')(app);
 	require('./api/banner.js')(app);
