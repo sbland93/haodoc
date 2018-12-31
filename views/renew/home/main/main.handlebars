@@ -64,11 +64,11 @@
 			<div class="swiper-wrapper">
 
 				<div v-for="(category, index) in highCategorys" v-if="highCategorys[index*2]" class="swiper-slide" >
-					<a :href="'/event?category='+highCategorys[index*2].categoryName">
+					<a :href="'/event?high='+highCategorys[index*2].categoryName">
 						<div class="icon"><img :src="'/images/category/highCategory/all/'+highCategorys[index*2].iconImage" alt=""></div>
 						<div class="text">\{{highCategorys[index*2].categoryName}}</div>
 					</a>
-					<a :href="'/event?category='+highCategorys[index*2+1].categoryName" v-if="highCategorys[index*2 +1]">
+					<a :href="'/event?high='+highCategorys[index*2+1].categoryName" v-if="highCategorys[index*2 +1]">
 						<div class="icon"><img :src="'/images/category/highCategory/all/'+highCategorys[index*2+1].iconImage" alt=""></div>
 						<div class="text">\{{highCategorys[index*2+1].categoryName}}</div>
 					</a>
