@@ -16,6 +16,7 @@ var dir_dictionary = {
 	"coupon" : "/public/images/coupon/all",
 	"event" : "/public/images/event/all",
 	"category" : "/public/images/category/all",
+	"highCategory" : "/public/images/category/highCategory/all",
 	"banner" : "/public/images/banner/all",
 	"feed" : "/public/images/feed/all",
 

@@ -26,6 +26,9 @@ var app = new Vue({
         couponFiles : "",
         categorys : "",
         categoryFiles : "",
+        highCategorys : "",
+        highCategoryFiles : "",
+
         banners: "",
         bannerFiles : "",
         feeds : "",
@@ -35,6 +38,8 @@ var app = new Vue({
         list_array_2 : [ {} ],
         list_array_3 : [ {} ],
 
+        array_list : [[{}]], //highCategory에 속의 리스트를 분류하기 위함.
+
         updateIndex : -1,
         updateObj : {},
 
@@ -43,15 +48,17 @@ var app = new Vue({
         update_event_toggle : false,
         update_coupon_toggle : false,
         update_category_toggle : false,
+        update_highCategory_toggle : false,
         update_banner_toggle : false,
         update_feed_toggle : false,
 
         toggles : {
-            payerToggle : true,
+            payerToggle : false,
             participantToggle : false,
             couponToggle : false,
             eventToggle : false,
             categoryToggle : false,
+            highCategoryToggle : true,
             bannerToggle : false,
             feedToggle : false,
         },
@@ -81,6 +88,9 @@ var app = new Vue({
                 func_name : getCategorys, data_name: "categorys"
             },
             {
+                func_name : getHighCategorys, data_name: "highCategorys"
+            },
+            {
                 func_name : getBanners, data_name: "banners"
             },
             {
@@ -108,6 +118,9 @@ var app = new Vue({
             {
                 dirString : "feed", data_name : "feedFiles"
             },
+            {
+                dirString : "highCategory", data_name : "highCategoryFiles"
+            },
         ];
 
         for (var i = init_file_arr.length - 1; i >= 0; i--) {
@@ -116,24 +129,31 @@ var app = new Vue({
     
     },
 
-    filters: {
-
-        moment: function (date) {
-          
-          return moment(date).format('MM/DD hh:mm a');
-        
+    watch: {
+        array_list : function(_old, _new){
+            console.log(_old, _new);
         }
-    
     },
+
     methods: {
 
-        //추가값을 활용하기 위함
+        //category가 현재 populate해서 전달되기 때문에
+        isInclude : function(arr, id){
+            var isInclude = false;
+            arr.map(function(el){
+                if(el._id === id) isInclude = "checked";
+            })
+            return isInclude;
+        },
+
+
+        //추가값을 활용하기 위함 //Event는 form내부에서 submit을 막기 위함.
         change_list_array : function(_arr, manipulate_string, event){
             
             event.preventDefault();
             
             var self = this;
-            
+            console.log(_arr);
             if(manipulate_string === "+"){
               
                 _arr.push({});
@@ -154,6 +174,21 @@ var app = new Vue({
 
         },
 
+        change_array_list : function(manipulate_string, event){
+            var self = this;
+            event.preventDefault();
+            if(manipulate_string === "+"){
+                self.array_list.push([{}]);
+            }else if(manipulate_string === "-"){
+                self.array_list.shift();
+            }else if(/^\d+$/.test(manipulate_string)){ //숫자가 들어오면 해당 값을 삭제한다.
+                self.array_list.splice(parseInt(manipulate_string), 1);
+            }else{
+                return false;
+            }
+
+        },
+
         toggleTo : function(target_string){
 
             var self = this;
@@ -166,9 +201,7 @@ var app = new Vue({
 
         },
 
-        moment: function (date) {
-            return moment(date);
-        },
+
         date: function (date) {
             return moment(date).format('MMMM Do YYYY, hh:mmm:ss a');
         },
@@ -316,6 +349,41 @@ var app = new Vue({
             });
         },
 
+        newHighCategory: function(event){
+
+            event.preventDefault();
+            var self = this;
+            var new_highCategory_form = $("#highCategory-form")[0];
+            var newHighCategory = new FormData(new_highCategory_form);
+
+            for(var key of newHighCategory.keys()){
+                console.log(key);
+            }
+            for(var value of newHighCategory.values()){
+                console.log(value);
+            }            
+            //file이 있는지 확인한다.
+            var val1 = $("#icon-high-image-file").val();
+
+            if(val1 == ''){
+               alert("파일은 필수입니다.");
+               return false;
+            }
+
+            addHighCategory(newHighCategory).then(function(rtn){
+                
+                if(rtn.success){
+                    alert("추가 완료");
+                    new_highCategory_form.reset();
+                    util_data_init(self, getHighCategorys, "highCategorys");
+                }else{
+                    console.log(rtn);
+                    alert("필드를 다 채워주셔야 합니다.");
+                }
+
+            });
+        },
+
         //dirName에 해당하는, File을 생성하는 함수.
         //id가 new-dirName-file인 form의 파일을 가져와서 추가한다.
         newFile : function(dirName, event){
@@ -368,6 +436,9 @@ var app = new Vue({
         //updateObj에 해당하는 값의 id로 들어가 update 시키는 함수.
         changeThing : function(whichFunc, dataString, toggleString){
             var self = this;
+            self.updateObj.middleCategorys.map(function(el){
+                console.log(el.lowCategorys);
+            });
             whichFunc(self.updateObj.id, self.updateObj).then(function(rtn){
                 if(rtn.success){
                     alert("수정 완료!");
@@ -395,6 +466,10 @@ var app = new Vue({
             var self = this;
             self.changeThing(updateCategory, "categorys", "update_category_toggle");
         },
+        changeHighCategory: function(){
+            var self = this;
+            self.changeThing(updateHighCategory, "highCategorys", "update_highCategory_toggle");
+        },
         changeEvent: function(){
             var self = this;
             self.changeThing(updateEvent, "events", "update_event_toggle");
@@ -418,7 +493,9 @@ var app = new Vue({
             var pass=prompt("Password")
             if(pass !== "inspire") return;
             var self = this;
+            console.log(deleteFunc);
             deleteFunc(id).then(function(rtn){
+                console.log(rtn);
                 if(rtn.success){
                     alert("삭제완료!");
                     util_data_init(self, getFunc, dataName);
@@ -453,6 +530,10 @@ var app = new Vue({
         removeCategory: function(id){
             var self = this;
             self.removeThing(deleteCategory, id, getCategorys, "categorys");
+        },
+        removeHighCategory: function(id){
+            var self = this;
+            self.removeThing(deleteHighCategory, id, getHighCategorys, "highCategorys");
         },
         removeBanner : function(id){
             var self = this;

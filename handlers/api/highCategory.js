@@ -5,7 +5,7 @@ module.exports = function(){
 	return {
 		
 		getHighCategorys: function(req, res, next){
-			HighCategory.find(req.query).sort({updated_at:'-1'})
+			HighCategory.find(req.query).sort({updated_at:'-1'}).populate("middleCategorys.lowCategorys")
 			.exec(function(err, payers){
 				if(err) return next(err);
 				res.json(payers.map(highCategoryViewModel));
@@ -57,10 +57,23 @@ module.exports = function(){
 		//id에 해당하는 highCategory를 삭제한다.
 		deleteHighCategory: function(req, res, next){
 			if(!req.params.id) return next('No Id');
-			HighCategory.remove({_id: req.params.id}, function(err){
-				if(err) return next(err);
-				res.json({
-					success: true,
+			var highCategory_dir = "/public/images/category/highCategory/all"
+			HighCategory.findById({_id: req.params.id}, function(err, highCategory){
+				if(err) return console.error(err);
+				/*DOLATER err 처리 */
+				if(!highCategory){
+					return res.json({
+						success: false,
+						message: 'NO DATA',
+					});
+				};
+				util_server.async_delete_file(highCategory_dir, highCategory.iconImage, function(err){
+					//파일처리에서 일부러 error 처리를 현재 하지 않는 중, 이미지 관리를 자유로 하고있기 때문에 , no dir error 빈번하게 발생.
+					highCategory.remove(function(err){
+						if(err) return next("Not Deleted");
+						return res.json({success: true});
+					})
+					
 				});
 			});
 		},

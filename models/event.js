@@ -8,6 +8,11 @@ var eventSchema = mongoose.Schema({
     categorys : { type : [ String ], default : [] },
     originalPrice : {type: Number, default: 0}, //원래가격
     price : {type: Number, default: 0},
+
+    highCategorys: { type: [ String ], default: []},
+    middleCategorys: { type: [ String ], default: []},
+    lowCategorys: { type: [ String ], default: []},
+    
     hospitalName: String,
     subway: String,
     address: String,

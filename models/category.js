@@ -1,8 +1,6 @@
 var mongoose = require('mongoose');
 
 
-
-
 var categorySchema = mongoose.Schema({
     
     categoryName: String,
@@ -18,9 +16,8 @@ var categorySchema = mongoose.Schema({
 });
 
 
-
-
 var Category = mongoose.model('Category', categorySchema);
 
 module.exports = Category;
+
 

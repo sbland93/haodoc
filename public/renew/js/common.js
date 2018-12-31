@@ -36,109 +36,114 @@ Vue.filter('split_event_name', function(name){
 });
 
 $(document).ready(function() {
-  
-
-  // lnb 2depth
-  $('.lnb .swiper-slide.eye').mouseenter(function(){
-    $('.box-lnb-2depth.eye').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
-  });
-  $('.lnb .swiper-slide.nose').mouseenter(function(){
-    $('.box-lnb-2depth.nose').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
-  });
-  $('.lnb .swiper-slide.breast').mouseenter(function(){
-    $('.box-lnb-2depth.breast').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
-  });
-  $('.lnb .swiper-slide.pillar').mouseenter(function(){
-    $('.box-lnb-2depth.pillar').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
-  });
-  $('.lnb .swiper-slide.botox').mouseenter(function(){
-    $('.box-lnb-2depth.botox').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
-  });
-  $('.lnb .swiper-slide.face').mouseenter(function(){
-    $('.box-lnb-2depth.face').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
-  });
-  $('.lnb .swiper-slide.fat').mouseenter(function(){
-    $('.box-lnb-2depth.fat').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
-  });
-  $('.lnb .swiper-slide.hair').mouseenter(function(){
-    $('.box-lnb-2depth.hair').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
-  });
-  $('.lnb .swiper-slide.teeth').mouseenter(function(){
-    $('.box-lnb-2depth.teeth').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
-  });
-
-  $('.lnb .swiper-slide').mouseleave(function(){
-    $('.box-lnb-2depth').css({'width':'0','padding-left':'0','padding-right':'0'});
-  });
-  $('.box-lnb-2depth').mouseenter(function(){
-    $(this).css({'width':'420px','padding-left':'20px','padding-right':'20px'});
-  });
-  $('.box-lnb-2depth').mouseleave(function(){
-    $(this).css({'width':'0','padding-left':'0','padding-right':'0'});
-  });
 
   common_make_swiper = function(){
-    // lnb
-    var swiper = new Swiper('.lnb .swiper-container', {
-      spaceBetween: 0,
-      slidesPerView: 9,
-      direction: 'vertical',
-      loop: false,
-      navigation: {
-        nextEl: '.lnb .swiper-button-next',
-      },
-    });
-    // lnb mobile
-    var swiper = new Swiper('.lnb-m .swiper-container', {
-      spaceBetween: 0,
-      slidesPerView: 5,
-      slidesPerGroup: 4,
-      loop: false,
-      pagination: {
-        el: '.lnb-m .swiper-pagination',
-        clickable: true,
-      },
-    });
+    
 
-    // bg main
-    var swiper = new Swiper('.slide-main .swiper-container', {
-      spaceBetween: 0,
-      centeredSlides: true,
-      autoplay: {
-        delay: 4000,
-        disableOnInteraction: false,
-      },
-      loop: true,
-      pagination: {
-        el: '.slide-main .swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.slide-main .swiper-button-next',
-        prevEl: '.slide-main .swiper-button-prev',
-      },
-    });
+      $('.lnb .swiper-slide.0').mouseenter(function(){
+        $('.box-lnb-2depth.0').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
+      });
+      // lnb 2depth
+      $('.lnb .swiper-slide.1').mouseenter(function(){
+        $('.box-lnb-2depth.1').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
+      });
+      // lnb 2depth
+      $('.lnb .swiper-slide.2').mouseenter(function(){
+        $('.box-lnb-2depth.2').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
+      });
+      // lnb 2depth
+      $('.lnb .swiper-slide.3').mouseenter(function(){
+        $('.box-lnb-2depth.3').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
+      });
+      // lnb 2depth
+      $('.lnb .swiper-slide.4').mouseenter(function(){
+        $('.box-lnb-2depth.4').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
+      });
+      // lnb 2depth
+      $('.lnb .swiper-slide.5').mouseenter(function(){
+        $('.box-lnb-2depth.5').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
+      });
+      // lnb 2depth
+      $('.lnb .swiper-slide.6').mouseenter(function(){
+        $('.box-lnb-2depth.6').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
+      });
+      // lnb 2depth
+      $('.lnb .swiper-slide.7').mouseenter(function(){
+        $('.box-lnb-2depth.7').css({'width':'420px','padding-left':'20px','padding-right':'20px'});
+      });
 
-    // box all category
-    var swiper = new Swiper('.box-all .swiper-container', {
-      loop: false,
-      spaceBetween: 20,
-      slidesPerView: 'auto',
-      navigation: {
-        nextEl: '.box-all .swiper-button-next',
-      },
-    });
-    // btn more
-    $('.btn-more').click(function(){
-      if($('.btn-qr').is(':visible')){
-        $('.btn-more').removeClass('active');
-        $('.btn-qr').css('display','none');
-      }else{
-        $('.btn-more').addClass('active');
-        $('.btn-qr').css('display','block');
-      }
-    });
 
+
+      $('.lnb .swiper-slide').mouseleave(function(){
+        $('.box-lnb-2depth').css({'width':'0','padding-left':'0','padding-right':'0'});
+      });
+      $('.box-lnb-2depth').mouseenter(function(){
+        $(this).css({'width':'420px','padding-left':'20px','padding-right':'20px'});
+      });
+      $('.box-lnb-2depth').mouseleave(function(){
+        $(this).css({'width':'0','padding-left':'0','padding-right':'0'});
+      });
+
+      // lnb
+      var swiper = new Swiper('.lnb .swiper-container', {
+        spaceBetween: 0,
+        slidesPerView: 9,
+        direction: 'vertical',
+        loop: false,
+        navigation: {
+          nextEl: '.lnb .swiper-button-next',
+        },
+      });
+      // lnb mobile
+      var swiper = new Swiper('.lnb-m .swiper-container', {
+        spaceBetween: 0,
+        slidesPerView: 5,
+        slidesPerGroup: 4,
+        loop: false,
+        pagination: {
+          el: '.lnb-m .swiper-pagination',
+          clickable: true,
+        },
+      });
+
+      // bg main
+      var swiper = new Swiper('.slide-main .swiper-container', {
+        spaceBetween: 0,
+        centeredSlides: true,
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+        },
+        loop: true,
+        pagination: {
+          el: '.slide-main .swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.slide-main .swiper-button-next',
+          prevEl: '.slide-main .swiper-button-prev',
+        },
+      });
+
+      // box all category
+      var swiper = new Swiper('.box-all .swiper-container', {
+        loop: false,
+        spaceBetween: 20,
+        slidesPerView: 'auto',
+        navigation: {
+          nextEl: '.box-all .swiper-button-next',
+        },
+      });
+      // btn more
+      $('.btn-more').click(function(){
+        if($('.btn-qr').is(':visible')){
+          $('.btn-more').removeClass('active');
+          $('.btn-qr').css('display','none');
+        }else{
+          $('.btn-more').addClass('active');
+          $('.btn-qr').css('display','block');
+        }
+      });
   }
   //For Delay Some Time => Swiper가 Vue를 잡기 위함.
   //setTimeout(common_make_swiper, 1000);

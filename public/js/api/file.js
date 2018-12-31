@@ -25,6 +25,7 @@ var addFile = function(dir, data){
 	if(dir === "event") newBase += "/event";
 	if(dir === "coupon") newBase += "/coupon";
 	if(dir === "category") newBase += "/category";
+	if(dir === "highCategory") newBase += "/highCategory";
 	if(dir === "banner") newBase += "/banner";
 	if(dir === "feed") newBase += "/feed";
 

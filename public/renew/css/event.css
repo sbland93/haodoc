@@ -1,3 +1,8 @@
+
+
+.box-all.high{margin-bottom: 8px;}
+.box-all.middle{margin-bottom: 8px;}
+
 .box-fold{margin-top: 25px;}
 .box-fold.first{margin-top: 30px;}
 .box-fold .title{height: 46px; line-height: 46px; padding: 0 60px 0 20px; font-size: 20px; background: no-repeat #fff; color: #eb5c5c; background-image: url('../images/arrow_fold_down.png'); background-position: calc(100% - 20px) center; cursor: pointer; transition: all 0.4s;}

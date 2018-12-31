@@ -2,7 +2,7 @@
 
 <div class="container sub" id="event_app" v-cloak>
 
-
+	{{!-- 배너영역 --}}
 	<div class="section-main sub">
 		<div class="inner">
 			<div class="slide-main">
@@ -22,7 +22,9 @@
 			</div>
 		</div>
 	</div>
+	{{!-- /배너영역 --}}
 
+	{{!-- 탭영역 --}}
 	<div class="box-sub-category inner">
 		<ul class="sub-category sub-category-05">
 			<li><a id="base-products" @click="changeBase('products')" class="active">项目分类{{!-- 전체 --}}</a></li>
@@ -30,23 +32,33 @@
 			<li><a id="base-events" @click="changeBase('events')">安心咨询{{!-- 안심상담 --}}</a></li>
 		</ul>
 	</div>
+	{{!-- /탭영역 --}}
 
+
+	{{!-- 대분류 영역 --}}
+
+	{{!-- /대분류 영역 --}}
+
+
+
+	{{!-- 소분류 영역 --}}
 	<div class="section-contents sub">
 		<div class="inner cf">
 			<div class="box-sub-content">
-				<div class="box-all">
+
+				<div class="box-all high">
 					<div class="relative cf">
 						<h2 class="fl">
-							<span v-if="category">\{{category.categoryName}}</span>
+							<span v-if="high">\{{high.categoryName}}</span>{{!-- 현재 선택받은 highCategory --}}
 							<div v-else>全部 {{!-- 전부 --}}</div>
 						</h2>
 						<div class="swiper-container fl">
 							<div class="swiper-wrapper">
 								<div class="swiper-slide">
-									<a @click="changeCategory('全部')">全部{{!-- 전부 --}}</a>
+									<a @click="changeValue('high', undefined)">全部{{!-- 전부 --}}</a>
 								</div>
-								<div class="swiper-slide" v-for="(category, index) in categorys">
-									<a @click="changeCategory(category.categoryName)">\{{category.categoryName}}</a>
+								<div class="swiper-slide" v-for="(_high, index) in highCategorys">
+									<a @click="changeValue('high', _high)">\{{_high.categoryName}}</a>
 								</div>
 							</div>
 						</div>
@@ -54,25 +66,67 @@
 					</div>
 				</div>
 
-				<div v-if="category" class="box-fold all first">
+				<div class="box-all middle" v-if="high">
+					<div class="relative cf">
+						<h2 class="fl">
+							<span v-if="middle">\{{middle.categoryName}}</span>
+							<div v-else>全部 {{!-- 전부 --}}</div>
+						</h2>
+						<div class="swiper-container fl">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<a @click="changeValue('middle', undefined)">全部{{!-- 전부 --}}</a>
+								</div>
+								<div class="swiper-slide" v-for="(_middle, index) in high.middleCategorys">
+									<a @click="changeValue('middle',_middle)">\{{_middle.categoryName}}</a>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-button-next"></div>
+					</div>
+				</div>
+
+
+				<div class="box-all low" v-if="high && middle">
+					<div class="relative cf">
+						<h2 class="fl">
+							<span v-if="low">\{{low.categoryName}}</span>
+							<div v-else>全部 {{!-- 전부 --}}</div>
+						</h2>
+						<div class="swiper-container fl">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<a @click="changeValue('low', undefined)">全部{{!-- 전부 --}}</a>
+								</div>
+								<div class="swiper-slide" v-for="(_low, index) in middle.lowCategorys">
+									<a @click="changeValue('low', _low)">\{{_low.categoryName}}</a>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-button-next"></div>
+					</div>
+				</div>
+
+
+				<div v-if="low" class="box-fold all first">
 					<div class="title">项目概念 {{!-- 개념 --}}</div>
 					<div class="content cf">
-						<div class="icon eye fl"><img :src="'/images/category/all/'+category.iconImage" alt=""></div>
+						<div class="icon eye fl"><img :src="'/images/category/all/'+low.iconImage" alt=""></div>
 						<div class="text fr">
 							<ul>
-								<li><span v-html="category.content_1"></span></li>
+								<li><span v-html="low.content_1"></span></li>
 							</ul>
 							<div class="description">
-								<span v-html="category.content_2"></span>
+								<span v-html="low.content_2"></span>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div v-if="category" class="box-fold faq">
+				<div v-if="low" class="box-fold faq">
 					<div class="title">常见问题 {{!-- 자주 묻는 질문 --}}</div>
 					<div class="content cf">
-						<div v-for="(question, index) in category.questions">
+						<div v-for="(question, index) in low.questions">
 							<div class="question"><span v-html="question.content"></span></div>
 							<div class="answer">
 								<span v-html="question.answer"></span>
@@ -114,9 +168,9 @@
 					<div class="title">相关活动{{!-- 이벤트 모아보기 --}}</div>
 					<div class="content cf">
 						<ul class="box-event">
-							<li v-for="(product, index) in sortedList"
+							<li v-for="(product, index) in products"
 							:class="product.isCoupon? 'coupon': ''">
-								<a v-if="product.isCoupon" :href="'/coupon/'+product.id" class="cf">
+								<a v-if="product.isCoupon && (sortBase == 'products' || sortBase == 'coupons')" :href="'/coupon/'+product.id" class="cf">
 									<div class="image vertical-middle fl">
 										<img :src="'/images/coupon/all/'+product.thumbnailImage" alt="">
 									</div>
@@ -140,7 +194,7 @@
 										</div>
 									</div>
 								</a>
-								<a v-if="!product.isCoupon" :href="'/event/'+ product.id" class="cf">
+								<a v-if="!product.isCoupon && (sortBase == 'products' || sortBase == 'events')" :href="'/event/'+ product.id" class="cf">
 									<div class="image vertical-middle fl">
 										<img :src="'/images/event/all/' + product.thumbnailImage " alt="">
 									</div>
@@ -168,6 +222,9 @@
 						</ul>
 					</div>
 				</div>
+
+
+
 			</div>
 		</div>
 	</div>
@@ -181,6 +238,7 @@
 	<script src="/js/api/event.js"></script>
 	<script src="/js/api/coupon.js"></script>
 	<script src="/js/api/banner.js"></script>
+	<script src="/js/api/highCategory.js"></script>
 	<script src="/js/api/category.js"></script>
 	<script type="text/javascript" src="/renew/js/controllers/eventController.js"></script>
 {{/section}}

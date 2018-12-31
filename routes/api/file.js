@@ -30,6 +30,15 @@ var storage_category = multer.diskStorage({
 	},
 });
 
+var storage_highCategory = multer.diskStorage({
+	destination: function(req, file, cb){
+		cb(null, 'public/images/category/highCategory/all');
+	},
+	filename: function(req, file, cb){
+		cb(null, Date.now() + "_" + file.originalname);
+	},
+});
+
 var storage_banner = multer.diskStorage({
 	destination: function(req, file, cb){
 		cb(null, 'public/images/banner/all');
@@ -51,6 +60,7 @@ var storage_feed = multer.diskStorage({
 var upload_event = multer({ storage: storage_event });
 var upload_coupon = multer({ storage : storage_coupon });
 var upload_category = multer({ storage : storage_category });
+var upload_highCategory = multer({ storage : storage_highCategory });
 var upload_banner = multer({ storage : storage_banner });
 var upload_feed = multer({ storage : storage_feed });
 
@@ -63,6 +73,8 @@ module.exports = function(app){
 	app.post('/api/file/coupon', upload_coupon.any(), fileHandlers.newFile);
 
 	app.post('/api/file/category', upload_category.any(), fileHandlers.newFile);
+	
+	app.post('/api/file/highCategory', upload_highCategory.any(), fileHandlers.newFile);
 
 	app.post('/api/file/banner', upload_banner.any(), fileHandlers.newFile);
 	
