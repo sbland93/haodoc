@@ -17,6 +17,10 @@ var eventSchema = mongoose.Schema({
     subway: String,
     address: String,
     thumbnailImage: String,
+
+    views : {type: Number, default: 0}, //조회수
+    payments : {type: Number, default: 0}, //예약자수, 결제건수
+
     eventImage: [ String ],
 	updated_at : { type: Date, default: Date.now },
 

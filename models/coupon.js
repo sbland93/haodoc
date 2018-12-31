@@ -40,8 +40,9 @@ var couponSchema = mongoose.Schema({
     address: String,
     thumbnailImage: String,
     couponImage: [ String ],
-    password : String,
     remarks : String,
+    payments : {type: Number, default: 0}, //예약자수, 결제건수
+    views : {type: Number, default: 0}, //조회수
     questions : [ questionSchema ],
 	updated_at : { type: Date, default: Date.now },
 
