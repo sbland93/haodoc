@@ -121,21 +121,19 @@
 									<div class="detail fr">
 										<div class="cf">
 											{{!-- <div class="event ellipsis">\{{product.couponName}}</div> --}}
-											<span class="name">\{{product.hospitalName | split_hospital_name }}</span><br>
-											{{!-- <span class="date">\{{product.couponRange}}</span> --}}
+											<span class="name">\{{product.hospitalName | split_hospital_name }}</span>{{!-- <span class="date"> 0</span> --}}
 										</div>
 										<div class="text sc">
 											<div class="event ellipsis">\{{product.couponName | split_event_name }}</div>
 											<div class="description ellipsis-multi">\{{product.subway}}</div>
 										</div>
 										<div class="bottom cf">
-											<!--div class="view fl">720</div-->
+											{{!-- <div class="view fl">720</div> --}}
 											<div class="price fr">
 												<div class="before" v-if="product.originalPrice > 0">\{{product.originalPrice | price}}</div>
 												<div class="current">
 													<span class="small">\{{product.price | changeCNY}} </span> \{{product.price | price}}
 												</div>
-												
 											</div>
 										</div>
 									</div>
@@ -154,7 +152,7 @@
 											<div class="description ellipsis-multi">\{{product.subway}}</div>
 										</div>
 										<div class="bottom cf">
-											<!--div class="view fl">720</div-->
+											{{!-- <div class="view fl">720</div> --}}
 											<div class="price fr">
 												<div class="before" v-if="product.originalPrice > 0">\{{product.originalPrice | price}}</div>
 												<div class="current">

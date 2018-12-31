@@ -1,5 +1,6 @@
 var HighCategory = require('../../models/highCategory.js');
 var highCategoryViewModel = require('../../viewModels/highCategory.js');
+var util_server = require('../../util_server.js')();
 
 module.exports = function(){
 	return {

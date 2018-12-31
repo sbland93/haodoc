@@ -490,9 +490,7 @@ var app = new Vue({
             var pass=prompt("Password")
             if(pass !== "inspire") return;
             var self = this;
-            console.log(deleteFunc);
             deleteFunc(id).then(function(rtn){
-                console.log(rtn);
                 if(rtn.success){
                     alert("삭제완료!");
                     util_data_init(self, getFunc, dataName);
