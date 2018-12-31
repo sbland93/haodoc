@@ -586,6 +586,7 @@
                 <div class="form" role="form" v-if="update_highCategory_toggle">
                     대분류이름 : <input type="text" class="form-control" v-model="updateObj.categoryName">
                     대분류아이콘 : <input type="text" class="form-control" v-model="updateObj.iconImage">
+                    생성날짜 : <input type="text" class="form-control" v-model="updateObj.updated_at">
                     <span v-for="(middleCategory, index) in updateObj.middleCategorys">
                         중분류이름 : <input type="text" class="form-control" v-model="updateObj.middleCategorys[index]['categoryName']">
                         <button class="btn btn-danger" @click="updateObj.middleCategorys.splice(index, 1)" style="width: 20%">삭제</button>
@@ -600,7 +601,6 @@
                             <span v-for="category in categorys" v-if="!isInclude(middleCategory.lowCategorys, category.id)">
                                 \{{category.categoryName}}<button class="btn btn-danger" @click="updateObj.middleCategorys[index].lowCategorys.push({_id: category.id})">+</button> , 
                             </span>
-                            
                         <br>
                     </span>
                     <button class="btn btn-danger" @click="updateObj.middleCategorys.push({'lowCategorys': []})" style="width:20%">중분류추가</button>
