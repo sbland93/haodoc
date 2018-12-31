@@ -436,9 +436,6 @@ var app = new Vue({
         //updateObj에 해당하는 값의 id로 들어가 update 시키는 함수.
         changeThing : function(whichFunc, dataString, toggleString){
             var self = this;
-            self.updateObj.middleCategorys.map(function(el){
-                console.log(el.lowCategorys);
-            });
             whichFunc(self.updateObj.id, self.updateObj).then(function(rtn){
                 if(rtn.success){
                     alert("수정 완료!");
