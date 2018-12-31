@@ -143,13 +143,14 @@ var app = new Vue({
 			
 			var self = this;
 			self[attrString] = value;
-			self.get_by_query();
 			if(value === "high"){
 				self.middle = undefined;
 				self.low = undefined;
 			}else if(value === "middle"){
 				self.low = undefined;
 			}
+			self.get_by_query();
+
 		
 		}
 
