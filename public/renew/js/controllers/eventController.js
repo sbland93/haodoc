@@ -2,14 +2,9 @@
 
 //Watch로 high, middle, low를 살펴본다.
 //독립적으로 움직이면서 서로 신호를 보내도록 만든다.
-
 var url =  new URLSearchParams(window.location.search);
 var allString = "全部";
 var _categoryName = allString;
-
-if(url.has('high'))	console.log(url.get('high'));
-if(url.has('middle'))	console.log(url.get('middle'));
-if(url.has('low'))	console.log(url.get('low'));
 
 var app = new Vue({
 
@@ -107,8 +102,8 @@ var app = new Vue({
 				
 				var products = rtn[0].concat(rtn[1]);
 				self.products = util_sort_updated_at(products);
-				setTimeout(common_make_box, 200); //common.js 안에 있는 함수, box에 클릭이벤트를 다시 묶어준다.
-				setTimeout(common_make_swiper, 200); //common.js 안에 있는 함수, box에 클릭이벤트를 다시 묶어준다.
+				setTimeout(common_make_box, 350); //common.js 안에 있는 함수, box에 클릭이벤트를 다시 묶어준다.
+				setTimeout(common_make_swiper, 350); //common.js 안에 있는 함수, box에 클릭이벤트를 다시 묶어준다.
 			
 			});
 
@@ -143,10 +138,10 @@ var app = new Vue({
 			
 			var self = this;
 			self[attrString] = value;
-			if(value === "high"){
+			if(attrString === "high"){
 				self.middle = undefined;
 				self.low = undefined;
-			}else if(value === "middle"){
+			}else if(attrString === "middle"){
 				self.low = undefined;
 			}
 			self.get_by_query();
