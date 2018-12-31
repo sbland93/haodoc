@@ -108,7 +108,7 @@
 				</div>
 
 
-				<div v-if="low" class="box-fold all first">
+				<div v-if="low && low.content_1 !== ' '"  class="box-fold all first">
 					<div class="title">项目概念 {{!-- 개념 --}}</div>
 					<div class="content cf">
 						<div class="icon eye fl"><img :src="'/images/category/all/'+low.iconImage" alt=""></div>
@@ -123,7 +123,7 @@
 					</div>
 				</div>
 
-				<div v-if="low" class="box-fold faq">
+				<div v-if="low && low.questions && low.questions[0].content !== ' '" class="box-fold faq">
 					<div class="title">常见问题 {{!-- 자주 묻는 질문 --}}</div>
 					<div class="content cf">
 						<div v-for="(question, index) in low.questions">
