@@ -183,6 +183,10 @@
                     할인가격 : <input type="number" class="form-control" v-model="updateObj.price" placeholder="숫자만가능">
                     병원이름 : <input type="text" class="form-control" v-model="updateObj.hospitalName">
                     지하철역이름 : <input type="text" class="form-control" v-model="updateObj.subway">
+                    조회수 : <input type="number" class="form-control" v-model="updateObj.views">
+                    결제수 : <input type="number" class="form-control" v-model="updateObj.payments">
+                    실조회수 : <input type="number" class="form-control" v-model="updateObj.realViews" disabled="disabled">
+                    실결제수 : <input type="number" class="form-control" v-model="updateObj.realPayments" disabled="disabled">
                     병원주소 : <input type="text" class="form-control" v-model="updateObj.address">
                     <div v-for="(category, index) in updateObj.highCategorys">
                         대분류 \{{index}} : <input type="text" class="form-control" v-model="updateObj.highCategorys[index]">
@@ -377,7 +381,11 @@
                     원래가격 : <input type="number" class="form-control" v-model="updateObj.originalPrice" placeholder="숫자만가능">
                     카테고리
                     <label class="radio-inline"><input id="category" type="radio" class="form-control" name="isDeposit" value="true" v-model="updateObj.isDeposit">예약금 모델</label>
-                    <label class="radio-inline"><input id="category" type="radio" class="form-control" name="isDeposit" value="false" v-model="updateObj.isDeposit">쿠폰</label>
+                    <label class="radio-inline"><input id="category" type="radio" class="form-control" name="isDeposit" value="false" v-model="updateObj.isDeposit">쿠폰</label><br>
+                    조회수 : <input type="number" class="form-control" v-model="updateObj.views">
+                    결제수 : <input type="number" class="form-control" v-model="updateObj.payments">
+                    실조회수 : <input type="number" class="form-control" v-model="updateObj.realViews" disabled="disabled">
+                    실결제수 : <input type="number" class="form-control" v-model="updateObj.realPayments" disabled="disabled">
                     할인가격 : <input type="number" class="form-control" v-model="updateObj.price" placeholder="숫자만가능">
                     상세주소 : <input type="text" class="form-control" v-model="updateObj.address">
                     쿠폰기간 : <input type="text" class="form-control" v-model="updateObj.couponRange">

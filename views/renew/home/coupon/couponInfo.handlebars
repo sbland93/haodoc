@@ -28,6 +28,9 @@
 									<div class="price fr">
 										<div class="before" v-if="coupon.originalPrice > 0">\{{coupon.originalPrice | price}}</div>
 										<div class="current">
+											<span class="number">
+												 \{{coupon.views}} <i class="far fa-eye"></i> \{{coupon.payments}} <i class="fas fa-shopping-cart"></i>
+											</span>
 											<span class="small">\{{coupon.price | changeCNY}} </span> \{{coupon.price | price}}
 										</div>
 									</div>
@@ -72,6 +75,7 @@
 							<li class="image vertical-middle"><img src="/renew/images/img_hospital_detail_03.jpg" alt=""></li>
 						</ul>
 					</div-->
+
 				</div>
 
 				<div class="section-qna-review">

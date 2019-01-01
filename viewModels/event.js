@@ -19,7 +19,13 @@ module.exports = function(event){
 		hospitalName: event.hospitalName,
 		subway: event.subway,
 		address: event.address,
-		views : event.views,
+
+		views : event.views, //조회수
+		payments : event.payments, //예약자수
+
+	    realViews : event.realViews, //실 조회수
+	    realPayments : event.realPayments, //실 결제수 
+
 		thumbnailImage: event.thumbnailImage,
 		eventImage: event.eventImage,
 		updated_at: event.updated_at,

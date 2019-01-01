@@ -23,7 +23,13 @@ module.exports = function(coupon){
 		couponRange: coupon.couponRange,
 		hospitalName: coupon.hospitalName,
 		subway: coupon.subway,
-		views: coupon.views,
+
+		views: coupon.views, // 조회수
+		payments: coupon.payments, // 예약자수
+		
+	    realViews : coupon.realViews, //실 조회수
+	    realPayments : coupon.realPayments, //실 결제수 
+
 		address: coupon.address,
 		thumbnailImage: coupon.thumbnailImage,
 		password : coupon.password,

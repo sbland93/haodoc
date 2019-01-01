@@ -42,10 +42,7 @@ var app = new Vue({
 		});
 
 		util_data_init(this, getBanners, "banners");
-		// getCategorys().then(function(categorys){
-		// 	self.categorys = categorys;
-		// 	setTimeout(common_make_swiper, 300);
-		// });
+
 		getHighCategorys().then(function(highCategorys){
 
 			self.highCategorys = highCategorys;

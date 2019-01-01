@@ -26,6 +26,9 @@
 									<div class="price fr">
 										<div class="before" v-if="event.originalPrice > 0">\{{event.originalPrice | price}}</div>
 										<div class="current">
+											<span class="number">
+												 \{{event.views}} <i class="far fa-eye"></i> \{{event.payments}} <i class="fas fa-shopping-cart"></i>
+											</span>
 											<span class="small">\{{event.price | changeCNY}} </span> \{{event.price | price}}
 										</div>
 									</div>

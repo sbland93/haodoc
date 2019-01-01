@@ -32,11 +32,23 @@ var app = new Vue({
     },
 
     mounted: function(){
+
+
+
+
         //마운트 시에, 쿠폰의 정보와, 쿠폰의 리뷰들을 불러온다.
         var self = this;
 
         getCoupon(couponID).then(function(coupon){
+            
             self.coupon = coupon;
+            //마운트시에 조회가 된 것이므로, 조회수를 올린다.
+            self.coupon.views += 1;
+            self.coupon.realViews += 1;
+            updateCoupon(couponID, self.coupon).then(function(rtn){
+                if(rtn.success) return;
+            });
+
         });
 
         getCouponReviews({coupon: couponID}).then(function(couponReviews){

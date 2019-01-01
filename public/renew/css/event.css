@@ -37,19 +37,20 @@
 .box-event li:nth-child(n+2){border-top: 2px solid #f5f5f5}
 .box-event li a{position: relative; display: block;}
 .box-event li.coupon .detail:before{position: absolute; right: 0; top: 0; content: '超值体验'; display: block; width: 102px; height: 102px; background: url('../images/bg_coupon.png') no-repeat center; font-size: 18px; color: #fff; text-align: right; padding: 15px 2px 0 0; box-sizing: border-box;}
-.box-event .image{width: 340px; height: 256px;}
-.box-event .detail{position: relative; width: calc(100% - 340px); height: 256px; padding: 25px 20px; box-sizing: border-box;}
+.box-event .image{width: 290px; height: 240px;}
+.box-event .detail{position: relative; width: calc(100% - 290px); height: 256px; padding: 25px 20px; box-sizing: border-box;}
 .box-event .name{font-size: 18px; color: #cc2626;}
 .box-event .date{font-size: 13px; color: #a29f9f;}
+.box-event .number{font-size: 13px; color: #a29f9f; text-align: left}
 .box-event .text{position: relative; line-height: 1.2; margin-top: 5px;}
 .box-event .event{height: 48px; font-size: 23px; color: #271b1b;}
-.box-event .description{height: 68px; font-size: 20px; color: #a29f9f;}
+.box-event .description{height: 30px; font-size: 13px; color: #a29f9f;}
 .box-event .bottom{position: absolute; width: 100%; left: 0; bottom: 0; padding: 0 20px 15px; box-sizing: border-box;}
 .box-event .view{position: relative; line-height: 20px; font-size: 15px; color: #a29f9f; padding-left: 10px;}
 /*.box-event .view:before{position: absolute; left: 0; top: 0; display: block; content: ''; width: 25px; height: 25px; background: url('../images/icon_eye.png') no-repeat left center; opacity: 0.7;}
 */.box-event .price{position: relative; text-align: right;}
 .box-event .before{position: absolute; right: 0; bottom: 35px; font-size: 23px; color: #a29f9f; text-decoration: line-through;}
-.box-event .current{font-size: 27px; color: #be0303; font-style: italic;}
+.box-event .current{font-size: 24px; color: #be0303; font-style: italic;}
 .box-event .current .small{font-size: 17px; color: #be0303; font-style: italic;}
 
 /* apply */
@@ -192,8 +193,8 @@
   .box-warning .list-bullet li:before{width: 10px; height: 10px; margin-top: -5px;}
 
   .box-event li.coupon .detail:before{transform: scale(0.5); right: -25px; top: -27px; opacity: 0.8;}
-  .box-event .image{width: 148px; height: 111px;}
-  .box-event .detail{width: calc(100% - 148px); height: 111px; padding: 10px;}
+  .box-event .image{width: 130px; height: 111px;}
+  .box-event .detail{width: calc(100% - 130px); height: 111px; padding: 10px;}
   .box-event .name{font-size: 13px;}
   .box-event .date{font-size: 10px;}
   .box-event .event{height: 20px; font-size: 17px; margin-bottom:3px;}
@@ -202,8 +203,9 @@
   .box-event .view{font-size: 12px; line-height: 21px; padding-left: 25px;}
   .box-event .view:before{width: 20px; height: 21px; background-size: 20px 11px;}
   .box-event .before{font-size: 12px; bottom: 27px;}
-  .box-event .current{font-size: 17px; padding-bottom: 8px;}
-  .box-event .current .small{font-size: 12px;}
+  .box-event .current{font-size: 15px; padding-bottom: 8px;}
+  .box-event .current .small{font-size: 11px;}
+  .box-event .number{font-size: 10px;}
 
   .section-event-detail{padding: 0; margin-top: 8px;}
   .section-event-detail > h3.bar{display: none;}

@@ -188,6 +188,9 @@
 											<div class="price fr">
 												<div class="before" v-if="product.originalPrice > 0">\{{product.originalPrice | price}}</div>
 												<div class="current">
+													<span class="number">
+														 \{{product.views}} <i class="far fa-eye"></i> \{{product.payments}} <i class="fas fa-shopping-cart"></i>
+													</span>
 													<span class="small">\{{product.price | changeCNY}} </span> \{{product.price | price}}
 												</div>
 											</div>
@@ -211,7 +214,11 @@
 											<!--div class="view fl">720</div-->
 											<div class="price fr">
 												<div class="before" v-if="product.originalPrice > 0">\{{product.originalPrice | price}}</div>
+
 												<div class="current">
+													<span class="number">
+														 \{{product.views}} <i class="far fa-eye"></i> \{{product.payments}} <i class="fas fa-shopping-cart"></i>
+													</span>
 													<span class="small">\{{product.price | changeCNY}} </span> \{{product.price | price}}
 												</div>
 											</div>

@@ -45,6 +45,9 @@ var couponSchema = mongoose.Schema({
     payments : {type: Number, default: 0}, //예약자수, 결제건수
     views : {type: Number, default: 0}, //조회수
     
+    realViews : {type: Number, default: 0}, //실 조회수
+    realPayments : {type: Number, default: 0}, //실 결제수 
+       
     questions : [ questionSchema ],
 	updated_at : { type: Date, default: Date.now },
 

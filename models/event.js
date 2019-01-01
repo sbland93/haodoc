@@ -21,6 +21,11 @@ var eventSchema = mongoose.Schema({
     views : {type: Number, default: 0}, //조회수
     payments : {type: Number, default: 0}, //예약자수, 결제건수
 
+
+    realViews : {type: Number, default: 0}, //실 조회수
+    realPayments : {type: Number, default: 0}, //실 결제수 
+
+
     eventImage: [ String ],
 	updated_at : { type: Date, default: Date.now },
 
