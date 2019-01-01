@@ -23,7 +23,7 @@
 
         <meta charset="utf-8" />
         <title>HaoDoc(하오닥)</title>
-        <link rel="icon" href="/images/layout/favicon.ico" type="/images/ico">
+        <link rel="icon" href="/images/layouts/favicon.ico" type="/images/ico">
         <link rel="canonical" href="http://www.haodoc.co.kr">
 
         <!-- Jquery -->
@@ -41,8 +41,8 @@
         <meta name="keywords" content="하오닥, HaoDoc, 为在韩华人提供免费韩国医疗信息服务的平台 " />
         <meta property="og:title" content="HaoDoc(하오닥)">
         <meta property="og:description" content="为在韩华人提供免费韩国医疗信息服务的平台 (하오닥)" />
-        <meta property="og:image" content="images/layout/thumbnail.jpg" />
-        <link rel="stylesheet" type="text/css" href="/css/layout.css">
+        <meta property="og:image" content="images/layouts/thumbnail.jpg" />
+        <link rel="stylesheet" type="text/css" href="/css/layouts/layout.css">
        
         <!-- Gsuite 용 -->
         <meta name="google-site-verification" content="GkEvRms7vI1Eamz8dMycBihFkootSnMpOXmu0dsa6CY" />
@@ -54,7 +54,11 @@
 
         <!-- For IE Promise Debugging -->
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+        
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+        
+        {{!-- For Moment --}}
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 
         {{!-- For Vue.js 2 --}}
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -75,23 +79,23 @@
         
         <nav class="header">
             <!-- HEADER LOGO -->
-            <a href="/"><img id="logo" alt="HaoDoc" src="/images/layout/logo2.png" ></a>
+            <a href="/"><img id="logo" alt="HaoDoc" src="/images/layouts/logo2.png" ></a>
             <!-- HEADER MENU BAR -->
-            <input id="menubar" type="image" src="/images/layout/menubar.png" />
+            <input id="menubar" type="image" src="/images/layouts/menubar.png" />
         </nav>
 
         <!-- WEIBO ICON -->
         <a href="https://www.weibo.com/u/6589350358?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank">
-            <img id="weibo" alt="Weibo" src="/images/layout/weibo.png">
+            <img id="weibo" alt="Weibo" src="/images/layouts/weibo.png">
         </a>
         <!-- Wechat ICON -->
         <a target="_blank" data-toggle="modal" data-target="#exampleModal">
-            <img id="wechat" alt="Wechat" src="/images/layout/wechat.png">
+            <img id="wechat" alt="Wechat" src="/images/layouts/wechat.png">
         </a>
 
         {{!-- Arrou Up ICON --}}
         <a id="top-btn" >
-            <img id="top"alt="Wechat" src="/images/layout/arrow_up.png">
+            <img id="top"alt="Wechat" src="/images/layouts/arrow_up.png">
         </a>
         
         <!-- Modal -->
@@ -105,7 +109,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p><img src="/images/layout/QR.jpg" id="QRCode"></p>
+                        <p><img src="/images/layouts/QR.jpg" id="QRCode"></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -118,7 +122,7 @@
 
     </div>
          <!-- javascript Section -->   
-        <script type="text/javascript" src="/js/layout.js"></script>
+        <script type="text/javascript" src="/js/controllers/layouts/layout.js"></script>
         <script type="text/javascript" src="/js/util/util.js"></script>
         {{{_sections.jquery}}}
     </body>

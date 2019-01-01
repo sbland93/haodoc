@@ -88,7 +88,7 @@ require('./routes/routes.js')(app);
 app.use(function(req, res, next){
 	//200이 default이므로 바꿔준다.
 	res.status(404);
-	res.render('home/main/404');
+	res.render('main/404');
 });
 
 //커스텀 500 페이지
@@ -96,7 +96,7 @@ app.use(function(err, req, res, next){
 	console.error('Error handler is coming....', err.stack);
 	res.type('text/html');
 	res.status(500);
-	res.render('home/main/500');
+	res.render('main/500');
 });
 
 function startServer() {

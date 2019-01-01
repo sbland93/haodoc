@@ -1,0 +1,78 @@
+{{#section 'head'}}
+    <link rel="stylesheet" type="text/css" href="/css/coupon/payment/coupon1.css">
+    <link rel="stylesheet" type="text/css" href="/css/coupon/payment/coupon0.css">
+{{/section}}
+
+<div id="coupon0_app">
+    <div class="content">
+        <h3 class="form-style-9">Step1. 使用条款同意 </h3>
+        
+        <form class="form-style-9 stepZeroForm" @submit="checkForm">
+            
+            <div class="scroll">
+    			<p>个人信息第3者提供同意 (支付) <br> </p>
+    			<p>&nbsp;1. 本公司为了可以给会员您顺利的提供我们的医院活动申请服务，我们需要给第三方提供个人信息。</p>
+                <p>&nbsp;2. 有权不同意个人信息的提供,但不同意时使用活动服务会存在一定的受限. 接收的个人信息不使用于活动服务用途外。</p>
+                <p>&nbsp;个人信息接收者 : 活动服务提供医院</p>
+                <p>&nbsp;个人信息使用目的 : 医院预约,活动服务提供及确认</p>
+                <p>&nbsp;需提供的个人信息 : <br>1) 姓名 (中文,护照英文,韩文) <br>2) 手机号码 <br>3) 微信ID <br>4) 性别 <br>5) 出生年月日 <br></p>
+                <p>&nbsp;个人信息保存及使用期间 : 直到活动服务提供及医院访问/诊疗的目的达成为止</p>
+                <p>&nbsp;拒绝同意带来的不利 : 活动服务使用受限</p>
+                <p>&nbsp;6. HaoDoc使用条款可在此处进行确认. </a></p>
+    		</div>
+    		<input type="checkbox" name="terms" id="terms" v-model="terms">使用条款同意 <br><br>
+    		
+            <div class="scroll">
+    			<p>个人信息收集及使用条款同意<br /></p>
+                <p>&nbsp;提供接收者 : 进行个人信息处理委托的业务内容<br></p>
+                <p>&nbsp;INSPIRE(HaoDoc服务运营企业名称) : 个人信息收集,保管，处理，废除，业务的委托处理<br /></p>
+                <p>&nbsp;医院代宣传企业 : 活动相关宣传及支付代行业务<br /></p>
+    		</div>
+    		<input type="checkbox" name="refundTerms" id="refundTerms" v-model="refundTerms">个人信息处理委托同意 <br><br>
+            
+            <div class="scroll">
+                <p>治疗委托合同事前同意<br /></p>
+                <p>&nbsp;1) 我们构成的系统为本医院的相应非薪项目是顾客访问本医院接受咨询治疗后可使用的.<br></p>
+                <p>&nbsp;原先是去医院进行诊疗商谈后支付,本医院是适用网上支付系统需要进行先支付。所以为了可以支付并使用本医院的相关非薪项目，在访问本医院前需要先进行治疗委托合同事前同意才可以使用本医院的相应项目。<br /></p>
+                <p>&nbsp;2) 非薪项目商品的金额中一部分是为了可以顺利提供服务，HaoDoc的服务费用。<br /></p>
+                <p>治疗委托同意事项<br /></p>
+                <p>&nbsp;1) 本医院的相关项目是需要先支付，访问医院与医生进行诊疗商谈后才可以使用的非薪项目，没有与本医院的医生进行商谈诊疗就进行手术或是治疗时可以进行退款。<br /></p>
+                <p>&nbsp;2) 本项目由于不是共同购买的形式，本医院的非薪相应项目一人支付也可进行使用。<br /></p>
+                <p>&nbsp;3) 本人在使用本医院系统时,充分了解到原是应访问该医院进行诊疗商谈后支付及接受该诊疗及治疗行为，在该医院的网页先支付，到该医院接受诊疗商谈后进行手术及治疗，您对此已同意了“治疗委托合同”。<br /></p>
+                <p>本医院就非薪项目相关的内容中，请遵守下列事项。<br /></p>
+                <p>&nbsp;a) 不适用于免费诊疗及免费手术券等诱因行为<br /></p>
+                <p>&nbsp;b) 关于非薪项目会标记正常价格，医疗机关各自维持患者<br /></p>
+                <p>&nbsp;c) 会接受支付顾客的治疗委托合同事前同意并合法的进行治疗行为。<br /></p>
+                <p>&nbsp;d) 不会以优惠券或是发放优惠券等单词进行违反医疗手续的行为。<br /></p>
+                <p>&nbsp;e) 我们的系统设置为使用后记只有实际支付及接受本医院的手术及治疗的顾客才可填写。<br /></p>
+                <p>&nbsp;f) 使用后记不会提供给非特定的多数人，适用于合法加入会员后登陆的会员才可看见。<br /></p>
+                <p>&nbsp;本人与上述相关充分认知到并同意由于该医院的治疗委托合同而产生的所有条款，本人亲自选择医院，支付后访问医院根据治疗委托步骤进行治疗。<br /></p>
+            </div>
+            <input type="checkbox" name="term-3" id="term-3" v-model="thirdTerms">治疗委托合同事前同意<br><br>
+
+            <ul>
+            	<li>
+                    <input type="submit" class="align-right" value="Submit" />
+                </li>
+                <li v-if="errors.length">
+                    {{!-- 아래사항들을 수정해 주세요 --}}
+                    <b>请修改以下项目</b><br>
+                    <ul>
+                      <li v-for="error in errors">\{{ error }}</li>
+                    </ul>
+                </li>
+            </ul>
+        </form>
+
+    </div>
+    <my-footer></my-footer>
+
+</div>
+
+{{#section 'jquery'}}
+
+    <script src="/js/controllers/coupon/coupon0Controller.js"></script>
+
+{{/section}}
+
+

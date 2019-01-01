@@ -17,34 +17,31 @@ var checkID = function(req, res, next){
 
 module.exports = function(app){
 
-
+	var renewLayout = { layout: "renew/layout.handlebars" };
 
 
 	app.get('/', function(req, res, next){
-		res.render('renew/home/main/main', { layout: "renew/layout.handlebars" });
+		res.render('main/main', renewLayout);
 	});
 
 	//home Handlers
-	app.get('/about', homeHandlers.about);
 	app.get('/admin', homeHandlers.admin);
 	app.get('/team', homeHandlers.team);
-	app.get('/rules', homeHandlers.rules);
-	app.get('/personal', homeHandlers.personal);
 
 	app.get('/feed', function(req, res, next){
-		res.render('renew/home/feed/feed', { layout: "renew/layout.handlebars" });
+		res.render('feed/feed', renewLayout);
 	});
 
 	app.get('/event', function(req, res, next){
-		res.render('renew/home/event/event', { layout: "renew/layout.handlebars" });
+		res.render('event/list/event', renewLayout);
 	});
 
 	app.get('/event/:id', checkID, function(req, res, next){
-		res.render('renew/home/event/eventInfo', { layout: "renew/layout.handlebars" });
+		res.render('event/info/eventInfo', renewLayout);
 	});
 
 	app.get('/coupon/:id', checkID, function(req, res, next){
-		res.render('renew/home/coupon/couponInfo', { layout: "renew/layout.handlebars" });
+		res.render('coupon/info/couponInfo', renewLayout);
 	});
 
 
@@ -56,17 +53,16 @@ module.exports = function(app){
 	app.get('/coupon2', couponHandlers.coupon2);
 	app.get('/coupon2/:id', checkID, couponHandlers.coupon2);
 
-	//For Development Handlers
 	app.get('/find', hospitalHandlers.find);
 	app.get('/subjectInfo', hospitalHandlers.subjectInfo);
 	app.get('/hospital/:id', checkID, hospitalHandlers.info);
 
 
 	app.get('/term1', function(req, res, next){
-		res.render('renew/home/other/term1', { layout: "renew/layout.handlebars" });
+		res.render('event/info/term/term1', renewLayout);
 	});
 	app.get('/term2', function(req, res, next){
-		res.render('renew/home/other/term2', { layout: "renew/layout.handlebars" });
+		res.render('event/info/term/term2', renewLayout);
 	});
 
 	require('./api/participant.js')(app);

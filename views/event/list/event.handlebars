@@ -1,0 +1,253 @@
+
+
+<div class="container sub" id="event_app" v-cloak>
+
+	{{!-- 배너영역 --}}
+	<div class="section-main sub">
+		<div class="inner">
+			<div class="slide-main">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div v-for="(banner, index) in banners" :class="'swiper-slide slide-0'+(index+1)">
+							<a :href="banner.url" class="image vertical-middle">
+								<img :src="'/images/banner/all/' + banner.bannerImage" alt="" class="pc">
+								<img :src="'/images/banner/all/' + banner.mobileImage" alt="" class="mobile">
+							</a>
+						</div>
+					</div>
+					<div class="swiper-pagination"></div>
+					<div class="swiper-button-next"></div>
+    			<div class="swiper-button-prev"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{!-- /배너영역 --}}
+
+	{{!-- 탭영역 --}}
+	<div class="box-sub-category inner">
+		<ul class="sub-category sub-category-05">
+			<li><a id="base-products" @click="changeBase('products')" class="active">项目分类{{!-- 전체 --}}</a></li>
+			<li><a id="base-coupons" @click="changeBase('coupons')">超值体验{{!-- 바로구매 --}}</a></li>
+			<li><a id="base-events" @click="changeBase('events')">安心咨询{{!-- 안심상담 --}}</a></li>
+		</ul>
+	</div>
+	{{!-- /탭영역 --}}
+
+
+	{{!-- 대분류 영역 --}}
+
+	{{!-- /대분류 영역 --}}
+
+
+
+	{{!-- 소분류 영역 --}}
+	<div class="section-contents sub">
+		<div class="inner cf">
+			<div class="box-sub-content">
+
+				<div class="box-all high">
+					<div class="relative cf">
+						<h2 class="fl">
+							<span v-if="high">\{{high.categoryName}}</span>{{!-- 현재 선택받은 highCategory --}}
+							<div v-else>全部 {{!-- 전부 --}}</div>
+						</h2>
+						<div class="swiper-container fl">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<a @click="changeValue('high', undefined)">全部{{!-- 전부 --}}</a>
+								</div>
+								<div class="swiper-slide" v-for="(_high, index) in highCategorys">
+									<a @click="changeValue('high', _high)">\{{_high.categoryName}}</a>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-button-next"></div>
+					</div>
+				</div>
+
+				<div class="box-all middle" v-if="high">
+					<div class="relative cf">
+						<h2 class="fl">
+							<span v-if="middle">\{{middle.categoryName}}</span>
+							<div v-else>全部 {{!-- 전부 --}}</div>
+						</h2>
+						<div class="swiper-container fl">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<a @click="changeValue('middle', undefined)">全部{{!-- 전부 --}}</a>
+								</div>
+								<div class="swiper-slide" v-for="(_middle, index) in high.middleCategorys">
+									<a @click="changeValue('middle',_middle)">\{{_middle.categoryName}}</a>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-button-next"></div>
+					</div>
+				</div>
+
+
+				<div class="box-all low" v-if="high && middle">
+					<div class="relative cf">
+						<h2 class="fl">
+							<span v-if="low">\{{low.categoryName}}</span>
+							<div v-else>全部 {{!-- 전부 --}}</div>
+						</h2>
+						<div class="swiper-container fl">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<a @click="changeValue('low', undefined)">全部{{!-- 전부 --}}</a>
+								</div>
+								<div class="swiper-slide" v-for="(_low, index) in middle.lowCategorys">
+									<a @click="changeValue('low', _low)">\{{_low.categoryName}}</a>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-button-next"></div>
+					</div>
+				</div>
+
+
+				<div v-if="low && low.content_1 !== ' '"  class="box-fold all first">
+					<div class="title">项目概念 {{!-- 개념 --}}</div>
+					<div class="content cf">
+						<div class="icon eye fl"><img :src="'/images/category/all/'+low.iconImage" alt=""></div>
+						<div class="text fr">
+							<ul>
+								<li><span v-html="low.content_1"></span></li>
+							</ul>
+							<div class="description">
+								<span v-html="low.content_2"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div v-if="low && low.questions && low.questions[0].content !== ' '" class="box-fold faq">
+					<div class="title">常见问题 {{!-- 자주 묻는 질문 --}}</div>
+					<div class="content cf">
+						<div v-for="(question, index) in low.questions">
+							<div class="question"><span v-html="question.content"></span></div>
+							<div class="answer">
+								<span v-html="question.answer"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--div v-if="category" class="box-fold warning">
+					<div class="title">手术前后注意事项 {{!-- 수술 전 후 주의사항 --}}</div>
+					<div class="content cf">
+						<div class="box-warning cf">
+							<div class="step fl">前{{!-- 전 --}}</div>
+							<div class="text fr">
+								<ul class="list-bullet">
+									<li v-for="(caution, index) in category.caution_1">
+										<span v-html="caution.content"></span>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="box-warning cf">
+							<div class="step fl">后{{!-- 후 --}}</div>
+							<div class="text fr">
+								<ul>
+									<li v-for="(caution, index) in category.caution_2">
+										<div class="day">\{{caution.day}}</div>
+										<div>
+											<span v-html="caution.content"></span>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div-->
+
+				<div class="box-fold event active">
+					<div class="title">相关活动{{!-- 이벤트 모아보기 --}}</div>
+					<div class="content cf">
+						<ul class="box-event">
+							<li v-for="(product, index) in products"
+							:class="product.isCoupon? 'coupon': ''">
+								<a v-if="product.isCoupon && (sortBase == 'products' || sortBase == 'coupons')" :href="'/coupon/'+product.id" class="cf">
+									<div class="image vertical-middle fl">
+										<img :src="'/images/coupon/all/'+product.thumbnailImage" alt="">
+									</div>
+									<div class="detail fr">
+										<div class="cf">
+											<span class="name">\{{product.hospitalName | split_hospital_name }}</span>
+											{{!-- <span class="date">\{{product.couponRange}}</span> --}}
+										</div>
+										<div class="text sc">
+											<div class="event ellipsis">\{{product.couponName | split_event_name }}</div>
+											<div class="description ellipsis-multi">\{{product.subway}}</div>
+										</div>
+										<div class="bottom cf">
+											<!--div class="view fl">720</div-->
+											<div class="price fr">
+												<div class="before" v-if="product.originalPrice > 0">\{{product.originalPrice | price}}</div>
+												<div class="current">
+													<span class="number">
+														 \{{product.views}} <i class="far fa-eye"></i> \{{product.payments}} <i class="fas fa-shopping-cart"></i>
+													</span>
+													<span class="small">\{{product.price | changeCNY}} </span> \{{product.price | price}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</a>
+								<a v-if="!product.isCoupon && (sortBase == 'products' || sortBase == 'events')" :href="'/event/'+ product.id" class="cf">
+									<div class="image vertical-middle fl">
+										<img :src="'/images/event/all/' + product.thumbnailImage " alt="">
+									</div>
+									<div class="detail fr">
+										<div class="cf">
+											<span class="name">\{{product.hospitalName | split_hospital_name }}</span>
+											{{!-- <span class="date">\{{product.eventRange}}</span> --}}
+										</div>
+										<div class="text sc">
+											<div class="event ellipsis">\{{product.eventName | split_event_name }}</div>
+											<div class="description ellipsis-multi">\{{product.subway}}</div>
+										</div>
+										<div class="bottom cf">
+											<!--div class="view fl">720</div-->
+											<div class="price fr">
+												<div class="before" v-if="product.originalPrice > 0">\{{product.originalPrice | price}}</div>
+
+												<div class="current">
+													<span class="number">
+														 \{{product.views}} <i class="far fa-eye"></i> \{{product.payments}} <i class="fas fa-shopping-cart"></i>
+													</span>
+													<span class="small">\{{product.price | changeCNY}} </span> \{{product.price | price}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+{{#section 'jquery'}}
+	<script src="/js/api/event.js"></script>
+	<script src="/js/api/coupon.js"></script>
+	<script src="/js/api/banner.js"></script>
+	<script src="/js/api/highCategory.js"></script>
+	<script src="/js/api/category.js"></script>
+	<script type="text/javascript" src="/js/controllers/event/eventController.js"></script>
+{{/section}}
+
+

@@ -19,7 +19,6 @@ var app = new Vue({
     	
         getCoupon(couponID).then(function(coupon){
             self.coupon = coupon;
-            console.log(coupon);
         });
     
     },
