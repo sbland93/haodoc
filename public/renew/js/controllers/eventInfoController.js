@@ -83,7 +83,6 @@ var app = new Vue({
 			if(!self.terms1 || !self.terms2){
 				validation_flag = false;
 			}
-			console.log("validation_flag", validation_flag);
 			if(validation_flag){
 				addParticipant(self.new_participant_obj).then(function(rtn){
 					if(rtn.success){
