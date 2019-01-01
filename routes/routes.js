@@ -61,43 +61,6 @@ module.exports = function(app){
 	app.get('/subjectInfo', hospitalHandlers.subjectInfo);
 	app.get('/hospital/:id', checkID, hospitalHandlers.info);
 
-	//For Question Handlers
-
-	app.get('/question', questionHandlers.question);
-	app.get('/recommend', questionHandlers.recommend);
-	app.get('/translate', questionHandlers.translate);
-	app.get('/insurance', questionHandlers.insurance);
-	app.get('/accompany', questionHandlers.accompany);
-
-	app.get('/recommendInfo/:id',  checkID, questionHandlers.recommendInfo);
-	app.get('/translateInfo/:id',  checkID, questionHandlers.translateInfo);
-	app.get('/insuranceInfo/:id',  checkID, questionHandlers.insuranceInfo);
-	app.get('/accompanyInfo/:id',  checkID, questionHandlers.accompanyInfo);
-
-	//Renewal
-	app.get('/renew', function(req, res, next){
-		res.render('renew/main', {layout: false});
-	});
-
-	app.get('/renew/event', function(req, res, next){
-		res.render('renew/event', {layout:false});
-	});
-
-	app.get('/test/renew', function(req, res, next){
-		res.render('renew/home/main/main', { layout: "renew/layout.handlebars" });
-	});
-
-	app.get('/test/renew/event', function(req, res, next){
-		res.render('renew/home/event/event', { layout: "renew/layout.handlebars" });
-	});
-
-	app.get('/test/renew/event/:id',  checkID, function(req, res, next){
-		res.render('renew/home/event/eventInfo', { layout: "renew/layout.handlebars" });
-	});
-
-	app.get('/test/renew/coupon/:id',  checkID, function(req, res, next){
-		res.render('renew/home/coupon/couponInfo', { layout: "renew/layout.handlebars" });
-	});
 
 	app.get('/term1', function(req, res, next){
 		res.render('renew/home/other/term1', { layout: "renew/layout.handlebars" });
@@ -110,14 +73,9 @@ module.exports = function(app){
 	require('./api/couponReview.js')(app);
 	require('./api/payer.js')(app);
 	require('./api/coupon.js')(app);
-	require('./api/user.js')(app);
 	require('./api/hospital.js')(app);
 	require('./api/subway.js')(app);
 	require('./api/event.js')(app);
-	require('./api/recommend.js')(app);
-	require('./api/insurance.js')(app);
-	require('./api/translate.js')(app);
-	require('./api/accompany.js')(app);
 	require('./api/feed.js')(app);
 	require('./api/file.js')(app);
 	require('./api/highCategory.js')(app);

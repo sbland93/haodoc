@@ -1,4 +1,3 @@
-var Hospital = require('../models/hospital.js');
 
 module.exports = function(){
 	

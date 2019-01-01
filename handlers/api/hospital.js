@@ -1,4 +1,4 @@
-var Hospital = require('../../models/hospital2.js');
+var Hospital = require('../../models/hospital.js');
 var hospitalViewModel = require('../../viewModels/hospital.js');
 var fs = require('fs');
 var path = require('path');

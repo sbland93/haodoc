@@ -6,8 +6,6 @@ var express = require('express');
 var app = express();
 
 //Model들 로드.
-// var Schools = require('./models/school.js');
-var Users = require('./models/user.js');
 
 //몽구스 설정.
 var mongoose = require('mongoose');
