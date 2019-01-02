@@ -1,0 +1,449 @@
+
+
+{{#section 'head'}}
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="/css/hospital/hospitalInfo.css">
+
+{{/section}}
+
+
+
+<div id="app">
+
+    <section class="name-box text-white logoColorBG">
+		<div class="container">
+	        <div class="row">
+		        <div class="col-sm-12 col-lg-12 hospitalName">
+	    	        <h1>
+	        	        \{{hospital.name}}
+	            	</h1>
+	    		</div>
+	        </div>
+		</div>
+    </section>
+    
+    <br><br>
+    
+    <section class="search-box">
+		<div class="container">
+			
+			<div class="row">
+				<br>
+				    <h2 class="col-sm-12 logoColor text-center" style="padding-top:20px">
+				    	医院基本信息<!--병원 기본 정보--> 
+				    </h2>
+			    <br>
+			</div>
+
+		    <div class="row">
+
+	            <div class="col-sm-5 well listing-box">
+	            	
+	            	<br>
+	            	<br>
+	            	<h3 style="line-height:20%;">
+	            		<i class="fas fa-globe fa-1x" style="line-height:6%;color:#BD1622"></i> 诊疗科目<!--진료과목-->
+	        		</h3>
+	                <p style="margin-top:12%;line-height:35%">
+	                	<span v-for="subject in hospital.subjects"><b>- \{{subject}}</b> </span></p><br>
+
+	                <h3 style="line-height:20%;">
+	                	<i class="fas fa-map-marker-alt fa-1x" style="line-height:6%;color:#BD1622"></i> 详细地址<!--상세주소-->
+	                </h3>
+
+	                <p style="margin-top:12%;">- \{{ fullAddress }}</p><br />
+
+	                <h3 style="line-height:20%;" v-show="hospital.homepage">
+	                	<i class="fas fa-map-marker-alt fa-1x" style="line-height:6%;color:#BD1622"></i> Homepage<!--상세주소-->
+	                </h3>
+
+	                <p style="margin-top:12%;" v-show="hospital.homepage" >-<a :href="hospital.homepage"> \{{ hospital.homepage }}</a></p><br />
+	                
+	                <h3 style="line-height:20%;">
+	                	<i class="fas fa-phone fa-1x" style="line-height:6%;color:#BD1622"></i>电话号<!--전화번호-->
+	                </h3>
+	                
+	                <p style="margin-top:12%;line-height:35%">
+	                	<a href="siteadresi.com/destek">-\{{ hospital.tel }}</a>
+	                </p>
+	                <br />
+	                
+	                <h3 style="line-height:20%;">
+	                	<i class="far fa-calendar-alt fa-1x" style="line-height:6%;color:#BD1622"></i> 诊疗时间<!--진료시간-->
+	                </h3>
+
+	                <p style="margin-top:12%;line-height:130%">
+	                	
+	                	- 星期一 : \{{hospital.monStart | makeTimeForm}} ~ \{{hospital.monClose | makeTimeForm}}<br>
+	                	
+	                	- 星期二 : \{{hospital.tueStart | makeTimeForm}} ~ \{{hospital.tueClose | makeTimeForm}}<br>
+	                	
+	                	- 星期三 : \{{hospital.wedStart | makeTimeForm}} ~ \{{hospital.wedClose | makeTimeForm}}<br>
+	                	
+	                	- 星期四 : \{{hospital.thuStart | makeTimeForm}} ~ \{{hospital.thuClose | makeTimeForm}}<br>
+	                	
+	                	- 星期五 : \{{hospital.friStart | makeTimeForm}} ~ \{{hospital.friClose | makeTimeForm}}<br>
+
+	                	- 星期六 : \{{hospital.satStart | makeTimeForm}} ~ \{{hospital.satClose | makeTimeForm}}<br>
+
+
+						<div v-if="hospital.sunStart">
+	                	    - 星期日 : \{{hospital.sunStart | makeTimeForm}} ~ \{{hospital.sunClose | makeTimeForm}}<br>
+	                	</div>
+	                	<div v-else>
+		                	- 星期日 : 休息<br>
+	                	</div>
+	                	<div v-if="hospital.holStart">
+	                		 - 假期 : \{{hospital.holStart | makeTimeForm}} ~ \{{hospital.holClose | makeTimeForm}}<br>
+	                	</div>
+	                	<div v-else>
+	                		- 假期  : 休息<br>
+	                	</div>
+	                	
+                		<div v-if="hospital.remarks">\{{hospital.remarks}}</div>
+                		<!--- subway : {{hospital.subway}}-->
+            		</p>
+	                <br />
+	                <div class="alert alert-danger col-xs-5" role="alert">
+				 		诊疗时间有可能会变更请向相应的医院电话确认后再进行访问。
+					</div>
+					<div class="alert alert-danger col-xs-5" role="alert" style="margin-top:10px; font-size:0.7em;">
+						备注：
+						韩国法定公休日：元旦（1月1日），新年（农历1月1日），三一节（3月1日），儿童节（5月5日），释迦诞生日（农历4月8日），显忠日（6月6日），光复节（8月15日），中秋（农历8月15日），开天节（10月3日），韩文节（10月9日），圣诞节（12月25日）
+					</div>
+	            </div>
+
+
+		        <div class="col-sm-7">
+		        	<br>	
+					<div id="map" style="width:100%; height:430px; border:0;"></div>
+				    <div class="float-right">
+					    <button class="mobile-btn btn" @click="toggleUpdate" style="margin-top:120px">Update</button>
+					    <button class="mobile-btn btn" @click="toggleReview" style="margin-top:120px">Review</button>
+					    <button class="mobile-btn btn" @click="togglePhotos" style="margin-top:120px">Photos</button>
+				    </div>
+		        </div>
+		       
+		    </div>
+
+	        
+
+		    <br><br>
+		    
+		    <!-- 병원 사진 렌더링 -->
+		    <!--div class="photo"-->
+		    <div class="photo" v-show="havePhoto">
+		    	<h2 class="logoColor text-center"> 医院照片 </h2>
+			    <div class="container-fluid row">
+				    <div style="float : none; margin: 0 auto;">
+			    		<span class="col-xs-12 col-md-4" v-for="photo in hospital.photos">
+			    			<img class="img-responsive" :src="imageHref(photo)">
+			    		</span>
+			    	</div>
+			    </div>
+		    </div>
+
+	</section>
+	<section v-if="reviewToggle" class="search-box row">
+		<form style="padding:10px">
+			<div class="form-group">
+				<div class="col-xs-3">
+					<label for="treatment">받은치료</label>
+					<input type="text" v-model="newReview.treatment" id="treatment" class="form-control">
+				    <small id="emailHelp" class="form-text text-muted">받은 치료를 나열해 적어주세요. ex)피검사, 스케일링, 교정</small>
+				</div>
+				<div class="col-xs-3">
+					<label for="star">총 만족도</label>
+		    		<input type="text" id="star" class="form-control" v-model="newReview.star">
+				    <small id="emailHelp" class="form-text text-muted">진료에 대한 전체적인 만족도를 1,2,3,4,5중 표현해 주세요.</small>
+				</div>
+				<div class="col-xs-3">
+					<label for="content">상세 후기</label>
+		    		<input type="text" id="content" class="form-control" v-model="newReview.content">
+				    <small id="emailHelp" class="form-text text-muted">진료의 전문성, 서비스 친절도, 대기시간, 치료후 결과 등에 대한 후기를 적어주세요! 좀 더 상세한 리뷰는 건강한 세상 만들기에 도움을 줄 수 있습니다:)</small>
+				</div>
+				<div class="col-xs-3">
+					<label for="weChat">위챗 아이디</label>
+		    		<input type="text" id="weChat" class="form-control" v-model="newReview.weChat">
+				    <small id="emailHelp" class="form-text text-muted">건강한 리뷰작성 이벤트에 도움주셔서 감사합니다! 상품을 보내드릴 위챗 아이디를 적어주시면 HaoDoc에서 빠른 시일내에 보내드리겠습니다. 고객님의 소중한 개인정보는 상품 발송 직후에 바로 삭제 됩니다. 감사합니다.</small>
+				</div>
+				<div class="col-xs-3">
+					<label for="password">리뷰 잠금 비밀번호</label>
+		    		<input type="text" id="password" class="form-control" v-model="newReview.password">
+				    <small id="password" class="form-text text-muted">리뷰 수정, 삭제시에 사용할 리뷰 잠금 비밀번호 (숫자 네자리 ex. 1234 )를 입력해주세요.</small>
+				</div>
+			</div>
+		</form>
+	    <button class="mobile-btn btn" @click="addReview">리뷰 작성 완료</button>
+	    <button class="mobile-btn btn" @click="toggleReview">작성 취소</button>
+	</section>
+
+	<!--사진 관리 탭 -->
+	<section v-if="photosToggle" class="search-box row">
+		<form style="padding:10px" role="form" class="form" id="photos-form">
+			<div class="form-group">
+				<div class="form-group">
+                    <label for="cc_name">병원 관련 사진</label>
+                    <div v-for="(photo, index) in photos">
+                    	<input type="file" class="form-control" :name="index" :id="index">
+                    	<button class="btn" @click="deletePhoto(index, $event)">X</button>
+                    </div>
+            		<button class="mobile-btn btn" @click="addPhoto">사진 추가하기</button>
+                </div>
+			</div>
+		</form>
+		<form style="padding:10px" role="form" class="form" id="photos-form">
+			<div class="form-group">
+				<div class="form-group">
+                    <label for="cc_name">삭제 관련</label>
+                    <div v-for="(photo, index) in hospital.photos">
+                    	<input type="text" class="form-control" :value="photo">
+                    	<button class="btn mobile-btn" @click="removePhoto(photo, $event)">\{{index}}번째 사진삭제하기</button>
+                    </div>
+                </div>
+			</div>
+		</form>
+	    <button class="mobile-btn btn" @click="changePhotos">사진 관리 완료</button>
+	    <button class="mobile-btn btn" @click="togglePhotos">취소</button>
+	</section>
+
+	<section v-if="updateToggle" class="search-box row">
+		<div class="form" role="form" style="padding:10px">
+			<div class="form-group">
+		<div class="col-xs-3">
+			<label for="hospitalName">병원이름</label>
+			<input type="text" v-model="hospital.name" id="hospitalName" class="form-control">
+		    <small id="emailHelp" class="form-text text-muted">이름이 틀릴시 변경입니다</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="hospitalCity">시</label>
+			<input type="text" name="" id="hospitalCity" class="form-control" v-model="hospital.city">
+		</div>
+		<div class="col-xs-3">
+			<label for="district">구</label>
+    		<input type="text" name="" id="district" class="form-control" v-model="hospital.district">
+		</div>
+		<div class="col-xs-3">
+			<label for="neighborhood">동</label>
+    		<input type="text" name="" id="neighborhood" class="form-control" v-model="hospital.neighborhood">
+		</div>
+		<div class="col-xs-3">
+			<label for="address">상세주소</label>
+    		<input type="text" name="" id="address" class="form-control" v-model="hospital.address">
+		</div>
+		<div class="col-xs-3">
+			<label for="tel">전화번호</label>
+    		<input type="text" id="tel" class="form-control" v-model="hospital.tel">
+		</div>
+		<div class="col-xs-3">
+			<label for="homepage">홈페이지</label>
+    		<input type="text" id="homepage" class="form-control" v-model="hospital.homepage">
+		</div>
+		<div class="col-xs-3">
+			<label for="subjects">진료과목</label>
+    		<!--input type="text" id="subjects" class="form-control" v-model="hospital.subjects"-->
+    		<div v-for="(subject, index) in hospital.subjects">
+    			<input id="subjects" type="text" class="subjects" v-model="hospital.subjects[index]"><button class="btn" @click="deleteSubject(subject)">X</button>
+    		</div>
+    		<button class="mobile-btn btn" @click="addSubject">진료과목 추가하기</button>
+		    <small id="emailHelp" class="form-text text-muted">ex)耳鼻喉科,内科,皮肤科 등 중국어만 한칸에 하나씩 입력해주세요.</small>
+		    <small id="emailHelp" class="form-text text-muted">"耳鼻喉科"(이비인후과) "内科"(내과) "皮肤科"(피부과) "牙科"(치과) "眼科"(안과) "骨科"(정형외과) "妇产科"(산부인과) "整形外科"(성형외과) "康复科"(재활의학과) "小儿科"(소아청소년과) </small>
+		    <small id="emailHelp" class="form-text text-muted">"家庭医学科"(가정의학과) "神经外科"(신경외과) "外科"(외과) "泌尿科"(비뇨의학과) "影像科"(영상의학과) "病理科"(병리과) "麻醉科"(마취통증의학과) "神经科"(신경과) "诊断检查科"(진단검사의학과) "应急室"(응급의학과)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="monTime">월요일시간</label>
+    		<input type="text" name="" id="monTime" class="form-control" v-model="hospital.monStart"> ~ <input type="text" name="" class="form-control" v-model="hospital.monClose">
+		    <small id="emailHelp" class="form-text text-muted">네개의 숫자로만 입력해주세요 ex) 1000 (o) 10:00(x)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="tueTime">화요일시간</label>
+    		<input type="text" name="" id="tueTime" class="form-control" v-model="hospital.tueStart"> ~ <input type="text" name="" class="form-control" v-model="hospital.tueClose">
+		    <small id="emailHelp" class="form-text text-muted">네개의 숫자로만 입력해주세요 ex) 1000 (o) 10:00(x)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="wedTime">수요일시간</label>
+    		<input type="text" name="" id="wedTime" class="form-control" v-model="hospital.wedStart"> ~ <input type="text" name="" class="form-control" v-model="hospital.wedClose">
+		    <small id="emailHelp" class="form-text text-muted">네개의 숫자로만 입력해주세요 ex) 1000 (o) 10:00(x)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="thuStart">목요일시간</label>
+    		<input type="text" name="" id="thuStart" class="form-control" v-model="hospital.thuStart"> ~ <input type="text" name="" class="form-control" v-model="hospital.thuClose">
+		    <small id="emailHelp" class="form-text text-muted">네개의 숫자로만 입력해주세요 ex) 1000 (o) 10:00(x)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="friTime">금요일시간</label>
+    		<input type="text" name="" id="friTime" class="form-control" v-model="hospital.friStart"> ~ <input type="text" name="" class="form-control" v-model="hospital.friClose">
+		    <small id="emailHelp" class="form-text text-muted">네개의 숫자로만 입력해주세요 ex) 1000 (o) 10:00(x)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="satTime">토요일시간</label>
+    		<input type="text" name="" id="satTime" class="form-control" v-model="hospital.satStart"> ~ <input type="text" name="" class="form-control" v-model="hospital.satClose">
+		    <small id="emailHelp" class="form-text text-muted">네개의 숫자로만 입력해주세요 ex) 1000 (o) 10:00(x)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="sunTime">일요일시간</label>
+    		<input type="text" name="" id="sunTime" class="form-control" v-model="hospital.sunStart"> ~ <input type="text" name="" class="form-control" v-model="hospital.sunClose">
+		    <small id="emailHelp" class="form-text text-muted">네개의 숫자로만 입력해주세요 ex) 1000 (o) 10:00(x)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="sunTime">공휴일시간</label>
+    		<input type="text" name="" id="sunTime" class="form-control" v-model="hospital.holStart"> ~ <input type="text" name="" class="form-control" v-model="hospital.holClose">
+		    <small id="emailHelp" class="form-text text-muted">네개의 숫자로만 입력해주세요 ex) 1000 (o) 10:00(x)</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="subway">지하철</label>
+    		<input type="text" name="" id="subway" class="form-control" v-model="hospital.subway">
+		    <small id="subwayhelp" class="form-text text-muted">반드시 정확한 역의 중국어 이름을 입력해주셔야 합니다. 모르시겠다면 나무위키에 검색하면 역의 중국어 이름이 나와요! 정확한지는 한번 케리에게 물어보고 진행해주세요!</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="remarks">특이사항</label>
+    		<input type="text" name="" id="remarks" class="form-control" v-model="hospital.remarks">
+		    <small id="subwayhelp" class="form-text text-muted">특이사항(ex. HPV 백신 접종 가능, MMR 접종 가능, 미백 가격 얼마, 등등) 비정형 데이터들을 '중국어로' 입력해주세요.</small>
+		</div>
+		<div class="col-xs-3">
+			<label for="remarks">상단 노출 키워드</label>
+			<div v-for="(keyword, index) in hospital.keywords">
+    			<input id="keywords" type="text" class="keywords" v-model="hospital.keywords[index]"><button class="btn" @click="deleteKeyword(keyword)">X</button>
+    		</div>
+    		<button class="mobile-btn btn" @click="addKeyword">키워드 추가하기</button>
+		    <small id="subwayhelp" class="form-text text-muted">강남역, 回基站, 서대문구, 서대문구 창천동, 서대문구 牙科, 서대문구 창천동 牙科 (한국어역이름, 중국어역이름, 구, 구 동, 구 진료과, 구 동 진료과, 진료과목은 항상 중국어입니다!)</small>
+		</div>
+			</div>
+		</div>
+		<button class="mobile-btn btn" @click="updateHospital">수정사항 반영하기</button>
+   		<button class="mobile-btn btn" @click="toggleUpdate">작성 취소</button>
+
+
+	</section>
+
+    <section class="search-box">
+
+	<div class="container">
+		<br>
+		<h2 class="text-center logoColor">医院访问后记</h2>
+		<br>
+
+
+		<div v-for="review in hospital.reviews">
+			<div class="card">
+				<div class="card-body">
+			        <div class="row">
+		        	    <div class="col-md-12">
+		        	        <p>
+		        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>\{{review.treatment}}</strong></a>
+		        	            <span v-for="index in review.star">
+			        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+		        	            </span>
+		        	       </p>
+		        	       <div class="clearfix"></div>
+		        	        <p>\{{review.content}}</p>
+		        	        <p>
+		        	           <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
+		        	           <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+		        	        </p>
+		        	    </div>
+			        </div>
+		    	</div>
+			</div>
+		</div>
+
+
+		<!--div class="card">
+		    <div class="card-body">
+		        <div class="row"-->
+	        	    <!--div class="col-md-2">
+	        	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+	        	        <p class="text-secondary text-center">Several Days Ago</p>
+	        	    </div-->
+	        	    <!--div class="col-md-12">
+	        	        <p>
+	        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>鲁洁</strong></a>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	                        <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+
+
+	        	       </p>
+	        	       <div class="clearfix"></div>
+	        	        <p>当初需要水平不太好，所以去了以后听不懂😂 而且我也不知道我的保险能不能用，他们咨询台的人讲了一大堆，发现他们也不是很明白.然后医生还挺倔的，我都告诉他，我在国内确认过是湿疹了，非跟我说是水痘，我说我曾经得过水痘了，他还在那边不信……是一次非常差的就诊体验！！！甚至可以说是糟糕！但是就诊环境还是不错的，不用排队，有沙发可以休息，而且当时快到夏天了，冷气也开放，比较舒服。然后还有自助饮水机和咖啡，挺全的。这些都挺好。</p>
+	        	        <p>
+	        	            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> 1</a>
+	        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i>2</a>
+	        	       </p>
+	        	    </div>
+	        	    <div class="col-md-12">
+	        	        <p>
+	        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>庄珺茹</strong></a>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	                        <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+
+
+	        	       </p>
+	        	       <div class="clearfix"></div>
+	        	        <p>本来要去大医院打疫苗，但是下课时突然看到学校里挂的横幅，说是有活动打子宫癌疫苗，觉得在学校张贴的广告一定是信得过的，毕竟是医疗方面，一定得小心，然后就去了广告上说的小医院，去了以后只有一个医生和一个护士（也可能是因为午休时间，中午下课去的），护士很不耐烦，我说我要打针，接着就付款填表打了，五分钟都不用，主要是针对那个疫苗没有给我任何的说明，这是什么疫苗，几价，打完需要注意什么，下次什么时候再来，什么话都没有，就让我走人，我就一个一个的问，护士就惜字如金的告诉我二价，没别的，不知道，不知道这个疫苗第二次打得时候可不可以去别的地方打，（因为担心不同医院用的药不一样，怕引起不良反应）如果可以，这医院不想再去第二次</p>
+	        	        <p>
+	        	            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> 2</a>
+	        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i>1</a>
+	        	       </p>
+	        	    </div>
+	        	    <div class="col-md-12">
+	        	        <p>
+	        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>虞箫萌</strong></a>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	                        <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+
+
+	        	       </p>
+	        	       <div class="clearfix"></div>
+	        	        <p>一直因为韩国打hpv疫苗快捷 资金方面又便宜才开始找医院 一开始是通过同学推荐来的 说是学生会组织的 然后医院也很正规 价格也很合理 各方宏大8号口出去，有中文系的韩国小姐姐来接，一起去医院，中文很好，人也很亲切。到了医院，医生护士都很温柔很亲切，笑眯眯的。到了先量体温，不发烧就可以接种hpv9价疫苗了。打针很快，注射的时候会痛，但能忍受，打完针会给一杯热水让你喝掉，会嘱咐不要喝酒。有微信和支付宝支付功能，还可以visa卡，很贴心。回到家晚上有点低烧，浑身酸痛，醒了好几次，第二天躺了一天才好，疫苗的副作用，能接受。</p>
+	        	        <p>
+	        	            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> 4</a>
+	        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i>3</a>
+	        	       </p>
+	        	    </div>
+	        	    <div class="col-md-12">
+	        	        <p>
+	        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>白潇义</strong></a>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	                        <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+	        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+
+
+	        	       </p>
+	        	       <div class="clearfix"></div>
+	        	        <p>现在国内的九价疫苗很不好预约，在韩国这边报名接种宫颈癌九价疫苗之后，交完5万预约金之后就几乎没费过心了，还是比较省事的。陪同人员也很耐心，还给了小零食。医院环境也很好，接种的时候那位女医生还很有亲和力地分散注意力，手法也很轻柔，扎针的时候都没什么感觉，就是推的时候涨涨的。接种完之后还提醒我们不要喝酒不要剧烈运动，多喝水什么的，很细心。</p>
+	        	        <p>
+	        	            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i>1</a>
+	        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i>1</a>
+	        	       </p>
+	        	    </div>
+		        </div>
+		    </div>
+		</div-->
+
+
+		<br><br>
+	</div>
+
+	</section>
+	
+</div>
+
+
+
+
+{{#section 'jquery'}}
+
+	<script type="text/javascript" src="/js/api/hospital.js"></script>
+	<script type="text/javascript" src="/js/controllers/hospital/hospitalInfoController.js"></script>
+
+{{/section}}

@@ -1,0 +1,24 @@
+.form-style-9 p{
+	padding-left:0px;
+}
+
+
+.infoImage{
+  padding:0px 500px 0px 500px;
+  width:100%;
+}
+
+
+
+@media (max-width: 991px) {
+	.form-style-9 img{
+		width:280px;
+	}
+}
+
+@media (max-width: 768px) {
+    .infoImage{
+    	padding: 0px 0px 0px 0px;
+    	width: 100%;
+    } 
+}

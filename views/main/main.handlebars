@@ -1,0 +1,202 @@
+
+{{!-- 컨테이너영역 --}}
+<div id="main_app" class="container" v-cloak>
+	{{!-- 메인섹션 --}}
+	<div class="section-main">
+		<!-- 카테고리 영역 -->
+		<div class="inner relative">
+			<div class="lnb">
+				
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<span v-for="(high, index) in highCategorys">
+							<div :class="'swiper-slide '+index">
+								<a :href="'/event?high='+high.categoryName">
+									<img :src="'/images/category/highCategory/all/'+high.iconImage" alt="">\{{high.categoryName}}
+								</a>
+							</div>
+						</span>
+					</div>
+				</div>
+				<div class="swiper-button-next"></div>
+
+				<div :class="'box-lnb-2depth '+_index" v-for="(high,_index) in highCategorys">
+					<ul class="lnb-2depth">
+						<li v-for="(middle, index) in high.middleCategorys">
+							<a class="title cf">
+								<div class="text fl">\{{middle.categoryName}}</div>
+							</a>
+							<ul class="subject cf">
+								<li v-for="(low, index) in middle.lowCategorys">
+									<a :href="'/event?high='+high.categoryName+'&middle='+middle.categoryName+'&low='+low.categoryName">\{{low.categoryName}}</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+		{{!-- /카테고리 영역 --}}
+		{{!-- 배너 영역 --}}
+		<div class="slide-main">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div v-for="(banner, index) in banners" :class="'swiper-slide slide-0'+(index+1)">
+						<a :href="banner.url" class="image vertical-middle">
+							<img :src="'/images/banner/all/' + banner.bannerImage" alt="" class="pc">
+							<!--img src="/renew/images/img_slide_01.jpg" alt="" class="pc"-->
+							<img :src="'/images/banner/all/' + banner.mobileImage" alt="" class="mobile">
+						</a>
+					</div>
+				</div>
+				<div class="swiper-pagination"></div>
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+			</div>
+		</div>
+		{{!-- /배너영역 --}}
+	</div>
+	{{!-- /메인섹션 --}}
+
+	{{!-- 모바일 카테고리 --}}
+	<div class="lnb-m">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+
+				<div v-for="(category, index) in highCategorys" v-if="highCategorys[index*2]" class="swiper-slide" >
+					<a :href="'/event?high='+highCategorys[index*2].categoryName">
+						<div class="icon"><img :src="'/images/category/highCategory/all/'+highCategorys[index*2].iconImage" alt=""></div>
+						<div class="text">\{{highCategorys[index*2].categoryName}}</div>
+					</a>
+					<a :href="'/event?high='+highCategorys[index*2+1].categoryName" v-if="highCategorys[index*2 +1]">
+						<div class="icon"><img :src="'/images/category/highCategory/all/'+highCategorys[index*2+1].iconImage" alt=""></div>
+						<div class="text">\{{highCategorys[index*2+1].categoryName}}</div>
+					</a>
+				</div>
+				
+				
+			</div>
+		</div>
+		<div class="swiper-pagination"></div>
+	</div>
+
+	{{!-- /모바일 카테고리 --}}
+
+	{{!-- 컨텐츠섹션 --}}
+	<div class="section-contents">
+		<div class="inner cf">
+			{{!-- 피드영역 --}}
+			<div class="box-feed fr">
+				<h2>精彩活动 {{!-- 최근활동 --}}</h2>
+				<div class="banner cf">
+					<div class="left-m">
+						<a href="https://mp.weixin.qq.com/s?__biz=Mzg4NzAzMzQ5OQ==&mid=2247483813&idx=3&sn=89ee4923b74954822113b62d7645f561&chksm=cf91da51f8e65347bb7ee933072bf812f46551a0624cdf275464b0a7d6c701f42279bf979b66&token=687913300&lang=zh_CN#rd">
+							<img src="/images/feed/all/피드_화이트닝.png" alt="">
+						</a>
+					</div>
+					<div class="right-m">
+						<a href="http://www.haodoc.co.kr/coupon/5c066e88f53fdc6fc892f29d?utm_source=haodoc&utm_medium=homepagebanner&utm_campaign=lizhulan">
+							<img src="/images/feed/all/피드_리쥬란.png" alt="">
+						</a>
+						<a href="http://www.haodoc.co.kr/coupon/5c1730493281e4315f0c146e?utm_source=haodoc&utm_medium=homepagebanner&utm_campaign=xinnianmubiao">
+							<img src="/images/feed/all/피드_새해이벤트.png" alt="">
+						</a>
+					</div>
+				</div>
+			</div>
+			{{!--/피드영역 --}}
+			{{!--이벤트영역 --}}
+			<div class="box-all fr">
+				<h2 class="dn">相关活动 {{!-- 이벤트 모아보기 --}}</h2>
+				<div class="box-fold event active">
+			{{!-- <div class="title">相关活动</div>--}}	
+					<div class="content cf">
+						<ul class="box-event">
+							<li v-for="(product, index) in products"
+							:class="product.isCoupon? 'coupon': ''">
+								<a v-if="product.isCoupon" :href="'/coupon/'+product.id" class="cf">
+									<div class="image vertical-middle fl">
+										<img :src="'/images/coupon/all/'+product.thumbnailImage" alt="">
+									</div>
+									<div class="detail fr">
+										<div class="cf">
+											{{!-- <div class="event ellipsis">\{{product.couponName}}</div> --}}
+											<span class="name">\{{product.hospitalName | split_hospital_name }}</span>
+										</div>
+										<div class="text sc">
+											<div class="event ellipsis">\{{product.couponName | split_event_name }}</div>
+											<div class="description ellipsis-multi">\{{product.subway}}
+											</div>
+										</div>
+										<div class="bottom cf">
+											{{!-- <div class="view fl">720</div> --}}
+											<div class="price fr">
+												<div class="before" v-if="product.originalPrice > 0">\{{product.originalPrice | price}}</div>
+												<div class="current">
+													<span class="number">
+														 \{{product.views}} <i class="far fa-eye"></i> \{{product.payments}} <i class="fas fa-shopping-cart"></i>
+													</span>
+													<span class="small">
+														\{{product.price | changeCNY}} 
+													</span> \{{product.price | price}}
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</a>
+								<a v-if="!product.isCoupon" :href="'/event/'+ product.id" class="cf">
+									
+									<div class="image vertical-middle fl">
+										<img :src="'/images/event/all/' + product.thumbnailImage " alt="">
+									</div>
+									<div class="detail fr">
+										<div class="cf">
+											<span class="name">\{{product.hospitalName | split_hospital_name }}</span><br>
+											{{!-- <span class="date">\{{product.eventRange}}</span> --}}
+										</div>
+										<div class="text sc">
+											<div class="event ellipsis">\{{product.eventName | split_event_name }}</div>
+											<div class="description ellipsis-multi">\{{product.subway}}</div>
+										</div>
+										<div class="bottom cf">
+											{{!-- <div class="view fl">720</div> --}}
+											<div class="price fr">
+												<div class="before" v-if="product.originalPrice > 0">\{{product.originalPrice | price}}</div>
+												<div class="current">
+													<span class="number">
+														 \{{product.views}} <i class="far fa-eye"></i> \{{product.payments}} <i class="fas fa-shopping-cart"></i>
+													</span>
+													<span class="small">\{{product.price | changeCNY}} </span> \{{product.price | price}}
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</a>
+							</li>
+						</ul>
+					</div>
+					</div>
+				</div>
+			</div>
+			{{!-- /이벤트영역 --}}
+		</div>
+	</div>
+	{{!-- /컨텐츠섹션 --}}
+</div>
+{{!-- /컨테이너영역 --}}
+
+
+
+
+{{#section 'jquery'}}
+	<script src="/js/api/event.js"></script>
+	<script src="/js/api/coupon.js"></script>
+	<script src="/js/api/banner.js"></script>
+	<script src="/js/api/category.js"></script>
+	<script src="/js/api/highCategory.js"></script>
+	<script src="/js/controllers/layouts/common.js"></script>
+	<script src="/js/controllers/main/mainController.js"></script>
+{{/section}}
