@@ -16,6 +16,7 @@ var app = new Vue({
 		coupons: [],
 		products : [], //이벤트 + 쿠폰을 합쳐서 만든 리스트.
 		highCategorys: "",
+		
 		//high, middle, low는 현재 선택받은 대,중,소분류의 obj를 잡고 있는다.
 		high: undefined,
 		middle: undefined,
