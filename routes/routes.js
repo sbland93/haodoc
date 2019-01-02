@@ -44,6 +44,9 @@ module.exports = function(app){
 		res.render('coupon/info/couponInfo', renewLayout);
 	});
 
+	app.get('/test/board', function(req, res, next){
+		res.render('board/list/board', renewLayout);
+	});
 
 	//coupon Handlers
 	app.get('/coupon0', couponHandlers.coupon0);
@@ -69,6 +72,7 @@ module.exports = function(app){
 	require('./api/couponReview.js')(app);
 	require('./api/payer.js')(app);
 	require('./api/coupon.js')(app);
+	require('./api/board.js')(app);
 	require('./api/hospital.js')(app);
 	require('./api/subway.js')(app);
 	require('./api/event.js')(app);

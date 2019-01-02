@@ -31,6 +31,7 @@ var util_data_init = function(vue_self, which_func, data_name, cb){
 		console.log(_rtn);
 	});
 
+
 }
 
 

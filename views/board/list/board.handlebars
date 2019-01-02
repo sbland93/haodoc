@@ -1,0 +1,27 @@
+zzz
+<div id = "board_app">
+	boardTitle<input type="text" name="" v-model="newBoardObj['boardTitle']">
+	content<input type="text" name="" v-model="newBoardObj['content']">
+	<button @click="newBoard">write</button>
+	\{{newBoardObj}}
+
+<br><br>
+<div v-if="updateToggle">
+	
+	보드타이틀<input type="text" name="" v-model="updateObj.boardTitle">
+	컨텐<input type="text" name="" v-model="updateObj.content ">
+	<button @click="updateBoard">수정완료 </button>
+</div>
+	<li v-for="(board, index) in boards">
+		\{{index}} / \{{board.boardTitle}} / \{{board.content}} / <button @click="removeBoard(board.id)">delete</button> <button @click="toggleUpdate(board)">Update</button>
+	</li>
+</div>
+
+
+{{#section 'jquery'}}
+
+
+<script type="text/javascript" src="/js/api/board.js"></script>
+<script type="text/javascript" src="/js/controllers/board/boardController.js"></script>
+
+{{/section}}
