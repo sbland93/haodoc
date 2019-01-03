@@ -7,7 +7,12 @@ var boardSchema = mongoose.Schema({
     content : String,
     category : String,
     boardImages : [String],
+    views : {type: Number, default: 0},
     updated_at : { type: Date, default: Date.now },
+    comments: {
+    	type : [{content: String, userID: String, updated_at: {type: Date, default: Date.now}}],
+		default: []
+	},
 
 });
 

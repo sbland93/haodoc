@@ -1,0 +1,32 @@
+
+
+
+<div id="board_info_app">
+
+	\{{board.boardTitle}}<br>
+	\{{board.content}}<br>
+	\{{board.updated_at |moment}}<br>
+
+	조회수 입니다 : \{{board.views}}
+
+
+
+	아이디<input type="text" v-model="comment['userID']"><br>
+	댓글내용<input type="text" v-model="comment['content']"><br>
+	<button @click="newComment">댓글달기</button>
+
+	<div v-for="(comment, index) in board.comments">
+		\{{index}} : \{{comment.userID}} 가 남긴말 \{{comment.content}}
+	</div>
+
+</div>
+
+
+
+
+{{#section 'jquery'}}
+
+	<script type="text/javascript" src="/js/api/board.js"></script>
+	<script type="text/javascript" src="/js/controllers/board/boardInfoController.js"></script>
+
+{{/section}}

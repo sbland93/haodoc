@@ -17,6 +17,8 @@ module.exports = function(board){
         boardTitle : board.boardTitle,
         content : board.content,
         category : board.category,
+        views : board.views,
+        comments : board.comments,
         updated_at : board.updated_at,
 	};
 

@@ -1,10 +1,24 @@
-zzz
+
+
+
+
+
+
 <div id = "board_app">
+	<li v-for="(board, index) in boards">
+		<a :href="'/test/board/'+board.id">\{{index}} / \{{board.boardTitle}} / \{{board.content}} / \{{board.views}}</a><button @click="removeBoard(board.id)">delete</button> <button @click="toggleUpdate(board)">Update</button>
+	</li>
+
+		<br><br><br><br><br>
+	<span v-for="banner in banners">
+		<a :href="banner.url"><img :src="'/images/banner/all/'+banner.bannerImage" ><br></a>
+	</span> 
+
+
 	boardTitle<input type="text" name="" v-model="newBoardObj['boardTitle']">
 	content<input type="text" name="" v-model="newBoardObj['content']">
 	<button @click="newBoard">write</button>
 	\{{newBoardObj}}
-
 <br><br>
 <div v-if="updateToggle">
 	
@@ -12,9 +26,8 @@ zzz
 	컨텐<input type="text" name="" v-model="updateObj.content ">
 	<button @click="updateBoard">수정완료 </button>
 </div>
-	<li v-for="(board, index) in boards">
-		\{{index}} / \{{board.boardTitle}} / \{{board.content}} / <button @click="removeBoard(board.id)">delete</button> <button @click="toggleUpdate(board)">Update</button>
-	</li>
+
+
 </div>
 
 
@@ -22,6 +35,7 @@ zzz
 
 
 <script type="text/javascript" src="/js/api/board.js"></script>
+<script type="text/javascript" src="/js/api/banner.js"></script>
 <script type="text/javascript" src="/js/controllers/board/boardController.js"></script>
 
 {{/section}}

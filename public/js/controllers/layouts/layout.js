@@ -64,6 +64,8 @@ $(document).ready(function() {
         return moment(date).format('MM/DD hh:mm a');
     })
 
+    
+
 
 	$('#top-btn').on('click', function(){
 		window.scrollTo(0, 0);

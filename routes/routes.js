@@ -48,6 +48,10 @@ module.exports = function(app){
 		res.render('board/list/board', renewLayout);
 	});
 
+	app.get('/test/board/:id', checkID, function(req, res, next){
+		res.render('board/info/boardInfo', renewLayout);
+	});
+
 	//coupon Handlers
 	app.get('/coupon0', couponHandlers.coupon0);
 	app.get('/coupon0/:id', checkID, couponHandlers.coupon0);

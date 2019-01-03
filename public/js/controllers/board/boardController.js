@@ -13,6 +13,7 @@ var app = new Vue({
     newBoardObj : {},
     updateObj: {},
     updateToggle : false,
+    banners : "",
 
     board_id : "",
 
@@ -21,6 +22,10 @@ var app = new Vue({
   mounted: function(){
     var self = this;
     util_data_init(self, getBoards, "boards");
+    util_data_init(self, getBanners, "banners");
+    getBanners().then(function(rtn){
+      console.log(rtn);
+    });
     
   },
 
