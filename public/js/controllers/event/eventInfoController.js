@@ -4,7 +4,7 @@ var eventID = url.replace("/event/", "");
 
 var app = new Vue({
 
-	el : "#app",
+	el : "#event-info-app",
 	
 	data : {
 
@@ -32,6 +32,7 @@ var app = new Vue({
 		errors : [],
 
 	},
+
 	
 	mounted: function(){
 		
@@ -39,12 +40,20 @@ var app = new Vue({
 		getEvent(eventID).then(function(event){
 		
 			self.event = event;
+
+			//해당 이벤트의 조회수 증가시킴
+			self.event.views += 1;
+			self.event.realViews += 1;
+			
+			updateEvent(eventID, self.event).then(function(rtn){ if(rtn.success) return; });
+
 			//이벤트 이름을 잡고 있도록
 			self.new_participant_obj.eventName = event.eventName;
-		
 		});
 	
 	},
+
+	
 	methods: {
 		
 		//toggling
@@ -74,7 +83,6 @@ var app = new Vue({
 			if(!self.terms1 || !self.terms2){
 				validation_flag = false;
 			}
-			console.log("validation_flag", validation_flag);
 			if(validation_flag){
 				addParticipant(self.new_participant_obj).then(function(rtn){
 					if(rtn.success){

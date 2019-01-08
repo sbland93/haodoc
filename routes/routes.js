@@ -17,34 +17,31 @@ var checkID = function(req, res, next){
 
 module.exports = function(app){
 
-
+	var renewLayout = { layout: "renew/layout.handlebars" };
 
 
 	app.get('/', function(req, res, next){
-		res.render('renew/home/main/main', { layout: "renew/layout.handlebars" });
+		res.render('main/main', renewLayout);
 	});
 
 	//home Handlers
-	app.get('/about', homeHandlers.about);
 	app.get('/admin', homeHandlers.admin);
 	app.get('/team', homeHandlers.team);
-	app.get('/rules', homeHandlers.rules);
-	app.get('/personal', homeHandlers.personal);
 
 	app.get('/feed', function(req, res, next){
-		res.render('renew/home/feed/feed', { layout: "renew/layout.handlebars" });
+		res.render('feed/feed', renewLayout);
 	});
 
 	app.get('/event', function(req, res, next){
-		res.render('renew/home/event/event', { layout: "renew/layout.handlebars" });
+		res.render('event/list/event', renewLayout);
 	});
 
 	app.get('/event/:id', checkID, function(req, res, next){
-		res.render('renew/home/event/eventInfo', { layout: "renew/layout.handlebars" });
+		res.render('event/info/eventInfo', renewLayout);
 	});
 
 	app.get('/coupon/:id', checkID, function(req, res, next){
-		res.render('renew/home/coupon/couponInfo', { layout: "renew/layout.handlebars" });
+		res.render('coupon/info/couponInfo', renewLayout);
 	});
 
 
@@ -56,68 +53,25 @@ module.exports = function(app){
 	app.get('/coupon2', couponHandlers.coupon2);
 	app.get('/coupon2/:id', checkID, couponHandlers.coupon2);
 
-	//For Development Handlers
 	app.get('/find', hospitalHandlers.find);
 	app.get('/subjectInfo', hospitalHandlers.subjectInfo);
 	app.get('/hospital/:id', checkID, hospitalHandlers.info);
 
-	//For Question Handlers
-
-	app.get('/question', questionHandlers.question);
-	app.get('/recommend', questionHandlers.recommend);
-	app.get('/translate', questionHandlers.translate);
-	app.get('/insurance', questionHandlers.insurance);
-	app.get('/accompany', questionHandlers.accompany);
-
-	app.get('/recommendInfo/:id',  checkID, questionHandlers.recommendInfo);
-	app.get('/translateInfo/:id',  checkID, questionHandlers.translateInfo);
-	app.get('/insuranceInfo/:id',  checkID, questionHandlers.insuranceInfo);
-	app.get('/accompanyInfo/:id',  checkID, questionHandlers.accompanyInfo);
-
-	//Renewal
-	app.get('/renew', function(req, res, next){
-		res.render('renew/main', {layout: false});
-	});
-
-	app.get('/renew/event', function(req, res, next){
-		res.render('renew/event', {layout:false});
-	});
-
-	app.get('/test/renew', function(req, res, next){
-		res.render('renew/home/main/main', { layout: "renew/layout.handlebars" });
-	});
-
-	app.get('/test/renew/event', function(req, res, next){
-		res.render('renew/home/event/event', { layout: "renew/layout.handlebars" });
-	});
-
-	app.get('/test/renew/event/:id',  checkID, function(req, res, next){
-		res.render('renew/home/event/eventInfo', { layout: "renew/layout.handlebars" });
-	});
-
-	app.get('/test/renew/coupon/:id',  checkID, function(req, res, next){
-		res.render('renew/home/coupon/couponInfo', { layout: "renew/layout.handlebars" });
-	});
 
 	app.get('/term1', function(req, res, next){
-		res.render('renew/home/other/term1', { layout: "renew/layout.handlebars" });
+		res.render('event/info/term/term1', renewLayout);
 	});
 	app.get('/term2', function(req, res, next){
-		res.render('renew/home/other/term2', { layout: "renew/layout.handlebars" });
+		res.render('event/info/term/term2', renewLayout);
 	});
 
 	require('./api/participant.js')(app);
 	require('./api/couponReview.js')(app);
 	require('./api/payer.js')(app);
 	require('./api/coupon.js')(app);
-	require('./api/user.js')(app);
 	require('./api/hospital.js')(app);
 	require('./api/subway.js')(app);
 	require('./api/event.js')(app);
-	require('./api/recommend.js')(app);
-	require('./api/insurance.js')(app);
-	require('./api/translate.js')(app);
-	require('./api/accompany.js')(app);
 	require('./api/feed.js')(app);
 	require('./api/file.js')(app);
 	require('./api/highCategory.js')(app);
